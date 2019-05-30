@@ -7,7 +7,7 @@ class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: ["hello"]
     };
   }
   componentDidMount() {
@@ -18,16 +18,16 @@ class Users extends React.Component {
   }
 
   render() {
-    return this.state.users ? (
+    // return this.state.users ? (
+    return (
       <div>
-        {this.state.users.map(user => {
-          <User key={user.id} user={user} />;
-        })}
+        {this.state.users &&
+          this.state.users.map(user => <User key={user.id} user={user} />)}
       </div>
-    ) : (
-      <div>
-        <p>LOADING</p>
-      </div>
+      // ) : (
+      //   <div>
+      //     <p>LOADING</p>
+      //   </div>
     );
   }
 }
