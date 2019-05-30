@@ -4,13 +4,12 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAIL,
   UNAUTHORIZED_USER
-} from "../actions";
+} from "../actions/index.js";
 
 const initialState = {
   users: [],
   user: {},
-  error: null,
-  errorStatusCode: null
+  error: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,8 +22,7 @@ const reducer = (state = initialState, action) => {
     case GET_USERS_FAIL:
       return {
         ...state,
-        error: action.payload.data.error,
-        errorStatusCode: action.payload.status
+        error: action.payload
       };
     case GET_USER_SUCCESS:
       return {
@@ -34,14 +32,12 @@ const reducer = (state = initialState, action) => {
     case GET_USER_FAIL:
       return {
         ...state,
-        error: action.payload.data.error,
-        errorStatusCode: action.payload.status
+        error: action.payload
       };
     case UNAUTHORIZED_USER:
       return {
         ...state,
-        error: action.payload.data.error,
-        errorStatusCode: action.payload.status
+        error: action.payload
       };
     default:
       return state;

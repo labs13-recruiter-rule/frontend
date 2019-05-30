@@ -1,13 +1,13 @@
 import React from "react";
 import User from "../User";
 import { connect } from "react-redux";
-import { getUsers } from "../actions";
+import { getUsers } from "../../actions/index.js";
 
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: ["hello"]
+      users: []
     };
   }
   componentDidMount() {
@@ -21,8 +21,7 @@ class Users extends React.Component {
     // return this.state.users ? (
     return (
       <div>
-        {this.state.users &&
-          this.state.users.map(user => <User key={user.id} user={user} />)}
+        {this.state.users && this.state.users.map(user => <User user={user} />)}
       </div>
       // ) : (
       //   <div>
