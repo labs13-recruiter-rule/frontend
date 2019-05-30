@@ -12,7 +12,7 @@ export const GET_USERS_FAIL = "GET_USERS_FAIL";
 
 export const getUsers = () => dispatch => {
   axios
-    .get("https://recruiter-back-end.herokuapp.com/users")
+    .get("https://recruiter-back-end.herokuapp.com/users/")
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
