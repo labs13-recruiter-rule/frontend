@@ -1,21 +1,21 @@
-import React from "react";
-import User from "../User";
-import { connect } from "react-redux";
-import { getUsers } from "../../actions/index.js";
+import React from 'react';
+import User from '../User';
+import { connect } from 'react-redux';
+import { getUsers } from '../../actions/index.js';
 
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
     };
   }
   componentDidMount() {
-    this.props.getUsers();
+    let url = process.env.REACT_APP_BACKEND_URL;
+    this.props.getUsers(url);
     this.setState({
-      users: this.props.users
+      users: this.props.users,
     });
-    console.log("CDM HIT", this.state);
   }
 
   render() {
@@ -23,6 +23,9 @@ class Users extends React.Component {
     return (
       <div>
         {this.state.users && this.state.users.map(user => <User user={user} />)}
+        {console.log('from env index', process.env.REACT_APP_BACKEND_URL)}
+        {console.log('from proc', process.env)}
+        {console.log('test word', process.env.REACT_APP_TESTWORD)}
       </div>
       // ) : (
       //   <div>
@@ -34,10 +37,10 @@ class Users extends React.Component {
 
 const mapStateToProps = ({ users, error }) => ({
   users,
-  error
+  error,
 });
 
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getUsers },
 )(Users);
