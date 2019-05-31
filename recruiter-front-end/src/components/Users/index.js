@@ -15,6 +15,7 @@ class Users extends React.Component {
     this.setState({
       users: this.props.users
     });
+    console.log("CDM HIT", this.state);
   }
 
   render() {

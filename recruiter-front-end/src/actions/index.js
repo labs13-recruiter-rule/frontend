@@ -12,9 +12,7 @@ export const GET_USERS_FAIL = "GET_USERS_FAIL";
 
 export const getUsers = () => dispatch => {
   axios
-    .get("https://recruiter-back-end.herokuapp.com/users/", {
-      headers: { "Access-Control-Allow-Origin": "*" }
-    })
+    .get(process.env.BACKEND_URL)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
@@ -35,7 +33,7 @@ export const GET_USER_FAIL = "GET_USER_FAIL";
 
 // export const getUserById = () => dispatch => {
 //   axios
-//     .get(`https://recruiter-back-end.herokuapp.com/users/${id}`)
+//     .get(`BACKEND_URL/${id}`)
 //     .then(res => {
 //       dispatch({
 //         type: GET_USER_SUCCESS,
