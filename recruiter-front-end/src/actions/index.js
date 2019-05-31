@@ -11,13 +11,15 @@ export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAIL = "GET_USERS_FAIL";
 
 export const getUsers = () => dispatch => {
+  console.log("is this working");
   axios
-    .get(process.env.BACKEND_URL)
+    .get("https://recruiter-back-end.herokuapp.com/users")
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
         payload: res.data
       });
+      console.log(res.data, "data");
     })
     .catch(error => {
       dispatch({

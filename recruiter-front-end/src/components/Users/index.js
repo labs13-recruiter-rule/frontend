@@ -11,11 +11,13 @@ class Users extends React.Component {
     };
   }
   componentDidMount() {
+    console.log("users in cdm", this.props.getUsers());
+    let url = process.env.BACKEND_URL;
     this.props.getUsers();
     this.setState({
-      users: this.props.users
+      users: this.state.users
     });
-    console.log("CDM HIT", this.state);
+    console.log("CDM HIT", this);
   }
 
   render() {
