@@ -11,18 +11,23 @@ class Users extends React.Component {
     };
   }
   componentDidMount() {
-    let url = process.env.REACT_APP_BACKEND_URL;
-    this.props.getUsers(url);
+    this.getUsers();
     this.setState({
       users: this.props.users
     });
   }
 
+  getUsers = () => {
+    let url = process.env.REACT_APP_BACKEND_URL;
+    this.props.getUsers(url);
+  };
+
   render() {
     // return this.state.users ? (
     return (
       <div>
-        {this.state.users && this.state.users.map(user => <User user={user} />)}
+        {this.state.users &&
+          this.state.users.map(user => <User key={user.id} user={user} />)}
         {console.log("from env index", process.env.REACT_APP_BACKEND_URL)}
         {console.log("from proc", process.env)}
         {console.log("test word", process.env.REACT_APP_TESTWORD)}
@@ -35,10 +40,12 @@ class Users extends React.Component {
   }
 }
 
-const mapStateToProps = ({ users, error }) => ({
-  users,
-  error
-});
+const mapStateToProps = ({ users, error }) => {
+  return {
+    users,
+    error
+  };
+};
 
 export default connect(
   mapStateToProps,
