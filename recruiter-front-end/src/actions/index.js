@@ -11,7 +11,7 @@ export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAIL = 'GET_USERS_FAIL';
 
 export const getUsers = url => dispatch => {
-  axios
+  return axios
     .get(`${url}`)
     .then(res => {
       dispatch({
