@@ -15,7 +15,15 @@ class App extends React.Component {
             <h1>Recruiter Rule</h1>
           </header>
           <Route exact path='/' component={Users} />
-          <Route exact path='/:id' component={User} />
+          <Route 
+          exact 
+          path='/:id' 
+          render={
+            props => {
+              console.log(props)
+              return <div>UserId: {props.match.params.id}</div>
+            }
+          } />
           {/* <Users /> */}
         </div>
       </Router>
