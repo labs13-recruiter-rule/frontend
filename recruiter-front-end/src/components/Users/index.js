@@ -11,13 +11,11 @@ class Users extends React.Component {
     };
   }
   componentDidMount() {
-    console.log("users in cdm", this.props.getUsers());
-    let url = process.env.BACKEND_URL;
-    this.props.getUsers();
+    let url = process.env.REACT_APP_BACKEND_URL;
+    this.props.getUsers(url);
     this.setState({
-      users: this.state.users
+      users: this.props.users
     });
-    console.log("CDM HIT", this);
   }
 
   render() {
@@ -25,6 +23,9 @@ class Users extends React.Component {
     return (
       <div>
         {this.state.users && this.state.users.map(user => <User user={user} />)}
+        {console.log("from env index", process.env.REACT_APP_BACKEND_URL)}
+        {console.log("from proc", process.env)}
+        {console.log("test word", process.env.REACT_APP_TESTWORD)}
       </div>
       // ) : (
       //   <div>

@@ -10,16 +10,16 @@ export const UNAUTHORIZED_USER = "UNAUTHORIZED_USER";
 export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAIL = "GET_USERS_FAIL";
 
-export const getUsers = () => dispatch => {
-  console.log("is this working");
-  axios
-    .get("https://recruiter-back-end.herokuapp.com/users")
+export const getUsers = url => dispatch => {
+  return axios
+    .get(`${url}`)
     .then(res => {
       dispatch({
         type: GET_USERS_SUCCESS,
         payload: res.data
       });
-      console.log(res.data, "data");
+      console.log("from res", res.data);
+      console.log("from env", process.env.REACT_APP);
     })
     .catch(error => {
       dispatch({
