@@ -2,6 +2,8 @@ import React from "react";
 import fire from "./../config/fire";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react'
+// import './'
 
 const uiConfig = {
   signInFlow: "popup",
@@ -47,30 +49,38 @@ class Login extends React.Component {
   };
   render() {
     return (
-      <div>
-        <form>
-          <input
-            value={this.state.email}
-            onChange={this.handleChange}
-            type="email"
-            name="email"
-            placeholder="Enter email"
-          />
-          <input
-            value={this.state.password}
-            onChange={this.handleChange}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
+      <Container>
+        <Header size='huge'>Recruiter Rule</Header>
+        <Form>
+          <Form.Field>
+            <label htmlFor='email'>Email</label>
+            <input
+              value={this.state.email}
+              onChange={this.handleChange}
+              type="email"
+              name="email"
+              placeholder="Email" 
+            />
+          </Form.Field>
+          <Form.Field>
+            <label htmlFor='password'>Password</label>
+            <input
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Button type="submit" onClick={this.login}>Login</Button>
+            <Button onClick={this.signup}>Signup</Button>
+          </Form.Field>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
+        </Form>
+      </Container>
 
-          <button type="submit" onClick={this.login}>
-            Login
-          </button>
-          <button onClick={this.signup}>Signup</button>
-        </form>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
-      </div>
+
     );
   }
 }
