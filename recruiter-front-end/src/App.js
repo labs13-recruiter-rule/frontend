@@ -42,9 +42,7 @@ class App extends React.Component {
           {this.state.user ? (
             [
               <Button onClick={this.logout}>logout</Button>,
-              <header className="App-header">
-                <h1>Recruiter Rule</h1>
-              </header>,
+              <Header>Recruiter Rule</Header>,
               <Route exact path="/" component={Users} />,
               <Route exact path="/db" component={Dashboard} />,
               <Route

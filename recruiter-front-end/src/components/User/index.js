@@ -4,7 +4,7 @@ import { Card, Image } from "semantic-ui-react";
 class User extends React.Component {
   render() {
     return (
-      <Card>
+      <Card style={{margin: '10px'}}>
         {/* <Image 
           size='medium' 
           src={this.props.user.profile_photo} /> */}

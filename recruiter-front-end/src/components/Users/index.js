@@ -3,6 +3,7 @@ import User from "../User";
 import { connect } from "react-redux";
 import { getUsers } from "../../actions/index.js";
 import { Link } from 'react-router-dom'
+import { Card, Container } from "semantic-ui-react";
 class Users extends React.Component {
   constructor() {
     super();
@@ -28,17 +29,20 @@ class Users extends React.Component {
     // return this.state.users ? (
       console.log(this.props)
     return (
-      <div>
+      <Container fluid>
+        <Card.Group>
         {
           this.props.users &&
-          this.props.users.map(user => {
-            return <Link to={`/${user.id}`} key={user.id}>
+          this.props.users.map(user => (
+            <Link to={`/${user.id}`} key={user.id}>
               <User user={user}  />
             </Link>
-          })}
+          ))}
         {/* {console.log('from env index', process.env.REACT_APP_BACKEND_URL)}
         {console.log('test word', process.env.REACT_APP_TESTWORD)} */}
-      </div>
+        </Card.Group>
+      </Container>
+      
       // ) : (
       //   <div>
       //     <p>LOADING</p>
