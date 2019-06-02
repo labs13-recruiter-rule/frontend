@@ -40,13 +40,13 @@ class App extends React.Component {
       <Container>
         <Router>
           {this.state.user ? (
-            <div className="App">
-              <Button onClick={this.logout}>logout</Button>
+            [
+              <Button onClick={this.logout}>logout</Button>,
               <header className="App-header">
                 <h1>Recruiter Rule</h1>
-              </header>
-              <Route exact path="/" component={Users} />
-              <Route exact path="/db" component={Dashboard} />
+              </header>,
+              <Route exact path="/" component={Users} />,
+              <Route exact path="/db" component={Dashboard} />,
               <Route
                 exact
                 path="/:id"
@@ -55,8 +55,7 @@ class App extends React.Component {
                   return <div>UserId: {props.match.params.id}</div>;
                 }}
               />
-              {/* <Users /> */}
-            </div>
+            ]
           ) : (
             <Login />
           )}
