@@ -79,8 +79,6 @@ class Login extends React.Component {
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
         </Form>
       </Container>
-
-
     );
   }
 }
