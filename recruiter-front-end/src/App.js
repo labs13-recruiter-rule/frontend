@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/Login";
 import User from "./components/User";
 import fire from "./config/fire";
-import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react'
-
+import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
 
 class App extends React.Component {
   state = {
@@ -22,6 +21,7 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        this.createUserObject();
       } else {
         this.setState({
           user: null
@@ -29,6 +29,17 @@ class App extends React.Component {
       }
     });
   }
+
+  createUserObject = () => {
+    const googleData = {
+      display_name: fire.auth().currentUser.displayName, // pull of google object
+      firebase_uuid: fire.auth().currentUser.uid, // pull off google object
+      email: fire.auth().currentUser.email, // pull off google object
+      profile_photo: fire.auth().currentUser.photoURL // pull off google object
+    };
+    console.log("googleData", googleData);
+    return googleData;
+  };
 
   logout() {
     fire.auth().signOut();
@@ -56,7 +67,8 @@ class App extends React.Component {
             ]
           ) : (
             <Login />
-          )}
+          )}{" "}
+          {/**this ternary function is what determines whether someone is in the app or not. It's a higher level component essentially. We can also abstract this away and put the first item after the ? inside its own component and it will work as long as it's in there */}
         </Router>
       </Container>
     );
