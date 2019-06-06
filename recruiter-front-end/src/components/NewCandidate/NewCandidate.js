@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
+import {
+	Button,
+	Checkbox,
+	Form,
+	Container,
+	Header,
+	Dropdown,
+	Menu
+} from "semantic-ui-react";
 
 class NewCandidate extends React.Component {
 	constructor(props) {
@@ -17,7 +25,10 @@ class NewCandidate extends React.Component {
 			volunteer: "",
 			publications: "",
 			hasBio: "",
-			hasPicture: ""
+			hasPicture: "",
+			bio: "",
+			picture: "",
+			posts: ""
 		};
 	}
 
@@ -25,7 +36,31 @@ class NewCandidate extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	handleBio = e => {
+		console.log("bio", e.target.innerText);
+		this.setState({ bio: e.target.innerText });
+	};
+
+	handlePicture = e => {
+		console.log("picture", e.target.innerText);
+		this.setState({ picture: e.target.innerText });
+	};
+
+	handlePosts = e => {
+		console.log("posts", e.target.innerText);
+		this.setState({ posts: e.target.innerText });
+	};
+
+	submit = e => {
+		console.log("Add candidate", this.state);
+	};
+
 	render() {
+		const options = [
+			{ key: 1, text: "True", value: true },
+			{ key: 2, text: "False", value: false }
+		];
+
 		return (
 			<Container>
 				<Header size="huge">New Candidate</Header>
@@ -130,10 +165,47 @@ class NewCandidate extends React.Component {
 							placeholder="Publications"
 						/>
 					</Form.Field>
-					{/* TODO: Add Drop down options for has bio */}
-					{/* TODO: Add Drop down options for LinkedIn picture */}
-					{/* TODO: Add Drop down options for has LinkedIn posts */}
-					{/* TODO: Add a submit button */}
+					<Form.Field>
+						<label htmlFor="bio" name="bio">
+							LinkedIn Bio exists
+						</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								simple
+								item
+								onChange={this.handleBio}
+							/>
+						</Menu>
+					</Form.Field>
+					<Form.Field>
+						<label htmlFor="picture">LinkedIn picture exists</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								simple
+								item
+								onChange={this.handlePicture}
+							/>
+						</Menu>
+					</Form.Field>
+					<Form.Field>
+						<label htmlFor="posts">LinkedIn posts exists</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								simple
+								item
+								onChange={this.handlePosts}
+							/>
+						</Menu>
+					</Form.Field>
+					<Button type="submit" onClick={this.submit}>
+						Add Candidate
+					</Button>
 				</Form>
 			</Container>
 		);
