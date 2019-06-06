@@ -37,17 +37,14 @@ class NewCandidate extends React.Component {
 	};
 
 	handleBio = e => {
-		console.log("bio", e.target.innerText);
 		this.setState({ bio: e.target.innerText });
 	};
 
 	handlePicture = e => {
-		console.log("picture", e.target.innerText);
 		this.setState({ picture: e.target.innerText });
 	};
 
 	handlePosts = e => {
-		console.log("posts", e.target.innerText);
 		this.setState({ posts: e.target.innerText });
 	};
 
@@ -166,9 +163,7 @@ class NewCandidate extends React.Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="bio" name="bio">
-							LinkedIn Bio exists
-						</label>
+						<label htmlFor="bio">LinkedIn Bio exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
