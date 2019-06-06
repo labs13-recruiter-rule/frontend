@@ -48,7 +48,8 @@ class App extends React.Component {
       display_name: fire.auth().currentUser.displayName, // pull of google object
       firebase_uuid: fire.auth().currentUser.uid, // pull off google object
       email: fire.auth().currentUser.email, // pull off google object
-      profile_photo: fire.auth().currentUser.photoURL // pull off google object
+      profile_photo: fire.auth().currentUser.photoURL, // pull off google object
+      everything: fire.auth().currentUser
     };
     console.log("googleData", googleData);
     return googleData;
