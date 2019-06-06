@@ -6,7 +6,8 @@ import {
   GET_USER_ID_SUCCESS,
   GET_USER_ID_FAIL,
   ADD_USER_SUCCESS,
-  ADD_USER_FAIL
+  ADD_USER_FAIL,
+  UNAUTHORIZED_USER
 } from "../actions/index.js";
 
 const initialState = {

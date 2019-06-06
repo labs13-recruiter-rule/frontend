@@ -5,13 +5,15 @@ import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import User from "./components/User";
+import { connect } from "react-redux";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import fire from "./config/fire";
 import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
-
+import { getUserIdfromUUID, addUserToSQL } from "./actions";
 class App extends React.Component {
   state = {
-    user: {}
+    user: {},
+    user_id: null
   };
 
   componentDidMount() {
@@ -22,6 +24,7 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        this.addToSql();
       } else {
         this.setState({
           user: null
@@ -30,20 +33,9 @@ class App extends React.Component {
     });
   }
 
-  authListener() {
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user });
-        this.createUserObject();
-      } else {
-        this.setState({
-          user: null
-        });
-      }
-    });
-  }
-
-  createUserObject = () => {
+  addToSql = () => {
+    let url = process.env.REACT_APP_BACKEND_URL;
+    let uuid = fire.auth().currentUser.uid;
     const googleData = {
       display_name: fire.auth().currentUser.displayName, // pull of google object
       firebase_uuid: fire.auth().currentUser.uid, // pull off google object
@@ -51,8 +43,8 @@ class App extends React.Component {
       profile_photo: fire.auth().currentUser.photoURL, // pull off google object
       everything: fire.auth().currentUser
     };
-    console.log("googleData", googleData);
-    return googleData;
+    this.props.addUserToSQL(url);
+    this.props.getUserIdfromUUID(url, uuid);
   };
 
   logout() {
@@ -95,4 +87,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    error: state.error,
+    user_id: state.user_id
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getUserIdfromUUID, addUserToSQL }
+)(App);
