@@ -24,7 +24,7 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
-        this.addToSql();
+        //this.addToSql();
       } else {
         this.setState({
           user: null
@@ -33,19 +33,19 @@ class App extends React.Component {
     });
   }
 
-  addToSql = () => {
-    let url = process.env.REACT_APP_BACKEND_URL;
-    let uuid = fire.auth().currentUser.uid;
-    const googleData = {
-      display_name: fire.auth().currentUser.displayName, // pull of google object
-      firebase_uuid: fire.auth().currentUser.uid, // pull off google object
-      email: fire.auth().currentUser.email, // pull off google object
-      profile_photo: fire.auth().currentUser.photoURL, // pull off google object
-      everything: fire.auth().currentUser
-    };
-    this.props.addUserToSQL(url);
-    this.props.getUserIdfromUUID(url, uuid);
-  };
+  // addToSql = () => {
+  //   let url = process.env.REACT_APP_BACKEND_URL;
+  //   let uuid = fire.auth().currentUser.uid;
+  //   const googleData = {
+  //     display_name: fire.auth().currentUser.displayName, // pull of google object
+  //     firebase_uuid: fire.auth().currentUser.uid, // pull off google object
+  //     email: fire.auth().currentUser.email, // pull off google object
+  //     profile_photo: fire.auth().currentUser.photoURL, // pull off google object
+  //     everything: fire.auth().currentUser
+  //   };
+  //   this.props.addUserToSQL(url);
+  //   this.props.getUserIdfromUUID(url, uuid);
+  // };
 
   logout() {
     fire.auth().signOut();
@@ -96,5 +96,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getUserIdfromUUID, addUserToSQL }
+  {}
 )(App);

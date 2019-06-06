@@ -24,7 +24,7 @@ export const getUsers = url => dispatch => {
     .catch(error => {
       dispatch({
         type: GET_USERS_FAIL,
-        payload: error.response
+        payload: error
       });
     });
 };
@@ -37,9 +37,9 @@ export const GET_USER_FAIL = "GET_USER_FAIL";
 export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS";
 export const ADD_USER_FAIL = "ADD_USER_FAIL";
 
-export const addUserToSQL = url => dispatch => {
+export const addUserToSQL = (url, user) => dispatch => {
   return axios
-    .post(`${url}`)
+    .post(`${url}`, user)
     .then(res => {
       dispatch({
         type: ADD_USER_SUCCESS,
@@ -49,7 +49,7 @@ export const addUserToSQL = url => dispatch => {
     .catch(error => {
       dispatch({
         type: ADD_USER_FAIL,
-        payload: error.response
+        payload: error
       });
     });
 };
@@ -71,7 +71,7 @@ export const getUserIdfromUUID = (url, uuid) => dispatch => {
     .catch(error => {
       dispatch({
         type: GET_USER_ID_FAIL,
-        payload: error.response
+        payload: error
       });
     });
 };

@@ -3,6 +3,7 @@ import fire from "./../config/fire";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
+import axios from "axios";
 // import './'
 
 const uiConfig = {
@@ -39,7 +40,14 @@ class Login extends React.Component {
     fire
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
+      .then(res => {
+        console.log(res.user._lat); // HERE!!!!!!
+        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+          headers: {
+            token: res.user._lat
+          }
+        });
+      })
       .catch(error => {
         console.log(error);
       });
@@ -75,7 +83,19 @@ class Login extends React.Component {
             </Button>
             <Button onClick={this.signup}>Signup</Button>
           </Form.Field>
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={fire
+              .auth()
+              .then(res => {
+                res.user.getIdToken(false).then(idToken => {
+                  axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+                    token: idToken
+                  });
+                });
+              })
+              .catch(error => console.log(error))}
+          />
         </Form>
       </Container>
     );
