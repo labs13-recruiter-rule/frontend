@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import User from "./components/User";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
+import Contacts from "./components/Contacts/Contacts";
 import fire from "./config/fire";
 import {
 	Menu,
@@ -41,12 +42,7 @@ class App extends React.Component {
 		fire.auth().signOut();
 	}
 
-	createCandidate() {
-		console.log("hi");
-	}
-
 	render() {
-		// console.log(this.props)
 		return (
 			<Container>
 				<Router>
@@ -76,7 +72,7 @@ class App extends React.Component {
 									}}
 								/>
 								<Route exact path="/new-candidate" component={NewCandidate} />
-								<Route exact path="/contacts" component={NewCandidate} />
+								<Route exact path="/contacts" component={Contacts} />
 							</>
 						]
 					) : (
