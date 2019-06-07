@@ -2,7 +2,8 @@ import React from "react";
 import fire from "./../config/fire";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
+import axios from "axios";
 // import './'
 
 const uiConfig = {
@@ -39,9 +40,12 @@ class Login extends React.Component {
     fire
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
-      .then(u => {
-        console.log(u);
+      .then(res => {
+        // console.log('from resuserlat', res.user._lat); // HERE!!!!!!
+        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+          // axios.post("http://localhost:4000/auth/register", {
+          token: res.user._lat
+        });
       })
       .catch(error => {
         console.log(error);
@@ -50,20 +54,20 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Header size='huge'>Recruiter Rule</Header>
+        <Header size="huge">Recruiter Rule</Header>
         <Form>
           <Form.Field>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               value={this.state.email}
               onChange={this.handleChange}
               type="email"
               name="email"
-              placeholder="Email" 
+              placeholder="Email"
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor="password">Password</label>
             <input
               value={this.state.password}
               onChange={this.handleChange}
@@ -73,10 +77,25 @@ class Login extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <Button type="submit" onClick={this.login}>Login</Button>
+            <Button type="submit" onClick={this.login}>
+              Login
+            </Button>
             <Button onClick={this.signup}>Signup</Button>
           </Form.Field>
-            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
+          {/* <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={fire
+              .auth()
+              .then(res => {
+                res.user.getIdToken(false).then(idToken => {
+                  // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+                  axios.post('http://localhost:4000/auth/register', {
+                    token: idToken,
+                  });
+                });
+              })
+              .catch(error => console.log(error))}
+          /> */}
         </Form>
       </Container>
     );
