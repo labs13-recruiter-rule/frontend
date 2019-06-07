@@ -24,7 +24,7 @@ class Mailer extends React.Component {
 
 	sendEmail = e => {
 		const recipients = this.setState.email
-		Axios.post("localhost:4000/mailer/", { recipients })
+		Axios.post("localhost:4000/mailer/", { recievers: recipients })
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};

@@ -163,7 +163,7 @@ class NewCandidate extends React.Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<div class="ui checkbox">
+						<div className="ui checkbox">
 							<input 
 							type="checkbox" 
 							name="linkedin-bio" 
@@ -183,7 +183,7 @@ class NewCandidate extends React.Component {
 						</Menu> */}
 					</Form.Field>
 					<Form.Field>
-						<div class="ui checkbox">
+						<div className="ui checkbox">
 							<input 
 							type="checkbox" 
 							name="linkedin-picture" 
@@ -205,7 +205,7 @@ class NewCandidate extends React.Component {
 					</Form.Field>
 					<Form.Field>
 
-						<div class="ui checkbox">
+						<div className="ui checkbox">
 							<input 
 							type="checkbox" 
 							name="linkedin-posts" 
