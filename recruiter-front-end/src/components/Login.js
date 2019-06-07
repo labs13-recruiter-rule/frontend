@@ -15,11 +15,11 @@ const uiConfig = {
       const token = authResult.user._lat;
 
       if (newUser) {
-        axios.post('http://localhost:4000/auth/register', {
+        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
           token,
         });
       } else {
-        axios.post('http://localhost:4000/auth/login', {
+        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
           token,
         });
       }
@@ -46,7 +46,7 @@ class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post('http://localhost:4000/auth/login', {
+        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
           token: res.user._lat,
         });
       })
@@ -61,7 +61,7 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post('http://localhost:4000/auth/register', {
+        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
           token: res.user._lat,
         });
       })
