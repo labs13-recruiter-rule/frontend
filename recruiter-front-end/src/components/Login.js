@@ -10,8 +10,21 @@ const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
   callbacks: {
-    handleOneClick: () => true
-  }
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      const newUser = authResult.additionalUserInfo.isNewUser;
+      const token = authResult.user._lat;
+
+      if (newUser) {
+        axios.post('http://localhost:4000/auth/register', {
+          token,
+        });
+      } else {
+        axios.post('http://localhost:4000/auth/login', {
+          token,
+        });
+      }
+    },
+  },
 };
 
 class Login extends React.Component {
@@ -23,10 +36,6 @@ class Login extends React.Component {
     };
   }
 
-  handleOneClick = e => {
-    console.log(res)
-  }
-
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -36,7 +45,11 @@ class Login extends React.Component {
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {})
+      .then(res => {
+        axios.post('http://localhost:4000/auth/login', {
+          token: res.user._lat,
+        });
+      })
       .catch(error => {
         console.log(error);
       });
@@ -48,11 +61,8 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        // console.log('from resuserlat', res.user._lat); // HERE!!!!!!
-        // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
         axios.post('http://localhost:4000/auth/register', {
-            token: res.user._lat,
-          
+          token: res.user._lat,
         });
       })
       .catch(error => {
@@ -90,12 +100,7 @@ class Login extends React.Component {
             </Button>
             <Button onClick={this.signup}>Signup</Button>
           </Form.Field>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={fire
-              .auth()}
-              
-          />
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
         </Form>
       </Container>
     );
@@ -103,13 +108,3 @@ class Login extends React.Component {
 }
 
 export default Login;
-
-// .then(res => {
-//   res.user.getIdToken(false).then(idToken => {
-//     // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-//     axios.post('http://localhost:4000/auth/register', {
-//       token: idToken,
-//     });
-//   });
-// })
-// .catch(error => console.log(error))}
