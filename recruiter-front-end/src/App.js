@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import User from "./components/User";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
+import NewRule from "./components/NewRule/NewRule";
 import fire from "./config/fire";
 import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
 
