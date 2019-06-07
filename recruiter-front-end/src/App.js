@@ -8,6 +8,7 @@ import User from "./components/User";
 import { connect } from "react-redux";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import Contacts from "./components/Contacts/Contacts";
+import Mailer from "./components/Mailer";
 import fire from "./config/fire";
 import {
   Menu,
@@ -41,6 +42,9 @@ class App extends React.Component {
     });
   }
 
+logout() {
+    fire.auth().signOut();
+  }
   // addToSql = () => {
   //   let url = process.env.REACT_APP_BACKEND_URL;
   //   let uuid = fire.auth().currentUser.uid;
@@ -55,50 +59,49 @@ class App extends React.Component {
   //   this.props.getUserIdfromUUID(url, uuid);
   // };
 
-  logout() {
-    fire.auth().signOut();
-  }
+	render() {
+		return (
+			<Container>
+				<Router>
+					{this.state.user ? (
+						[
+							<>
+								<Menu>
+									<Menu.Item>
+										<Button onClick={this.logout}>logout</Button>
+									</Menu.Item>
+									
+									<Menu.Item>
+										<Link to="/new-candidate">New Candidate</Link>
+									</Menu.Item>
 
-  render() {
-    return (
-      <Container>
-        <Router>
-          {this.state.user ? (
-            [
-              <>
-                <Menu>
-                  <Menu.Item>
-                    <Button onClick={this.logout}>logout</Button>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link to="/new-candidate">New Candidate</Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link to="/contacts">Contacts</Link>
-                  </Menu.Item>
-                </Menu>
-                <Header>Recruiter Rule</Header>
-                <Route exact path="/" component={Users} />
-                <Route exact path="/db" component={Dashboard} />
-                <Route
-                  exact
-                  path="/id"
-                  render={props => {
-                    console.log(props);
-                    return <div>UserId: {props.match.params.id}</div>;
-                  }}
-                />
-                <Route exact path="/new-candidate" component={NewCandidate} />
-                <Route exact path="/contacts" component={Contacts} />
-              </>
-            ]
-          ) : (
-            <Login />
-          )}
-        </Router>
-      </Container>
-    );
-  }
+									<Menu.Item>
+										<Link to="/mailer">Mailer</Link>
+									</Menu.Item>
+								</Menu>
+								<Header>Recruiter Rule</Header>
+								<Route exact path="/" component={Users} />
+								<Route exact path="/db" component={Dashboard} />
+								<Route
+									exact
+									path="/id"
+									render={props => {
+										console.log(props);
+										return <div>UserId: {props.match.params.id}</div>;
+									}}
+								/>
+								<Route exact path="/new-candidate" component={NewCandidate} />
+								<Route exact path="/contacts" component={Contacts} />
+								<Route exact path="/mailer" component={Mailer} />
+							</>
+						]
+					) : (
+						<Login />
+					)}
+				</Router>
+			</Container>
+		);
+	}
 }
 
 const mapStateToProps = state => {
