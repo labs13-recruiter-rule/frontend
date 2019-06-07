@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import User from "./components/User";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import Contacts from "./components/Contacts/Contacts";
+import Mailer from "./components/Mailer";
 import fire from "./config/fire";
 import {
 	Menu,
@@ -57,7 +58,11 @@ class App extends React.Component {
 										<Link to="/new-candidate">New Candidate</Link>
 									</Menu.Item>
 									<Menu.Item>
-										<Link to="/contacts">Contacts</Link>
+										<Link to="/new-candidate">New Candidate</Link>
+									</Menu.Item>
+
+									<Menu.Item>
+										<Link to="/mailer">Mailer</Link>
 									</Menu.Item>
 								</Menu>
 								<Header>Recruiter Rule</Header>
@@ -73,6 +78,7 @@ class App extends React.Component {
 								/>
 								<Route exact path="/new-candidate" component={NewCandidate} />
 								<Route exact path="/contacts" component={Contacts} />
+								<Route exact path="/mailer" component={Mailer} />
 							</>
 						]
 					) : (
