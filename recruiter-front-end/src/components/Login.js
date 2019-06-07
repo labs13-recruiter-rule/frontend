@@ -42,8 +42,8 @@ class Login extends React.Component {
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
         // console.log('from resuserlat', res.user._lat); // HERE!!!!!!
-        // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-        axios.post("http://localhost:4000/auth/register", {
+        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+          // axios.post("http://localhost:4000/auth/register", {
           token: res.user._lat
         });
       })
