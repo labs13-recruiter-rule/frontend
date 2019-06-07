@@ -163,7 +163,15 @@ class NewCandidate extends React.Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="bio">LinkedIn Bio exists</label>
+						<div class="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-bio" 
+							onChange={this.handleBio}
+							/>
+							<label>LinkedIn Bio Exists</label>
+						</div>
+						{/* <label htmlFor="bio">LinkedIn Bio exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
@@ -172,10 +180,19 @@ class NewCandidate extends React.Component {
 								item
 								onChange={this.handleBio}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="picture">LinkedIn picture exists</label>
+						<div class="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-picture" 
+							onChange={this.handlePicture}
+							/>
+							<label>LinkedIn Profile Picture Exists</label>
+						</div>
+						
+						{/* <label htmlFor="picture">LinkedIn picture exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
@@ -184,10 +201,19 @@ class NewCandidate extends React.Component {
 								item
 								onChange={this.handlePicture}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="posts">LinkedIn posts exists</label>
+
+						<div class="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-posts" 
+							onChange={this.handlePosts}
+							/>
+							<label>LinkedIn Posts Exists</label>
+						</div>
+						{/* <label htmlFor="posts">LinkedIn posts exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
@@ -196,7 +222,7 @@ class NewCandidate extends React.Component {
 								item
 								onChange={this.handlePosts}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Button type="submit" onClick={this.submit}>
 						Add Candidate
