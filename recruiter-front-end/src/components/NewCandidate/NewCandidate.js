@@ -59,7 +59,7 @@ class NewCandidate extends React.Component {
 		];
 
 		return (
-			<Container>
+			<Container className='form-container'>
 				<Header size="huge">New Candidate</Header>
 				<Form>
 					<Form.Field>
@@ -67,7 +67,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.name}
 							onChange={this.handleChange}
-							type="name"
+							type="text"
 							name="name"
 							placeholder="Name"
 						/>
@@ -77,7 +77,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.title}
 							onChange={this.handleChange}
-							type="title"
+							type="text"
 							name="title"
 							placeholder="Title"
 						/>
@@ -97,7 +97,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.skills}
 							onChange={this.handleChange}
-							type="skills"
+							type="text"
 							name="skills"
 							placeholder="Skills"
 						/>
@@ -107,7 +107,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.education}
 							onChange={this.handleChange}
-							type="education"
+							type="text"
 							name="education"
 							placeholder="Education"
 						/>
@@ -117,7 +117,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.industry}
 							onChange={this.handleChange}
-							type="industry"
+							type="text"
 							name="industry"
 							placeholder="Industry"
 						/>
@@ -127,7 +127,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.languages}
 							onChange={this.handleChange}
-							type="languages"
+							type="text"
 							name="languages"
 							placeholder="Languages"
 						/>
@@ -137,7 +137,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.certifications}
 							onChange={this.handleChange}
-							type="certifications"
+							type="text"
 							name="certifications"
 							placeholder="Certifications"
 						/>
@@ -147,7 +147,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.volunteer}
 							onChange={this.handleChange}
-							type="volunteer"
+							type="text"
 							name="volunteer"
 							placeholder="Volunteer"
 						/>
@@ -157,7 +157,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.publications}
 							onChange={this.handleChange}
-							type="publications"
+							type="text"
 							name="publications"
 							placeholder="Publications"
 						/>
@@ -192,7 +192,7 @@ class NewCandidate extends React.Component {
 							<Dropdown
 								text=""
 								options={options}
-								simple
+								// simple
 								item
 								onChange={this.handlePosts}
 							/>
