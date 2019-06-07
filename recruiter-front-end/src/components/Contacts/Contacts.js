@@ -31,7 +31,7 @@ class NewCandidate extends React.Component {
 
 	render() {
 		return (
-			<Container>
+			<Container className='form-container'>
 				<p>You have no contacts. Add your first contact</p>
 				<Form>
 					<Form.Field>
@@ -39,7 +39,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.name}
 							onChange={this.handleChange}
-							type="name"
+							type="text"
 							name="name"
 							placeholder="Name"
 						/>
