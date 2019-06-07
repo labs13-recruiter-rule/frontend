@@ -9,6 +9,9 @@ import axios from 'axios';
 const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+  callbacks: {
+    handleOneClick: () => true
+  }
 };
 
 class Login extends React.Component {
@@ -18,6 +21,10 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
+  }
+
+  handleOneClick = e => {
+    console.log(res)
   }
 
   handleChange = e => {
@@ -83,20 +90,12 @@ class Login extends React.Component {
             </Button>
             <Button onClick={this.signup}>Signup</Button>
           </Form.Field>
-          {/* <StyledFirebaseAuth
+          <StyledFirebaseAuth
             uiConfig={uiConfig}
             firebaseAuth={fire
-              .auth()
-              .then(res => {
-                res.user.getIdToken(false).then(idToken => {
-                  // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-                  axios.post('http://localhost:4000/auth/register', {
-                    token: idToken,
-                  });
-                });
-              })
-              .catch(error => console.log(error))}
-          /> */}
+              .auth()}
+              
+          />
         </Form>
       </Container>
     );
@@ -104,3 +103,13 @@ class Login extends React.Component {
 }
 
 export default Login;
+
+// .then(res => {
+//   res.user.getIdToken(false).then(idToken => {
+//     // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+//     axios.post('http://localhost:4000/auth/register', {
+//       token: idToken,
+//     });
+//   });
+// })
+// .catch(error => console.log(error))}
