@@ -1,22 +1,22 @@
-import React from "react";
-import fire from "./../config/fire";
-import firebase from "firebase";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
-import axios from "axios";
+import React from 'react';
+import fire from './../config/fire';
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react';
+import axios from 'axios';
 // import './'
 
 const uiConfig = {
-  signInFlow: "popup",
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
+  signInFlow: 'popup',
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     };
   }
 
@@ -41,11 +41,11 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        console.log(res.user._lat); // HERE!!!!!!
-        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-          headers: {
-            token: res.user._lat
-          }
+        // console.log('from resuserlat', res.user._lat); // HERE!!!!!!
+        // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+        axios.post('http://localhost:4000/auth/register', {
+            token: res.user._lat,
+          
         });
       })
       .catch(error => {
@@ -83,19 +83,20 @@ class Login extends React.Component {
             </Button>
             <Button onClick={this.signup}>Signup</Button>
           </Form.Field>
-          <StyledFirebaseAuth
+          {/* <StyledFirebaseAuth
             uiConfig={uiConfig}
             firebaseAuth={fire
               .auth()
               .then(res => {
                 res.user.getIdToken(false).then(idToken => {
-                  axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-                    token: idToken
+                  // axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
+                  axios.post('http://localhost:4000/auth/register', {
+                    token: idToken,
                   });
                 });
               })
               .catch(error => console.log(error))}
-          />
+          /> */}
         </Form>
       </Container>
     );
