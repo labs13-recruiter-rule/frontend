@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
+import {
+	Button,
+	Checkbox,
+	Form,
+	Container,
+	Header,
+	Dropdown,
+	Menu
+} from "semantic-ui-react";
 
 class NewCandidate extends React.Component {
 	constructor(props) {
@@ -17,7 +25,10 @@ class NewCandidate extends React.Component {
 			volunteer: "",
 			publications: "",
 			hasBio: "",
-			hasPicture: ""
+			hasPicture: "",
+			bio: "",
+			picture: "",
+			posts: ""
 		};
 	}
 
@@ -25,9 +36,30 @@ class NewCandidate extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	handleBio = e => {
+		this.setState({ bio: e.target.innerText });
+	};
+
+	handlePicture = e => {
+		this.setState({ picture: e.target.innerText });
+	};
+
+	handlePosts = e => {
+		this.setState({ posts: e.target.innerText });
+	};
+
+	submit = e => {
+		console.log("Add candidate", this.state);
+	};
+
 	render() {
+		const options = [
+			{ key: 1, text: "True", value: true },
+			{ key: 2, text: "False", value: false }
+		];
+
 		return (
-			<Container>
+			<Container className='form-container'>
 				<Header size="huge">New Candidate</Header>
 				<Form>
 					<Form.Field>
@@ -35,7 +67,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.name}
 							onChange={this.handleChange}
-							type="name"
+							type="text"
 							name="name"
 							placeholder="Name"
 						/>
@@ -45,7 +77,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.title}
 							onChange={this.handleChange}
-							type="title"
+							type="text"
 							name="title"
 							placeholder="Title"
 						/>
@@ -65,7 +97,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.skills}
 							onChange={this.handleChange}
-							type="skills"
+							type="text"
 							name="skills"
 							placeholder="Skills"
 						/>
@@ -75,7 +107,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.education}
 							onChange={this.handleChange}
-							type="education"
+							type="text"
 							name="education"
 							placeholder="Education"
 						/>
@@ -85,7 +117,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.industry}
 							onChange={this.handleChange}
-							type="industry"
+							type="text"
 							name="industry"
 							placeholder="Industry"
 						/>
@@ -95,7 +127,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.languages}
 							onChange={this.handleChange}
-							type="languages"
+							type="text"
 							name="languages"
 							placeholder="Languages"
 						/>
@@ -105,7 +137,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.certifications}
 							onChange={this.handleChange}
-							type="certifications"
+							type="text"
 							name="certifications"
 							placeholder="Certifications"
 						/>
@@ -115,7 +147,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.volunteer}
 							onChange={this.handleChange}
-							type="volunteer"
+							type="text"
 							name="volunteer"
 							placeholder="Volunteer"
 						/>
@@ -125,15 +157,50 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.publications}
 							onChange={this.handleChange}
-							type="publications"
+							type="text"
 							name="publications"
 							placeholder="Publications"
 						/>
 					</Form.Field>
-					{/* TODO: Add Drop down options for has bio */}
-					{/* TODO: Add Drop down options for LinkedIn picture */}
-					{/* TODO: Add Drop down options for has LinkedIn posts */}
-					{/* TODO: Add a submit button */}
+					<Form.Field>
+						<label htmlFor="bio">LinkedIn Bio exists</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								simple
+								item
+								onChange={this.handleBio}
+							/>
+						</Menu>
+					</Form.Field>
+					<Form.Field>
+						<label htmlFor="picture">LinkedIn picture exists</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								simple
+								item
+								onChange={this.handlePicture}
+							/>
+						</Menu>
+					</Form.Field>
+					<Form.Field>
+						<label htmlFor="posts">LinkedIn posts exists</label>
+						<Menu compact>
+							<Dropdown
+								text=""
+								options={options}
+								// simple
+								item
+								onChange={this.handlePosts}
+							/>
+						</Menu>
+					</Form.Field>
+					<Button type="submit" onClick={this.submit}>
+						Add Candidate
+					</Button>
 				</Form>
 			</Container>
 		);
