@@ -59,7 +59,7 @@ class NewCandidate extends React.Component {
 		];
 
 		return (
-			<Container>
+			<Container className='form-container'>
 				<Header size="huge">New Candidate</Header>
 				<Form>
 					<Form.Field>
@@ -67,7 +67,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.name}
 							onChange={this.handleChange}
-							type="name"
+							type="text"
 							name="name"
 							placeholder="Name"
 						/>
@@ -77,7 +77,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.title}
 							onChange={this.handleChange}
-							type="title"
+							type="text"
 							name="title"
 							placeholder="Title"
 						/>
@@ -97,7 +97,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.skills}
 							onChange={this.handleChange}
-							type="skills"
+							type="text"
 							name="skills"
 							placeholder="Skills"
 						/>
@@ -107,7 +107,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.education}
 							onChange={this.handleChange}
-							type="education"
+							type="text"
 							name="education"
 							placeholder="Education"
 						/>
@@ -117,7 +117,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.industry}
 							onChange={this.handleChange}
-							type="industry"
+							type="text"
 							name="industry"
 							placeholder="Industry"
 						/>
@@ -127,7 +127,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.languages}
 							onChange={this.handleChange}
-							type="languages"
+							type="text"
 							name="languages"
 							placeholder="Languages"
 						/>
@@ -137,7 +137,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.certifications}
 							onChange={this.handleChange}
-							type="certifications"
+							type="text"
 							name="certifications"
 							placeholder="Certifications"
 						/>
@@ -147,7 +147,7 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.volunteer}
 							onChange={this.handleChange}
-							type="volunteer"
+							type="text"
 							name="volunteer"
 							placeholder="Volunteer"
 						/>
@@ -157,13 +157,21 @@ class NewCandidate extends React.Component {
 						<input
 							value={this.state.publications}
 							onChange={this.handleChange}
-							type="publications"
+							type="text"
 							name="publications"
 							placeholder="Publications"
 						/>
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="bio">LinkedIn Bio exists</label>
+						<div className="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-bio" 
+							onChange={this.handleBio}
+							/>
+							<label>LinkedIn Bio Exists</label>
+						</div>
+						{/* <label htmlFor="bio">LinkedIn Bio exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
@@ -172,10 +180,19 @@ class NewCandidate extends React.Component {
 								item
 								onChange={this.handleBio}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="picture">LinkedIn picture exists</label>
+						<div className="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-picture" 
+							onChange={this.handlePicture}
+							/>
+							<label>LinkedIn Profile Picture Exists</label>
+						</div>
+						
+						{/* <label htmlFor="picture">LinkedIn picture exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
@@ -184,19 +201,28 @@ class NewCandidate extends React.Component {
 								item
 								onChange={this.handlePicture}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="posts">LinkedIn posts exists</label>
+
+						<div className="ui checkbox">
+							<input 
+							type="checkbox" 
+							name="linkedin-posts" 
+							onChange={this.handlePosts}
+							/>
+							<label>LinkedIn Posts Exists</label>
+						</div>
+						{/* <label htmlFor="posts">LinkedIn posts exists</label>
 						<Menu compact>
 							<Dropdown
 								text=""
 								options={options}
-								simple
+								// simple
 								item
 								onChange={this.handlePosts}
 							/>
-						</Menu>
+						</Menu> */}
 					</Form.Field>
 					<Button type="submit" onClick={this.submit}>
 						Add Candidate
