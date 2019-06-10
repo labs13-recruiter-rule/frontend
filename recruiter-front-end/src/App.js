@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import User from "./components/User";
 import { connect } from "react-redux";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
-import NewRule from "./components/NewRule/NewRule";
+import RuleMain from "./components/RuleView/RuleMain";
 import Contacts from "./components/Contacts/Contacts";
 import Mailer from "./components/Mailer";
 import fire from "./config/fire";
@@ -79,8 +79,12 @@ logout() {
 									<Menu.Item>
 										<Link to="/mailer">Mailer</Link>
 									</Menu.Item>
+
+                  <Menu.Item>
+										<Link to="/rules">Rules</Link>
+									</Menu.Item>
 								</Menu>
-								<Header>Recruiter Rule</Header>
+								<Header textAlign='center'>Recruiter Rule</Header>
 								<Route exact path="/" component={Users} />
 								<Route exact path="/db" component={Dashboard} />
 								<Route
@@ -94,6 +98,7 @@ logout() {
 								<Route exact path="/new-candidate" component={NewCandidate} />
 								<Route exact path="/contacts" component={Contacts} />
 								<Route exact path="/mailer" component={Mailer} />
+                <Route exact path="/rules" component={RuleMain} />
 							</>
 						]
 					) : (
