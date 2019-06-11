@@ -1,12 +1,9 @@
 import React from "react";
 import {
 	Button,
-	Checkbox,
 	Form,
 	Container,
-	Header,
-	Dropdown,
-	Menu
+	Header
 } from "semantic-ui-react";
 
 class NewCandidate extends React.Component {
@@ -53,6 +50,7 @@ class NewCandidate extends React.Component {
 	};
 
 	render() {
+		//? 'options' IS ASSIGNED A VALUE BUT NEVER DEFINED
 		const options = [
 			{ key: 1, text: "True", value: true },
 			{ key: 2, text: "False", value: false }
