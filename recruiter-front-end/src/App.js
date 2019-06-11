@@ -4,7 +4,7 @@ import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
-import User from "./components/User";
+//! import User from "./components/User"; DEFINED BUT NEVER USED
 import { connect } from "react-redux";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import RuleMain from "./components/RuleView/RuleMain";
@@ -14,8 +14,6 @@ import fire from "./config/fire";
 import {
   Menu,
   Button,
-  Checkbox,
-  Form,
   Container,
   Header
 } from "semantic-ui-react";
