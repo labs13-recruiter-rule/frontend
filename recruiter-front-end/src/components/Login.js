@@ -2,7 +2,7 @@ import React from 'react';
 import fire from './../config/fire';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react';
+import { Button, Form, Container, Header } from 'semantic-ui-react';
 import axios from 'axios';
 // import './'
 
