@@ -4,60 +4,53 @@ import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
-import User from "./components/User";
+// import User from "./components/User";
 import { connect } from "react-redux";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import Contacts from "./components/Contacts/Contacts";
 import Mailer from "./components/Mailer";
 import fire from "./config/fire";
-import {
-  Menu,
-  Button,
-  Checkbox,
-  Form,
-  Container,
-  Header
-} from "semantic-ui-react";
+import { Menu, Button, Container, Header } from "semantic-ui-react";
 
 class App extends React.Component {
-  state = {
-    user: {},
-    user_id: null
-  };
+	state = {
+		user: {},
+		user_id: null
+	};
 
-  componentDidMount() {
-    this.authListener();
-  }
+	componentDidMount() {
+		this.authListener();
+	}
 
-  authListener() {
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user });
-        //this.addToSql();
-      } else {
-        this.setState({
-          user: null
-        });
-      }
-    });
-  }
+	authListener() {
+		fire.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.setState({ user });
+				//this.addToSql();
+			} else {
+				this.setState({
+					user: null
+				});
+			}
+		});
+	}
 
-logout() {
-    fire.auth().signOut();
-  }
-  // addToSql = () => {
-  //   let url = process.env.REACT_APP_BACKEND_URL;
-  //   let uuid = fire.auth().currentUser.uid;
-  //   const googleData = {
-  //     display_name: fire.auth().currentUser.displayName, // pull of google object
-  //     firebase_uuid: fire.auth().currentUser.uid, // pull off google object
-  //     email: fire.auth().currentUser.email, // pull off google object
-  //     profile_photo: fire.auth().currentUser.photoURL, // pull off google object
-  //     everything: fire.auth().currentUser
-  //   };
-  //   this.props.addUserToSQL(url);
-  //   this.props.getUserIdfromUUID(url, uuid);
-  // };
+	logout() {
+		fire.auth().signOut();
+	}
+	// addToSql = () => {
+	//   let url = process.env.REACT_APP_BACKEND_URL;
+	//   let uuid = fire.auth().currentUser.uid;
+	//   const googleData = {
+	//     display_name: fire.auth().currentUser.displayName, // pull of google object
+	//     firebase_uuid: fire.auth().currentUser.uid, // pull off google object
+	//     email: fire.auth().currentUser.email, // pull off google object
+	//     profile_photo: fire.auth().currentUser.photoURL, // pull off google object
+	//     everything: fire.auth().currentUser
+	//   };
+	//   this.props.addUserToSQL(url);
+	//   this.props.getUserIdfromUUID(url, uuid);
+	// };
 
 	render() {
 		return (
@@ -70,7 +63,7 @@ logout() {
 									<Menu.Item>
 										<Button onClick={this.logout}>logout</Button>
 									</Menu.Item>
-									
+
 									<Menu.Item>
 										<Link to="/new-candidate">New Candidate</Link>
 									</Menu.Item>
@@ -105,13 +98,13 @@ logout() {
 }
 
 const mapStateToProps = state => {
-  return {
-    error: state.error,
-    user_id: state.user_id
-  };
+	return {
+		error: state.error,
+		user_id: state.user_id
+	};
 };
 
 export default connect(
-  mapStateToProps,
-  {}
+	mapStateToProps,
+	{}
 )(App);

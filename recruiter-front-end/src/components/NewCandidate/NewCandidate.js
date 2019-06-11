@@ -1,13 +1,6 @@
 import React from "react";
-import {
-	Button,
-	Checkbox,
-	Form,
-	Container,
-	Header,
-	Dropdown,
-	Menu
-} from "semantic-ui-react";
+import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
+import Axios from "axios";
 
 class NewCandidate extends React.Component {
 	constructor(props) {
@@ -16,7 +9,6 @@ class NewCandidate extends React.Component {
 			name: "",
 			email: "",
 			title: "",
-			yearsOfExperience: "",
 			skills: "",
 			education: "",
 			industry: "",
@@ -24,11 +16,9 @@ class NewCandidate extends React.Component {
 			certifications: "",
 			volunteer: "",
 			publications: "",
-			hasBio: "",
-			hasPicture: "",
-			bio: "",
-			picture: "",
-			posts: ""
+			bio: false,
+			picture: false,
+			posts: false
 		};
 	}
 
@@ -36,30 +26,45 @@ class NewCandidate extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	handleBio = e => {
-		this.setState({ bio: e.target.innerText });
+	toggleBio = () => {
+		this.setState(prevState => ({ bio: !prevState.bio }));
 	};
 
-	handlePicture = e => {
-		this.setState({ picture: e.target.innerText });
+	togglePicture = () => {
+		this.setState(prevState => ({ picture: !prevState.picture }));
 	};
 
-	handlePosts = e => {
-		this.setState({ posts: e.target.innerText });
+	togglePosts = () => {
+		this.setState(prevState => ({ posts: !prevState.posts }));
 	};
 
 	submit = e => {
-		console.log("Add candidate", this.state);
+		const newCandidate = {
+			name: this.state.name,
+			email: this.state.email,
+			title: this.state.title,
+			skills: this.state.skills,
+			education: this.state.education,
+			industry: this.state.industry,
+			languages: this.state.languages,
+			certifications: this.state.certifications,
+			volunteer: this.state.volunteer,
+			publications: this.state.publications,
+			bio: this.state.bio,
+			picture: this.state.picture,
+			posts: this.state.posts
+		};
+		Axios.post(
+			"https://recruiter-back-end.herokuapp.com/candidates/",
+			newCandidate
+		)
+            .then(res => { console.log(res) })
+			.catch(err => console.log(err));
 	};
 
 	render() {
-		const options = [
-			{ key: 1, text: "True", value: true },
-			{ key: 2, text: "False", value: false }
-		];
-
 		return (
-			<Container className='form-container'>
+			<Container className="form-container">
 				<Header size="huge">New Candidate</Header>
 				<Form>
 					<Form.Field>
@@ -73,16 +78,6 @@ class NewCandidate extends React.Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<label htmlFor="title">Title</label>
-						<input
-							value={this.state.title}
-							onChange={this.handleChange}
-							type="text"
-							name="title"
-							placeholder="Title"
-						/>
-					</Form.Field>
-					<Form.Field>
 						<label htmlFor="email">Email</label>
 						<input
 							value={this.state.email}
@@ -90,6 +85,16 @@ class NewCandidate extends React.Component {
 							type="email"
 							name="email"
 							placeholder="Email"
+						/>
+					</Form.Field>
+					<Form.Field>
+						<label htmlFor="title">Title</label>
+						<input
+							value={this.state.title}
+							onChange={this.handleChange}
+							type="text"
+							name="title"
+							placeholder="Title"
 						/>
 					</Form.Field>
 					<Form.Field>
@@ -163,66 +168,19 @@ class NewCandidate extends React.Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<div className="ui checkbox">
-							<input 
-							type="checkbox" 
-							name="linkedin-bio" 
-							onChange={this.handleBio}
-							/>
-							<label>LinkedIn Bio Exists</label>
-						</div>
-						{/* <label htmlFor="bio">LinkedIn Bio exists</label>
-						<Menu compact>
-							<Dropdown
-								text=""
-								options={options}
-								simple
-								item
-								onChange={this.handleBio}
-							/>
-						</Menu> */}
+						<Checkbox label="LinkedIn Bio Exists" onChange={this.toggleBio} />
 					</Form.Field>
 					<Form.Field>
-						<div className="ui checkbox">
-							<input 
-							type="checkbox" 
-							name="linkedin-picture" 
-							onChange={this.handlePicture}
-							/>
-							<label>LinkedIn Profile Picture Exists</label>
-						</div>
-						
-						{/* <label htmlFor="picture">LinkedIn picture exists</label>
-						<Menu compact>
-							<Dropdown
-								text=""
-								options={options}
-								simple
-								item
-								onChange={this.handlePicture}
-							/>
-						</Menu> */}
+						<Checkbox
+							label="LinkedIn Picture Exists"
+							onChange={this.togglePicture}
+						/>
 					</Form.Field>
 					<Form.Field>
-
-						<div className="ui checkbox">
-							<input 
-							type="checkbox" 
-							name="linkedin-posts" 
-							onChange={this.handlePosts}
-							/>
-							<label>LinkedIn Posts Exists</label>
-						</div>
-						{/* <label htmlFor="posts">LinkedIn posts exists</label>
-						<Menu compact>
-							<Dropdown
-								text=""
-								options={options}
-								// simple
-								item
-								onChange={this.handlePosts}
-							/>
-						</Menu> */}
+						<Checkbox
+							label="LinkedIn Picture Exists"
+							onChange={this.togglePosts}
+						/>
 					</Form.Field>
 					<Button type="submit" onClick={this.submit}>
 						Add Candidate

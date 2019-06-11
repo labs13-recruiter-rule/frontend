@@ -1,13 +1,5 @@
 import React from "react";
-import {
-	Button,
-	Checkbox,
-	Form,
-	Container,
-	Header,
-	Dropdown,
-	Menu
-} from "semantic-ui-react";
+import { Button, Form, Container } from "semantic-ui-react";
 import Axios from "axios";
 
 class Mailer extends React.Component {
@@ -23,7 +15,7 @@ class Mailer extends React.Component {
 	};
 
 	sendEmail = e => {
-		const recipients = this.setState.email
+		const recipients = this.setState.email;
 		Axios.post("localhost:4000/mailer/", { recievers: recipients })
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
@@ -31,7 +23,7 @@ class Mailer extends React.Component {
 
 	render() {
 		return (
-			<Container className='form-container'>
+			<Container className="form-container">
 				<p>Enter the recipient emails separated by a comma</p>
 				<Form>
 					<Form.Field>
