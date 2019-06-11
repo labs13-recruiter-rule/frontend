@@ -1,8 +1,10 @@
 import React from "react";
-import User from "../User";
+//! { User, connect, getUsers, Link } DEFINED BUT NEVER USED
+/* import User from "../User";
 import { connect } from "react-redux";
 import { getUsers } from "../../actions/index.js";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' */
+
 class Dashboard extends React.Component {
   constructor() {
     super();
