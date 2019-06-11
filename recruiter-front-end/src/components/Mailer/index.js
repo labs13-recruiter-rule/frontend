@@ -1,12 +1,8 @@
 import React from "react";
 import {
 	Button,
-	Checkbox,
 	Form,
-	Container,
-	Header,
-	Dropdown,
-	Menu
+	Container
 } from "semantic-ui-react";
 import Axios from "axios";
 
