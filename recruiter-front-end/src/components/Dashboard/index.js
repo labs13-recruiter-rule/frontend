@@ -1,20 +1,21 @@
-import React from "react";
+import React from 'react';
 // import User from "../User";
 // import { connect } from "react-redux";
 // import { getUsers } from "../../actions/index.js";
 // import { Link } from 'react-router-dom'
 
 class Dashboard extends React.Component {
-	constructor() {
-		super();
-		this.state = {};
-	}
-	componentDidMount() {}
+  constructor() {
+    super();
+    this.state = {};
+  }
 
-	render() {
-		// return this.state.users ? (
-		return <div>Dashboard</div>;
-	}
+  componentDidMount() {}
+
+  render() {
+    // return this.state.users ? (
+    return <div>Dashboard</div>;
+  }
 }
 
 export default Dashboard;
