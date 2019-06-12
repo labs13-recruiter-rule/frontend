@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 // import User from "./components/User";
 import { connect } from "react-redux";
+import { getUserIdfromUUID } from "./actions/index";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import Contacts from "./components/Contacts/Contacts";
 import Mailer from "./components/Mailer";
@@ -20,6 +21,7 @@ class App extends React.Component {
 
 	componentDidMount() {
 		this.authListener();
+		// this.props.getUserIdfromUUID();
 	}
 
 	authListener() {
@@ -53,6 +55,7 @@ class App extends React.Component {
 	// };
 
 	render() {
+		console.log("App.js this.props", this.props);
 		return (
 			<Container>
 				<Router>
@@ -61,15 +64,16 @@ class App extends React.Component {
 							<>
 								<Menu>
 									<Menu.Item>
-										<Button onClick={this.logout}>logout</Button>
+										<Link to="/">Home</Link>
 									</Menu.Item>
-
 									<Menu.Item>
 										<Link to="/new-candidate">New Candidate</Link>
 									</Menu.Item>
-
 									<Menu.Item>
 										<Link to="/mailer">Mailer</Link>
+									</Menu.Item>
+									<Menu.Item>
+										<Button onClick={this.logout}>logout</Button>
 									</Menu.Item>
 								</Menu>
 								<Header>Recruiter Rule</Header>
