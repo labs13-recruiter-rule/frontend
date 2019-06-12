@@ -177,8 +177,6 @@ class NewCandidate extends React.Component {
               placeholder="Publications"
             />
           </Form.Field>
-
-
           <Form.Field>
             <Checkbox
               label="LinkedIn Profile Exists"
@@ -186,7 +184,6 @@ class NewCandidate extends React.Component {
               onClick={this.toggleHidden}
             />
           </Form.Field>
-
           <Form.Field hidden={hidden}>
             <label htmlFor="linkedinURL">LinkedIn Profile</label>
             <input
@@ -197,8 +194,6 @@ class NewCandidate extends React.Component {
               placeholder="LinkedIn Profile URL"
             />
           </Form.Field>
-
-
           <Form.Field>
             <Checkbox
               label="LinkedIn Picture Exists"
