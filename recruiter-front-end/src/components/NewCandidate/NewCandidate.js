@@ -6,19 +6,21 @@ class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      title: '',
-      skills: '',
-      education: '',
-      industry: '',
-      languages: '',
-      certifications: '',
-      volunteer: '',
-      publications: '',
-      bio: false,
-      picture: false,
+      name: "",
+      email: "",
+      title: "",
+      skills: "",
+      education: "",
+      industry: "",
+      languages: "",
+      certifications: "",
+      volunteer: "",
+      publications: "",
       posts: false,
+      linkedinURL: "",
+      picture: false,
+      bio: false,
+      hidden: true
     };
   }
 
@@ -38,6 +40,10 @@ class NewCandidate extends React.Component {
     this.setState(prevState => ({ posts: !prevState.posts }));
   };
 
+  toggleHidden = () => {
+    this.setState(prevState => ({ hidden: !prevState.hidden }))
+  };
+
   submit = e => {
     const newCandidate = {
       name: this.state.name,
@@ -50,9 +56,10 @@ class NewCandidate extends React.Component {
       certifications: this.state.certifications,
       volunteer: this.state.volunteer,
       publications: this.state.publications,
-      bio: this.state.bio,
-      picture: this.state.picture,
       posts: this.state.posts,
+      linkedinURL: this.state.linkedinURL,
+      picture: this.state.picture,
+      bio: this.state.bio
     };
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/candidates/',
@@ -65,6 +72,8 @@ class NewCandidate extends React.Component {
   };
 
   render() {
+    const { hidden } = this.state
+
     return (
       <Container className="form-container">
         <Header size="huge">New Candidate</Header>
@@ -170,7 +179,21 @@ class NewCandidate extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <Checkbox label="LinkedIn Bio Exists" onChange={this.toggleBio} />
+            <Checkbox
+              label="LinkedIn Profile Exists"
+              onChange={this.togglePosts}
+              onClick={this.toggleHidden}
+            />
+          </Form.Field>
+          <Form.Field hidden={hidden}>
+            <label htmlFor="linkedinURL">LinkedIn Profile</label>
+            <input
+              value={this.state.linkedinURL}
+              onChange={this.handleChange}
+              type="text"
+              name="linkedinURL"
+              placeholder="LinkedIn Profile URL"
+            />
           </Form.Field>
           <Form.Field>
             <Checkbox
@@ -179,9 +202,9 @@ class NewCandidate extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <Checkbox
-              label="LinkedIn Picture Exists"
-              onChange={this.togglePosts}
+            <Checkbox 
+              label="LinkedIn Bio Exists"
+              onChange={this.toggleBio}
             />
           </Form.Field>
           <Button type="submit" onClick={this.submit}>
