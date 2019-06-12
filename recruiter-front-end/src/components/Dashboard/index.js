@@ -5,16 +5,16 @@ import React from "react";
 // import { Link } from 'react-router-dom'
 
 class Dashboard extends React.Component {
-	constructor() {
-		super();
-		this.state = {};
-	}
-	componentDidMount() {}
+  constructor() {
+    super();
+    this.state = {};
+  }
+  componentDidMount() {}
 
-	render() {
-		// return this.state.users ? (
-		return <div>Dashboard</div>;
-	}
+  render() {
+    // return this.state.users ? (
+    return <div>Dashboard</div>;
+  }
 }
 
 export default Dashboard;
