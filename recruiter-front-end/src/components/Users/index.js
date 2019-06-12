@@ -27,7 +27,6 @@ class Users extends React.Component {
 
   render() {
     // return this.state.users ? (
-    console.log(this.props.users, "users");
     return (
       <Container fluid>
         <Card.Group>

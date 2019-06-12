@@ -1,13 +1,5 @@
 import React from "react";
-import {
-	Button,
-	Checkbox,
-	Form,
-	Container,
-	Header,
-	Dropdown,
-	Menu
-} from "semantic-ui-react";
+import { Button, Form, Container } from "semantic-ui-react";
 import Axios from "axios";
 
 class NewCandidate extends React.Component {
@@ -24,14 +16,17 @@ class NewCandidate extends React.Component {
 	};
 
 	createContact = e => {
-		Axios.post("https://recruiter-back-end.herokuapp.com/users/1/contacts", this.state)
+		Axios.post(
+			"https://recruiter-back-end.herokuapp.com/users/1/contacts",
+			this.state
+		)
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};
 
 	render() {
 		return (
-			<Container className='form-container'>
+			<Container className="form-container">
 				<p>You have no contacts. Add your first contact</p>
 				<Form>
 					<Form.Field>
