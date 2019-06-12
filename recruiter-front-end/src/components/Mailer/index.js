@@ -6,11 +6,7 @@ class Mailer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
       email: '',
-=======
-      email: ""
->>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
     };
   }
 
