@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // import User from "../User";
 // import { connect } from "react-redux";
 // import { getUsers } from "../../actions/index.js";
@@ -9,6 +9,7 @@ class Dashboard extends React.Component {
     super();
     this.state = {};
   }
+
   componentDidMount() {}
 
   render() {

@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
-import Axios from "axios";
+import React from 'react';
+import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react';
+import Axios from 'axios';
 
 class NewCandidate extends React.Component {
   constructor(props) {
@@ -62,8 +62,8 @@ class NewCandidate extends React.Component {
       bio: this.state.bio
     };
     Axios.post(
-      "https://recruiter-back-end.herokuapp.com/candidates/",
-      newCandidate
+      'https://recruiter-back-end.herokuapp.com/candidates/',
+      newCandidate,
     )
       .then(res => {
         console.log(res);

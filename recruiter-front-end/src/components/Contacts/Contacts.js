@@ -1,13 +1,13 @@
-import React from "react";
-import { Button, Form, Container } from "semantic-ui-react";
-import Axios from "axios";
+import React from 'react';
+import { Button, Form, Container } from 'semantic-ui-react';
+import Axios from 'axios';
 
 class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: ""
+      name: '',
+      email: '',
     };
   }
 
@@ -17,8 +17,8 @@ class NewCandidate extends React.Component {
 
   createContact = e => {
     Axios.post(
-      "https://recruiter-back-end.herokuapp.com/users/1/contacts",
-      this.state
+      'https://recruiter-back-end.herokuapp.com/users/1/contacts',
+      this.state,
     )
       .then(res => console.log(res))
       .catch(err => console.log(err));
