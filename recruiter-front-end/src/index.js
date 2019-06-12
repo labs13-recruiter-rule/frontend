@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import rootReducer from './reducers/index.js';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
-import 'semantic-ui-css/semantic.min.css'
+import rootReducer from './reducers/index';
+import 'semantic-ui-css/semantic.min.css';
 // import dotenv from 'dotenv';
 import App from './App';
 

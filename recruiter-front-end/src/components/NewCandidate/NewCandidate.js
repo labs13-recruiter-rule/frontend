@@ -1,24 +1,24 @@
-import React from "react";
-import { Button, Checkbox, Form, Container, Header } from "semantic-ui-react";
-import Axios from "axios";
+import React from 'react';
+import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react';
+import Axios from 'axios';
 
 class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      title: "",
-      skills: "",
-      education: "",
-      industry: "",
-      languages: "",
-      certifications: "",
-      volunteer: "",
-      publications: "",
+      name: '',
+      email: '',
+      title: '',
+      skills: '',
+      education: '',
+      industry: '',
+      languages: '',
+      certifications: '',
+      volunteer: '',
+      publications: '',
       bio: false,
       picture: false,
-      posts: false
+      posts: false,
     };
   }
 
@@ -52,11 +52,11 @@ class NewCandidate extends React.Component {
       publications: this.state.publications,
       bio: this.state.bio,
       picture: this.state.picture,
-      posts: this.state.posts
+      posts: this.state.posts,
     };
     Axios.post(
-      "https://recruiter-back-end.herokuapp.com/candidates/",
-      newCandidate
+      'https://recruiter-back-end.herokuapp.com/candidates/',
+      newCandidate,
     )
       .then(res => {
         console.log(res);

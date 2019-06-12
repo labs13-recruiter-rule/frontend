@@ -1,12 +1,12 @@
-import React from "react";
-import { Button, Form, Container } from "semantic-ui-react";
-import Axios from "axios";
+import React from 'react';
+import { Button, Form, Container } from 'semantic-ui-react';
+import Axios from 'axios';
 
 class Mailer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ""
+      email: '',
     };
   }
 

@@ -1,22 +1,22 @@
-import React from "react";
-import "./App.css";
-import Users from "./components/Users";
-import Dashboard from "./components/Dashboard";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Login from "./components/Login";
+import React from 'react';
+import './App.css';
+import Users from './components/Users';
+import Dashboard from './components/Dashboard';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Login from './components/Login';
 //! import User from "./components/User"; DEFINED BUT NEVER USED
-import { connect } from "react-redux";
-import NewCandidate from "./components/NewCandidate/NewCandidate";
-import RuleMain from "./components/RuleView/RuleMain";
-import Contacts from "./components/Contacts/Contacts";
-import Mailer from "./components/Mailer";
-import fire from "./config/fire";
-import { Menu, Button, Container, Header } from "semantic-ui-react";
+import { connect } from 'react-redux';
+import NewCandidate from './components/NewCandidate/NewCandidate';
+import RuleMain from './components/RuleView/RuleMain';
+import Contacts from './components/Contacts/Contacts';
+import Mailer from './components/Mailer';
+import fire from './config/fire';
+import { Menu, Button, Container, Header } from 'semantic-ui-react';
 
 class App extends React.Component {
   state = {
     user: {},
-    user_id: null
+    user_id: null,
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class App extends React.Component {
         //this.addToSql();
       } else {
         this.setState({
-          user: null
+          user: null,
         });
       }
     });
@@ -92,7 +92,7 @@ class App extends React.Component {
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
                 <Route exact path="/rules" component={RuleMain} />
-              </>
+              </>,
             ]
           ) : (
             <Login />
@@ -106,11 +106,11 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
-    user_id: state.user_id
+    user_id: state.user_id,
   };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  {},
 )(App);
