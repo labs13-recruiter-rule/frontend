@@ -6,6 +6,7 @@ class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       name: '',
       email: '',
       title: '',
@@ -19,6 +20,21 @@ class NewCandidate extends React.Component {
       bio: false,
       picture: false,
       posts: false,
+=======
+      name: "",
+      email: "",
+      title: "",
+      skills: "",
+      education: "",
+      industry: "",
+      languages: "",
+      certifications: "",
+      volunteer: "",
+      publications: "",
+      bio: false,
+      picture: false,
+      posts: false
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
     };
   }
 
@@ -52,11 +68,19 @@ class NewCandidate extends React.Component {
       publications: this.state.publications,
       bio: this.state.bio,
       picture: this.state.picture,
+<<<<<<< HEAD
       posts: this.state.posts,
     };
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/candidates/',
       newCandidate,
+=======
+      posts: this.state.posts
+    };
+    Axios.post(
+      "https://recruiter-back-end.herokuapp.com/candidates/",
+      newCandidate
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
     )
       .then(res => {
         console.log(res);

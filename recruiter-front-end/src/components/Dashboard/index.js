@@ -9,9 +9,14 @@ class Dashboard extends React.Component {
     super();
     this.state = {};
   }
+<<<<<<< HEAD
 
   componentDidMount() {}
 
+=======
+  componentDidMount() {}
+
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
   render() {
     // return this.state.users ? (
     return <div>Dashboard</div>;

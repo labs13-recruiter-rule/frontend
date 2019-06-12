@@ -6,8 +6,13 @@ class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       name: '',
       email: '',
+=======
+      name: "",
+      email: ""
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
     };
   }
 
@@ -17,8 +22,13 @@ class NewCandidate extends React.Component {
 
   createContact = e => {
     Axios.post(
+<<<<<<< HEAD
       'https://recruiter-back-end.herokuapp.com/users/1/contacts',
       this.state,
+=======
+      "https://recruiter-back-end.herokuapp.com/users/1/contacts",
+      this.state
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
     )
       .then(res => console.log(res))
       .catch(err => console.log(err));

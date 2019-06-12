@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import './App.css';
 import Users from './components/Users';
@@ -11,11 +12,31 @@ import Contacts from './components/Contacts/Contacts';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container, Header } from 'semantic-ui-react';
+=======
+import React from "react";
+import "./App.css";
+import Users from "./components/Users";
+import Dashboard from "./components/Dashboard";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Login from "./components/Login";
+//! import User from "./components/User"; DEFINED BUT NEVER USED
+import { connect } from "react-redux";
+import NewCandidate from "./components/NewCandidate/NewCandidate";
+import RuleMain from "./components/RuleView/RuleMain";
+import Contacts from "./components/Contacts/Contacts";
+import Mailer from "./components/Mailer";
+import fire from "./config/fire";
+import { Menu, Button, Container, Header } from "semantic-ui-react";
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
 
 class App extends React.Component {
   state = {
     user: {},
+<<<<<<< HEAD
     user_id: null,
+=======
+    user_id: null
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
   };
 
   componentDidMount() {
@@ -29,7 +50,11 @@ class App extends React.Component {
         //this.addToSql();
       } else {
         this.setState({
+<<<<<<< HEAD
           user: null,
+=======
+          user: null
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
         });
       }
     });
@@ -71,8 +96,17 @@ class App extends React.Component {
                   <Menu.Item>
                     <Link to="/mailer">Mailer</Link>
                   </Menu.Item>
+<<<<<<< HEAD
                 </Menu>
                 <Header>Recruiter Rule</Header>
+=======
+
+                  <Menu.Item>
+                    <Link to="/rules">Rules</Link>
+                  </Menu.Item>
+                </Menu>
+                <Header textAlign="center">Recruiter Rule</Header>
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
                 <Route exact path="/" component={Users} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -86,7 +120,12 @@ class App extends React.Component {
                 <Route exact path="/new-candidate" component={NewCandidate} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
+<<<<<<< HEAD
               </>,
+=======
+                <Route exact path="/rules" component={RuleMain} />
+              </>
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
             ]
           ) : (
             <Login />
@@ -100,11 +139,19 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
+<<<<<<< HEAD
     user_id: state.user_id,
+=======
+    user_id: state.user_id
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
   };
 };
 
 export default connect(
   mapStateToProps,
+<<<<<<< HEAD
   {},
+=======
+  {}
+>>>>>>> 4e823ab5724f326f8e029711d4e8a95c1f8e522a
 )(App);
