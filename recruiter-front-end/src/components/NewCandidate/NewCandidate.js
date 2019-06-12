@@ -16,9 +16,11 @@ class NewCandidate extends React.Component {
       certifications: "",
       volunteer: "",
       publications: "",
-      bio: false,
+      posts: false,
+      linkedinURL: "",
       picture: false,
-      posts: false
+      bio: false,
+      hidden: true
     };
   }
 
@@ -36,6 +38,10 @@ class NewCandidate extends React.Component {
 
   togglePosts = () => {
     this.setState(prevState => ({ posts: !prevState.posts }));
+  };
+
+  toggleHidden = () => {
+    this.setState(prevState => ({ hidden: !prevState.hidden }))
   };
 
   submit = e => {
@@ -65,6 +71,8 @@ class NewCandidate extends React.Component {
   };
 
   render() {
+    const { hidden } = this.state
+
     return (
       <Container className="form-container">
         <Header size="huge">New Candidate</Header>
@@ -169,9 +177,28 @@ class NewCandidate extends React.Component {
               placeholder="Publications"
             />
           </Form.Field>
+
+
           <Form.Field>
-            <Checkbox label="LinkedIn Bio Exists" onChange={this.toggleBio} />
+            <Checkbox
+              label="LinkedIn Profile Exists"
+              onChange={this.togglePosts}
+              onClick={this.toggleHidden}
+            />
           </Form.Field>
+
+          <Form.Field className='urlField' hidden={hidden}>
+            <label htmlFor="linkedinURL">LinkedIn Profile URL</label>
+            <input
+              value={this.state.linkedinURL}
+              onChange={this.handleChange}
+              type="text"
+              name="linkedinURL"
+              placeholder="LinkedIn Profile URL"
+            />
+          </Form.Field>
+
+
           <Form.Field>
             <Checkbox
               label="LinkedIn Picture Exists"
@@ -179,9 +206,9 @@ class NewCandidate extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <Checkbox
-              label="LinkedIn Picture Exists"
-              onChange={this.togglePosts}
+            <Checkbox 
+              label="LinkedIn Bio Exists"
+              onChange={this.toggleBio}
             />
           </Form.Field>
           <Button type="submit" onClick={this.submit}>
