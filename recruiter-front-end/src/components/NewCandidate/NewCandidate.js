@@ -187,8 +187,8 @@ class NewCandidate extends React.Component {
             />
           </Form.Field>
 
-          <Form.Field className='urlField' hidden={hidden}>
-            <label htmlFor="linkedinURL">LinkedIn Profile URL</label>
+          <Form.Field hidden={hidden}>
+            <label htmlFor="linkedinURL">LinkedIn Profile</label>
             <input
               value={this.state.linkedinURL}
               onChange={this.handleChange}
