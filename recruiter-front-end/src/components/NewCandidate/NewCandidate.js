@@ -56,9 +56,10 @@ class NewCandidate extends React.Component {
       certifications: this.state.certifications,
       volunteer: this.state.volunteer,
       publications: this.state.publications,
-      bio: this.state.bio,
+      posts: this.state.posts,
+      linkedinURL: this.state.linkedinURL,
       picture: this.state.picture,
-      posts: this.state.posts
+      bio: this.state.bio
     };
     Axios.post(
       "https://recruiter-back-end.herokuapp.com/candidates/",
