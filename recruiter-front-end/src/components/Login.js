@@ -15,13 +15,21 @@ const uiConfig = {
       const token = authResult.user._lat;
 
       if (newUser) {
-        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-          token,
-        });
+        console.log('from register token', token);
+        axios
+          .post(process.env.REACT_APP_BACKEND_REGISTER, { token })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       } else {
-        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
-          token,
-        });
+        console.log('from login token', token);
+        axios
+          .post(process.env.REACT_APP_BACKEND_LOGIN, { token })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       }
     },
   },
