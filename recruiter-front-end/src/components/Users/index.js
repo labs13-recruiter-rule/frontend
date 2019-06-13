@@ -29,12 +29,12 @@ class Users extends React.Component {
 		return (
 			<Container fluid>
 				<Card.Group>
-					{this.props.users &&
+					{/* {this.props.users &&
 						this.props.users.map(user => (
 							<Link to={`/${user.id}`} key={user.id}>
 								<User user={user} />
 							</Link>
-						))}
+						))} */}
 					{/* {console.log('from env index', process.env.REACT_APP_BACKEND_URL)}
         {console.log('test word', process.env.REACT_APP_TESTWORD)} */}
 				</Card.Group>

@@ -1,17 +1,16 @@
 import React from "react";
 import "./App.css";
-import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Login from "./components/Login";
-// import User from "./components/User";
 import { connect } from "react-redux";
-import { getUserIdfromUUID } from "./actions/index";
 import NewCandidate from "./components/NewCandidate/NewCandidate";
 import Contacts from "./components/Contacts/Contacts";
+import NewContactGroup from "./views/NewContactGroup/NewContactGroup";
+import NewUserLandingPage from "./views/NewUserLandingPage/NewUserLandingPage";
 import Mailer from "./components/Mailer";
 import fire from "./config/fire";
-import { Menu, Button, Container, Header } from "semantic-ui-react";
+import { Menu, Button, Container } from "semantic-ui-react";
 
 class App extends React.Component {
 	state = {
@@ -21,7 +20,6 @@ class App extends React.Component {
 
 	componentDidMount() {
 		this.authListener();
-		// this.props.getUserIdfromUUID();
 	}
 
 	authListener() {
@@ -40,6 +38,7 @@ class App extends React.Component {
 	logout() {
 		fire.auth().signOut();
 	}
+
 	// addToSql = () => {
 	//   let url = process.env.REACT_APP_BACKEND_URL;
 	//   let uuid = fire.auth().currentUser.uid;
@@ -55,7 +54,6 @@ class App extends React.Component {
 	// };
 
 	render() {
-		console.log("App.js this.props", this.props);
 		return (
 			<Container>
 				<Router>
@@ -64,20 +62,34 @@ class App extends React.Component {
 							<>
 								<Menu>
 									<Menu.Item>
-										<Link to="/">Home</Link>
+										<Button>
+											<NavLink style={{ color: "rgba(0,0,0,.6)" }} to="/">
+												Home
+											</NavLink>
+										</Button>
 									</Menu.Item>
 									<Menu.Item>
-										<Link to="/new-candidate">New Candidate</Link>
+										<Button>
+											<NavLink
+												style={{ color: "rgba(0,0,0,.6)" }}
+												to="/new-candidate"
+											>
+												New Candidate
+											</NavLink>
+										</Button>
 									</Menu.Item>
 									<Menu.Item>
-										<Link to="/mailer">Mailer</Link>
+										<Button>
+											<NavLink style={{ color: "rgba(0,0,0,.6)" }} to="/mailer">
+												Mailer
+											</NavLink>
+										</Button>
 									</Menu.Item>
-									<Menu.Item>
+									<Menu.Item position="right">
 										<Button onClick={this.logout}>logout</Button>
 									</Menu.Item>
 								</Menu>
-								<Header>Recruiter Rule</Header>
-								<Route exact path="/" component={Users} />
+								<Route exact path="/" component={NewUserLandingPage} />
 								<Route exact path="/db" component={Dashboard} />
 								<Route
 									exact
@@ -90,6 +102,11 @@ class App extends React.Component {
 								<Route exact path="/new-candidate" component={NewCandidate} />
 								<Route exact path="/contacts" component={Contacts} />
 								<Route exact path="/mailer" component={Mailer} />
+								<Route
+									exact
+									path="/new-contact-group"
+									component={NewContactGroup}
+								/>
 							</>
 						]
 					) : (
