@@ -15,13 +15,21 @@ const uiConfig = {
       const token = authResult.user._lat;
 
       if (newUser) {
-        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-          token,
-        });
+        console.log('from register token', token);
+        axios
+          .post(process.env.REACT_APP_BACKEND_REGISTER, { token })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       } else {
-        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
-          token,
-        });
+        console.log('from login token', token);
+        axios
+          .post(process.env.REACT_APP_BACKEND_LOGIN, { token })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       }
     },
   },
@@ -46,9 +54,14 @@ class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
-          token: res.user._lat,
-        });
+        axios
+          .post(process.env.REACT_APP_BACKEND_LOGIN, {
+            token: res.user._lat,
+          })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       })
       .catch(error => {
         console.log(error);
@@ -61,9 +74,14 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-          token: res.user._lat,
-        });
+        axios
+          .post(process.env.REACT_APP_BACKEND_REGISTER, {
+            token: res.user._lat,
+          })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       })
       .catch(error => {
         console.log(error);
