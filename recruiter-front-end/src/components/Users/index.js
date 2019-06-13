@@ -1,20 +1,20 @@
-import React from "react";
-import User from "../User";
-import { connect } from "react-redux";
-import { getUsers } from "../../actions/index.js";
-import { Link } from "react-router-dom";
-import { Card, Container } from "semantic-ui-react";
+import React from 'react';
+import User from '../User';
+import { connect } from 'react-redux';
+import { getUsers } from '../../actions/index';
+import { Link } from 'react-router-dom';
+import { Card, Container } from 'semantic-ui-react';
 class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
     };
   }
   componentDidMount() {
     let url = process.env.REACT_APP_BACKEND_URL;
     this.props.getUsers(url);
-    console.log("FROM PROPS USERS", this.props.users);
+    console.log('FROM PROPS USERS', this.props.users);
     // this.setState({
     //   users: this.props.users,
     // });
@@ -27,7 +27,6 @@ class Users extends React.Component {
 
   render() {
     // return this.state.users ? (
-    console.log(this.props.users, "users");
     return (
       <Container fluid>
         <Card.Group>
@@ -53,11 +52,11 @@ class Users extends React.Component {
 const mapStateToProps = state => {
   return {
     users: state.users,
-    error: state.error
+    error: state.error,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getUsers },
 )(Users);
