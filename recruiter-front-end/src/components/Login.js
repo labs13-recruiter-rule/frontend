@@ -54,9 +54,14 @@ class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post(process.env.REACT_APP_BACKEND_LOGIN, {
-          token: res.user._lat,
-        });
+        axios
+          .post(process.env.REACT_APP_BACKEND_LOGIN, {
+            token: res.user._lat,
+          })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       })
       .catch(error => {
         console.log(error);
@@ -69,9 +74,14 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
-        axios.post(process.env.REACT_APP_BACKEND_REGISTER, {
-          token: res.user._lat,
-        });
+        axios
+          .post(process.env.REACT_APP_BACKEND_REGISTER, {
+            token: res.user._lat,
+          })
+          .then(res => console.log('from register res', res))
+          .catch(error => {
+            console.log('from register error', error);
+          });
       })
       .catch(error => {
         console.log(error);
