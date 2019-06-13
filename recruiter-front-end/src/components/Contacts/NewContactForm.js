@@ -49,7 +49,7 @@ class NewContact extends React.Component {
             />
           </Form.Field>
           <Button type="submit" onClick={this.createContact}>
-            Create Contact
+            Add Contact
           </Button>
         </Form>
       </Container>
