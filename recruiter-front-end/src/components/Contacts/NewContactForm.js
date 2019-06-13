@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
 import Axios from 'axios';
 
-class NewCandidate extends React.Component {
+class NewContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,6 @@ class NewCandidate extends React.Component {
   render() {
     return (
       <Container className="form-container">
-        <p>You have no contacts. Add your first contact</p>
         <Form>
           <Form.Field>
             <label htmlFor="name">Name</label>
@@ -58,4 +57,4 @@ class NewCandidate extends React.Component {
   }
 }
 
-export default NewCandidate;
+export default NewContact;

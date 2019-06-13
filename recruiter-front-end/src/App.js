@@ -10,7 +10,7 @@ import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
 import NewContactGroup from './views/NewContactGroup/NewContactGroup';
 import NewCandidate from './components/NewCandidate/NewCandidate';
 import RuleMain from './components/RuleView/RuleMain';
-import Contacts from './components/Contacts/Contacts';
+import Contacts from './components/Contacts/NewContactForm';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container, Header } from 'semantic-ui-react';
