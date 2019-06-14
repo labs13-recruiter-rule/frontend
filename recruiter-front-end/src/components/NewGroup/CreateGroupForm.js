@@ -14,6 +14,11 @@ class CreateGroupForm extends React.Component {
       .post(
         'https://recruiter-back-end.herokuapp.com/groups/',
         this.state.addressee_type,
+        {
+          headers: {
+            token: token,
+          },
+        },
       )
       .then(res => console.log(res))
       .catch(err => console.log(err));
