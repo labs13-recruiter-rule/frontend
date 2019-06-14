@@ -2,25 +2,27 @@ import React from 'react';
 import { Button, Checkbox, Form, Container, Header } from 'semantic-ui-react';
 import Axios from 'axios';
 
+const token = sessionStorage.getItem('token');
+
 class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      title: "",
-      skills: "",
-      education: "",
-      industry: "",
-      languages: "",
-      certifications: "",
-      volunteer: "",
-      publications: "",
+      name: '',
+      email: '',
+      title: '',
+      skills: '',
+      education: '',
+      industry: '',
+      languages: '',
+      certifications: '',
+      volunteer: '',
+      publications: '',
       posts: false,
-      linkedinURL: "",
+      linkedinURL: '',
       picture: false,
       bio: false,
-      hidden: true
+      hidden: true,
     };
   }
 
@@ -41,7 +43,7 @@ class NewCandidate extends React.Component {
   };
 
   toggleHidden = () => {
-    this.setState(prevState => ({ hidden: !prevState.hidden }))
+    this.setState(prevState => ({ hidden: !prevState.hidden }));
   };
 
   submit = e => {
@@ -59,11 +61,16 @@ class NewCandidate extends React.Component {
       posts: this.state.posts,
       linkedinURL: this.state.linkedinURL,
       picture: this.state.picture,
-      bio: this.state.bio
+      bio: this.state.bio,
     };
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/candidates/',
       newCandidate,
+      {
+        headers: {
+          token: `${token}`,
+        },
+      },
     )
       .then(res => {
         console.log(res);
@@ -72,7 +79,7 @@ class NewCandidate extends React.Component {
   };
 
   render() {
-    const { hidden } = this.state
+    const { hidden } = this.state;
 
     return (
       <Container className="form-container">
@@ -202,10 +209,7 @@ class NewCandidate extends React.Component {
             />
           </Form.Field>
           <Form.Field>
-            <Checkbox 
-              label="LinkedIn Bio Exists"
-              onChange={this.toggleBio}
-            />
+            <Checkbox label="LinkedIn Bio Exists" onChange={this.toggleBio} />
           </Form.Field>
           <Button type="submit" onClick={this.submit}>
             Add Candidate

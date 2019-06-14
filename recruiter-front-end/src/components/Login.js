@@ -15,14 +15,16 @@ const uiConfig = {
       const token = authResult.user._lat;
 
       if (newUser) {
+        sessionStorage.setItem('token', token);
         console.log('from register token', token);
         axios
           .post(process.env.REACT_APP_BACKEND_REGISTER, { token })
-          .then(res => console.log('from register res', res))
+          .then(res => console.log('from register', res))
           .catch(error => {
             console.log('from register error', error);
           });
       } else {
+        sessionStorage.setItem('token', token);
         console.log('from login token', token);
         axios
           .post(process.env.REACT_APP_BACKEND_LOGIN, { token })
@@ -54,6 +56,7 @@ class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
+        sessionStorage.setItem('token', res.user._lat);
         axios
           .post(process.env.REACT_APP_BACKEND_LOGIN, {
             token: res.user._lat,
@@ -74,6 +77,7 @@ class Login extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(res => {
+        sessionStorage.setItem('token', res.user._lat);
         axios
           .post(process.env.REACT_APP_BACKEND_REGISTER, {
             token: res.user._lat,
