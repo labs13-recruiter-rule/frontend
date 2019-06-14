@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Grid, Divider, Form, Input } from 'semantic-ui-react';
 import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
