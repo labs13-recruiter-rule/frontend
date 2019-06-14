@@ -122,6 +122,10 @@ export const getContact = url => dispatch => {
 export const ADD_CONTACT_SUCCESS = 'ADD_CONTACT_SUCCESS';
 export const ADD_CONTACT_FAIL = 'ADD_CONTACT_FAIL';
 
+export const addContact = url => dispatch => {
+  return axios.post(`${url}`);
+};
+
 // UPDATE CONTACT
 export const UPDATE_CONTACT_SUCCESS = 'UPDATE_CONTACT_SUCCESS';
 export const UPDATE_CONTACT_FAIL = 'UPDATE_CONTACT_FAIL';

@@ -15,6 +15,7 @@ import Contacts from './components/Contacts/NewContactForm';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
+import { Menu, Button, Container } from 'semantic-ui-react';
 
 class App extends React.Component {
   state = {
