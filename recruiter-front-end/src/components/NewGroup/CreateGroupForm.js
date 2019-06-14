@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Button, Container } from 'semantic-ui-react';
+import { Form, Button, Container, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const token = sessionStorage.getItem('token');
@@ -28,6 +29,19 @@ class CreateGroupForm extends React.Component {
   };
 
   render() {
+      const primaryButton = {
+          margin: '50px',
+          height: '5rem',
+          width: '300px',
+          fontSize: '1.25rem',
+          fontStyle: 'italic',
+      };
+      
+    const linkStyles = {
+      textAlign: 'center',
+      color: 'rgba(0,0,0,.87)',
+    };
+
     return (
       <Container className="form-container">
         {this.state.addressee_type.length > 0 ? (
@@ -47,9 +61,15 @@ class CreateGroupForm extends React.Component {
                 placeholder="Admin/Supervisor/Manager/Director/VP"
               />
             </Form.Field>
-            <Button type="submit" onClick={this.createGroup}>
+            {/* <Link style={linkStyles} to="/new-rule/skills">
+              <Button style={primaryButton} onClick={this.handleSubmit}>
+                Next <Icon name="arrow right" size="small" />
+              </Button>
+            </Link> */}
+
+            {/* <Button type="submit" onClick={this.createGroup}>
               Create Group
-            </Button>
+            </Button> */}
           </Form>
         )}
       </Container>

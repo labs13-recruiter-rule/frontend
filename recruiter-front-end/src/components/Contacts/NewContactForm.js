@@ -55,9 +55,6 @@ class NewContact extends React.Component {
               placeholder="Email"
             />
           </Form.Field>
-          <Button type="submit" onClick={this.createContact}>
-            Add Contact
-          </Button>
         </Form>
       </Container>
     );

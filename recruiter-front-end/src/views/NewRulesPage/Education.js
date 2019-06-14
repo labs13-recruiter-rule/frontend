@@ -60,7 +60,7 @@ class NewCandidate extends React.Component {
     };
 
     const primaryButton = {
-      margin: '50px',
+      margin: '50px auto',
       height: '5rem',
       width: '300px',
       fontSize: '1.25rem',
@@ -186,8 +186,22 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={17} />
-            <Step.Group ordered>
+            <Progress percent={50} />
+            <Step.Group widths={5}>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-contact-group">
+                    <Step.Title>Group</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-contact-group/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step active>
                 <Step.Content>
                   <Step.Title>Education</Step.Title>
@@ -247,11 +261,11 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            <Link style={linkStyles} to="/new-rule/skills">
-              <Button style={primaryButton} onClick={this.handleSubmit}>
+            <Button style={primaryButton} onClick={this.handleSubmit}>
+              <Link style={linkStyles} to="/new-rule/skills">
                 Next <Icon name="arrow right" size="small" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <Modal
               trigger={
                 <Button style={secondaryButton}>
