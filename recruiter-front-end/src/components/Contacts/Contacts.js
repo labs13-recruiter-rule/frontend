@@ -1,61 +1,55 @@
 import React from 'react';
-import { Button, Form, Container } from 'semantic-ui-react';
-import Axios from 'axios';
-
-class NewCandidate extends React.Component {
-  constructor(props) {
-    super(props);
+import User from '../User';
+import { connect } from 'react-redux';
+import { getUsers } from '../../actions/index';
+import { Link } from 'react-router-dom';
+import { Card, Container } from 'semantic-ui-react';
+class Contacts extends React.Component {
+  constructor() {
+    super();
     this.state = {
-      name: '',
-      email: '',
+      contacts: [],
     };
   }
+  componentDidMount() {
+    let url = process.env.REACT_APP_BACKEND_URL;
+    this.props.getUsers(url);
+    // this.setState({
+    //   contacts: this.props.contacts,
+    // });
+  }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  createContact = e => {
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/users/1/contacts',
-      this.state,
-    )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  getContacts = () => {
+    let url = process.env.REACT_APP_BACKEND_URL;
+    this.props.getContacts(url);
   };
 
   render() {
-    return (
-      <Container className="form-container">
-        <p>You have no contacts. Add your first contact</p>
-        <Form>
-          <Form.Field>
-            <label htmlFor="name">Name</label>
-            <input
-              value={this.state.name}
-              onChange={this.handleChange}
-              type="text"
-              name="name"
-              placeholder="Name"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="email">Email</label>
-            <input
-              value={this.state.email}
-              onChange={this.handleChange}
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </Form.Field>
-          <Button type="submit" onClick={this.createContact}>
-            Create Contact
-          </Button>
-        </Form>
+    this.state.contacts.length < 1 ? (
+      <Container fluid>
+        {' '}
+        <p>You don't have any contacts yet.</p>{' '}
+      </Container>
+    ) : (
+      <Container fluid>
+        <Card.Group>
+          {this.state.contacts.map(contact => (
+            <Card>{contact}</Card>
+          ))}
+        </Card.Group>
       </Container>
     );
   }
 }
 
-export default NewCandidate;
+const mapStateToProps = state => {
+  return {
+    users: state.users,
+    error: state.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getUsers },
+)(Users);

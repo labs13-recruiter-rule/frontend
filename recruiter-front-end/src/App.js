@@ -12,11 +12,11 @@ import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import NewCandidate from './components/NewCandidate/NewCandidate';
+import Contacts from './components/Contacts/NewContactForm';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
-import Contacts from './components/Contacts/Contacts';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
-import { Menu, Button, Container, Header } from 'semantic-ui-react';
+import { Menu, Button, Container } from 'semantic-ui-react';
 
 class App extends React.Component {
   state = {
@@ -90,7 +90,11 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route exact path="/add-candidate" component={AddCandidatePage} />
+                <Route
+                  exact
+                  path="/add-candidate"
+                  component={AddCandidatePage}
+                />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
                 <Route
