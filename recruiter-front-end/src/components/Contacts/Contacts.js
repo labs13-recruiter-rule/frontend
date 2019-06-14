@@ -15,35 +15,29 @@ class Contacts extends React.Component {
     let url = process.env.REACT_APP_BACKEND_URL;
     this.props.getUsers(url);
     // this.setState({
-    //   users: this.props.users,
+    //   contacts: this.props.contacts,
     // });
   }
 
-  getUsers = () => {
+  getContacts = () => {
     let url = process.env.REACT_APP_BACKEND_URL;
-    this.props.getUsers(url);
+    this.props.getContacts(url);
   };
 
   render() {
-    // return this.state.users ? (
-    return (
+    this.state.contacts.length < 1 ? (
+      <Container fluid>
+        {' '}
+        <p>You don't have any contacts yet.</p>{' '}
+      </Container>
+    ) : (
       <Container fluid>
         <Card.Group>
-          {/* {this.props.users &&
-						this.props.users.map(user => (
-							<Link to={`/${user.id}`} key={user.id}>
-								<User user={user} />
-							</Link>
-						))} */}
-          {/* {console.log('from env index', process.env.REACT_APP_BACKEND_URL)}
-        {console.log('test word', process.env.REACT_APP_TESTWORD)} */}
+          {this.state.contacts.map(contact => (
+            <Card>{contact}</Card>
+          ))}
         </Card.Group>
       </Container>
-
-      // ) : (
-      //   <div>
-      //     <p>LOADING</p>
-      //   </div>
     );
   }
 }
