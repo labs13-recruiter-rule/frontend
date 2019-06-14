@@ -30,14 +30,14 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     console.log(this.state);
-    // Axios.post(
-    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
-    //   this.state,
-    // )
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    Axios.post(
+      'https://recruiter-back-end.herokuapp.com/engine/addRule',
+      this.state,
+    )
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -284,7 +284,7 @@ class NewCandidate extends React.Component {
             <Step.Group ordered>
               <Step completed>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/Education">
+                  <Link style={linkStyles} to="/new-rule/education">
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
@@ -296,7 +296,9 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Step.Title>Experience</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/experience">
+                    <Step.Title>Experience</Step.Title>
+                  </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
@@ -305,8 +307,8 @@ class NewCandidate extends React.Component {
                 <Grid.Column />
                 <Grid.Column width={14}>
                   <Header as="h4" textAlign="center">
-                    What are the skill requirements for sending a candidate to
-                    the Sales Managers?
+                    What are the skill requirements to send a candidate to the
+                    Sales Managers?
                   </Header>
                 </Grid.Column>
                 <Grid.Column />

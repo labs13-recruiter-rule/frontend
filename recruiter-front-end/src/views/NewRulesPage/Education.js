@@ -9,7 +9,6 @@ import {
   Step,
   Dropdown,
   Divider,
-  Input,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
@@ -196,7 +195,9 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Step.Title>Experience</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/experience">
+                    <Step.Title>Experience</Step.Title>
+                  </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
