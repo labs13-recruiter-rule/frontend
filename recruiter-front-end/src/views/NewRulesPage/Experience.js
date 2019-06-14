@@ -9,7 +9,6 @@ import {
   Step,
   Dropdown,
   Divider,
-  Input,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
@@ -75,7 +74,7 @@ class NewCandidate extends React.Component {
     };
 
     const primaryButton = {
-      margin: '50px',
+      margin: '50px auto',
       height: '5rem',
       width: '300px',
       fontSize: '1.25rem',
@@ -138,20 +137,34 @@ class NewCandidate extends React.Component {
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={90} />
-            <Step.Group ordered>
-              <Step completed>
+            <Step.Group widths={5}>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-contact-group">
+                    <Step.Title>Group</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-contact-group/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
-              <Step completed>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/skills">
+              <Step>
+                <Link style={linkStyles} to="/new-rule/skills">
+                  <Step.Content>
                     <Step.Title>Skills</Step.Title>
-                  </Link>
-                </Step.Content>
+                  </Step.Content>
+                </Link>
               </Step>
               <Step active>
                 <Step.Content>

@@ -41,7 +41,7 @@ function App() {
               <label>LinkedIn</label>
               <input
                 type="url"
-                placeholder="https://www.linkedin.com/fname-lname-exampl3"
+                placeholder="https://www.linkedin.com/john-lname-exampl3"
               />
             </Form.Field>
           </Form>

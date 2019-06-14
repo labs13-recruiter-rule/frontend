@@ -7,16 +7,18 @@ import Login from './components/Login';
 //! import User from "./components/User"; DEFINED BUT NEVER USED
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
-import NewContactGroup from './views/NewContactGroup/NewContactGroup';
+import ContactGroup from './views/NewContactGroup/ContactGroup';
+import Contacts from './views/NewContactGroup/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import NewCandidate from './components/NewCandidate/NewCandidate';
-import Contacts from './components/Contacts/NewContactForm';
+// import Contacts from './components/Contacts/NewContactForm';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
+import history from './history';
 
 class App extends React.Component {
   state = {
@@ -47,7 +49,7 @@ class App extends React.Component {
   render() {
     return (
       <Container>
-        <Router>
+        <Router history={history}>
           {this.state.user ? (
             [
               <>
@@ -100,7 +102,12 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-contact-group"
-                  component={NewContactGroup}
+                  component={ContactGroup}
+                />
+                <Route
+                  exact
+                  path="/new-contact-group/contacts"
+                  component={Contacts}
                 />
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
