@@ -30,7 +30,6 @@ class Contacts extends React.Component {
     })
       .then(res => this.setState({ contacts: res.data }))
       .catch(error => console.log(error));
-  };
 
   render() {
     this.state.contacts.length < 1 ? (
