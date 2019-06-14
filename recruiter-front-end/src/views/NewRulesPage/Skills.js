@@ -57,8 +57,11 @@ class NewCandidate extends React.Component {
       margin: '50px auto',
       height: '5rem',
       width: '300px',
-      fontSize: '1.25rem',
-      fontStyle: 'italic',
+      fontSize: '1.35rem',
+      fontWeight: '900',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     };
 
     const secondaryButton = {
@@ -354,10 +357,13 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            <Button style={primaryButton} onClick={this.handleSubmit}>
-              <Link style={linkStyles} to="/new-rule/experience">
-                Next <Icon name="arrow right" size="small" />
-              </Link>
+            <Button
+              style={primaryButton}
+              onClick={this.handleSubmit}
+              as={Link}
+              to="/new-rule/experience"
+            >
+              Next <Icon name="arrow right" size="small" />
             </Button>
             <Modal
               trigger={

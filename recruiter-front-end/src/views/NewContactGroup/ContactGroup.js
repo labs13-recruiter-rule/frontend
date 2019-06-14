@@ -35,10 +35,13 @@ const secondaryButton = {
 
 const primaryButton = {
   margin: '50px auto',
-//   height: '5rem',
+  height: '5rem',
   width: '300px',
-  fontSize: '1.25rem',
-  fontStyle: 'italic',
+  fontSize: '1.35rem',
+  fontWeight: '900',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const handleSubmit = e => {
