@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Grid, Divider, Form, Dropdown, Input } from 'semantic-ui-react';
+import { Grid, Divider, Form, Input } from 'semantic-ui-react';
+import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
+import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
+import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
 
 const flexContainer = {
   display: 'flex',
@@ -10,107 +13,6 @@ const flexContainer = {
 const center = {
   textAlign: 'center',
 };
-
-const DegreeSelection = [
-  {
-    key: '1',
-    text: 'High School Diploma / GED or equivalent',
-    value: 'High School Diploma / GED or equivalent',
-  },
-  {
-    key: '2',
-    text: 'Some College or equivalent',
-    value: 'Some College or equivalent',
-  },
-  {
-    key: '3',
-    text: "Associate's Degree or equivalent",
-    value: "Associate's Degree or equivalent",
-  },
-  {
-    key: '4',
-    text: "Bachelor's Degree or equivalent",
-    value: "Bachelor's Degree or equivalent",
-  },
-  {
-    key: '5',
-    text: "Master's Degree or equivalent",
-    value: "Master's Degree or equivalent",
-  },
-  {
-    key: '6',
-    text: 'PhD or equivalent',
-    value: 'PhD or equivalent',
-  },
-];
-
-const MajorSelection = [
-  {
-    key: '1',
-    text: 'High School Diploma / GED or equivalent',
-    value: 'High School Diploma / GED or equivalent',
-  },
-  {
-    key: '2',
-    text: 'Some College or equivalent',
-    value: 'Some College or equivalent',
-  },
-];
-
-const ExperienceSelection = [
-  {
-    key: '1',
-    text: 'Less than 6 Months',
-    value: 'Less than 6 Months',
-  },
-  {
-    key: '2',
-    text: '6 Months to 1 Year',
-    value: '6 Months to 1 Year',
-  },
-  {
-    key: '3',
-    text: '1 Year',
-    value: '1 Year',
-  },
-  {
-    key: '4',
-    text: '2 Years',
-    value: '2 Years',
-  },
-  {
-    key: '5',
-    text: '3 years',
-    value: '3 years',
-  },
-];
-
-const DegreeDropdown = () => (
-  <Dropdown
-    placeholder="Select Degree"
-    fluid
-    selection
-    options={DegreeSelection}
-  />
-);
-
-const MajorDropdown = () => (
-  <Dropdown
-    placeholder="Select Major"
-    fluid
-    selection
-    options={MajorSelection}
-  />
-);
-
-const ExperienceDropdown = () => (
-  <Dropdown
-    placeholder="Select Experience"
-    fluid
-    selection
-    options={ExperienceSelection}
-  />
-);
 
 const SkillsTags = () => <Input placeholder="Enter Skill" />;
 
