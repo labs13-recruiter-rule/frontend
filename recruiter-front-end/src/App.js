@@ -11,11 +11,9 @@ import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import Contacts from './components/Contacts/NewContactForm';
-import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
-import DefaultContactMessage from './views/CreateDefaultContact/DefaultContactMessage';
 
 class App extends React.Component {
   state = {
@@ -81,7 +79,6 @@ class App extends React.Component {
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
-                <Route exact path="/test" component={DefaultContactMessage} />
                 <Route
                   exact
                   path="/id"
@@ -89,11 +86,6 @@ class App extends React.Component {
                     console.log(props);
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
-                />
-                <Route
-                  exact
-                  path="/add-candidate"
-                  component={AddCandidatePage}
                 />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
