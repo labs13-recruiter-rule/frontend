@@ -8,12 +8,13 @@ import Login from './components/Login';
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
 import NewContactGroup from './views/NewContactGroup/NewContactGroup';
+import Education from './views/NewRulesPage/Education';
+import Skills from './views/NewRulesPage/Skills';
 import NewCandidate from './components/NewCandidate/NewCandidate';
-import RuleMain from './components/RuleView/RuleMain';
 import Contacts from './components/Contacts/NewContactForm';
+import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
-import { Menu, Button, Container, Header } from 'semantic-ui-react';
 
 class App extends React.Component {
   state = {
@@ -60,9 +61,9 @@ class App extends React.Component {
                     <Button>
                       <NavLink
                         style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/new-candidate"
+                        to="/add-candidate"
                       >
-                        New Candidate
+                        Add Candidate
                       </NavLink>
                     </Button>
                   </Menu.Item>
@@ -87,7 +88,11 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route exact path="/new-candidate" component={NewCandidate} />
+                <Route
+                  exact
+                  path="/add-candidate"
+                  component={AddCandidatePage}
+                />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
                 <Route
@@ -95,6 +100,8 @@ class App extends React.Component {
                   path="/new-contact-group"
                   component={NewContactGroup}
                 />
+                <Route exact path="/new-rule/education" component={Education} />
+                <Route exact path="/new-rule/skills" component={Skills} />
               </>,
             ]
           ) : (
