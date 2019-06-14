@@ -14,6 +14,8 @@ import {
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
+const token = sessionStorage.getItem('token');
+
 class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
@@ -51,14 +53,19 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     console.log('this.state', this.state);
-    // Axios.post(
-    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
-    //   this.state,
-    // )
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    Axios.post(
+      'https://recruiter-back-end.herokuapp.com/engine/addRule',
+      this.state,
+      {
+        headers: {
+          token: `${token}`,
+        },
+      },
+    )
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {

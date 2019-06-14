@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Button, Container } from 'semantic-ui-react';
 import axios from 'axios';
 
+const token = sessionStorage.getItem('token');
+
 class CreateGroupForm extends React.Component {
   state = {
     addressee_type: '',
@@ -9,16 +11,13 @@ class CreateGroupForm extends React.Component {
   };
 
   createGroup = () => {
+    console.log('token', token);
     this.setState({ addressee_type: this.state.group_name });
     axios
       .post(
         'https://recruiter-back-end.herokuapp.com/groups/',
         this.state.addressee_type,
-        {
-          headers: {
-            token: token,
-          },
-        },
+        { headers: { token: `${token}` } },
       )
       .then(res => console.log(res))
       .catch(err => console.log(err));

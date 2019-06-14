@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
 import Axios from 'axios';
 
+const token = sessionStorage.getItem('token');
+
 class NewContact extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +19,13 @@ class NewContact extends React.Component {
 
   createContact = e => {
     Axios.post(
-      'https://recruiter-back-end.herokuapp.com/users/1/contacts',
+      'https://recruiter-back-end.herokuapp.com/contacts/',
       this.state,
+      {
+        headers: {
+          token: `${token}`,
+        },
+      },
     )
       .then(res => console.log(res))
       .catch(err => console.log(err));

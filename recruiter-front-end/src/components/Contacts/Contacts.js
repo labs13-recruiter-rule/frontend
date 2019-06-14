@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { getUsers } from '../../actions/index';
 import { Link } from 'react-router-dom';
 import { Card, Container } from 'semantic-ui-react';
+import Axios from 'axios';
+
+const token = sessionStorage.getItem('token');
+
 class Contacts extends React.Component {
   constructor() {
     super();
@@ -12,16 +16,20 @@ class Contacts extends React.Component {
     };
   }
   componentDidMount() {
-    let url = process.env.REACT_APP_BACKEND_URL;
-    this.props.getUsers(url);
+    this.getUsers();
     // this.setState({
     //   contacts: this.props.contacts,
     // });
   }
 
   getContacts = () => {
-    let url = process.env.REACT_APP_BACKEND_URL;
-    this.props.getContacts(url);
+    Axios.get('https://recruiter-back-end.herokuapp.com/contacts/', {
+      headers: {
+        token: `${token}`,
+      },
+    })
+      .then(res => this.setState({ contacts: res.data }))
+      .catch(error => console.log(error));
   };
 
   render() {
@@ -42,14 +50,4 @@ class Contacts extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    users: state.users,
-    error: state.error,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { getUsers },
-)(Users);
+export default Contacts;
