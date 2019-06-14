@@ -10,6 +10,7 @@ import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
 import NewContactGroup from './views/NewContactGroup/NewContactGroup';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
+import Experience from './views/NewRulesPage/Experience';
 import NewCandidate from './components/NewCandidate/NewCandidate';
 import RuleMain from './components/RuleView/RuleMain';
 import Contacts from './components/Contacts/Contacts';
@@ -99,6 +100,11 @@ class App extends React.Component {
                 />
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
+                <Route
+                  exact
+                  path="/new-rule/experience"
+                  component={Experience}
+                />
               </>,
             ]
           ) : (
