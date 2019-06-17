@@ -16,7 +16,7 @@ class Contacts extends React.Component {
     };
   }
   componentDidMount() {
-    this.getUsers();
+    // this.getUsers();
     // this.setState({
     //   contacts: this.props.contacts,
     // });
@@ -32,20 +32,24 @@ class Contacts extends React.Component {
       .catch(error => console.log(error));
   };
   render() {
-    this.state.contacts.length < 1 ? (
-      <Container fluid>
-        {' '}
-        <p>You don't have any contacts yet.</p>{' '}
-      </Container>
-    ) : (
-      <Container fluid>
-        <Card.Group>
-          {this.state.contacts.map(contact => (
-            <Card>{contact}</Card>
-          ))}
-        </Card.Group>
-      </Container>
-    );
+    if (this.state.contacts.length < 1) {
+      return (
+        <Container fluid>
+          {' '}
+          <p>You don't have any contacts yet.</p>{' '}
+        </Container>
+      );
+    } else {
+      return (
+        <Container fluid>
+          <Card.Group>
+            {this.state.contacts.map(contact => (
+              <Card>{contact}</Card>
+            ))}
+          </Card.Group>
+        </Container>
+      );
+    }
   }
 }
 
