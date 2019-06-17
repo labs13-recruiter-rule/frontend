@@ -1,4 +1,12 @@
 import axios from 'axios';
+import {
+  ADD_CONTACT_TO_GROUP_FAIL,
+  ADD_CONTACT_TO_GROUP_SUCCESS,
+  REMOVE_CONTACT_FROM_GROUP_FAIL,
+  REMOVE_CONTACT_FROM_GROUP_SUCCESS,
+  EDIT_CONTACT_IN_GROUP_FAIL,
+  EDIT_CONTACT_IN_GROUP_SUCCESS,
+} from './types';
 
 // TOKEN
 
@@ -10,8 +18,6 @@ const tokenHeader = {
 };
 
 // ADD CONTACT TO CONTACT GROUP
-export const ADD_CONTACT_TO_GROUP_SUCCESS = 'ADD_CONTACT_TO_GROUP_SUCCESS';
-export const ADD_CONTACT_TO_GROUP_FAIL = 'ADD_CONTACT_TO_GROUP_FAIL';
 
 export const addContactToGroup = (url, newGroupContact) => dispatch => {
   return axios
@@ -31,11 +37,8 @@ export const addContactToGroup = (url, newGroupContact) => dispatch => {
 };
 
 // REMOVE CONTACT FROM CONTACT GROUP
-export const REMOVE_CONTACT_FROM_GROUP_SUCCESS =
-  'REMOVE_CONTACT_FROM_GROUP_SUCCESS';
-export const REMOVE_CONTACT_FROM_GROUP_FAIL = 'REMOVE_CONTACT_FROM_GROUP_FAIL';
 
-export const removeContactfromGroup = url => {
+export const removeContactfromGroup = url => dispatch => {
   return axios
     .delete(`${url}`, tokenHeader)
     .then(res => {
@@ -53,8 +56,6 @@ export const removeContactfromGroup = url => {
 };
 
 // EDIT CONTACT IN CONTACT GROUP
-export const EDIT_CONTACT_IN_GROUP_SUCCESS = 'EDIT_CONTACT_IN_GROUP_SUCCESS';
-export const EDIT_CONTACT_IN_GROUP_FAIL = 'EDIT_CONTACT_IN_GROUP_FAIL';
 
 export const editContactInGroup = (url, editedGroupContact) => dispatch => {
   return axios

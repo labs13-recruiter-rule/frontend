@@ -1,5 +1,14 @@
 import axios from 'axios';
-
+import {
+  CREATE_GROUP_FAIL,
+  CREATE_GROUP_SUCCESS,
+  EDIT_GROUP_FAIL,
+  EDIT_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
+  DELETE_GROUP_SUCCESS,
+  GET_GROUP_FAIL,
+  GET_GROUP_SUCCESS,
+} from './types';
 // TOKEN
 
 const token = sessionStorage.getItem('token');
@@ -10,8 +19,6 @@ const tokenHeader = {
 };
 
 // CREATE CONTACT GROUP
-export const CREATE_GROUP_SUCCESS = 'CREATE_GROUP_SUCCESS';
-export const CREATE_GROUP_FAIL = 'CREATE_GROUP_FAIL';
 
 export const createGroup = (url, newGroup) => dispatch => {
   return axios
@@ -31,8 +38,6 @@ export const createGroup = (url, newGroup) => dispatch => {
 };
 
 // EDIT CONTACT GROUP
-export const EDIT_GROUP_SUCCESS = 'EDIT_GROUP_SUCCESS';
-export const EDIT_GROUP_FAIL = 'EDIT_GROUP_FAIL';
 
 export const editGroup = (url, editedGroup) => dispatch => {
   return axios
@@ -52,27 +57,25 @@ export const editGroup = (url, editedGroup) => dispatch => {
 };
 
 // DELETE CONTACT GROUP
-export const DELETE_GROUP_SUCCESS = 'DELETE_GROUP_SUCCESS';
-export const DELETE_GROUP_FAIL = 'DELETE_GROUP_FAIL';
 
 export const deleteGroup = url => dispatch => {
   return axios
     .delete(`${url}`, tokenHeader)
     .then(res => {
       dispatch({
-        type: DELETE_CONTACT_SUCCESS,
+        type: DELETE_GROUP_SUCCESS,
         payload: res.data,
       });
     })
-    .catch({
-      type: DELETE_GROUP_FAIL,
-      payload: error,
+    .catch(error => {
+      dispatch({
+        type: DELETE_GROUP_FAIL,
+        payload: error,
+      });
     });
 };
 
 // GET CONTACT GROUP
-export const GET_GROUP_SUCCESS = 'GET_GROUP_SUCCESS';
-export const GET_GROUP_FAIL = 'GET_GROUP_FAIL';
 
 export const getGroup = url => dispatch => {
   return axios

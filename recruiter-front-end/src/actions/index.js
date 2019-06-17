@@ -18,6 +18,20 @@ import {
   UPDATE_CONTACT_SUCCESS,
   DELETE_CONTACT_FAIL,
   DELETE_CONTACT_SUCCESS,
+  CREATE_GROUP_FAIL,
+  CREATE_GROUP_SUCCESS,
+  EDIT_GROUP_FAIL,
+  EDIT_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
+  DELETE_GROUP_SUCCESS,
+  GET_GROUP_FAIL,
+  GET_GROUP_SUCCESS,
+  ADD_CONTACT_TO_GROUP_FAIL,
+  ADD_CONTACT_TO_GROUP_SUCCESS,
+  REMOVE_CONTACT_FROM_GROUP_FAIL,
+  REMOVE_CONTACT_FROM_GROUP_SUCCESS,
+  EDIT_CONTACT_IN_GROUP_FAIL,
+  EDIT_CONTACT_IN_GROUP_SUCCESS,
 } from './types';
 
 import { getUsers, addUserToSQL, getUserIdfromUUID } from './userActions';
@@ -28,10 +42,17 @@ import {
   deleteContact,
   updateContact,
 } from './contactActions';
+import { createGroup, editGroup, deleteGroup, getGroup } from './groupActions';
+import {
+  addContactToGroup,
+  editContactInGroup,
+  removeContactfromGroup,
+} from './groupContactsActions';
 
 // import { history } from "../helpers/history";
 
 export {
+  // USERS
   GET_USERS_FAIL,
   GET_USERS_SUCCESS,
   GET_USER_FAIL,
@@ -43,6 +64,7 @@ export {
   getUsers,
   addUserToSQL,
   getUserIdfromUUID,
+  // CONTACTS
   GET_CONTACTS_SUCCESS,
   GET_CONTACTS_FAIL,
   GET_CONTACT_SUCCESS,
@@ -58,4 +80,27 @@ export {
   addContact,
   deleteContact,
   updateContact,
+  // GROUPS
+  CREATE_GROUP_FAIL,
+  CREATE_GROUP_SUCCESS,
+  EDIT_GROUP_FAIL,
+  EDIT_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
+  DELETE_GROUP_SUCCESS,
+  GET_GROUP_FAIL,
+  GET_GROUP_SUCCESS,
+  createGroup,
+  editGroup,
+  deleteGroup,
+  getGroup,
+  // GROUP CONTACTS
+  ADD_CONTACT_TO_GROUP_FAIL,
+  ADD_CONTACT_TO_GROUP_SUCCESS,
+  REMOVE_CONTACT_FROM_GROUP_FAIL,
+  REMOVE_CONTACT_FROM_GROUP_SUCCESS,
+  EDIT_CONTACT_IN_GROUP_FAIL,
+  EDIT_CONTACT_IN_GROUP_SUCCESS,
+  addContactToGroup,
+  editContactInGroup,
+  removeContactfromGroup,
 };
