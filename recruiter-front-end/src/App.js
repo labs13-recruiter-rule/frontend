@@ -7,12 +7,12 @@ import Login from './components/Login';
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
 import ContactGroup from './views/NewContactGroup/ContactGroup';
-import Contacts from './views/NewContactGroup/Contacts';
+import Contacts from './components/Contacts/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 
-import Contacts from './components/Contacts/NewContactForm';
+import NewContactForm from './views/NewContactGroup/Contacts';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
@@ -89,10 +89,11 @@ class App extends React.Component {
                   path="/new-contact-group"
                   component={ContactGroup}
                 />
+                <Route exact path="/contacts" component={Contacts} />
                 <Route
                   exact
                   path="/new-contact-group/contacts"
-                  component={Contacts}
+                  component={NewContactForm}
                 />
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
