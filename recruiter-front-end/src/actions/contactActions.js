@@ -1,5 +1,16 @@
 import axios from 'axios';
-
+import {
+  GET_CONTACTS_SUCCESS,
+  GET_CONTACTS_FAIL,
+  GET_CONTACT_SUCCESS,
+  GET_CONTACT_FAIL,
+  ADD_CONTACT_SUCCESS,
+  ADD_CONTACT_FAIL,
+  UPDATE_CONTACT_FAIL,
+  UPDATE_CONTACT_SUCCESS,
+  DELETE_CONTACT_FAIL,
+  DELETE_CONTACT_SUCCESS,
+} from './types';
 // TOKEN
 
 const token = sessionStorage.getItem('token');
@@ -9,10 +20,7 @@ const tokenHeader = {
   },
 };
 
-// GET CONTACTS
-export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
-export const GET_CONTACTS_FAIL = 'GET_CONTACTS_FAIL';
-
+// GET ALL CONTACTS
 export const getContacts = url => dispatch => {
   return axios
     .get(`${url}`, tokenHeader)
@@ -31,8 +39,6 @@ export const getContacts = url => dispatch => {
 };
 
 // GET INDIVIDUAL CONTACT
-export const GET_CONTACT_SUCCESS = 'GET_CONTACT_SUCCESS';
-export const GET_CONTACT_FAIL = 'GET_CONTACT_FAIL';
 
 export const getContact = url => dispatch => {
   return axios
@@ -52,8 +58,6 @@ export const getContact = url => dispatch => {
 };
 
 // ADD CONTACT
-export const ADD_CONTACT_SUCCESS = 'ADD_CONTACT_SUCCESS';
-export const ADD_CONTACT_FAIL = 'ADD_CONTACT_FAIL';
 
 export const addContact = (url, contact) => dispatch => {
   return axios
@@ -73,8 +77,6 @@ export const addContact = (url, contact) => dispatch => {
 };
 
 // UPDATE CONTACT
-export const UPDATE_CONTACT_SUCCESS = 'UPDATE_CONTACT_SUCCESS';
-export const UPDATE_CONTACT_FAIL = 'UPDATE_CONTACT_FAIL';
 
 export const updateContact = (url, updatedContact) => dispatch => {
   return axios
@@ -94,8 +96,6 @@ export const updateContact = (url, updatedContact) => dispatch => {
 };
 
 // DELETE CONTACT
-export const DELETE_CONTACT_SUCCESS = 'DELETE_CONTACT_SUCCESS';
-export const DELETE_CONTACT_FAIL = 'DELETE_CONTACT_FAIL';
 
 export const deleteContact = url => dispatch => {
   return axios

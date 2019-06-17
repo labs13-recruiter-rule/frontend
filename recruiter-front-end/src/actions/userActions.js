@@ -1,7 +1,12 @@
 import axios from 'axios';
-
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAIL = 'GET_USERS_FAIL';
+import {
+  GET_USERS_FAIL,
+  GET_USERS_SUCCESS,
+  ADD_USER_FAIL,
+  ADD_USER_SUCCESS,
+  GET_USER_ID_FAIL,
+  GET_USER_ID_SUCCESS,
+} from './types.js';
 
 export const getUsers = url => dispatch => {
   return axios
@@ -22,14 +27,6 @@ export const getUsers = url => dispatch => {
     });
 };
 
-// GET USER BY ID
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAIL = 'GET_USER_FAIL';
-
-// ADD USER TO SQL DB
-export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
-export const ADD_USER_FAIL = 'ADD_USER_FAIL';
-
 export const addUserToSQL = (url, user) => dispatch => {
   return axios
     .post(`${url}`, user)
@@ -48,9 +45,6 @@ export const addUserToSQL = (url, user) => dispatch => {
 };
 
 // GET USER ID FROM FIREBASE UID
-
-export const GET_USER_ID_SUCCESS = 'GET_USER_ID_SUCCESS';
-export const GET_USER_ID_FAIL = 'GET_USER_ID_FAIL';
 
 export const getUserIdfromUUID = (url, uuid) => dispatch => {
   return axios

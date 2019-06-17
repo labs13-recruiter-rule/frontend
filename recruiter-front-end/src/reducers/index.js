@@ -7,8 +7,7 @@ import {
   GET_USER_ID_FAIL,
   ADD_USER_SUCCESS,
   ADD_USER_FAIL,
-  UNAUTHORIZED_USER,
-} from '../actions/index';
+} from '../actions';
 
 const initialState = {
   users: [],
@@ -34,11 +33,6 @@ const reducer = (state = initialState, action) => {
         user: action.payload,
       };
     case GET_USER_FAIL:
-      return {
-        ...state,
-        error: action.payload,
-      };
-    case UNAUTHORIZED_USER:
       return {
         ...state,
         error: action.payload,
