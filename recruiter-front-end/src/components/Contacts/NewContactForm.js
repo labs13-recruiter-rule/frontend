@@ -1,15 +1,13 @@
 import React from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
-import Axios from 'axios';
-
-const token = sessionStorage.getItem('token');
+import { connect } from 'react-redux';
+import { addContact } from '../../actions';
 
 class NewContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
+      contact: { name: '', email: '' },
     };
   }
 
@@ -18,23 +16,16 @@ class NewContact extends React.Component {
   };
 
   createContact = e => {
-    Axios.post(
+    this.props.addContact(
       'https://recruiter-back-end.herokuapp.com/contacts/',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+      this.state.contact,
+    );
   };
 
   render() {
     return (
       <Container className="form-container">
-        <Form>
+        <Form onSubmit={this.createContact}>
           <Form.Field>
             <label htmlFor="name">Name</label>
             <input
@@ -61,4 +52,11 @@ class NewContact extends React.Component {
   }
 }
 
-export default NewContact;
+const mapStateToProps = ({ contact }) => ({
+  contact,
+});
+
+export default connect(
+  mapStateToProps,
+  addContact,
+)(NewContact);

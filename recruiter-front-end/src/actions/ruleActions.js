@@ -34,7 +34,7 @@ export const getRules = url => dispatch => {
     .catch(error => {
       dispatch({
         type: GET_RULES_FAIL,
-        payload: res.data,
+        payload: error,
       });
     });
 };
