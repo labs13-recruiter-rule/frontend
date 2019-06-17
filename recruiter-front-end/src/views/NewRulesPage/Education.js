@@ -60,9 +60,9 @@ class NewCandidate extends React.Component {
     };
 
     const primaryButton = {
-      margin: '50px auto',
-      height: '5rem',
-      width: '300px',
+      margin: '50px 0',
+      height: '4rem',
+      width: '150px',
       fontSize: '1.35rem',
       fontWeight: '900',
       display: 'flex',
@@ -189,8 +189,8 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={50} />
-            <Step.Group widths={5}>
+            <Progress percent={42} />
+            <Step.Group widths={6}>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-contact-group">
@@ -221,6 +221,13 @@ class NewCandidate extends React.Component {
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/experience">
                     <Step.Title>Experience</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/fail">
+                    <Step.Title>Fail</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -264,14 +271,26 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            <Button
-              style={primaryButton}
-              onClick={this.handleSubmit}
-              as={Link}
-              to="/new-rule/skills"
+            <Grid.Column
+              style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              Next <Icon name="arrow right" size="small" />
-            </Button>
+              <Button
+                style={primaryButton}
+                as={Link}
+                to="/new-contact-group/contacts"
+              >
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/new-rule/skills"
+              >
+                Next <Icon name="arrow right" size="small" />
+              </Button>
+            </Grid.Column>
             <Modal
               trigger={
                 <Button style={secondaryButton}>
