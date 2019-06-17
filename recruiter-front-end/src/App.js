@@ -71,13 +71,6 @@ class App extends React.Component {
                       </NavLink>
                     </Button>
                   </Menu.Item>
-                  <Menu.Item>
-                    <Button>
-                      <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/mailer">
-                        Mailer
-                      </NavLink>
-                    </Button>
-                  </Menu.Item>
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
@@ -98,7 +91,6 @@ class App extends React.Component {
                   component={AddCandidatePage}
                 />
                 <Route exact path="/contacts" component={Contacts} />
-                <Route exact path="/mailer" component={Mailer} />
                 <Route
                   exact
                   path="/new-contact-group"
