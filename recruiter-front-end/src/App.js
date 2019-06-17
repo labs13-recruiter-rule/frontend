@@ -4,7 +4,6 @@ import Users from './components/Users';
 import Dashboard from './components/Dashboard';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import Login from './components/Login';
-//! import User from "./components/User"; DEFINED BUT NEVER USED
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
 import ContactGroup from './views/NewContactGroup/ContactGroup';
@@ -12,9 +11,8 @@ import Contacts from './views/NewContactGroup/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
-import NewCandidate from './components/NewCandidate/NewCandidate';
-// import Contacts from './components/Contacts/NewContactForm';
-import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
+
+import Contacts from './components/Contacts/NewContactForm';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
@@ -84,11 +82,6 @@ class App extends React.Component {
                     console.log(props);
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
-                />
-                <Route
-                  exact
-                  path="/add-candidate"
-                  component={AddCandidatePage}
                 />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route
