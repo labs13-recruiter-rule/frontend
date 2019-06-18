@@ -1,4 +1,4 @@
-import React from 'react';
+import React from './node_modules/react';
 import {
   Grid,
   Progress,
@@ -7,8 +7,8 @@ import {
   Button,
   Header,
   Icon,
-} from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+} from './node_modules/semantic-ui-react';
+import { Link } from './node_modules/react-router-dom';
 import CreateGroupForm from '../../components/NewGroup/CreateGroupForm';
 import history from '../../history';
 
