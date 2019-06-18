@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Divider, Form } from 'semantic-ui-react';
+import React from './node_modules/react';
+import { Grid, Divider, Form } from './node_modules/semantic-ui-react';
 import DegreeDropdown from './DegreeDropdown';
 import MajorDropdown from './MajorDropdown';
 import ExperienceDropdown from './ExperienceDropdown';
