@@ -6,10 +6,12 @@ import { createGroup } from '../../actions';
 
 class CreateGroupForm extends React.Component {
   state = {
-    addressee_type: '', // group name
+    addressee_type: '',
+    group_name: '',
   };
 
   createGroup = () => {
+    this.setState({ addressee_type: this.state.group_name });
     this.props.createGroup();
   };
 
@@ -44,9 +46,9 @@ class CreateGroupForm extends React.Component {
               <label htmlFor="name">Contact Group Name</label>
               <input
                 onChange={this.handleChange}
-                value={this.state.addressee_type}
+                value={this.state.group_name}
                 type="text"
-                name="addressee_type"
+                name="group_name"
                 placeholder="Admin/Supervisor/Manager/Director/VP"
               />
             </Form.Field>
@@ -55,10 +57,7 @@ class CreateGroupForm extends React.Component {
                 Next <Icon name="arrow right" size="small" />
               </Button>
             </Link> */}
-
-            <Button type="submit" onClick={this.createGroup}>
-              Create Group
-            </Button>
+            <Button type="submit">Create Group</Button>
           </Form>
         )}
       </Container>
@@ -66,8 +65,8 @@ class CreateGroupForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ group }) => ({
-  group,
+const mapStateToProps = ({ addressee_type }) => ({
+  addressee_type,
 });
 
 export default connect(
