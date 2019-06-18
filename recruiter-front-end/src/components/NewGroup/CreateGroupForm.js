@@ -12,7 +12,7 @@ class CreateGroupForm extends React.Component {
 
   createGroup = () => {
     this.setState({ addressee_type: this.state.group_name });
-    this.props.createGroup();
+    this.props.createGroup(this.state.addressee_type);
   };
 
   handleChange = e => {

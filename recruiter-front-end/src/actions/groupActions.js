@@ -9,7 +9,7 @@ import {
   GET_GROUP_FAIL,
   GET_GROUP_SUCCESS,
   GET_ALL_GROUPS_FAIL,
-  GET_ALL_GROUPS_SUCCESS
+  GET_ALL_GROUPS_SUCCESS,
 } from './types';
 import { CommentAction } from 'semantic-ui-react';
 // TOKEN
@@ -26,7 +26,7 @@ const tokenHeader = {
 export const createGroup = newGroup => dispatch => {
   return axios
     .post(
-      `https://recruiter-back-end.herokuapp.com/groups/`,
+      'https://recruiter-back-end.herokuapp.com/groups',
       newGroup,
       tokenHeader,
     )
@@ -112,16 +112,18 @@ export const getGroup = group_id => dispatch => {
 };
 
 export const getGroups = () => dispatch => {
-    return axios.get(`https://recruiter-back-end.herokuapp.com/groups/`, tokenHeader)
-    .then(res => 
-        dispatch({
-            type: GET_ALL_GROUPS_SUCCESS,
-            payload: res.data
-        }))
+  return axios
+    .get(`https://recruiter-back-end.herokuapp.com/groups/`, tokenHeader)
+    .then(res =>
+      dispatch({
+        type: GET_ALL_GROUPS_SUCCESS,
+        payload: res.data,
+      }),
+    )
     .catch(error => {
-        dispatch({
-            type: GET_ALL_GROUPS_FAIL,
-            payload: error
-        })
-    })
-}
+      dispatch({
+        type: GET_ALL_GROUPS_FAIL,
+        payload: error,
+      });
+    });
+};

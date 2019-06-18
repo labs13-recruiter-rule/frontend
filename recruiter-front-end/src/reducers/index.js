@@ -81,6 +81,7 @@ const initialState = {
   email_total: null,
   email_total_candidate: null,
   email_total_contact: null,
+  addressee_type: '',
   group: {},
   groups: [],
   message: '',
