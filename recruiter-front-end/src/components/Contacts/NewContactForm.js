@@ -7,7 +7,8 @@ class NewContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: { name: '', email: '' },
+      name: '',
+      email: '',
     };
   }
 
@@ -18,7 +19,7 @@ class NewContact extends React.Component {
   createContact = e => {
     this.props.addContact(
       'https://recruiter-back-end.herokuapp.com/contacts/',
-      this.state.contact,
+      this.state,
     );
   };
 
@@ -46,6 +47,7 @@ class NewContact extends React.Component {
               placeholder="Email"
             />
           </Form.Field>
+          <Button type="submit">Add Contact</Button>
         </Form>
       </Container>
     );
@@ -58,5 +60,5 @@ const mapStateToProps = ({ contact }) => ({
 
 export default connect(
   mapStateToProps,
-  addContact,
+  { addContact },
 )(NewContact);

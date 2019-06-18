@@ -61,8 +61,9 @@ export const getContact = url => dispatch => {
 
 export const addContact = (url, contact) => dispatch => {
   return axios
-    .post(`${url}`, contact, tokenHeader)
+    .post(url, contact, tokenHeader)
     .then(res => {
+      console.log('addContact res', res);
       dispatch({
         type: ADD_CONTACT_SUCCESS,
         payload: res.data,
