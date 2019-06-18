@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import React from './node_modules/react';
+import { Form, Button } from './node_modules/semantic-ui-react';
 
 const flexContainer = {
   display: 'flex',
