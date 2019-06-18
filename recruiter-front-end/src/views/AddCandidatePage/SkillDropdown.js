@@ -1,5 +1,5 @@
-import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import React from './node_modules/react';
+import { Dropdown } from './node_modules/semantic-ui-react';
 
 const skills = [
   { key: 'Adaptability', text: 'Adaptability', value: 'Adaptability' },
