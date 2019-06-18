@@ -11,12 +11,12 @@ import Contacts from './views/NewContactGroup/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
-
-import Contacts from './components/Contacts/NewContactForm';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
+import CreateDefaultContact from './views/CreateDefaultContact/CreateDefaultContact';
+import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage'
 
 class App extends React.Component {
   state = {
@@ -92,6 +92,7 @@ class App extends React.Component {
                 />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/mailer" component={Mailer} />
+                <Route exact path="/add-candidate" component={AddCandidatePage} />
                 <Route
                   exact
                   path="/new-contact-group"
@@ -108,6 +109,11 @@ class App extends React.Component {
                   exact
                   path="/new-rule/experience"
                   component={Experience}
+                />
+                <Route
+                  exact
+                  path="/brandon"
+                  component={CreateDefaultContact}
                 />
               </>,
             ]
