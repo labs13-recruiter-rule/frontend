@@ -44,7 +44,7 @@ function App() {
             Send your candidate to the correct contacts every time
           </Header>
 
-          <Link style={linkStyles} to="/new-contact-group">
+          <Link style={linkStyles} to="/new-rule/education">
             <Button style={primaryButton}>Create Rules Engine</Button>
           </Link>
         </Grid.Column>

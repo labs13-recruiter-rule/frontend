@@ -294,20 +294,6 @@ class NewCandidate extends React.Component {
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group">
-                    <Step.Title>Group</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
                     <Step.Title>Education</Step.Title>
                   </Link>
@@ -327,8 +313,8 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/fallback">
-                    <Step.Title>Fallback</Step.Title>
+                  <Link style={linkStyles} to="/new-contact-group/contacts">
+                    <Step.Title>Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>

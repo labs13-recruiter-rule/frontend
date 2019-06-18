@@ -191,20 +191,6 @@ class NewCandidate extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={42} />
             <Step.Group widths={6}>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group">
-                    <Step.Title>Group</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
               <Step active>
                 <Step.Content>
                   <Step.Title>Education</Step.Title>
@@ -226,8 +212,8 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/fallback">
-                    <Step.Title>Fallback</Step.Title>
+                  <Link style={linkStyles} to="/new-contact-group/contacts">
+                    <Step.Title>Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
