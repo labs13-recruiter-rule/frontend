@@ -74,11 +74,14 @@ class NewCandidate extends React.Component {
     };
 
     const primaryButton = {
-      margin: '50px auto',
-      height: '5rem',
-      width: '300px',
-      fontSize: '1.25rem',
-      fontStyle: 'italic',
+      margin: '50px 0',
+      height: '4rem',
+      width: '150px',
+      fontSize: '1.35rem',
+      fontWeight: '900',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     };
 
     const secondaryButton = {
@@ -136,8 +139,8 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={90} />
-            <Step.Group widths={5}>
+            <Progress percent={77} />
+            <Step.Group widths={6}>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-contact-group">
@@ -169,6 +172,13 @@ class NewCandidate extends React.Component {
               <Step active>
                 <Step.Content>
                   <Step.Title>Experience</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/fail">
+                    <Step.Title>Fail</Step.Title>
+                  </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
@@ -237,11 +247,22 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            <Link style={linkStyles} to="/">
-              <Button style={primaryButton} onClick={this.handleSubmit}>
+            <Grid.Column
+              style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Button style={primaryButton} as={Link} to="/new-rule/skills">
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/"
+              >
                 Next <Icon name="arrow right" size="small" />
               </Button>
-            </Link>
+            </Grid.Column>
             <Modal
               trigger={
                 <Button style={secondaryButton}>

@@ -34,11 +34,17 @@ const secondaryButton = {
 };
 
 const primaryButton = {
-  margin: '50px auto',
-//   height: '5rem',
-  width: '300px',
-  fontSize: '1.25rem',
-  fontStyle: 'italic',
+  //   margin: '50px 0 50px auto;',
+  marginLeft: 'auto',
+  marginTop: '50px',
+  marginBottom: '50px',
+  height: '4rem',
+  width: '150px',
+  fontSize: '1.35rem',
+  fontWeight: '900',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const handleSubmit = e => {
@@ -52,8 +58,8 @@ function NewContactGroupView() {
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={12} />
-          <Step.Group widths={5}>
+          <Progress percent={10} />
+          <Step.Group widths={6}>
             <Step active>
               <Step.Content>
                 <Link style={linkStyles} to="/new-contact-group">
@@ -86,6 +92,13 @@ function NewContactGroupView() {
               <Step.Content>
                 <Link style={linkStyles} to="/new-rule/experience">
                   <Step.Title>Experience</Step.Title>
+                </Link>
+              </Step.Content>
+            </Step>
+            <Step>
+              <Step.Content>
+                <Link style={linkStyles} to="/new-rule/fail">
+                  <Step.Title>Fail</Step.Title>
                 </Link>
               </Step.Content>
             </Step>
