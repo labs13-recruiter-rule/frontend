@@ -1,6 +1,6 @@
-import React from "react";
-import { Grid, Button, Modal, Header } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React from "./node_modules/react";
+import { Grid, Button, Modal, Header } from "./node_modules/semantic-ui-react";
+import { Link } from "./node_modules/react-router-dom";
 
 const flexContainer = {
 	display: "flex",
