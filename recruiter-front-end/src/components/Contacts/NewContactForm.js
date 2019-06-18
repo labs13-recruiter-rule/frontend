@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Container } from 'semantic-ui-react';
+import { Button, Form, Container, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addContact } from '../../actions';
 
@@ -44,7 +44,25 @@ class NewContact extends React.Component {
               placeholder="Email"
             />
           </Form.Field>
-          <Button type="submit">Add Contact</Button>
+          <Grid>
+            <Grid.Row style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                type="submit"
+                style={{
+                  margin: '20px 0 0',
+                  height: '4rem',
+                  width: '200px',
+                  fontSize: '1.35rem',
+                  fontWeight: '900',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                Add Contact
+              </Button>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Container>
     );
