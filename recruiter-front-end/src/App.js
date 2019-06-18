@@ -11,6 +11,7 @@ import Contacts from './components/Contacts/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
+import Fallback from './views/NewRulesPage/Fallback';
 
 import NewContactForm from './views/NewContactGroup/Contacts';
 import Mailer from './components/Mailer';
@@ -102,6 +103,7 @@ class App extends React.Component {
                   path="/new-rule/experience"
                   component={Experience}
                 />
+                <Route exact path="/new-rule/fallback" component={Fallback} />
               </>,
             ]
           ) : (
