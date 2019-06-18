@@ -16,7 +16,7 @@ import {
 const token = sessionStorage.getItem('token');
 const tokenHeader = {
   headers: {
-    token: token,
+    token,
   },
 };
 
@@ -24,12 +24,13 @@ const tokenHeader = {
 export const getContacts = () => dispatch => {
   return axios
     .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
-    .then(res =>
+    .then(res => {
+      console.log('from resdata', res.data);
       dispatch({
         type: GET_CONTACTS_SUCCESS,
         payload: res.data,
-      }),
-    )
+      });
+    })
     .catch(error => {
       dispatch({
         type: GET_CONTACTS_FAIL,

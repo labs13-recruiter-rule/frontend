@@ -83,18 +83,13 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route exact path="/contacts" component={Contacts} />
-                <Route
-                  exact
-                  path="/new-contact-group"
-                  component={ContactGroup}
-                />
-                <Route exact path="/contacts" component={Contacts} />
+
                 <Route
                   exact
                   path="/new-contact-group/contacts"
                   component={NewContactForm}
                 />
+                <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
                 <Route

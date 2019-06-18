@@ -3,23 +3,33 @@ import User from '../User';
 import { connect } from 'react-redux';
 import { getUsers } from '../../actions/index';
 import { Link } from 'react-router-dom';
-import { Card, Container } from 'semantic-ui-react';
+import { Card, Container, Button, Header, Segment } from 'semantic-ui-react';
 import { getContacts } from '../../actions';
+import SpecificContact from './SpecificContact';
 
 class Contacts extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      contacts: [],
-    };
+  state = {
+    contacts: [],
+  };
+
+  componentDidMount() {
+    this.props.getContacts();
   }
 
-  getContacts = () => {
-    this.props.getContacts();
-    console.log(this.state.contacts);
-  };
+  delContact() {
+    console.log('deleted? nah lol');
+  }
+
+  editContact() {
+    console.log('edit contact? also nah lol');
+  }
+
+  addContact() {
+    console.log('added nope lol');
+  }
+
   render() {
-    if (this.state.contacts.length < 1) {
+    if (this.props.contacts.length < 1) {
       return (
         <Container fluid>
           {' '}
@@ -29,11 +39,25 @@ class Contacts extends React.Component {
     } else {
       return (
         <Container fluid>
-          <Card.Group>
-            {this.state.contacts.map(contact => (
-              <Card>{contact}</Card>
-            ))}
-          </Card.Group>
+          <Segment clearing>
+            <Header
+              as="h3"
+              content="Manage your contacts"
+              subheader="If you do not have any, add them here"
+              floated="left"
+            />
+            {/* <Header attached="top" content="manage" floated="right" /> */}
+            <Button color="green" floated="right">
+              Add Contact
+            </Button>
+          </Segment>
+          <Segment attached>
+            <Card.Group itemsPerRow={4}>
+              {this.props.contacts.map(contact => (
+                <SpecificContact contact={contact} key={contact.id} />
+              ))}
+            </Card.Group>
+          </Segment>
         </Container>
       );
     }
