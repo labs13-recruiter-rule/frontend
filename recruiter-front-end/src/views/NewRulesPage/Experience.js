@@ -1,4 +1,4 @@
-import React from 'react';
+import React from './node_modules/react';
 import {
   Grid,
   Button,
@@ -9,9 +9,9 @@ import {
   Step,
   Dropdown,
   Divider,
-} from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import Axios from 'axios';
+} from './node_modules/semantic-ui-react';
+import { Link } from './node_modules/react-router-dom';
+import Axios from './node_modules/axios';
 
 const token = sessionStorage.getItem('token');
 
