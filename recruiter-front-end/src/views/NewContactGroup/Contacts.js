@@ -93,8 +93,8 @@ function NewContactGroupView() {
             </Step>
             <Step>
               <Step.Content>
-                <Link style={linkStyles} to="/new-rule/fail">
-                  <Step.Title>Fail</Step.Title>
+                <Link style={linkStyles} to="/new-rule/fallback">
+                  <Step.Title>Fallback</Step.Title>
                 </Link>
               </Step.Content>
             </Step>

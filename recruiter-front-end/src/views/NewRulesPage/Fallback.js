@@ -112,20 +112,22 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Step.Title>Experience</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/experience">
+                    <Step.Title>Experience</Step.Title>
+                  </Link>
                 </Step.Content>
               </Step>
               <Step active>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/fail">
-                    <Step.Title>Fail</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/fallback">
+                    <Step.Title>Fallback</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
             <h2 class="ui header" style={center}>
-              If a candidate does not meet the education, skills and
-              experience requirements where should we send them?
+              If a candidate does not meet the education, skills and experience
+              requirements where should we send them?
             </h2>
             <NewContactForm />
             <Grid.Column
