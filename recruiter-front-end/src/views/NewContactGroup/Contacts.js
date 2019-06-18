@@ -9,7 +9,6 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import CreateGroupForm from '../../components/NewGroup/CreateGroupForm';
 import NewContact from '../../components/Contacts/NewContactForm';
 
 const flexContainer = {
@@ -100,9 +99,9 @@ function NewContactGroupView() {
               style={primaryButton}
               onClick={handleSubmit}
               as={Link}
-              to="/new-rule/education"
+              to="/"
             >
-              Next <Icon name="arrow right" size="small" />
+              Submit
             </Button>
           </Grid.Column>
           <Modal
