@@ -106,8 +106,8 @@ class App extends React.Component {
                 />
                 <Route
                   exact
-                  path="/brandon"
-                  component={CreateDefaultContact}
+                  path="/testing"
+                  component={Skills}
                 />
               </>,
             ]
