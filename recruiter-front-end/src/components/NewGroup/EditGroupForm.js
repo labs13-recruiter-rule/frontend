@@ -1,29 +1,16 @@
 import React from 'react';
 import { Form, Button, Container } from 'semantic-ui-react';
-import axios from 'axios';
-
-const token = sessionStorage.getItem('token');
+import { connect } from 'react-redux';
+import { updateGroup } from '../../actions';
 
 class EditGroupForm extends React.Component {
   state = {
     addressee_type: '',
-    group_name: '',
+    groupcontact_id: null,
   };
 
   updateGroup = () => {
-    this.setState({ addressee_type: this.state.group_name });
-    axios
-      .put(
-        'https://recruiter-back-end.herokuapp.com/groups/',
-        this.state.addressee_type,
-        {
-          headers: {
-            token: `${token}`,
-          },
-        },
-      )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    this.props.updateGroup(this.state.groupcontact_id);
   };
 
   handleChange = e => {
@@ -38,9 +25,9 @@ class EditGroupForm extends React.Component {
             <label htmlFor="name">Contact Group Name</label>
             <input
               onChange={this.handleChange}
-              value={this.state.group_name}
+              value={this.state.addressee_type}
               type="text"
-              name="group_name"
+              name="addressee_type"
               placeholder={this.state.addressee_type}
             />
           </Form.Field>
@@ -53,4 +40,11 @@ class EditGroupForm extends React.Component {
   }
 }
 
-export default EditGroupForm;
+const mapStateToProps = ({ addressee_type }) => ({
+  addressee_type,
+});
+
+export default connect(
+  mapStateToProps,
+  { updateGroup },
+)(EditGroupForm);

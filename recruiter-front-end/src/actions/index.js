@@ -1,164 +1,231 @@
-import axios from 'axios';
+import {
+  GET_USERS_FAIL,
+  GET_USERS_SUCCESS,
+  GET_USER_FAIL,
+  GET_USER_SUCCESS,
+  GET_USER_ID_FAIL,
+  GET_USER_ID_SUCCESS,
+  ADD_USER_FAIL,
+  ADD_USER_SUCCESS,
+  GET_CONTACTS_SUCCESS,
+  GET_CONTACTS_FAIL,
+  GET_CONTACT_SUCCESS,
+  GET_CONTACT_FAIL,
+  ADD_CONTACT_SUCCESS,
+  ADD_CONTACT_FAIL,
+  UPDATE_CONTACT_FAIL,
+  UPDATE_CONTACT_SUCCESS,
+  DELETE_CONTACT_FAIL,
+  DELETE_CONTACT_SUCCESS,
+  CREATE_GROUP_FAIL,
+  CREATE_GROUP_SUCCESS,
+  EDIT_GROUP_FAIL,
+  EDIT_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
+  DELETE_GROUP_SUCCESS,
+  GET_GROUP_FAIL,
+  GET_GROUP_SUCCESS,
+  GET_ALL_GROUPS_FAIL,
+  GET_ALL_GROUPS_SUCCESS,
+  ADD_CONTACT_TO_GROUP_FAIL,
+  ADD_CONTACT_TO_GROUP_SUCCESS,
+  REMOVE_CONTACT_FROM_GROUP_FAIL,
+  REMOVE_CONTACT_FROM_GROUP_SUCCESS,
+  EDIT_CONTACT_IN_GROUP_FAIL,
+  EDIT_CONTACT_IN_GROUP_SUCCESS,
+  GET_GROUPCONTACTS_BY_GROUP_FAIL,
+  GET_GROUPCONTACTS_BY_GROUP_SUCCESS,
+  GET_GROUPCONTACTS_SUCCESS,
+  GET_GROUPCONTACTS_FAIL,
+  GET_RULES_FAIL,
+  GET_RULES_SUCCESS,
+  GET_RULE_SUCCESS,
+  GET_RULE_FAIL,
+  ADD_RULE_SUCCESS,
+  ADD_RULE_FAIL,
+  UPDATE_RULE_SUCCESS,
+  UPDATE_RULE_FAIL,
+  DELETE_RULE_SUCCESS,
+  DELETE_RULE_FAIL,
+  GET_ENGINES_FAIL,
+  GET_ENGINES_SUCCESS,
+  GET_ENGINE_FAIL,
+  GET_ENGINE_SUCCESS,
+  ADD_ENGINE_FAIL,
+  ADD_ENGINE_SUCCESS,
+  UPDATE_ENGINE_FAIL,
+  UPDATE_ENGINE_SUCCESS,
+  DELETE_ENGINE_FAIL,
+  DELETE_ENGINE_SUCCESS,
+  ADD_EMAIL_HISTORY_SUCCESS,
+  ADD_EMAIL_HISTORY_FAIL,
+  GET_EMAIL_HISTORY_SUCCESS,
+  GET_EMAIL_HISTORY_FAIL,
+  GET_EMAIL_TOTAL_SUCCESS,
+  GET_EMAIL_TOTAL_FAIL,
+  GET_EMAILS_BY_CANDIDATE_FAIL,
+  GET_EMAILS_BY_CANDIDATE_SUCCESS,
+  GET_EMAILS_BY_CONTACT_FAIL,
+  GET_EMAILS_BY_CONTACT_SUCCESS,
+  SEND_EMAIL_SUCCESS,
+  SEND_EMAIL_FAIL,
+} from './types';
+
+import { getUsers, addUserToSQL, getUserIdfromUUID } from './userActions';
+import {
+  getContact,
+  getContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+} from './contactActions';
+import {
+  createGroup,
+  editGroup,
+  deleteGroup,
+  getGroup,
+  getGroups,
+} from './groupActions';
+import {
+  addContactToGroup,
+  editContactInGroup,
+  removeContactfromGroup,
+  getGroupContacts,
+  getGroupContactsByGroupId,
+} from './groupContactsActions';
+import {
+  getEngine,
+  getEngines,
+  addEngine,
+  updateEngine,
+  deleteEngine,
+} from './engineActions';
+import {
+  getRule,
+  getRules,
+  addRule,
+  updateRule,
+  deleteRule,
+} from './ruleActions';
+import {
+  getEmailHistory,
+  getEmailHistoryAboutCandidate,
+  getEmailHistoryToContact,
+  getEmailTotal,
+  addEmailHistory,
+} from './emailActions';
 
 // import { history } from "../helpers/history";
 
-// ERRORS
-export const UNAUTHORIZED_USER = 'UNAUTHORIZED_USER';
-
-// GET USERS
-
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAIL = 'GET_USERS_FAIL';
-
-export const getUsers = url => dispatch => {
-  return axios
-    .get(`${url}`)
-    .then(res => {
-      dispatch({
-        type: GET_USERS_SUCCESS,
-        payload: res.data,
-      });
-      console.log('from res', res.data);
-      console.log('from env', process.env.REACT_APP);
-    })
-    .catch(error => {
-      dispatch({
-        type: GET_USERS_FAIL,
-        payload: error,
-      });
-    });
+export {
+  // USERS
+  GET_USERS_FAIL,
+  GET_USERS_SUCCESS,
+  GET_USER_FAIL,
+  GET_USER_SUCCESS,
+  GET_USER_ID_FAIL,
+  GET_USER_ID_SUCCESS,
+  ADD_USER_FAIL,
+  ADD_USER_SUCCESS,
+  getUsers,
+  addUserToSQL,
+  getUserIdfromUUID,
+  // CONTACTS
+  GET_CONTACTS_SUCCESS,
+  GET_CONTACTS_FAIL,
+  GET_CONTACT_SUCCESS,
+  GET_CONTACT_FAIL,
+  ADD_CONTACT_SUCCESS,
+  ADD_CONTACT_FAIL,
+  UPDATE_CONTACT_FAIL,
+  UPDATE_CONTACT_SUCCESS,
+  DELETE_CONTACT_FAIL,
+  DELETE_CONTACT_SUCCESS,
+  getContact,
+  getContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+  // GROUPS
+  CREATE_GROUP_FAIL,
+  CREATE_GROUP_SUCCESS,
+  EDIT_GROUP_FAIL,
+  EDIT_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
+  DELETE_GROUP_SUCCESS,
+  GET_GROUP_FAIL,
+  GET_GROUP_SUCCESS,
+  GET_ALL_GROUPS_FAIL,
+  GET_ALL_GROUPS_SUCCESS,
+  createGroup,
+  editGroup,
+  deleteGroup,
+  getGroup,
+  getGroups,
+  // GROUP CONTACTS
+  ADD_CONTACT_TO_GROUP_FAIL,
+  ADD_CONTACT_TO_GROUP_SUCCESS,
+  REMOVE_CONTACT_FROM_GROUP_FAIL,
+  REMOVE_CONTACT_FROM_GROUP_SUCCESS,
+  EDIT_CONTACT_IN_GROUP_FAIL,
+  EDIT_CONTACT_IN_GROUP_SUCCESS,
+  GET_GROUPCONTACTS_BY_GROUP_SUCCESS,
+  GET_GROUPCONTACTS_BY_GROUP_FAIL,
+  GET_GROUPCONTACTS_SUCCESS,
+  GET_GROUPCONTACTS_FAIL,
+  addContactToGroup,
+  editContactInGroup,
+  removeContactfromGroup,
+  getGroupContacts,
+  getGroupContactsByGroupId,
+  // RULES
+  GET_RULES_FAIL,
+  GET_RULES_SUCCESS,
+  GET_RULE_SUCCESS,
+  GET_RULE_FAIL,
+  ADD_RULE_SUCCESS,
+  ADD_RULE_FAIL,
+  UPDATE_RULE_SUCCESS,
+  UPDATE_RULE_FAIL,
+  DELETE_RULE_SUCCESS,
+  DELETE_RULE_FAIL,
+  getRule,
+  getRules,
+  addRule,
+  updateRule,
+  deleteRule,
+  // ENGINES
+  GET_ENGINES_FAIL,
+  GET_ENGINES_SUCCESS,
+  GET_ENGINE_FAIL,
+  GET_ENGINE_SUCCESS,
+  ADD_ENGINE_FAIL,
+  ADD_ENGINE_SUCCESS,
+  UPDATE_ENGINE_FAIL,
+  UPDATE_ENGINE_SUCCESS,
+  DELETE_ENGINE_FAIL,
+  DELETE_ENGINE_SUCCESS,
+  getEngine,
+  getEngines,
+  addEngine,
+  updateEngine,
+  deleteEngine,
+  // EMAILS
+  ADD_EMAIL_HISTORY_SUCCESS,
+  ADD_EMAIL_HISTORY_FAIL,
+  GET_EMAIL_HISTORY_SUCCESS,
+  GET_EMAIL_HISTORY_FAIL,
+  GET_EMAIL_TOTAL_SUCCESS,
+  GET_EMAIL_TOTAL_FAIL,
+  GET_EMAILS_BY_CANDIDATE_FAIL,
+  GET_EMAILS_BY_CANDIDATE_SUCCESS,
+  GET_EMAILS_BY_CONTACT_FAIL,
+  GET_EMAILS_BY_CONTACT_SUCCESS,
+  SEND_EMAIL_SUCCESS,
+  SEND_EMAIL_FAIL,
+  getEmailHistory,
+  getEmailHistoryAboutCandidate,
+  getEmailHistoryToContact,
+  getEmailTotal,
+  addEmailHistory,
 };
-
-// GET USER BY ID
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_FAIL = 'GET_USER_FAIL';
-
-// ADD USER TO SQL DB
-export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
-export const ADD_USER_FAIL = 'ADD_USER_FAIL';
-
-export const addUserToSQL = (url, user) => dispatch => {
-  return axios
-    .post(`${url}`, user)
-    .then(res => {
-      dispatch({
-        type: ADD_USER_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: ADD_USER_FAIL,
-        payload: error,
-      });
-    });
-};
-
-// GET USER ID FROM FIREBASE UID
-
-export const GET_USER_ID_SUCCESS = 'GET_USER_ID_SUCCESS';
-export const GET_USER_ID_FAIL = 'GET_USER_ID_FAIL';
-
-export const getUserIdfromUUID = (url, uuid) => dispatch => {
-  return axios
-    .get(`${url}/fbid/${uuid}`)
-    .then(res => {
-      dispatch({
-        type: GET_USER_ID_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: GET_USER_ID_FAIL,
-        payload: error,
-      });
-    });
-};
-
-// GET CONTACTS
-export const GET_CONTACTS_SUCCESS = 'GET_CONTACTS_SUCCESS';
-export const GET_CONTACTS_FAIL = 'GET_CONTACTS_FAIL';
-
-export const getContacts = url => dispatch => {
-  return axios
-    .get(`${url}`)
-    .then(res =>
-      dispatch({
-        type: GET_CONTACTS_SUCCESS,
-        payload: res.data,
-      }),
-    )
-    .catch(error => {
-      dispatch({
-        type: GET_CONTACTS_FAIL,
-        payload: error,
-      });
-    });
-};
-
-// GET INDIVIDUAL CONTACT
-export const GET_CONTACT_SUCCESS = 'GET_CONTACT_SUCCESS';
-export const GET_CONTACT_FAIL = 'GET_CONTACT_FAIL';
-
-export const getContact = url => dispatch => {
-  return axios
-    .get(`${url}`)
-    .then(res =>
-      dispatch({
-        type: GET_CONTACT_SUCCESS,
-        payload: res.data,
-      }),
-    )
-    .catch(error => {
-      dispatch({
-        type: GET_CONTACT_FAIL,
-        payload: error,
-      });
-    });
-};
-
-// ADD CONTACT
-export const ADD_CONTACT_SUCCESS = 'ADD_CONTACT_SUCCESS';
-export const ADD_CONTACT_FAIL = 'ADD_CONTACT_FAIL';
-
-export const addContact = url => dispatch => {
-  return axios.post(`${url}`);
-};
-
-// UPDATE CONTACT
-export const UPDATE_CONTACT_SUCCESS = 'UPDATE_CONTACT_SUCCESS';
-export const UPDATE_CONTACT_FAIL = 'UPDATE_CONTACT_FAIL';
-
-// DELETE CONTACT
-export const DELETE_CONTACT_SUCCESS = 'DELETE_CONTACT_SUCCESS';
-export const DELETE_CONTACT_FAIL = 'DELETE_CONTACT_FAIL';
-
-// CREATE CONTACT GROUP
-export const CREATE_GROUP_SUCCESS = 'CREATE_GROUP_SUCCESS';
-export const CREATE_GROUP_FAIL = 'CREATE_GROUP_FAIL';
-
-// EDIT CONTACT GROUP
-export const EDIT_GROUP_SUCCESS = 'EDIT_GROUP_SUCCESS';
-export const EDIT_GROUP_FAIL = 'EDIT_GROUP_FAIL';
-
-// DELETE CONTACT GROUP
-export const DELETE_GROUP_SUCCESS = 'DELETE_GROUP_SUCCESS';
-export const DELETE_GROUP_FAIL = 'DELETE_GROUP_FAIL';
-
-// GET CONTACT GROUP
-export const GET_GROUP_SUCCESS = 'GET_GROUP_SUCCESS';
-export const GET_GROUP_FAIL = 'GET_GROUP_FAIL';
-
-// ADD CONTACT TO CONTACT GROUP
-export const ADD_CONTACT_TO_GROUP_SUCCESS = 'ADD_CONTACT_TO_GROUP_SUCCESS';
-export const ADD_CONTACT_TO_GROUP_FAIL = 'ADD_CONTACT_TO_GROUP_FAIL';
-
-// REMOVE CONTACT FROM CONTACT GROUP
-export const REMOVE_CONTACT_FROM_GROUP_SUCCESS =
-  'REMOVE_CONTACT_FROM_GROUP_SUCCESS';
-export const REMOVE_CONTACT_FROM_GROUP_FAIL = 'REMOVE_CONTACT_FROM_GROUP_FAIL';
-
-// EDIT CONTACT IN CONTACT GROUP
-export const EDIT_CONTACT_IN_GROUP_SUCCESS = 'EDIT_CONTACT_IN_GROUP_SUCCESS';
-export const EDIT_CONTACT_IN_GROUP_FAIL = 'EDIT_CONTACT_IN_GROUP_FAIL';
