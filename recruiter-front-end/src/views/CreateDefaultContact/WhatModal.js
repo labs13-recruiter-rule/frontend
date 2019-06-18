@@ -13,6 +13,6 @@ const WhatModal = () => (
       </p>
     </Modal.Content>
   </Modal>
-)
+);
 
-export default WhatModal
+export default WhatModal;
