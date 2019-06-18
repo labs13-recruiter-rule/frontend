@@ -8,7 +8,10 @@ import {
   DELETE_GROUP_SUCCESS,
   GET_GROUP_FAIL,
   GET_GROUP_SUCCESS,
+  GET_ALL_GROUPS_FAIL,
+  GET_ALL_GROUPS_SUCCESS
 } from './types';
+import { CommentAction } from 'semantic-ui-react';
 // TOKEN
 
 const token = sessionStorage.getItem('token');
@@ -20,9 +23,13 @@ const tokenHeader = {
 
 // CREATE CONTACT GROUP
 
-export const createGroup = (url, newGroup) => dispatch => {
+export const createGroup = newGroup => dispatch => {
   return axios
-    .post(`${url}`, newGroup, tokenHeader)
+    .post(
+      `https://recruiter-back-end.herokuapp.com/groups/`,
+      newGroup,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: CREATE_GROUP_SUCCESS,
@@ -39,9 +46,13 @@ export const createGroup = (url, newGroup) => dispatch => {
 
 // EDIT CONTACT GROUP
 
-export const editGroup = (url, editedGroup) => dispatch => {
+export const editGroup = (group_id, editedGroup) => dispatch => {
   return axios
-    .put(`${url}`, editedGroup, tokenHeader)
+    .put(
+      `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
+      editedGroup,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: EDIT_GROUP_SUCCESS,
@@ -58,9 +69,12 @@ export const editGroup = (url, editedGroup) => dispatch => {
 
 // DELETE CONTACT GROUP
 
-export const deleteGroup = url => dispatch => {
+export const deleteGroup = group_id => dispatch => {
   return axios
-    .delete(`${url}`, tokenHeader)
+    .delete(
+      `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: DELETE_GROUP_SUCCESS,
@@ -75,11 +89,14 @@ export const deleteGroup = url => dispatch => {
     });
 };
 
-// GET CONTACT GROUP
+// GET CONTACT GROUP BY ID
 
-export const getGroup = url => dispatch => {
+export const getGroup = group_id => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get(
+      `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: GET_GROUP_SUCCESS,
@@ -93,3 +110,18 @@ export const getGroup = url => dispatch => {
       });
     });
 };
+
+export const getGroups = () => dispatch => {
+    return axios.get(`https://recruiter-back-end.herokuapp.com/groups/`, tokenHeader)
+    .then(res => 
+        dispatch({
+            type: GET_ALL_GROUPS_SUCCESS,
+            payload: res.data
+        }))
+    .catch(error => {
+        dispatch({
+            type: GET_ALL_GROUPS_FAIL,
+            payload: error
+        })
+    })
+}

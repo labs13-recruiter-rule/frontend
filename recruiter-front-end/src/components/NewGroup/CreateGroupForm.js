@@ -1,27 +1,16 @@
 import React from 'react';
 import { Form, Button, Container, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-const token = sessionStorage.getItem('token');
+import { connect } from 'react-redux';
+import { createGroup } from '../../actions';
 
 class CreateGroupForm extends React.Component {
   state = {
-    addressee_type: '',
-    group_name: '',
+    addressee_type: '', // group name
   };
 
   createGroup = () => {
-    console.log('token', token);
-    this.setState({ addressee_type: this.state.group_name });
-    axios
-      .post(
-        'https://recruiter-back-end.herokuapp.com/groups/',
-        this.state.addressee_type,
-        { headers: { token: `${token}` } },
-      )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    this.props.createGroup();
   };
 
   handleChange = e => {
@@ -29,14 +18,14 @@ class CreateGroupForm extends React.Component {
   };
 
   render() {
-      const primaryButton = {
-          margin: '50px',
-          height: '5rem',
-          width: '300px',
-          fontSize: '1.25rem',
-          fontStyle: 'italic',
-      };
-      
+    const primaryButton = {
+      margin: '50px',
+      height: '5rem',
+      width: '300px',
+      fontSize: '1.25rem',
+      fontStyle: 'italic',
+    };
+
     const linkStyles = {
       textAlign: 'center',
       color: 'rgba(0,0,0,.87)',
@@ -50,14 +39,14 @@ class CreateGroupForm extends React.Component {
             <Button>Change Group Name</Button>
           </div>
         ) : (
-          <Form>
+          <Form onSubmit={this.createGroup}>
             <Form.Field>
               <label htmlFor="name">Contact Group Name</label>
               <input
                 onChange={this.handleChange}
-                value={this.state.group_name}
+                value={this.state.addressee_type}
                 type="text"
-                name="group_name"
+                name="addressee_type"
                 placeholder="Admin/Supervisor/Manager/Director/VP"
               />
             </Form.Field>
@@ -67,9 +56,9 @@ class CreateGroupForm extends React.Component {
               </Button>
             </Link> */}
 
-            {/* <Button type="submit" onClick={this.createGroup}>
+            <Button type="submit" onClick={this.createGroup}>
               Create Group
-            </Button> */}
+            </Button>
           </Form>
         )}
       </Container>
@@ -77,4 +66,11 @@ class CreateGroupForm extends React.Component {
   }
 }
 
-export default CreateGroupForm;
+const mapStateToProps = ({ group }) => ({
+  group,
+});
+
+export default connect(
+  mapStateToProps,
+  { createGroup },
+)(CreateGroupForm);

@@ -17,10 +17,7 @@ class NewContact extends React.Component {
   };
 
   createContact = e => {
-    this.props.addContact(
-      'https://recruiter-back-end.herokuapp.com/contacts/',
-      this.state,
-    );
+    this.props.addContact(this.state);
   };
 
   render() {

@@ -21,9 +21,9 @@ const tokenHeader = {
 };
 
 // GET ALL CONTACTS
-export const getContacts = url => dispatch => {
+export const getContacts = () => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
     .then(res =>
       dispatch({
         type: GET_CONTACTS_SUCCESS,
@@ -40,9 +40,9 @@ export const getContacts = url => dispatch => {
 
 // GET INDIVIDUAL CONTACT
 
-export const getContact = url => dispatch => {
+export const getContact = () => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
     .then(res =>
       dispatch({
         type: GET_CONTACT_SUCCESS,
@@ -59,9 +59,13 @@ export const getContact = url => dispatch => {
 
 // ADD CONTACT
 
-export const addContact = (url, contact) => dispatch => {
+export const addContact = contact => dispatch => {
   return axios
-    .post(url, contact, tokenHeader)
+    .post(
+      'https://recruiter-back-end.herokuapp.com/contacts/',
+      contact,
+      tokenHeader,
+    )
     .then(res => {
       console.log('addContact res', res);
       dispatch({
@@ -79,9 +83,13 @@ export const addContact = (url, contact) => dispatch => {
 
 // UPDATE CONTACT
 
-export const updateContact = (url, updatedContact) => dispatch => {
+export const updateContact = (contact_id, updatedContact) => dispatch => {
   return axios
-    .put(`${url}`, updatedContact, tokenHeader)
+    .put(
+      `https://recruiter-back-end.herokuapp.com/contacts/${contact_id}`,
+      updatedContact,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: UPDATE_CONTACT_SUCCESS,
@@ -98,9 +106,12 @@ export const updateContact = (url, updatedContact) => dispatch => {
 
 // DELETE CONTACT
 
-export const deleteContact = url => dispatch => {
+export const deleteContact = contact_id => dispatch => {
   return axios
-    .delete(`${url}`, tokenHeader)
+    .delete(
+      `https://recruiter-back-end.herokuapp.com/contacts/${contact_id}`,
+      tokenHeader,
+    )
     .then(res => {
       dispatch({
         type: DELETE_CONTACT_SUCCESS,

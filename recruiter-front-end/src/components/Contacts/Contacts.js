@@ -10,7 +10,7 @@ class Contacts extends React.Component {
   constructor() {
     super();
     this.state = {
-      contacts: this.props.contacts,
+      contacts: [],
     };
   }
 
