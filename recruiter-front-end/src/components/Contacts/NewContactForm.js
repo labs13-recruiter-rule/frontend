@@ -35,26 +35,28 @@ class NewContact extends React.Component {
       <Container className="form-container">
         <Form onSubmit={this.createContact}>
           <Form.Field>
-            <label htmlFor="name">Name</label>
-            <input
+            <Form.Input
+              label="Name"
               value={this.state.contact.name}
               onChange={this.handleChange}
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="Jane Doe"
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="email">Email</label>
-            <input
+            <Form.Input
+              label="Email"
               value={this.state.contact.email}
               onChange={this.handleChange}
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="example@email.com"
             />
           </Form.Field>
-          <Button type="submit">Add Contact</Button>
+          <Button color="green" type="submit">
+            Submit Contact
+          </Button>
         </Form>
       </Container>
     );

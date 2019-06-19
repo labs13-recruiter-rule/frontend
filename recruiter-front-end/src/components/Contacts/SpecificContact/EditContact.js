@@ -56,7 +56,7 @@ class EditContact extends React.Component {
             />
           </Form.Field>
           <Button color="green" type="submit">
-            Save
+            Update
           </Button>
           <Button
             color="red"
