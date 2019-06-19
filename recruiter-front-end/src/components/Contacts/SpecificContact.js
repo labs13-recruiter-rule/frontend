@@ -13,7 +13,11 @@ function SpecificContact(props) {
           <Button basic color="blue">
             Edit
           </Button>
-          <Button basic color="red">
+          <Button
+            basic
+            color="red"
+            onClick={() => props.deleteContact(props.contact.id)}
+          >
             Delete
           </Button>
         </div>

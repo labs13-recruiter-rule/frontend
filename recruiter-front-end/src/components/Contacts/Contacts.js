@@ -11,7 +11,7 @@ import {
   Segment,
   Modal,
 } from 'semantic-ui-react';
-import { getContacts } from '../../actions';
+import { getContacts, deleteContact } from '../../actions';
 import SpecificContact from './SpecificContact';
 import NewContactForm from './NewContactForm';
 
@@ -25,9 +25,9 @@ class Contacts extends React.Component {
     this.props.getContacts();
   }
 
-  delContact() {
-    console.log('deleted? nah lol');
-  }
+  delContact = contact_id => {
+    this.props.deleteContact(contact_id);
+  };
 
   editContact() {
     console.log('edit contact? also nah lol');
@@ -82,7 +82,11 @@ class Contacts extends React.Component {
           <Segment attached>
             <Card.Group itemsPerRow={4}>
               {this.props.contacts.map(contact => (
-                <SpecificContact contact={contact} key={contact.id} />
+                <SpecificContact
+                  contact={contact}
+                  key={contact.id}
+                  deleteContact={this.delContact}
+                />
               ))}
             </Card.Group>
           </Segment>
@@ -98,5 +102,5 @@ const mapStateToProps = ({ contacts }) => ({
 
 export default connect(
   mapStateToProps,
-  { getContacts },
+  { getContacts, deleteContact },
 )(Contacts);

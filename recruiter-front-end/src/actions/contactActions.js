@@ -114,6 +114,7 @@ export const deleteContact = contact_id => dispatch => {
       tokenHeader,
     )
     .then(res => {
+      console.log('del success', res);
       dispatch({
         type: DELETE_CONTACT_SUCCESS,
         payload: res.data,
