@@ -11,12 +11,12 @@ import {
   DELETE_CONTACT_FAIL,
   DELETE_CONTACT_SUCCESS,
 } from './types';
-// TOKEN
 
+// TOKEN
 const token = sessionStorage.getItem('token');
 const tokenHeader = {
   headers: {
-    token: token,
+    token,
   },
 };
 
@@ -24,12 +24,13 @@ const tokenHeader = {
 export const getContacts = () => dispatch => {
   return axios
     .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
-    .then(res =>
+    .then(res => {
+      console.log('from resdata', res.data);
       dispatch({
         type: GET_CONTACTS_SUCCESS,
         payload: res.data,
-      }),
-    )
+      });
+    })
     .catch(error => {
       dispatch({
         type: GET_CONTACTS_FAIL,
@@ -91,6 +92,7 @@ export const updateContact = (contact_id, updatedContact) => dispatch => {
       tokenHeader,
     )
     .then(res => {
+      console.log('from res update contact', res);
       dispatch({
         type: UPDATE_CONTACT_SUCCESS,
         payload: res.data,
@@ -113,6 +115,7 @@ export const deleteContact = contact_id => dispatch => {
       tokenHeader,
     )
     .then(res => {
+      console.log('del success', res);
       dispatch({
         type: DELETE_CONTACT_SUCCESS,
         payload: res.data,
