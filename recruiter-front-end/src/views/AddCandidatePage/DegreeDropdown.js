@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import { Dropdown } from './node_modules/semantic-ui-react';
+import React from 'react';
+import { Dropdown } from 'semantic-ui-react';
 
 const options = [
   { key: 1, text: 'High School / GED', value: 'High School / GED' },
