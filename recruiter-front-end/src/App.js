@@ -54,21 +54,22 @@ class App extends React.Component {
               <>
                 <Menu>
                   <Menu.Item>
-                    <Button>
-                      <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/">
-                        Home
-                      </NavLink>
-                    </Button>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/">
+                      <Button>Home</Button>
+                    </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button>
-                      <NavLink
-                        style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/add-candidate"
-                      >
-                        Add Candidate
-                      </NavLink>
-                    </Button>
+                    <NavLink
+                      style={{ color: 'rgba(0,0,0,.6)' }}
+                      to="/add-candidate"
+                    >
+                      <Button>Add Candidate</Button>
+                    </NavLink>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
+                      <Button>Contacts</Button>
+                    </NavLink>
                   </Menu.Item>
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
