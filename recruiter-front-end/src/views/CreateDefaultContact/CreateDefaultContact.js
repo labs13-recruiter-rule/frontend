@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import { Grid, Divider } from './node_modules/semantic-ui-react';
+import React from 'react';
+import { Grid, Divider } from 'semantic-ui-react';
 import DefaultContactMessage from './DefaultContactMessage';
 import DefaultContactFields from './DefaultContactFields';
 import WhatModal from './WhatModal';
