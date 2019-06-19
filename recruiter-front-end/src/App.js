@@ -32,6 +32,7 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        sessionStorage.setItem('token', user._lat);
       } else {
         this.setState({
           user: null,

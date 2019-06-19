@@ -1,4 +1,6 @@
 import axios from 'axios';
+import firebase from 'firebase';
+import fire from '../config/fire';
 import {
   GET_CONTACTS_SUCCESS,
   GET_CONTACTS_FAIL,
@@ -11,9 +13,18 @@ import {
   DELETE_CONTACT_FAIL,
   DELETE_CONTACT_SUCCESS,
 } from './types';
+
 // TOKEN
 
 const token = sessionStorage.getItem('token');
+
+// const token = fire
+//   .auth()
+//   .currentuser.getIdToken(true)
+//   .then(function(idToken) {
+//     return idToken;
+//   });
+
 const tokenHeader = {
   headers: {
     token,
