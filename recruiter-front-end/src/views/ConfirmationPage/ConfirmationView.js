@@ -1,6 +1,11 @@
-import React from './node_modules/react';
-import { Container } from './node_modules/semantic-ui-react';
-import Message from './Message';
+import React from 'react';
+import { Container, Divider } from 'semantic-ui-react';
+import Success from './Success';
+import Header from './Header';
+import Conditions from './Conditions';
+import AddContact from './AddContact';
+import AddCandidate from './AddCandidate';
+import ViewDashboard from './ViewDashboard';
 
 class ConfirmationView extends React.Component {
   constructor(props) {
@@ -9,9 +14,24 @@ class ConfirmationView extends React.Component {
   }
 
   render() {
+    const flexContainer = {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '5rem',
+    };
     return (
-      <Container>
-        <Message />
+      <Container style={flexContainer}>
+        <Success />
+        <Divider hidden />
+        <Header />
+        <Divider hidden />
+        <Conditions />
+        <Divider hidden />
+        <AddContact />
+        <Divider hidden />
+        <AddCandidate />
+        <Divider hidden />
+        <ViewDashboard />
       </Container>
     );
   }
