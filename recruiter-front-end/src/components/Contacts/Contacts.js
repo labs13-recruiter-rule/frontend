@@ -2,14 +2,23 @@ import React from 'react';
 import User from '../User';
 import { connect } from 'react-redux';
 import { getUsers } from '../../actions/index';
-import { Link } from 'react-router-dom';
-import { Card, Container, Button, Header, Segment } from 'semantic-ui-react';
+import { Link, Route } from 'react-router-dom';
+import {
+  Card,
+  Container,
+  Button,
+  Header,
+  Segment,
+  Modal,
+} from 'semantic-ui-react';
 import { getContacts } from '../../actions';
 import SpecificContact from './SpecificContact';
+import NewContactForm from './NewContactForm';
 
 class Contacts extends React.Component {
   state = {
     contacts: [],
+    modalOpen: false,
   };
 
   componentDidMount() {
@@ -27,6 +36,11 @@ class Contacts extends React.Component {
   addContact() {
     console.log('added nope lol');
   }
+
+  handleModalOpen = () => this.setState({ modalOpen: true });
+
+  handleModalClose = () =>
+    this.setState({ modalOpen: false }, () => this.props.getContacts());
 
   render() {
     if (this.props.contacts.length < 1) {
@@ -47,9 +61,23 @@ class Contacts extends React.Component {
               floated="left"
             />
             {/* <Header attached="top" content="manage" floated="right" /> */}
-            <Button color="green" floated="right">
-              Add Contact
-            </Button>
+            <Modal
+              trigger={
+                <Button
+                  color="green"
+                  floated="right"
+                  onClick={this.handleModalOpen}
+                >
+                  Add Contact
+                </Button>
+              }
+              open={this.state.modalOpen}
+              onClose={this.handleModalClose}
+            >
+              <Modal.Content>
+                <NewContactForm handleModalClose={this.handleModalClose} />
+              </Modal.Content>
+            </Modal>
           </Segment>
           <Segment attached>
             <Card.Group itemsPerRow={4}>

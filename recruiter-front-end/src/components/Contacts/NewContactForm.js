@@ -1,23 +1,32 @@
 import React from 'react';
-import { Button, Form, Container } from 'semantic-ui-react';
+import { Button, Form, Container, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addContact } from '../../actions';
+import { withRouter } from 'react-router-dom';
 
 class NewContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
+      contact: {
+        name: '',
+        email: '',
+      },
     };
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      contact: {
+        ...this.state.contact,
+        [e.target.name]: e.target.value,
+      },
+    });
   };
 
   createContact = e => {
-    this.props.addContact(this.state);
+    this.props.addContact(this.state.contact);
+    this.props.handleModalClose();
   };
 
   render() {
@@ -27,7 +36,7 @@ class NewContact extends React.Component {
           <Form.Field>
             <label htmlFor="name">Name</label>
             <input
-              value={this.state.name}
+              value={this.state.contact.name}
               onChange={this.handleChange}
               type="text"
               name="name"
@@ -37,7 +46,7 @@ class NewContact extends React.Component {
           <Form.Field>
             <label htmlFor="email">Email</label>
             <input
-              value={this.state.email}
+              value={this.state.contact.email}
               onChange={this.handleChange}
               type="email"
               name="email"
@@ -58,4 +67,4 @@ const mapStateToProps = ({ contact }) => ({
 export default connect(
   mapStateToProps,
   { addContact },
-)(NewContact);
+)(withRouter(NewContact));
