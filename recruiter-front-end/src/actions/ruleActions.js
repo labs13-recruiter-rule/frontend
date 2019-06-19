@@ -16,15 +16,19 @@ import {
 const token = sessionStorage.getItem('token');
 const tokenHeader = {
   headers: {
-    token: token,
+    token,
   },
 };
 
 // GET RULES
 
-export const getRules = url => dispatch => {
+// https://recruiter-back-end.herokuapp.com/engines/1/rules
+
+const engineURL = 'https://recruiter-back-end.herokuapp.com/engines/';
+
+export const getRules = id => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get(`${engineURL}` + `${id}` + `/rules/`, tokenHeader)
     .then(res => {
       dispatch({
         type: GET_RULES_SUCCESS,
