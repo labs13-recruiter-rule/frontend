@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Container, Button, Header, Segment } from 'semantic-ui-react';
 import { getRules } from '../../actions/ruleActions';
+import EngineCardRules from './EngineCardRules';
 
 class EngineCard extends React.Component {
   constructor(props) {
@@ -17,17 +18,22 @@ class EngineCard extends React.Component {
 
   render() {
     return (
-      <Card>
-        <Card.Content>{this.props.engine.engine_name}</Card.Content>
+      <Card centered color="blue">
+        {/* <Card.Content> */}
+        <Header as="h2" content={this.props.engine.engine_name} />
+        <Header.Subheader>
+          {this.props.rules && this.props.rules.length > 1
+            ? `${this.props.rules.length} Rules`
+            : `${this.props.rules.length} Rule`}
+        </Header.Subheader>
+
+        {/* </Card.Content> */}
         {this.props.rules.length < 1 ? (
           'No Rules'
         ) : (
           <Segment>
             {this.props.rules.map(rule => (
-              <>
-                <h1>{rule.conditions}</h1>
-                <h2>{rule.user_id}</h2>
-              </>
+              <EngineCardRules rule={rule.rule} key={rule.id} />
             ))}
           </Segment>
         )}
