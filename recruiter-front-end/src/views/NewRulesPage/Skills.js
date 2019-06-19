@@ -290,7 +290,7 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={60} />
+            <Progress percent={40} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
@@ -313,7 +313,7 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
+                  <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
                   </Link>
                 </Step.Content>

@@ -53,7 +53,7 @@ function NewContactGroupView() {
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={25} />
+          <Progress percent={90} />
           <Step.Group widths={6}>
             <Step>
               <Step.Content>
@@ -91,7 +91,7 @@ function NewContactGroupView() {
           <Grid.Column
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            <Button style={primaryButton} as={Link} to="/new-contact-group">
+            <Button style={primaryButton} as={Link} to="/new-rule/experience">
               <Icon name="arrow left" size="small" />
               Back
             </Button>

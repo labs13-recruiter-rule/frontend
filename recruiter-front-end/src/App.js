@@ -13,7 +13,7 @@ import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import Fallback from './views/NewRulesPage/Fallback';
 
-import Contacts from './views/NewContactGroup/Contacts';
+import NewRuleContacts from './views/NewContactGroup/Contacts';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
@@ -84,17 +84,12 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route exact path="/contacts" component={Contacts} />
+                {/* <Route exact path="/contacts" component={Contacts} /> */}
+                {/* <Route exact path="/contacts" component={Contacts} /> */}
                 <Route
                   exact
-                  path="/new-contact-group"
-                  component={ContactGroup}
-                />
-                <Route exact path="/contacts" component={Contacts} />
-                <Route
-                  exact
-                  path="/new-contact-group/contacts"
-                  component={Contacts}
+                  path="/new-rule/contacts"
+                  component={NewRuleContacts}
                 />
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
