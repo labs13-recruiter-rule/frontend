@@ -54,17 +54,6 @@ class NewContact extends React.Component {
               placeholder="example@email.com"
             />
           </Form.Field>
-          <Button color="green" type="submit">
-            Submit Contact
-          </Button>
-          <Button
-            color="red"
-            type="button"
-            floated="right"
-            onClick={() => this.props.handleModalClose()}
-          >
-            Cancel
-          </Button>
         </Form>
       </Container>
     );

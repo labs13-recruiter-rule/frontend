@@ -1,16 +1,16 @@
 import React from 'react';
-import { Button, Form, Container, Grid } from 'semantic-ui-react';
+import { Button, Form, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { addContact } from '../../actions';
+import { updateContact } from '../../../actions';
 import { withRouter } from 'react-router-dom';
 
-class NewContact extends React.Component {
+class EditContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       contact: {
-        name: '',
-        email: '',
+        name: this.props.contactname,
+        email: this.props.contactemail,
       },
     };
   }
@@ -24,43 +24,43 @@ class NewContact extends React.Component {
     });
   };
 
-  createContact = e => {
+  submitEdittedContact = e => {
     this.props
-      .addContact(this.state.contact)
-      .then(() => this.props.handleModalClose());
+      .updateContact(this.props.contactid, this.state.contact)
+      .then(() => this.props.handleModalClose())
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
     return (
       <Container className="form-container">
-        <Form onSubmit={this.createContact}>
+        <Form onSubmit={this.submitEdittedContact}>
           <Form.Field>
             <Form.Input
-              label="Name"
-              value={this.state.contact.name}
+              label="name"
               onChange={this.handleChange}
               type="text"
               name="name"
-              placeholder="Jane Doe"
+              defaultValue={this.props.contactname}
             />
           </Form.Field>
           <Form.Field>
             <Form.Input
-              label="Email"
-              value={this.state.contact.email}
+              label="email"
               onChange={this.handleChange}
               type="email"
               name="email"
-              placeholder="example@email.com"
+              defaultValue={this.props.contactemail}
             />
           </Form.Field>
           <Button color="green" type="submit">
-            Submit Contact
+            Update
           </Button>
           <Button
             color="red"
             type="button"
-            floated="right"
             onClick={() => this.props.handleModalClose()}
           >
             Cancel
@@ -77,5 +77,5 @@ const mapStateToProps = ({ contact }) => ({
 
 export default connect(
   mapStateToProps,
-  { addContact },
-)(withRouter(NewContact));
+  { updateContact },
+)(withRouter(EditContact));
