@@ -9,8 +9,7 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import CreateGroupForm from '../../components/NewGroup/CreateGroupForm';
-import history from '../../history';
+import NewUserContact from '../../components/Contacts/NewUserContactForm';
 
 const flexContainer = {
   display: 'flex',
@@ -34,10 +33,7 @@ const secondaryButton = {
 };
 
 const primaryButton = {
-  //   margin: '50px 0 50px auto;',
-  marginLeft: 'auto',
-  marginTop: '50px',
-  marginBottom: '50px',
+  margin: '50px 0',
   height: '4rem',
   width: '150px',
   fontSize: '1.35rem',
@@ -48,8 +44,7 @@ const primaryButton = {
 };
 
 const handleSubmit = e => {
-  console.log('Contact Group handleSubmit');
-  history.push('/new-contact-group/contacts');
+  console.log('Contacts handleSubmit');
 };
 
 function NewContactGroupView() {
@@ -58,22 +53,8 @@ function NewContactGroupView() {
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={10} />
+          <Progress percent={90} />
           <Step.Group widths={6}>
-            <Step active>
-              <Step.Content>
-                <Link style={linkStyles} to="/new-contact-group">
-                  <Step.Title>Group</Step.Title>
-                </Link>
-              </Step.Content>
-            </Step>
-            <Step>
-              <Step.Content>
-                <Link style={linkStyles} to="/new-contact-group/contacts">
-                  <Step.Title>Contacts</Step.Title>
-                </Link>
-              </Step.Content>
-            </Step>
             <Step>
               <Step.Content>
                 <Link style={linkStyles} to="/new-rule/education">
@@ -95,41 +76,47 @@ function NewContactGroupView() {
                 </Link>
               </Step.Content>
             </Step>
-            <Step>
+            <Step active>
               <Step.Content>
-                <Link style={linkStyles} to="/new-rule/fallback">
-                  <Step.Title>Fallback</Step.Title>
+                <Link style={linkStyles} to="/new-contact-group/contacts">
+                  <Step.Title>Contacts</Step.Title>
                 </Link>
               </Step.Content>
             </Step>
           </Step.Group>
-          <h2 class="ui header" style={center}>
-            Where should we send these candidates?
-          </h2>
-          <CreateGroupForm />
-          <Button
-            style={primaryButton}
-            onClick={handleSubmit}
-            as={Link}
-            to="/new-contact-group/contacts"
+          <Header as="h3" style={center}>
+            When a candidate passes these rules, where should they be sent?
+          </Header>
+          <NewUserContact />
+          <Grid.Column
+            style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            Next <Icon name="arrow right" size="small" />
-          </Button>
-          <Modal
-            trigger={
-              <Button style={secondaryButton}>What is a contact group?</Button>
-            }
-            closeIcon
-          >
-            <Header content="What is a contact group?" />
-            <Modal.Content>
-              <p>
-                A contact group is a collection of contacts. As an example you
-                might have a Sales Managers group with the sales managers
-                Samantha and Robert.
-              </p>
-            </Modal.Content>
-          </Modal>
+            <Button style={primaryButton} as={Link} to="/new-rule/experience">
+              <Icon name="arrow left" size="small" />
+              Back
+            </Button>
+            <Modal
+              trigger={<Button style={primaryButton}>Submit</Button>}
+              closeIcon
+            >
+              <Header icon="archive" content="Create New Rule" />
+              <Modal.Content>
+                <p>
+                  Would you like to create a new rule with the same fallback
+                  contact if a candidate does not pass all conditions for the
+                  rule?
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color="red">
+                  <Icon name="x" /> No
+                </Button>
+                <Button color="green" as={Link} to="/new-rule/education">
+                  <Icon name="check" /> Yes
+                </Button>
+              </Modal.Actions>
+            </Modal>
+          </Grid.Column>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid.Row>
