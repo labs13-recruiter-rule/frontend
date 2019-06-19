@@ -17,11 +17,14 @@ class Checkout extends Component {
     // User clicked submit
     let { token } = await this.props.stripe.createToken({ name: 'Name' });
     console.log('token', token);
-    let response = await fetch('http://localhost:4000/charge', {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: token.id,
-    });
+    let response = await fetch(
+      'https://recruiter-back-end.herokuapp.com/charge',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: token.id,
+      },
+    );
     if (response.ok) this.setState({ complete: true });
   }
 
