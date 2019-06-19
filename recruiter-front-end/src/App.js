@@ -9,6 +9,7 @@ import Contacts from './components/Contacts/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
+import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
 import Fallback from './views/NewRulesPage/Fallback';
 
@@ -99,6 +100,7 @@ class App extends React.Component {
                   path="/new-rule/experience"
                   component={Experience}
                 />
+                <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact
                   path="/new-rule/confirmation"
