@@ -171,7 +171,7 @@ const reducer = (state = initialState, action) => {
     case DELETE_CONTACT_SUCCESS:
       return {
         ...state,
-        message: action.payload,
+        contacts: action.payload,
       };
     case DELETE_CONTACT_FAIL:
       return {
