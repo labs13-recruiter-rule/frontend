@@ -57,7 +57,6 @@ class CreateGroupForm extends React.Component {
                 Next <Icon name="arrow right" size="small" />
               </Button>
             </Link> */}
-            <Button type="submit">Create Group</Button>
           </Form>
         )}
       </Container>

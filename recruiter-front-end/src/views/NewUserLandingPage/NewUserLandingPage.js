@@ -1,6 +1,8 @@
 import React from 'react';
-import { Grid, Button, Modal, Header } from 'semantic-ui-react';
+import { Grid, Button, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
+import MarketingCards from '../../components/Cards/MarketingCards';
 
 const flexContainer = {
   display: 'flex',
@@ -37,34 +39,23 @@ function App() {
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <h2 class="ui header" style={center}>
-            Ruler Rules sends your candidate to the correct group of contacts
-            every time.
-          </h2>
-          <h3 class="ui header" style={center}>
-            Let's start with your first contact group 👇
-          </h3>
-          <Link style={linkStyles} to="/new-contact-group">
-            <Button style={primaryButton}>New Contact Group</Button>
-          </Link>
-
-          <Modal
-            trigger={
-              <Button style={secondaryButton}>What is a contact group?</Button>
-            }
-            closeIcon
-          >
-            <Header content="What is a contact group?" />
-            <Modal.Content>
-              <p>
-                A contact group is a collection of contacts. As an example you
-                might have a Sales Managers group with the sales managers
-                Samantha and Robert.
-              </p>
-            </Modal.Content>
-          </Modal>
+          <Header as="h1" style={center}>
+            Recruiter Rules
+          </Header>
+          <Header as="h3" style={center}>
+            Send your candidate to the correct contacts every time
+          </Header>
+          <Header as="h2" style={center}>
+            3 Simple Steps To Create Your First Rule
+          </Header>
         </Grid.Column>
         <Grid.Column width={1} />
+      </Grid.Row>
+      <Grid.Row centered>
+        <MarketingCards />
+        <Link style={linkStyles} to="/new-rule/education">
+          <Button style={primaryButton}>Create Rule</Button>
+        </Link>
       </Grid.Row>
     </Grid>
   );
