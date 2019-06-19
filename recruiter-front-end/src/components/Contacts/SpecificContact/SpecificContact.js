@@ -13,7 +13,6 @@ class SpecificContact extends React.Component {
   handleModalOpen = () => this.setState({ modalOpen: true });
 
   handleModalClose = () => {
-    console.log('cancelled');
     this.setState({ modalOpen: false }, () => this.props.refreshContacts());
   };
 
@@ -21,7 +20,8 @@ class SpecificContact extends React.Component {
     return (
       <Card>
         <Card.Content>
-          <Card.Header>{this.props.contact.name}</Card.Header>
+          {/* <Card.Header>{this.props.contact.name}</Card.Header> */}
+          <Card.Header content={this.props.contact.name} />
           <Card.Meta>{this.props.contact.email}</Card.Meta>
         </Card.Content>
         <Card.Content extra>

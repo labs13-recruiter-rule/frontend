@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Container, Modal } from 'semantic-ui-react';
+import { Button, Form, Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addContact } from '../../actions';
 import { withRouter } from 'react-router-dom';
@@ -56,6 +56,14 @@ class NewContact extends React.Component {
           </Form.Field>
           <Button color="green" type="submit">
             Submit Contact
+          </Button>
+          <Button
+            color="red"
+            type="button"
+            floated="right"
+            onClick={() => this.props.handleModalClose()}
+          >
+            Cancel
           </Button>
         </Form>
       </Container>

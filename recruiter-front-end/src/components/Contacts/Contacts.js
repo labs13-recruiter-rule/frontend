@@ -11,11 +11,17 @@ import {
 import { getContacts, deleteContact } from '../../actions';
 import SpecificContact from './SpecificContact/SpecificContact';
 import NewContactForm from './NewContactForm';
+import ExampleContact from './SpecificContact/ExampleContact';
 
 class Contacts extends React.Component {
   state = {
     contacts: [],
     modalOpen: false,
+    exampleContact: {
+      name: 'Jane Exampleson',
+      email: 'example@email.com',
+      id: 28384747,
+    },
   };
 
   componentDidMount() {
@@ -26,58 +32,52 @@ class Contacts extends React.Component {
     this.props.deleteContact(contact_id);
   };
 
-  editContact() {
-    console.log('edit contact? also nah lol');
-  }
-
-  addContact() {
-    console.log('added nope lol');
-  }
-
   handleModalOpen = () => this.setState({ modalOpen: true });
 
   handleModalClose = () =>
     this.setState({ modalOpen: false }, () => this.props.getContacts());
 
   render() {
-    if (this.props.contacts.length < 1) {
-      return (
-        <Container fluid>
-          {' '}
-          <p>You don't have any contacts yet.</p>{' '}
-        </Container>
-      );
-    } else {
-      return (
-        <Container fluid>
-          <Segment clearing>
-            <Header
-              as="h3"
-              content="Manage your contacts"
-              subheader="If you do not have any, add them here"
-              floated="left"
-            />
-            {/* <Header attached="top" content="manage" floated="right" /> */}
-            <Modal
-              trigger={
-                <Button
-                  color="green"
-                  floated="right"
-                  onClick={this.handleModalOpen}
-                >
-                  Add Contact
-                </Button>
-              }
-              open={this.state.modalOpen}
-              onClose={this.handleModalClose}
-            >
-              <Modal.Content>
-                <NewContactForm handleModalClose={this.handleModalClose} />
-              </Modal.Content>
-            </Modal>
-          </Segment>
+    return (
+      <Container fluid>
+        <Segment clearing>
+          <Header
+            as="h3"
+            content="Manage Contacts"
+            subheader="Contacts that you add will be available to receive candidates from your engines"
+            floated="left"
+          />
+
+          <Modal
+            trigger={
+              <Button
+                color="green"
+                floated="right"
+                onClick={this.handleModalOpen}
+              >
+                Add Contact
+              </Button>
+            }
+            open={this.state.modalOpen}
+            onClose={this.handleModalClose}
+          >
+            <Modal.Content>
+              <NewContactForm handleModalClose={this.handleModalClose} />
+            </Modal.Content>
+          </Modal>
+        </Segment>
+        {this.props.contacts.length < 1 ? (
           <Segment attached>
-            <Card.Group itemsPerRow={4}>
+            <Card.Group>
+              <ExampleContact
+                contact={this.state.exampleContact}
+                key={this.state.exampleContact.id}
+              />
+            </Card.Group>
+          </Segment>
+        ) : (
+          <Segment attached>
+            <Card.Group itemsPerRow={3} stackable doubling>
               {this.props.contacts.map(contact => (
                 <SpecificContact
                   contact={contact}
@@ -88,11 +88,12 @@ class Contacts extends React.Component {
               ))}
             </Card.Group>
           </Segment>
-        </Container>
-      );
-    }
+        )}
+      </Container>
+    );
   }
 }
+// }
 
 const mapStateToProps = ({ contacts }) => ({
   contacts,
