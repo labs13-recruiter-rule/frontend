@@ -84,9 +84,9 @@ function NewContactGroupView() {
               </Step.Content>
             </Step>
           </Step.Group>
-          <h2 class="ui header" style={center}>
-            Where should we send these candidates?
-          </h2>
+          <Header as="h3" style={center}>
+            When a candidate passes these rules, where should they be sent?
+          </Header>
           <NewContact />
           <Grid.Column
             style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -95,30 +95,28 @@ function NewContactGroupView() {
               <Icon name="arrow left" size="small" />
               Back
             </Button>
-            <Button
-              style={primaryButton}
-              onClick={handleSubmit}
-              as={Link}
-              to="/"
+            <Modal
+              trigger={<Button style={primaryButton}>Submit</Button>}
+              closeIcon
             >
-              Submit
-            </Button>
+              <Header icon="archive" content="Create New Rule" />
+              <Modal.Content>
+                <p>
+                  Would you like to create a new rule with the same fallback
+                  contact if a candidate does not pass all conditions for the
+                  rule?
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color="red">
+                  <Icon name="x" /> No
+                </Button>
+                <Button color="green">
+                  <Icon name="check" /> Yes
+                </Button>
+              </Modal.Actions>
+            </Modal>
           </Grid.Column>
-          <Modal
-            trigger={
-              <Button style={secondaryButton}>What is a contact group?</Button>
-            }
-            closeIcon
-          >
-            <Header content="What is a contact group?" />
-            <Modal.Content>
-              <p>
-                A contact group is a collection of contacts. As an example you
-                might have a Sales Managers group with the sales managers
-                Samantha and Robert.
-              </p>
-            </Modal.Content>
-          </Modal>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid.Row>

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Grid, Button, Modal, Header } from 'semantic-ui-react';
+import { Grid, Button, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
+import MarketingCards from '../../components/Cards/MarketingCards';
 
 const flexContainer = {
   display: 'flex',
@@ -40,15 +42,20 @@ function App() {
           <Header as="h1" style={center}>
             Recruiter Rules
           </Header>
-          <Header as="h2" style={center}>
+          <Header as="h3" style={center}>
             Send your candidate to the correct contacts every time
           </Header>
-
-          <Link style={linkStyles} to="/new-rule/education">
-            <Button style={primaryButton}>Create Rules Engine</Button>
-          </Link>
+          <Header as="h2" style={center}>
+            3 Simple Steps To Create Your First Rule
+          </Header>
         </Grid.Column>
         <Grid.Column width={1} />
+      </Grid.Row>
+      <Grid.Row centered>
+        <MarketingCards />
+        <Link style={linkStyles} to="/new-rule/education">
+          <Button style={primaryButton}>Create Rule</Button>
+        </Link>
       </Grid.Row>
     </Grid>
   );
