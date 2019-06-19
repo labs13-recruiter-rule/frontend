@@ -1,6 +1,4 @@
 import axios from 'axios';
-import firebase from 'firebase';
-import fire from '../config/fire';
 import {
   GET_CONTACTS_SUCCESS,
   GET_CONTACTS_FAIL,
@@ -15,16 +13,7 @@ import {
 } from './types';
 
 // TOKEN
-
 const token = sessionStorage.getItem('token');
-
-// const token = fire
-//   .auth()
-//   .currentuser.getIdToken(true)
-//   .then(function(idToken) {
-//     return idToken;
-//   });
-
 const tokenHeader = {
   headers: {
     token,
@@ -103,6 +92,7 @@ export const updateContact = (contact_id, updatedContact) => dispatch => {
       tokenHeader,
     )
     .then(res => {
+      console.log('from res update contact', res);
       dispatch({
         type: UPDATE_CONTACT_SUCCESS,
         payload: res.data,

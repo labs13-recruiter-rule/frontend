@@ -1,8 +1,5 @@
 import React from 'react';
-import User from '../User';
 import { connect } from 'react-redux';
-import { getUsers } from '../../actions/index';
-import { Link, Route } from 'react-router-dom';
 import {
   Card,
   Container,
@@ -12,7 +9,7 @@ import {
   Modal,
 } from 'semantic-ui-react';
 import { getContacts, deleteContact } from '../../actions';
-import SpecificContact from './SpecificContact';
+import SpecificContact from './SpecificContact/SpecificContact';
 import NewContactForm from './NewContactForm';
 
 class Contacts extends React.Component {
@@ -86,6 +83,7 @@ class Contacts extends React.Component {
                   contact={contact}
                   key={contact.id}
                   deleteContact={this.delContact}
+                  refreshContacts={() => this.props.getContacts()}
                 />
               ))}
             </Card.Group>
