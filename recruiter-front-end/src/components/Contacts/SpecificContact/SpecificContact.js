@@ -2,43 +2,6 @@ import React from 'react';
 import { Card, Container, Button, Modal } from 'semantic-ui-react';
 import EditContact from './EditContact';
 
-// function SpecificContact(props) {
-//   return (
-//     <Card>
-//       <Card.Content>
-//         <Card.Header>{props.contact.name}</Card.Header>
-//         <Card.Meta>{props.contact.email}</Card.Meta>
-//       </Card.Content>
-//       <Card.Content extra>
-//         <div className="ui two buttons">
-//           <Modal
-//             trigger={
-//               <Button basic color="blue">
-//                 Edit
-//               </Button>
-//             }
-//           >
-//             <Modal.Content>
-//               <EditContact
-//                 contactname={props.contact.name}
-//                 contactemail={props.contact.email}
-//                 contactid={props.contact.id}
-//               />
-//             </Modal.Content>
-//           </Modal>
-//           <Button
-//             basic
-//             color="red"
-//             onClick={() => props.deleteContact(props.contact.id)}
-//           >
-//             Delete
-//           </Button>
-//         </div>
-//       </Card.Content>
-//     </Card>
-//   );
-// }
-
 class SpecificContact extends React.Component {
   constructor(props) {
     super(props);
@@ -49,8 +12,10 @@ class SpecificContact extends React.Component {
 
   handleModalOpen = () => this.setState({ modalOpen: true });
 
-  handleModalClose = () =>
+  handleModalClose = () => {
+    console.log('cancelled');
     this.setState({ modalOpen: false }, () => this.props.refreshContacts());
+  };
 
   render() {
     return (

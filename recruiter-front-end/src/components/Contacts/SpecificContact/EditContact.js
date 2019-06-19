@@ -27,7 +27,10 @@ class EditContact extends React.Component {
   submitEdittedContact = e => {
     this.props
       .updateContact(this.props.contactid, this.state.contact)
-      .then(() => this.props.handleModalClose());
+      .then(() => this.props.handleModalClose())
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -55,7 +58,11 @@ class EditContact extends React.Component {
           <Button color="green" type="submit">
             Save
           </Button>
-          <Button color="red" onClick={this.props.handleModalClose}>
+          <Button
+            color="red"
+            type="button"
+            onClick={() => this.props.handleModalClose()}
+          >
             Cancel
           </Button>
         </Form>
