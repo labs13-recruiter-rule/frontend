@@ -11,7 +11,7 @@ import Contacts from './components/Contacts/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
-
+import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewContactForm from './components/Contacts/NewContactForm';
 import Mailer from './components/Mailer';
 import fire from './config/fire';
@@ -102,6 +102,7 @@ class App extends React.Component {
                   path="/new-rule/experience"
                   component={Experience}
                 />
+                <Route exact path="/checkout" component={CheckoutContainer} />
               </>,
             ]
           ) : (
