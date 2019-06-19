@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Link,
+} from 'react-router-dom';
 import Login from './components/Login';
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
@@ -13,6 +18,10 @@ import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
 import Fallback from './views/NewRulesPage/Fallback';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
+import CandidateContactInfo from './views/AddCandidatePage/CandidateContactInfo';
+import CandidateEducation from './views/AddCandidatePage/CandidateEducation';
+import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
+import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
 
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
@@ -62,13 +71,13 @@ class App extends React.Component {
                     </Button>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button>
-                      <NavLink
+                    <Button as={Link} to="/new-candidate/contact-info">
+                      {/* <NavLink
                         style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/new-candidate"
-                      >
-                        Add Candidate
-                      </NavLink>
+                        to="/new-candidate/contact-info"
+                      > */}
+                      Send Candidate
+                      {/* </NavLink> */}
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
@@ -109,6 +118,26 @@ class App extends React.Component {
                   exact
                   path="/new-candidate/"
                   component={AddCandidatePage}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/contact-info"
+                  component={CandidateContactInfo}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/education"
+                  component={CandidateEducation}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/skills"
+                  component={CandidateSkills}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/experience"
+                  component={CandidateExperience}
                 />
               </>,
             ]
