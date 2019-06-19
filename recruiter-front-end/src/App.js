@@ -11,6 +11,7 @@ import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
 import Fallback from './views/NewRulesPage/Fallback';
+import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
@@ -63,7 +64,7 @@ class App extends React.Component {
                     <Button>
                       <NavLink
                         style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/add-candidate"
+                        to="/new-candidate"
                       >
                         Add Candidate
                       </NavLink>
@@ -83,15 +84,8 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route
-                  exact
-                  path="/new-rule/contacts"
-                  component={NewRuleContacts}
-                />
                 <Route exact path="/contacts/add" component={NewContactForm} />
-
                 <Route exact path="/contacts" component={Contacts} />
-
                 <Route exact path="/new-rule/education" component={Education} />
                 <Route exact path="/new-rule/skills" component={Skills} />
                 <Route
@@ -101,8 +95,18 @@ class App extends React.Component {
                 />
                 <Route
                   exact
+                  path="/new-rule/contacts"
+                  component={NewRuleContacts}
+                />
+                <Route
+                  exact
                   path="/new-rule/confirmation"
                   component={Fallback}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/"
+                  component={AddCandidatePage}
                 />
               </>,
             ]

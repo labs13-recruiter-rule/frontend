@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card, Image, Grid } from 'semantic-ui-react';
+import { Card, Image, Grid, Icon } from 'semantic-ui-react';
 import rules from '../../images/rules.jpg';
 import contacts from '../../images/contacts.jpg';
 import candidates from '../../images/candidates.jpg';
 
 const MarketingCards = () => (
-  <Grid.Row centered style={{ display: 'flex' }}>
+  <Grid.Row centered style={{ display: 'flex', alignItems: 'center' }}>
     <Card style={{ margin: '1em 15px' }}>
       <Image src={rules} wrapped ui={false} />
       <Card.Content>
@@ -15,6 +15,7 @@ const MarketingCards = () => (
         </Card.Description>
       </Card.Content>
     </Card>
+    <Icon disabled name="arrow right" size="big" />
     <Card style={{ margin: '1em 15px' }}>
       <Image src={contacts} wrapped ui={false} />
       <Card.Content>
@@ -25,6 +26,7 @@ const MarketingCards = () => (
         </Card.Description>
       </Card.Content>
     </Card>
+    <Icon disabled name="arrow right" size="big" />
     <Card style={{ margin: '1em 15px' }}>
       <Image src={candidates} wrapped ui={false} />
       <Card.Content>
