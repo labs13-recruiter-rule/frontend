@@ -290,22 +290,8 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={60} />
+            <Progress percent={40} />
             <Step.Group widths={6}>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group">
-                    <Step.Title>Group</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
@@ -327,8 +313,8 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/fail">
-                    <Step.Title>Fail</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>

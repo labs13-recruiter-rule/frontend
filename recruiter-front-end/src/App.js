@@ -9,6 +9,8 @@ import Contacts from './components/Contacts/Contacts';
 import Education from './views/NewRulesPage/Education';
 import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
+import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
+import Fallback from './views/NewRulesPage/Fallback';
 
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
@@ -81,6 +83,11 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
+                <Route
+                  exact
+                  path="/new-rule/contacts"
+                  component={NewRuleContacts}
+                />
                 <Route exact path="/contacts/add" component={NewContactForm} />
 
                 <Route exact path="/contacts" component={Contacts} />
@@ -91,6 +98,11 @@ class App extends React.Component {
                   exact
                   path="/new-rule/experience"
                   component={Experience}
+                />
+                <Route
+                  exact
+                  path="/new-rule/confirmation"
+                  component={Fallback}
                 />
               </>,
             ]

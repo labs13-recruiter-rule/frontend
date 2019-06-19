@@ -9,8 +9,7 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import CreateGroupForm from '../../components/NewGroup/CreateGroupForm';
-import NewContact from '../../components/Contacts/NewContactForm';
+import NewUserContact from '../../components/Contacts/NewUserContactForm';
 
 const flexContainer = {
   display: 'flex',
@@ -54,22 +53,8 @@ function NewContactGroupView() {
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={25} />
+          <Progress percent={90} />
           <Step.Group widths={6}>
-            <Step>
-              <Step.Content>
-                <Link style={linkStyles} to="/new-contact-group">
-                  <Step.Title>Group</Step.Title>
-                </Link>
-              </Step.Content>
-            </Step>
-            <Step active>
-              <Step.Content>
-                <Link style={linkStyles} to="/new-contact-group/contacts">
-                  <Step.Title>Contacts</Step.Title>
-                </Link>
-              </Step.Content>
-            </Step>
             <Step>
               <Step.Content>
                 <Link style={linkStyles} to="/new-rule/education">
@@ -91,49 +76,47 @@ function NewContactGroupView() {
                 </Link>
               </Step.Content>
             </Step>
-            <Step>
+            <Step active>
               <Step.Content>
-                <Link style={linkStyles} to="/new-rule/fail">
-                  <Step.Title>Fail</Step.Title>
+                <Link style={linkStyles} to="/new-contact-group/contacts">
+                  <Step.Title>Contacts</Step.Title>
                 </Link>
               </Step.Content>
             </Step>
           </Step.Group>
-          <h2 class="ui header" style={center}>
-            Where should we send these candidates?
-          </h2>
-          <NewContact />
+          <Header as="h3" style={center}>
+            When a candidate passes these rules, where should they be sent?
+          </Header>
+          <NewUserContact />
           <Grid.Column
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            <Button style={primaryButton} as={Link} to="/new-contact-group">
+            <Button style={primaryButton} as={Link} to="/new-rule/experience">
               <Icon name="arrow left" size="small" />
               Back
             </Button>
-            <Button
-              style={primaryButton}
-              onClick={handleSubmit}
-              as={Link}
-              to="/new-rule/education"
+            <Modal
+              trigger={<Button style={primaryButton}>Submit</Button>}
+              closeIcon
             >
-              Next <Icon name="arrow right" size="small" />
-            </Button>
+              <Header icon="archive" content="Create New Rule" />
+              <Modal.Content>
+                <p>
+                  Would you like to create a new rule with the same fallback
+                  contact if a candidate does not pass all conditions for the
+                  rule?
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color="red">
+                  <Icon name="x" /> No
+                </Button>
+                <Button color="green" as={Link} to="/new-rule/education">
+                  <Icon name="check" /> Yes
+                </Button>
+              </Modal.Actions>
+            </Modal>
           </Grid.Column>
-          <Modal
-            trigger={
-              <Button style={secondaryButton}>What is a contact group?</Button>
-            }
-            closeIcon
-          >
-            <Header content="What is a contact group?" />
-            <Modal.Content>
-              <p>
-                A contact group is a collection of contacts. As an example you
-                might have a Sales Managers group with the sales managers
-                Samantha and Robert.
-              </p>
-            </Modal.Content>
-          </Modal>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid.Row>
