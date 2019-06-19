@@ -25,8 +25,9 @@ class NewContact extends React.Component {
   };
 
   createContact = e => {
-    this.props.addContact(this.state.contact);
-    this.props.handleModalClose();
+    this.props
+      .addContact(this.state.contact)
+      .then(() => this.props.handleModalClose());
   };
 
   render() {
