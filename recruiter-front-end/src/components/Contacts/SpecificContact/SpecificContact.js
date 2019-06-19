@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container, Button, Modal } from 'semantic-ui-react';
+import { Card, Button, Modal } from 'semantic-ui-react';
 import EditContact from './EditContact';
 
 class SpecificContact extends React.Component {

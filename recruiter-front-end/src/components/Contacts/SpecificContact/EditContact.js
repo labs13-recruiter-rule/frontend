@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Container, Modal } from 'semantic-ui-react';
+import { Button, Form, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { updateContact } from '../../../actions';
 import { withRouter } from 'react-router-dom';
