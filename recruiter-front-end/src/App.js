@@ -16,6 +16,7 @@ import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
 import CreateDefaultContact from './views/CreateDefaultContact/CreateDefaultContact';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage'
+import ConfirmationView from './views/ConfirmationPage/ConfirmationView';
 
 class App extends React.Component {
   state = {
@@ -97,7 +98,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/testing"
-                  component={Skills}
+                  component={ConfirmationView}
                 />
               </>,
             ]
