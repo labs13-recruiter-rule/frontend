@@ -1,0 +1,22 @@
+.engineManager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.engineManager a {
+  /* display: none; */
+  align-items: baseline;
+  justify-content: center;
+  /* align-content: b; */
+  /* width: fit-content; */
+}
+
+.engineManager a i {
+  float: right;
+  z-index: 5;
+}
+
+.engineCardRuleGrid {
+  justify-content: space-between;
+}

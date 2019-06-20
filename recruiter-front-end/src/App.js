@@ -27,6 +27,7 @@ import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
+import EngineDash from './components/Engines/EngineDash';
 
 class App extends React.Component {
   state = {
@@ -68,6 +69,18 @@ class App extends React.Component {
                       Home
                     </Button>
                   </Menu.Item>
+
+                  <Menu.Item>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/engines">
+                      <Button>Engines</Button>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
+                      <Button>Contacts</Button>
+                    </NavLink>
+                  </Menu.Item>
                   <Menu.Item>
                     <Button as={Link} to="/new-candidate/contact-info">
                       Send Candidate
@@ -86,6 +99,12 @@ class App extends React.Component {
                     console.log(props);
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
+                />
+                <Route exact path="/engines" component={EngineDash} />
+                <Route
+                  exact
+                  path="/new-rule/contacts"
+                  component={NewRuleContacts}
                 />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />

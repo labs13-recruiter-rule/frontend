@@ -38,7 +38,7 @@ function App() {
     <Grid columns={12} style={{ marginTop: '25px' }}>
       <Grid.Row centered>
         <Grid.Column width={1} />
-        <Grid.Column width={10} centered style={flexContainer}>
+        <Grid.Column width={10} centered="true" style={flexContainer}>
           <Header as="h1" style={center}>
             Recruiter Rules
           </Header>
