@@ -17,6 +17,7 @@ import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
+import EngineDash from './components/Engines/EngineDash';
 
 class App extends React.Component {
   state = {
@@ -54,21 +55,28 @@ class App extends React.Component {
               <>
                 <Menu>
                   <Menu.Item>
-                    <Button>
-                      <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/">
-                        Home
-                      </NavLink>
-                    </Button>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/">
+                      <Button>Home</Button>
+                    </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button>
-                      <NavLink
-                        style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/add-candidate"
-                      >
-                        Add Candidate
-                      </NavLink>
-                    </Button>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/engines">
+                      <Button>Engines</Button>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
+                      <Button>Contacts</Button>
+                    </NavLink>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <NavLink
+                      style={{ color: 'rgba(0,0,0,.6)' }}
+                      to="/add-candidate"
+                    >
+                      <Button>Add Candidate</Button>
+                    </NavLink>
                   </Menu.Item>
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
@@ -84,6 +92,7 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
+                <Route exact path="/engines" component={EngineDash} />
                 <Route
                   exact
                   path="/new-rule/contacts"

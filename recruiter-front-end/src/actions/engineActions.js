@@ -17,15 +17,17 @@ import {
 const token = sessionStorage.getItem('token');
 const tokenHeader = {
   headers: {
-    token: token,
+    token,
   },
 };
 
 // GET ALL ENGINES
 
-export const getEngines = url => dispatch => {
+const engineBaseURL = 'https://recruiter-back-end.herokuapp.com/engines/';
+
+export const getEngines = () => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get(engineBaseURL, tokenHeader)
     .then(res => {
       dispatch({
         type: GET_ENGINES_SUCCESS,
@@ -40,7 +42,7 @@ export const getEngines = url => dispatch => {
     });
 };
 
-//GET ENGINE BY ID
+// GET ENGINE BY ID
 export const getEngine = url => dispatch => {
   return axios
     .get(`${url}`, tokenHeader)
