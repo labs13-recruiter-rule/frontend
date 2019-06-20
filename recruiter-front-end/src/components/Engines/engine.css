@@ -1,6 +1,6 @@
 .engineManager {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -8,9 +8,15 @@
   /* display: none; */
   align-items: baseline;
   justify-content: center;
-  z-index: 10;
+  /* align-content: b; */
+  /* width: fit-content; */
 }
 
 .engineManager a i {
   float: right;
+  z-index: 5;
+}
+
+.engineCardRuleGrid {
+  justify-content: space-between;
 }

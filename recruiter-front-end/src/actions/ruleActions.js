@@ -99,10 +99,14 @@ export const updateRule = (url, updatedRule) => dispatch => {
 };
 
 // DELETE RULE
-export const deleteRule = url => dispatch => {
+export const deleteRule = (engineid, ruleid) => dispatch => {
   return axios
-    .delete(`${url}`, tokenHeader)
+    .delete(
+      `${engineURL}` + `${engineid}` + `/rules/` + `${ruleid}`,
+      tokenHeader,
+    )
     .then(res => {
+      console.log('from delete res action', res);
       dispatch({
         type: DELETE_RULE_SUCCESS,
         payload: res.data,
