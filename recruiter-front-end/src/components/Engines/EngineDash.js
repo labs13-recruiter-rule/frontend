@@ -1,8 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getEngines } from '../../actions/engineActions';
-import { Card, Container, Button, Header, Segment } from 'semantic-ui-react';
+import {
+  Card,
+  Container,
+  Button,
+  Header,
+  Segment,
+  Icon,
+} from 'semantic-ui-react';
 import EngineCard from './EngineCard';
+import { Link } from 'react-router-dom';
+import './engine.css';
 
 class EngineDash extends React.Component {
   state = {
@@ -17,6 +26,20 @@ class EngineDash extends React.Component {
   render() {
     return (
       <Container fluid>
+        <Segment className="engineManager">
+          <Header>Engine Manager</Header>
+
+          {/* NOTE: Come back and change this to the route for new engine. Make similar icon + route handling for EngineCard Rules later */}
+          <Link to="/">
+            <Icon
+              name="plus circle"
+              size="big"
+              color="green"
+              link={true}
+            ></Icon>
+          </Link>
+        </Segment>
+
         {this.props.engines.length < 1 ? (
           'No Engines Found'
         ) : (

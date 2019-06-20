@@ -1,0 +1,16 @@
+.engineManager {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.engineManager a {
+  /* display: none; */
+  align-items: baseline;
+  justify-content: center;
+  z-index: 10;
+}
+
+.engineManager a i {
+  float: right;
+}
