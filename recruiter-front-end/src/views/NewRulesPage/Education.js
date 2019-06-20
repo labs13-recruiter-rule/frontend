@@ -271,8 +271,8 @@ class NewCandidate extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
-                // as={Link}
-                // to="/new-rule/skills"
+                as={Link}
+                to="/new-rule/skills"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

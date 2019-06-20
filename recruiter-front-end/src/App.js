@@ -59,6 +59,10 @@ class App extends React.Component {
     this.setState({ majors: e });
   };
 
+  skills = e => {
+    this.setState({ skills: e });
+  };
+
   render() {
     return (
       <Router history={history}>
@@ -117,7 +121,12 @@ class App extends React.Component {
                   path="/new-rule/education"
                   component={props => <Education majors={this.majors} />}
                 />
-                <Route exact path="/new-rule/skills" component={Skills} />
+                <Route
+                  exact
+                  path="/new-rule/skills"
+                  component={props => <Skills skills={this.skills} />}
+                />
+
                 <Route
                   exact
                   path="/new-rule/experience"

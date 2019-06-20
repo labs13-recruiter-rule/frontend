@@ -31,20 +31,20 @@ class NewCandidate extends React.Component {
   };
 
   handleSubmit = e => {
-    console.log(this.state);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.skills(this.state.skills);
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -360,8 +360,8 @@ class NewCandidate extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
-                as={Link}
-                to="/new-rule/experience"
+                // as={Link}
+                // to="/new-rule/experience"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
