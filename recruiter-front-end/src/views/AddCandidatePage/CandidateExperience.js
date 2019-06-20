@@ -1,13 +1,14 @@
 import React from 'react';
 import {
   Grid,
-  Divider,
+  Button,
+  Icon,
   Form,
   Input,
   Step,
-  Link,
   Progress,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
 import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
 import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
@@ -19,6 +20,17 @@ const flexContainer = {
 
 const center = {
   textAlign: 'center',
+};
+
+const primaryButton = {
+  margin: '50px 0',
+  height: '4rem',
+  width: '150px',
+  fontSize: '1.35rem',
+  fontWeight: '900',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const SkillsTags = () => <Input placeholder="Enter Skill" />;
@@ -52,14 +64,27 @@ function App() {
               </Step.Content>
             </Step>
           </Step.Group>
-          <h3 style={center}>Experience</h3>
-          <Divider />
           <Form className="Experience">
             <Form.Field>
               <label>Years of Experience</label>
               <ExperienceDropdown />
             </Form.Field>
           </Form>
+          <Grid.Row
+            style={{ display: 'flex', justifyContent: 'space-between' }}
+          >
+            <Button
+              style={primaryButton}
+              as={Link}
+              to="/new-candidate/education"
+            >
+              <Icon name="arrow left" size="small" />
+              Back
+            </Button>
+            <Button style={primaryButton} as={Link} to="/">
+              Send
+            </Button>
+          </Grid.Row>
         </Grid.Column>
         <Grid.Column width={1} />
       </Grid.Row>

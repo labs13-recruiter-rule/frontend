@@ -64,20 +64,13 @@ class App extends React.Component {
               <>
                 <Menu>
                   <Menu.Item>
-                    <Button>
-                      <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/">
-                        Home
-                      </NavLink>
+                    <Button as={Link} to="/">
+                      Home
                     </Button>
                   </Menu.Item>
                   <Menu.Item>
                     <Button as={Link} to="/new-candidate/contact-info">
-                      {/* <NavLink
-                        style={{ color: 'rgba(0,0,0,.6)' }}
-                        to="/new-candidate/contact-info"
-                      > */}
                       Send Candidate
-                      {/* </NavLink> */}
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
