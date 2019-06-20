@@ -128,6 +128,14 @@ class App extends React.Component {
     this.setState({ skills: e });
   };
 
+  minExp = e => {
+    this.setState({ minExp: e });
+  };
+
+  maxExp = e => {
+    this.setState({ maxExp: e });
+  };
+
   render() {
     return (
       <Router history={history}>
@@ -162,9 +170,9 @@ class App extends React.Component {
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
                 </Menu>
-                {/* <button onClick={() => console.log(this.state)}>
+                <button onClick={() => console.log(this.state)}>
                   App.js this.state
-                </button> */}
+                </button>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -200,7 +208,10 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/experience"
-                  component={Experience}
+                  //   component={Experience}
+                  component={props => (
+                    <Experience minExp={this.minExp} maxExp={this.maxExp} />
+                  )}
                 />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />

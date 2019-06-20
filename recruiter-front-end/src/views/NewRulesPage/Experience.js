@@ -20,9 +20,7 @@ class NewCandidate extends React.Component {
     super(props);
     this.state = {
       minNumber: '',
-      minTime: '',
       maxNumber: '',
-      maxTime: '',
     };
   }
 
@@ -52,19 +50,22 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     console.log('this.state', this.state);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.minExp(this.state.minNumber);
+    this.props.maxExp(this.state.maxNumber);
+
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
