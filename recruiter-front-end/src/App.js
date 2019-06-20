@@ -22,7 +22,6 @@ import CandidateContactInfo from './views/AddCandidatePage/CandidateContactInfo'
 import CandidateEducation from './views/AddCandidatePage/CandidateEducation';
 import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
 import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
-
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
@@ -55,6 +54,10 @@ class App extends React.Component {
   logout() {
     fire.auth().signOut();
   }
+
+  majors = e => {
+    this.setState({ majors: e });
+  };
 
   render() {
     return (
@@ -90,6 +93,9 @@ class App extends React.Component {
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
                 </Menu>
+                {/* <button onClick={() => console.log(this.state)}>
+                  App.js this.state
+                </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -106,15 +112,19 @@ class App extends React.Component {
                   path="/new-rule/contacts"
                   component={NewRuleContacts}
                 />
-                <Route exact path="/contacts/add" component={NewContactForm} />
-                <Route exact path="/contacts" component={Contacts} />
-                <Route exact path="/new-rule/education" component={Education} />
+                <Route
+                  exact
+                  path="/new-rule/education"
+                  component={props => <Education majors={this.majors} />}
+                />
                 <Route exact path="/new-rule/skills" component={Skills} />
                 <Route
                   exact
                   path="/new-rule/experience"
                   component={Experience}
                 />
+                <Route exact path="/contacts/add" component={NewContactForm} />
+                <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact

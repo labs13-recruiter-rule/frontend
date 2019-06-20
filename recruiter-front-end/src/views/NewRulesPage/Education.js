@@ -37,42 +37,20 @@ class NewCandidate extends React.Component {
   };
 
   handleSubmit = e => {
-    console.log('this.state', this.state);
-    const testObj = {
-      rule: {
-        conditions: {
-          priority: 1,
-          all: [
-            {
-              operator: 'contains',
-              value: this.state.skills[0],
-              fact: 'skills',
-            },
-          ],
-        },
-        priority: 1,
-        event: {
-          type: 'email',
-          params: {
-            contact: 'timothymshores@gmail.com',
-          },
-        },
-      },
-    };
-    console.log('testObj', testObj);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      testObj,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.majors(this.state.majors);
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -293,8 +271,8 @@ class NewCandidate extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
-                as={Link}
-                to="/new-rule/skills"
+                // as={Link}
+                // to="/new-rule/skills"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
