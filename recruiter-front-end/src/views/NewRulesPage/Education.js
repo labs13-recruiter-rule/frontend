@@ -38,9 +38,31 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     console.log('this.state', this.state);
+    const testObj = {
+      rule: {
+        conditions: {
+          priority: 1,
+          all: [
+            {
+              operator: 'contains',
+              value: this.state.skills[0],
+              fact: 'skills',
+            },
+          ],
+        },
+        priority: 1,
+        event: {
+          type: 'email',
+          params: {
+            contact: 'timothymshores@gmail.com',
+          },
+        },
+      },
+    };
+    console.log('testObj', testObj);
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
+      testObj,
       {
         headers: {
           token: `${token}`,

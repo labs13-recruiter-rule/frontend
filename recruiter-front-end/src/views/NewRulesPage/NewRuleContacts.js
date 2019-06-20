@@ -47,7 +47,7 @@ const handleSubmit = e => {
   console.log('Contacts handleSubmit');
 };
 
-function NewContactGroupView() {
+function NewRuleContacts() {
   return (
     <Grid columns={12} style={{ marginTop: '25px' }}>
       <Grid.Row centered>
@@ -124,4 +124,4 @@ function NewContactGroupView() {
   );
 }
 
-export default NewContactGroupView;
+export default NewRuleContacts;
