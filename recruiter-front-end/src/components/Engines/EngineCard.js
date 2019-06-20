@@ -20,20 +20,23 @@ class EngineCard extends React.Component {
     return (
       <Card centered color="blue">
         {/* <Card.Content> */}
-        <Header as="h2" content={this.props.engine.engine_name} />
-        <Header.Subheader>
-          {this.props.rules && this.props.rules.length > 1
-            ? `${this.props.rules.length} Rules`
-            : `${this.props.rules.length} Rule`}
-        </Header.Subheader>
+
+        <Card.Content>
+          <Header as="h2" content={this.props.engine.engine_name} />
+          <Header.Subheader as="h2">
+            {this.props.rules && this.props.rules.length > 1
+              ? `${this.props.rules.length} Rules`
+              : `${this.props.rules.length} Rule`}
+          </Header.Subheader>
+        </Card.Content>
 
         {/* </Card.Content> */}
         {this.props.rules.length < 1 ? (
           'No Rules'
         ) : (
           <Segment>
-            {this.props.rules.map(rule => (
-              <EngineCardRules rule={rule.rule} key={rule.id} />
+            {this.props.rules.map((rule, i) => (
+              <EngineCardRules rule={rule.rule} key={rule.id} count={i + 1} />
             ))}
           </Segment>
         )}
