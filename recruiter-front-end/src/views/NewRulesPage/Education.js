@@ -38,6 +38,7 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     this.props.majors(this.state.majors);
+    this.props.minEducation(this.state.degree);
     // Axios.post(
     //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
     //   this.state,
