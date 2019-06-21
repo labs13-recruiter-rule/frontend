@@ -28,6 +28,7 @@ import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
+import NewCandidate from './components/NewCandidate/NewCandidate';
 
 class App extends React.Component {
   state = {
@@ -195,7 +196,7 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button as={Link} to="/new-candidate/contact-info">
+                    <Button as={Link} to="/new-candidate-test">
                       Send Candidate
                     </Button>
                   </Menu.Item>
@@ -283,6 +284,11 @@ class App extends React.Component {
                   exact
                   path="/new-candidate/experience"
                   component={CandidateExperience}
+                />
+                <Route
+                  exact
+                  path="/new-candidate-test"
+                  component={NewCandidate}
                 />
               </>,
             ]
