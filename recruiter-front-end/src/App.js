@@ -27,7 +27,7 @@ import fire from './config/fire';
 import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
-import { parseRule } from './actions/ruleActions';
+import { parseRule, addRule } from './actions/ruleActions';
 
 class App extends React.Component {
   state = {
@@ -78,6 +78,11 @@ class App extends React.Component {
       .parseRule(this.state.rule)
       .then(() => {
         console.log('from response of parsing', this.props.parsedRule);
+
+        this.props.addRule(
+          'https://recruiter-back-end.herokuapp.com/engines/3/rules/',
+          this.props.parsedRule,
+        );
       })
       .catch(err => {
         console.log('from error parse', err);
@@ -212,5 +217,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { parseRule },
+  { parseRule, addRule },
 )(App);
