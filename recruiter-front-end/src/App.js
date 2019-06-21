@@ -28,6 +28,7 @@ import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
+import NewEngine from './components/Engines/NewEngine';
 
 class App extends React.Component {
   state = {
@@ -243,7 +244,7 @@ class App extends React.Component {
                   App.js this.state
                 </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
-                <Route exact path="/db" component={Dashboard} />
+                {/* <Route exact path="/db" component={Dashboard} /> */}
                 <Route
                   exact
                   path="/id"
@@ -252,6 +253,7 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
+                <Route exact path="/engines/new" component={NewEngine} />
                 <Route exact path="/engines" component={EngineDash} />
                 <Route
                   exact

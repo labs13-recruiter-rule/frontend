@@ -9,20 +9,28 @@ import {
   Segment,
   Icon,
   Grid,
+  Modal,
 } from 'semantic-ui-react';
 import EngineCard from './EngineCard';
+import NewEngine from './NewEngine';
 import { Link } from 'react-router-dom';
 import './engine.css';
 
 class EngineDash extends React.Component {
   state = {
     engines: [],
+    newEngineModalOpen: false,
   };
 
   componentDidMount() {
     this.props.getEngines();
     //
   }
+
+  handleModalOpen = () => this.setState({ newEngineModalOpen: true });
+
+  handleModalClose = () =>
+    this.setState({ newEngineModalOpen: false }, () => this.props.getEngines());
 
   render() {
     return (
@@ -31,14 +39,24 @@ class EngineDash extends React.Component {
           <Header>Engine Manager</Header>
 
           {/* NOTE: Come back and change this to the route for new engine. Make similar icon + route handling for EngineCard Rules later */}
-          <Link to="/">
-            <Icon
-              name="plus circle"
-              size="big"
-              color="green"
-              link={true}
-            ></Icon>
-          </Link>
+          <Modal
+            trigger={
+              <Icon
+                name="plus circle"
+                size="big"
+                color="green"
+                link={true}
+                onClick={this.handleModalOpen}
+              ></Icon>
+            }
+            open={this.state.newEngineModalOpen}
+            onClose={this.handleModalClose}
+          >
+            <Modal.Content>
+              <NewEngine handleModalClose={this.handleModalClose} />
+            </Modal.Content>
+          </Modal>
+          {/* </Link> */}
         </Segment>
 
         {this.props.engines.length < 1 ? (

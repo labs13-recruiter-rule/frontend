@@ -61,9 +61,9 @@ export const getEngine = url => dispatch => {
 };
 
 // ADD ENGINE
-export const addEngine = (url, newEngine) => dispatch => {
+export const addEngine = newEngine => dispatch => {
   return axios
-    .post(`${url}`, newEngine, tokenHeader)
+    .post(engineBaseURL, newEngine, tokenHeader)
     .then(res => {
       dispatch({
         type: ADD_ENGINE_SUCCESS,
