@@ -16,7 +16,7 @@ import Skills from './views/NewRulesPage/Skills';
 import Experience from './views/NewRulesPage/Experience';
 import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
-import Fallback from './views/NewRulesPage/Fallback';
+import Confirmation from './views/NewRulesPage/Confirmation';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
 import CandidateContactInfo from './views/AddCandidatePage/CandidateContactInfo';
 import CandidateEducation from './views/AddCandidatePage/CandidateEducation';
@@ -136,6 +136,16 @@ class App extends React.Component {
     this.setState({ maxExp: e });
   };
 
+  contactName = e => {
+    console.log('App.js contactName');
+    this.setState({ contactName: e });
+  };
+
+  contactEmail = e => {
+    console.log('App.js contactEmail');
+    this.setState({ contactEmail: e });
+  };
+
   render() {
     return (
       <Router history={history}>
@@ -149,13 +159,11 @@ class App extends React.Component {
                       Home
                     </Button>
                   </Menu.Item>
-
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/engines">
                       <Button>Engines</Button>
                     </NavLink>
                   </Menu.Item>
-
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
                       <Button>Contacts</Button>
@@ -170,9 +178,9 @@ class App extends React.Component {
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
                 </Menu>
-                <button onClick={() => console.log(this.state)}>
+                {/* <button onClick={() => console.log(this.state)}>
                   App.js this.state
-                </button>
+                </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -187,7 +195,12 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/contacts"
-                  component={NewRuleContacts}
+                  component={props => (
+                    <NewRuleContacts
+                      contactName={this.contactName}
+                      contactEmail={this.contactEmail}
+                    />
+                  )}
                 />
                 <Route
                   exact
@@ -219,7 +232,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/confirmation"
-                  component={Fallback}
+                  component={Confirmation}
                 />
                 <Route
                   exact

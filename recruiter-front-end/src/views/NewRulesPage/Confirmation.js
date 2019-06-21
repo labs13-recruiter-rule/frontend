@@ -7,39 +7,45 @@ import {
   Icon,
   Progress,
   Step,
+  Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
-import NewContactForm from '../../components/Contacts/NewContactForm';
 
 const token = sessionStorage.getItem('token');
 
-class NewCandidate extends React.Component {
+class Confirmation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      minNumber: '',
-      minTime: '',
-      maxNumber: '',
-      maxTime: '',
+      fallbackName: '',
+      fallbackEmail: '',
     };
   }
 
   handleSubmit = e => {
     console.log('this.state', this.state);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
+  };
+
+  handleName = e => {
+    this.setState({ fallbackName: e.target.value });
+  };
+
+  handleEmail = e => {
+    this.setState({ fallbackEmail: e.target.value });
   };
 
   render() {
@@ -84,13 +90,6 @@ class NewCandidate extends React.Component {
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
                     <Step.Title>Education</Step.Title>
                   </Link>
@@ -110,19 +109,47 @@ class NewCandidate extends React.Component {
                   </Link>
                 </Step.Content>
               </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step active>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/fallback">
-                    <Step.Title>Fallback</Step.Title>
+                  <Link style={linkStyles} to="/new-rule/confirmation">
+                    <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
-            <h2 class="ui header" style={center}>
+            <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
               requirements where should we send them?
-            </h2>
-            <NewContactForm />
+            </Header>
+            <Form>
+              <Form.Field>
+                <Form.Input
+                  label="Name"
+                  value={this.state.fallbackName}
+                  onChange={this.handleName}
+                  type="text"
+                  name="name"
+                  placeholder="Jane Doe"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Email"
+                  value={this.state.fallbackEmaill}
+                  onChange={this.handleEmail}
+                  type="email"
+                  name="email"
+                  placeholder="example@email.com"
+                />
+              </Form.Field>
+            </Form>
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -136,7 +163,7 @@ class NewCandidate extends React.Component {
                 as={Link}
                 to="/"
               >
-                Submit <Icon name="arrow right" size="small" />
+                Submit
               </Button>
             </Grid.Column>
             <Modal
@@ -166,4 +193,4 @@ class NewCandidate extends React.Component {
   }
 }
 
-export default NewCandidate;
+export default Confirmation;
