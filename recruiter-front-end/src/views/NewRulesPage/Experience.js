@@ -49,7 +49,6 @@ class NewCandidate extends React.Component {
   };
 
   handleSubmit = e => {
-    console.log('this.state', this.state);
     this.props.minExp(this.state.minNumber);
     this.props.maxExp(this.state.maxNumber);
 
@@ -135,7 +134,7 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={65} />
+            <Progress percent={50} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
@@ -160,6 +159,13 @@ class NewCandidate extends React.Component {
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/confirmation">
+                    <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
