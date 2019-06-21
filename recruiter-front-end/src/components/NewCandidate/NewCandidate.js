@@ -62,9 +62,10 @@ class NewCandidate extends React.Component {
       linkedinURL: this.state.linkedinURL,
       picture: this.state.picture,
       bio: this.state.bio,
+      engine_id: this.state.engine_id,
     };
     Axios.post(
-      'https://recruiter-back-end.herokuapp.com/candidates/',
+      `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine_id}/use`,
       newCandidate,
       {
         headers: {
@@ -85,6 +86,16 @@ class NewCandidate extends React.Component {
       <Container className="form-container">
         <Header size="huge">New Candidate</Header>
         <Form>
+          <Form.Field>
+            <label htmlFor="engine_id">Engine Id</label>
+            <input
+              value={this.state.engine_id}
+              onChange={this.handleChange}
+              type="text"
+              name="engine_id"
+              placeholder="engine_id"
+            />
+          </Form.Field>
           <Form.Field>
             <label htmlFor="name">Name</label>
             <input
@@ -212,7 +223,7 @@ class NewCandidate extends React.Component {
             <Checkbox label="LinkedIn Bio Exists" onChange={this.toggleBio} />
           </Form.Field>
           <Button type="submit" onClick={this.submit}>
-            Add Candidate
+            Send Candidate
           </Button>
         </Form>
       </Container>

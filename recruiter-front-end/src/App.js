@@ -29,19 +29,19 @@ import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
 import NewEngine from './components/Engines/NewEngine';
+import NewCandidate from './components/NewCandidate/NewCandidate';
 
 class App extends React.Component {
   state = {
     user: {},
     user_id: null,
     rule: {
-      skills: ['React', 'Vue', 'Angular'],
-      education: ['Masters', 'PhD'],
-      majors: ['Computer Science'],
-      minExp: 2,
-      maxExp: 9,
-      contactEmail: 'omaro@me.com',
-      requireHeadshot: true,
+      skills: [],
+      education: [],
+      majors: [],
+      minExp: '',
+      maxExp: '',
+      contactEmail: '',
     },
   };
 
@@ -166,7 +166,6 @@ class App extends React.Component {
       .parseRule(this.state.rule)
       .then(() => {
         console.log('from response of parsing', this.props.parsedRule);
-
         this.props.addRule(
           'https://recruiter-back-end.herokuapp.com/engines/3/rules/',
           this.props.parsedRule,
@@ -232,7 +231,7 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button as={Link} to="/new-candidate/contact-info">
+                    <Button as={Link} to="/new-candidate-test">
                       Send Candidate
                     </Button>
                   </Menu.Item>
@@ -321,6 +320,11 @@ class App extends React.Component {
                   exact
                   path="/new-candidate/experience"
                   component={CandidateExperience}
+                />
+                <Route
+                  exact
+                  path="/new-candidate-test"
+                  component={NewCandidate}
                 />
               </>,
             ]
