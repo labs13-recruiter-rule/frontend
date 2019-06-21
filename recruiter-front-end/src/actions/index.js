@@ -69,6 +69,9 @@ import {
   GET_EMAILS_BY_CONTACT_SUCCESS,
   SEND_EMAIL_SUCCESS,
   SEND_EMAIL_FAIL,
+  PARSE_RULE_START,
+  PARSE_RULE_SUCCESS,
+  PARSE_RULE_FAILURE,
 } from './types';
 
 import { getUsers, addUserToSQL, getUserIdfromUUID } from './userActions';
@@ -106,6 +109,7 @@ import {
   addRule,
   updateRule,
   deleteRule,
+  parseRule,
 } from './ruleActions';
 import {
   getEmailHistory,
@@ -228,4 +232,9 @@ export {
   getEmailHistoryToContact,
   getEmailTotal,
   addEmailHistory,
+  // PARSING
+  PARSE_RULE_START,
+  PARSE_RULE_SUCCESS,
+  PARSE_RULE_FAILURE,
+  parseRule,
 };
