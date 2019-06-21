@@ -65,6 +65,71 @@ class App extends React.Component {
     fire.auth().signOut();
   }
 
+  minEducation = e => {
+    switch (e) {
+      case '':
+        this.setState({
+          education: [
+            'High School / GED',
+            'Some College',
+            "Associate's",
+            "Bachelor's Degree",
+            "Master's Degree",
+            'PhD',
+          ],
+        });
+        break;
+      case 'High School / GED':
+        this.setState({
+          education: [
+            'High School / GED',
+            'Some College',
+            "Associate's",
+            "Bachelor's Degree",
+            "Master's Degree",
+            'PhD',
+          ],
+        });
+        break;
+      case 'Some College':
+        this.setState({
+          education: [
+            'Some College',
+            "Associate's",
+            "Bachelor's Degree",
+            "Master's Degree",
+            'PhD',
+          ],
+        });
+        break;
+      case "Associate's":
+        this.setState({
+          education: [
+            "Associate's",
+            "Bachelor's Degree",
+            "Master's Degree",
+            'PhD',
+          ],
+        });
+        break;
+      case "Bachelor's Degree":
+        this.setState({
+          education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+        });
+        break;
+      case "Master's Degree":
+        this.setState({
+          education: ["Master's Degree", 'PhD'],
+        });
+        break;
+      case 'PhD':
+        this.setState({
+          education: ['PhD'],
+        });
+        break;
+    }
+  };
+
   majors = e => {
     this.setState({ majors: e });
   };
@@ -88,6 +153,13 @@ class App extends React.Component {
         console.log('from error parse', err);
       });
   }
+  minExp = e => {
+    this.setState({ minExp: e });
+  };
+
+  maxExp = e => {
+    this.setState({ maxExp: e });
+  };
 
   render() {
     return (
@@ -128,9 +200,9 @@ class App extends React.Component {
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
                 </Menu>
-                {/* <button onClick={() => console.log(this.state)}>
+                <button onClick={() => console.log(this.state)}>
                   App.js this.state
-                </button> */}
+                </button>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -150,7 +222,12 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/education"
-                  component={props => <Education majors={this.majors} />}
+                  component={props => (
+                    <Education
+                      minEducation={this.minEducation}
+                      majors={this.majors}
+                    />
+                  )}
                 />
                 <Route
                   exact
@@ -161,7 +238,10 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/experience"
-                  component={Experience}
+                  //   component={Experience}
+                  component={props => (
+                    <Experience minExp={this.minExp} maxExp={this.maxExp} />
+                  )}
                 />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />

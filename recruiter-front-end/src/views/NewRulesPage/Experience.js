@@ -20,9 +20,7 @@ class NewCandidate extends React.Component {
     super(props);
     this.state = {
       minNumber: '',
-      minTime: '',
       maxNumber: '',
-      maxTime: '',
     };
   }
 
@@ -52,19 +50,22 @@ class NewCandidate extends React.Component {
 
   handleSubmit = e => {
     console.log('this.state', this.state);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.minExp(this.state.minNumber);
+    this.props.maxExp(this.state.maxNumber);
+
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -125,11 +126,6 @@ class NewCandidate extends React.Component {
       { key: 25, text: '25', value: '25' },
     ];
 
-    const timeframe = [
-      { key: 'months', text: 'months', value: 'months' },
-      { key: 'years', text: 'years', value: 'years' },
-    ];
-
     const dropdownStyles = {
       margin: '0',
     };
@@ -170,8 +166,8 @@ class NewCandidate extends React.Component {
             </Step.Group>
             <Grid style={{ marginTop: '25px' }}>
               <Grid.Row>
-                <Grid.Column floated="left" width={6}>
-                  <Header as="h4">Minimum experience required</Header>
+                <Grid.Column floated="left" width={12}>
+                  <Header as="h4">Minimum years of experience required</Header>
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
@@ -186,24 +182,11 @@ class NewCandidate extends React.Component {
                     onChange={this.handleMinNumber}
                   />
                 </Grid.Column>
-                <Grid.Column floated="right" width={4} style={dropdownStyles}>
-                  <Dropdown
-                    placeholder="Months or Years"
-                    search
-                    fluid
-                    allowAdditions
-                    clearable
-                    selection
-                    options={timeframe}
-                    styles={{ width: '300px' }}
-                    onChange={this.handleMinTimeframe}
-                  />
-                </Grid.Column>
               </Grid.Row>
               <Divider />
               <Grid.Row>
-                <Grid.Column floated="left" width={6}>
-                  <Header as="h4">Maximum experience allowed</Header>
+                <Grid.Column floated="left" width={12}>
+                  <Header as="h4">Maximum years of experience allowed</Header>
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
@@ -216,19 +199,6 @@ class NewCandidate extends React.Component {
                     options={options}
                     styles={{ width: '300px' }}
                     onChange={this.handleMaxNumber}
-                  />
-                </Grid.Column>
-                <Grid.Column floated="right" width={4} style={dropdownStyles}>
-                  <Dropdown
-                    placeholder="Months or Years"
-                    search
-                    fluid
-                    allowAdditions
-                    clearable
-                    selection
-                    options={timeframe}
-                    styles={{ width: '300px' }}
-                    onChange={this.handleMaxTimeframe}
                   />
                 </Grid.Column>
               </Grid.Row>
