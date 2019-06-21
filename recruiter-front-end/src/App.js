@@ -34,7 +34,7 @@ class App extends React.Component {
     user: {},
     user_id: null,
     rule: {
-      // skills: ['React', 'Vue', 'Angular'],
+      skills: ['React', 'Vue', 'Angular'],
       education: ['Masters', 'PhD'],
       majors: ['Computer Science'],
       minExp: 2,

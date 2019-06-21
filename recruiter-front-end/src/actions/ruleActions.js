@@ -153,9 +153,9 @@ export function actualParser(rule) {
   if (rule.skills) {
     rule.skills.forEach(skill => {
       const skillRule = {
+        fact: 'skills',
         operator: 'contains',
         value: `${skill}`,
-        fact: 'skills',
       };
       allRules.push(skillRule);
     });
@@ -170,9 +170,9 @@ export function actualParser(rule) {
       // }
       // Min Edu Rule vv
       const eduRule = {
+        fact: 'education',
         operator: 'contains',
         value: `${edu}`,
-        fact: 'education',
       };
       minEduRules.push(eduRule);
     });
@@ -180,11 +180,55 @@ export function actualParser(rule) {
   }
   if (rule.requireHeadshot) {
     const headshotRule = {
+      fact: 'hasHeadshot',
       operator: 'equal',
       value: true,
-      fact: 'hasHeadshot',
     };
     allRules.push(headshotRule);
   }
-  return allRules;
+  if (rule.majors) {
+    const majorRules = [];
+    // if the candidate matches *any* of these majors, continue. ***not all of the majors, just one at minimum***
+    rule.majors.forEach(major => {
+      const majorRule = {
+        fact: 'major',
+        operator: 'contains',
+        value: `${major}`,
+      };
+      majorRules.push(majorRule);
+    });
+    allRules.push({ any: majorRules });
+  }
+  if (rule.minExp) {
+    const minExpRule = {
+      fact: 'experience',
+      operator: 'greaterThanInclusive',
+      value: rule.minExp,
+    };
+    allRules.push(minExpRule);
+
+    if (rule.maxExp) {
+      const maxExpRule = {
+        fact: 'experience',
+        operator: 'lessThanInclusive',
+        value: rule.maxExp,
+      };
+      allRules.push(maxExpRule);
+    }
+
+    // !** END OF TRADITIONAL RULES \\
+    // BELOW BEGINS EVENT PARAMS **1 \\
+
+    let event = {};
+
+    if (rule.contactEmail) {
+      //
+      event = { type: 'email', params: { contact: `${rule.contactEmail}` } };
+    }
+
+    const conditions = { all: allRules };
+    const ruleFinal = { rule: { conditions, event } };
+
+    return ruleFinal;
+  }
 }
