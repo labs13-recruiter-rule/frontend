@@ -10,6 +10,9 @@ import {
   UPDATE_RULE_FAIL,
   DELETE_RULE_SUCCESS,
   DELETE_RULE_FAIL,
+  PARSE_RULE_START,
+  PARSE_RULE_SUCCESS,
+  PARSE_RULE_FAILURE,
 } from './types';
 // TOKEN
 
@@ -119,3 +122,69 @@ export const deleteRule = (engineid, ruleid) => dispatch => {
       });
     });
 };
+
+export const parseRule = rule => dispatch => {
+  dispatch({ type: PARSE_RULE_START });
+
+  // const allRules = [];
+  // if (rule.skills) {
+  //   rule.skills.forEach(skill => {
+  //     const skillRule = {
+  //       operator: 'contains',
+  //       value: `${skill}`,
+  //       fact: 'skills',
+  //     };
+  //     allRules.push(skillRule);
+  //   });
+  // }
+  // return allRules;
+  return Promise.resolve(actualParser(rule))
+    .then(res => {
+      dispatch({ type: PARSE_RULE_SUCCESS, payload: res });
+    })
+    .catch(err => {
+      dispatch({ type: PARSE_RULE_FAILURE, payload: err });
+    });
+};
+
+export function actualParser(rule) {
+  //
+  const allRules = [];
+  if (rule.skills) {
+    rule.skills.forEach(skill => {
+      const skillRule = {
+        operator: 'contains',
+        value: `${skill}`,
+        fact: 'skills',
+      };
+      allRules.push(skillRule);
+    });
+  }
+  if (rule.education) {
+    const minEduRules = [];
+    rule.education.forEach(edu => {
+      // const eduRule = {
+      //   operator: 'contains',
+      //   value: `${edu}`,
+      //   fact: 'education'
+      // }
+      // Min Edu Rule vv
+      const eduRule = {
+        operator: 'contains',
+        value: `${edu}`,
+        fact: 'education',
+      };
+      minEduRules.push(eduRule);
+    });
+    allRules.push({ any: minEduRules });
+  }
+  if (rule.requireHeadshot) {
+    const headshotRule = {
+      operator: 'equal',
+      value: true,
+      fact: 'hasHeadshot',
+    };
+    allRules.push(headshotRule);
+  }
+  return allRules;
+}
