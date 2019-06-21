@@ -63,6 +63,9 @@ import {
   GET_EMAILS_BY_CONTACT_SUCCESS,
   SEND_EMAIL_SUCCESS,
   SEND_EMAIL_FAIL,
+  PARSE_RULE_START,
+  PARSE_RULE_SUCCESS,
+  PARSE_RULE_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -85,6 +88,7 @@ const initialState = {
   group: {},
   groups: [],
   message: '',
+  parsedRule: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -397,6 +401,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         email_total_contact: action.payload,
+      };
+    case PARSE_RULE_START:
+      return {
+        ...state,
+      };
+    case PARSE_RULE_SUCCESS:
+      return {
+        ...state,
+        parsedRule: action.payload,
+      };
+    case PARSE_RULE_FAILURE:
+      return {
+        ...state,
+        parsedRule: action.payload,
       };
     default:
       return state;
