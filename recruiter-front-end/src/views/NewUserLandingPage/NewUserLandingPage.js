@@ -15,17 +15,9 @@ const center = {
 
 const primaryButton = {
   margin: '20px auto',
-  height: '5rem',
+  height: '3.5rem',
   width: '300px',
   fontSize: '1.25rem',
-  fontStyle: 'italic',
-};
-
-const secondaryButton = {
-  margin: '10px auto',
-  height: '3rem',
-  width: '200px',
-  fontSize: '1rem',
   fontStyle: 'italic',
 };
 
@@ -54,7 +46,9 @@ function App() {
       <Grid.Row centered>
         <MarketingCards />
         <Link style={linkStyles} to="/new-rule/education">
-          <Button style={primaryButton}>Create Rule</Button>
+          <Button style={primaryButton} as={Link} to="/engines">
+            Create Rules Enginge
+          </Button>
         </Link>
       </Grid.Row>
     </Grid>

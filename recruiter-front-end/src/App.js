@@ -59,91 +59,127 @@ class App extends React.Component {
     switch (e) {
       case '':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'High School / GED':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'Some College':
         this.setState({
-          education: [
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Associate's":
         this.setState({
-          education: [
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Bachelor's Degree":
         this.setState({
-          education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          rule: {
+            education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          },
         });
         break;
       case "Master's Degree":
         this.setState({
-          education: ["Master's Degree", 'PhD'],
+          rule: {
+            education: ["Master's Degree", 'PhD'],
+          },
         });
         break;
       case 'PhD':
         this.setState({
-          education: ['PhD'],
+          rule: {
+            education: ['PhD'],
+          },
         });
         break;
     }
   };
 
   majors = e => {
-    this.setState({ majors: e });
+    this.setState({
+      rule: {
+        majors: e,
+      },
+    });
   };
 
   skills = e => {
-    this.setState({ skills: e });
+    this.setState({
+      rule: {
+        skills: e,
+      },
+    });
   };
 
   minExp = e => {
-    this.setState({ minExp: e });
+    this.setState({
+      rule: {
+        minExp: e,
+      },
+    });
   };
 
   maxExp = e => {
-    this.setState({ maxExp: e });
+    this.setState({
+      rule: {
+        maxExp: e,
+      },
+    });
   };
 
   contactName = e => {
-    console.log('App.js contactName');
-    this.setState({ contactName: e });
+    this.setState({
+      rule: {
+        contactName: e,
+      },
+    });
   };
 
   contactEmail = e => {
-    console.log('App.js contactEmail');
-    this.setState({ contactEmail: e });
+    this.setState({
+      rule: {
+        contactEmail: e,
+      },
+    });
   };
 
   render() {
@@ -178,9 +214,9 @@ class App extends React.Component {
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
                 </Menu>
-                {/* <button onClick={() => console.log(this.state)}>
+                <button onClick={() => console.log(this.state)}>
                   App.js this.state
-                </button> */}
+                </button>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
