@@ -31,20 +31,20 @@ class NewCandidate extends React.Component {
   };
 
   handleSubmit = e => {
-    console.log(this.state);
-    Axios.post(
-      'https://recruiter-back-end.herokuapp.com/engine/addRule',
-      this.state,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    this.props.skills(this.state.skills);
+    // Axios.post(
+    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
+    //   this.state,
+    //   {
+    //     headers: {
+    //       token: `${token}`,
+    //     },
+    //   },
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -290,7 +290,7 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={40} />
+            <Progress percent={30} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
@@ -315,6 +315,13 @@ class NewCandidate extends React.Component {
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/confirmation">
+                    <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
