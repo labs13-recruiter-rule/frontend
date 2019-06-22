@@ -44,6 +44,11 @@ function App() {
         <Grid.Column width={10} centered style={flexContainer}>
           <Progress percent={65} />
           <Step.Group widths={6}>
+          <Step link href="/new-candidate/engine">
+                <Step.Content>
+                  <Step.Title>Select Engine</Step.Title>
+                </Step.Content>
+              </Step>
             <Step link href="/new-candidate/contact-info">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>

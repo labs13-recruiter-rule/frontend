@@ -142,7 +142,7 @@ class App extends React.Component {
               </Form.Field>
               <Form.Field>
                 <label>
-                  Major - Is this supposed to be a drop down or search?
+                  Major
                 </label>
                 <MajorDropdown />
               </Form.Field>

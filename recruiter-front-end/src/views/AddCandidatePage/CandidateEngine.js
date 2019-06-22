@@ -42,7 +42,7 @@ function App() {
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
           <Progress percent={15} />
-          <Step.Group widths={6}>
+          <Step.Group widths={6}> 
           <Step link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Select Engine</Step.Title>
@@ -69,36 +69,11 @@ function App() {
               </Step.Content>
             </Step>
           </Step.Group>
-          <Form className="Contact">
-            <Form.Field>
-              <label>Name</label>
-              <input type="text" placeholder="Name" />
-            </Form.Field>
-            <Form.Field>
-              <label>Email</label>
-              <input type="email" placeholder="Email" />
-            </Form.Field>
-            <Form.Field>
-              <label>LinkedIn</label>
-              <input
-                type="url"
-                placeholder="https://www.linkedin.com/john-lname-exampl3"
-              />
-            </Form.Field>
-          </Form>
-          <Grid.Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button
-              style={primaryButton}
-              as={Link}
-              to="/new-candidate/engine"
-            >
-              <Icon name="arrow left" size="small" />
-              Back
-            </Button>
+          <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               style={primaryButton}
               as={Link}
-              to="/new-candidate/education"
+              to="/new-candidate/contact-info"
             >
               Next <Icon name="arrow right" size="small" />
             </Button>

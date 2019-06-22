@@ -29,6 +29,7 @@ import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
 import NewCandidate from './components/NewCandidate/NewCandidate';
+import CandidateEngine from './views/AddCandidatePage/CandidateEngine'
 
 class App extends React.Component {
   state = {
@@ -196,7 +197,7 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button as={Link} to="/new-candidate-test">
+                    <Button as={Link} to="/new-candidate/contact-info">
                       Send Candidate
                     </Button>
                   </Menu.Item>
@@ -285,6 +286,8 @@ class App extends React.Component {
                   path="/new-candidate/experience"
                   component={CandidateExperience}
                 />
+                <Route 
+                exact path="/new-candidate/engine" component={CandidateEngine} />
                 <Route
                   exact
                   path="/new-candidate-test"
