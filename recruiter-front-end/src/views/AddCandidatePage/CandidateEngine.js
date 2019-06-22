@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Grid,
-  Form,
+  Dropdown,
   Input,
   Step,
   Progress,
@@ -33,9 +33,11 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const SkillsTags = () => <Input placeholder="Enter Skill" />;
-
-function App() {
+class CandidateEngine extends React.Component {
+    state={
+        engines:[]
+    }
+    render() {
   return (
     <Grid columns={12}>
       <Grid.Row centered>
@@ -69,6 +71,14 @@ function App() {
               </Step.Content>
             </Step>
           </Step.Group>
+        {(this.state.engines.length>0) ? <Dropdown
+    placeholder="Select Rules Engine"
+    fluid
+    selection
+    options={this.state.engines}
+  /> : <><p> You don't have any engines created yet. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
+ 
+          
           <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               style={primaryButton}
@@ -82,7 +92,7 @@ function App() {
         <Grid.Column width={1} />
       </Grid.Row>
     </Grid>
-  );
+  );}
 }
 
-export default App;
+export default CandidateEngine;
