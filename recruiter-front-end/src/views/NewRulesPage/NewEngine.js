@@ -61,6 +61,20 @@ class NewEngine extends React.Component {
                       </Step.Content>
                     </Step>
                     <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/contacts">
+                          <Step.Title>Contacts</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/education">
+                    <Step.Title>Education</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+                    <Step>
                       <Link style={linkStyles} to="/new-rule/skills">
                         <Step.Title>Skills</Step.Title>
                       </Link>
@@ -69,13 +83,6 @@ class NewEngine extends React.Component {
                       <Step.Content>
                         <Link style={linkStyles} to="/new-rule/experience">
                           <Step.Title>Experience</Step.Title>
-                        </Link>
-                      </Step.Content>
-                    </Step>
-                    <Step>
-                      <Step.Content>
-                        <Link style={linkStyles} to="/new-rule/contacts">
-                          <Step.Title>Contacts</Step.Title>
                         </Link>
                       </Step.Content>
                     </Step>
@@ -103,17 +110,13 @@ class NewEngine extends React.Component {
                     </Grid.Row>
                   </Grid>
                   <Grid.Column
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                    style={{ display: 'flex', justifyContent: 'flex-end' }}
                   >
-                    <Button style={primaryButton} as={Link} to="/new-rule/education">
-                      <Icon name="arrow left" size="small" />
-                      Back
-                    </Button>
                     <Button
                       style={primaryButton}
                       onClick={this.handleSubmit}
                       as={Link}
-                      to="/new-rule/experience"
+                      to="/new-rule/contacts"
                     >
                       Next <Icon name="arrow right" size="small" />
                     </Button>

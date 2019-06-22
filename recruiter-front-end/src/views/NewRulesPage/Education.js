@@ -192,6 +192,20 @@ class NewCandidate extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={10} />
             <Step.Group widths={6}>
+            <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/engine">
+                          <Step.Title>Create Rule Engine</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step active>
                 <Step.Content>
                   <Step.Title>Education</Step.Title>
@@ -213,13 +227,6 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
@@ -231,7 +238,7 @@ class NewCandidate extends React.Component {
                 <Grid.Column width={11}>
                   <Header as="h4">
                     What is the minimum the education required to send sending a
-                    candidate to the Sales Managers group?
+                    candidate?
                   </Header>
                 </Grid.Column>
                 <Grid.Column floated="right" width={5}>
@@ -271,7 +278,7 @@ class NewCandidate extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/new-contact-group/contacts"
+                to="/new-rule/contacts"
               >
                 <Icon name="arrow left" size="small" />
                 Back

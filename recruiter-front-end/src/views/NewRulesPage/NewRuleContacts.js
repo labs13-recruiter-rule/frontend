@@ -66,6 +66,20 @@ class ContactsClass extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={70} />
             <Step.Group widths={6}>
+            <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/engine">
+                          <Step.Title>Create Rule Engine</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step active>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
@@ -87,13 +101,7 @@ class ContactsClass extends React.Component {
                   </Link>
                 </Step.Content>
               </Step>
-              <Step active>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
+        
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
@@ -103,7 +111,7 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              When a candidate passes these rules, where should they be sent?
+              Choose a contact for the rule you'll create on the following pages. Choose a contact, and on then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
             </Header>
             <Form>
               <Form.Field>
@@ -130,36 +138,18 @@ class ContactsClass extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button style={primaryButton} as={Link} to="/new-rule/experience">
+              <Button style={primaryButton} as={Link} to="/new-rule/engine">
                 <Icon name="arrow left" size="small" />
                 Back
-              </Button>
-              <Modal
-                trigger={<Button style={primaryButton}>Next</Button>}
-                closeIcon
+              </Button> 
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/new-rule/education"
               >
-                <Header icon="archive" content="Create New Rule" />
-                <Modal.Content>
-                  <p>
-                    Would you like to create a new rule with the same fallback
-                    contact if a candidate does not pass all conditions for the
-                    rule?
-                  </p>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button
-                    color="red"
-                    onClick={this.handleSubmit}
-                    as={Link}
-                    to="/new-rule/confirmation"
-                  >
-                    <Icon name="x" /> No
-                  </Button>
-                  <Button color="green" as={Link} to="/new-rule/education">
-                    <Icon name="check" /> Yes
-                  </Button>
-                </Modal.Actions>
-              </Modal>
+                Next <Icon name="arrow right" size="small" />
+              </Button> 
             </Grid.Column>
           </Grid.Column>
           <Grid.Column width={1} />
