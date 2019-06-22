@@ -76,7 +76,7 @@ class CandidateEngine extends React.Component {
     fluid
     selection
     options={this.state.engines}
-  /> : <><p> You don't have any engines created yet. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
+  /> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
  
           
           <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
