@@ -11,7 +11,9 @@ import {
     Form,
   } from 'semantic-ui-react';
   import { Link } from 'react-router-dom';
+  import axios from 'axios';
 
+  const token = sessionStorage.getItem('token');
   const flexContainer = {
     display: 'flex',
     flexDirection: 'column',
@@ -45,6 +47,22 @@ import {
   };
 
 class NewEngine extends React.Component {
+
+    state={
+        engine_name: '',
+        engine_id: null
+    }
+
+    handleEngineName = (e) => {
+        this.setState({ engine_name: [e.target.value] });
+  }
+
+    handleSubmit = () => {
+        axios.post('https://recruiter-back-end.herokuapp.com/engine/', this.state.engine_name, {headers: {
+            token: `${token}`
+        }}).then(res => this.setState({engine_id: res}) ).catch(err => console.log(err))
+    }
+
     render() {
         return (
             <Grid columns={12} style={{ marginTop: '25px' }}>
@@ -99,8 +117,21 @@ class NewEngine extends React.Component {
                       <Grid.Column />
                       <Grid.Column width={14}>
                         <Header as="h4" textAlign="center">
-                          Create your first rule engine. 
-                        </Header>
+                          Create your first rule engine. What would you like to name your engine?
+                        </Header> 
+                        
+            <Form>
+              <Form.Field>
+                <Form.Input
+                  label="Engine Name"
+                  value={this.state.engine_name}
+                  onChange={this.handleEngineName}
+                  type="text"
+                  name="engine_name"
+                  placeholder="Example Engine"
+                />
+              </Form.Field> 
+              </Form>
                       </Grid.Column>
                       <Grid.Column />
                     </Grid.Row>
