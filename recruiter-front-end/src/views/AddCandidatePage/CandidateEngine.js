@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
 import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
 import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
+import Axios from 'axios';
 
 const flexContainer = {
   display: 'flex',
@@ -33,9 +34,18 @@ const primaryButton = {
   alignItems: 'center',
 };
 
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = {headers: {token: `${token}`}}
+
 class CandidateEngine extends React.Component {
     state={
-        engines:[]
+        engines:[],
+        engine: ''
+    }
+
+    componentDidMount() {
+      Axios.get('https://recruiter-back-end.herokuapp.com/engines', tokenHeader).then( res => this.setState({engines: res.data})).catch(error => console.log(error))
     }
     render() {
   return (
@@ -75,7 +85,7 @@ class CandidateEngine extends React.Component {
     placeholder="Select Rules Engine"
     fluid
     selection
-    options={this.state.engines}
+    options={this.state.engines.map(engine=> {return {'key': engine.id, 'text': engine.engine_name, 'value': engine.id }})}
   /> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
  
           
