@@ -31,7 +31,6 @@ import { parseRule, addRule } from './actions/ruleActions';
 import NewEngine from './components/Engines/NewEngine';
 import NewCandidate from './components/NewCandidate/NewCandidate';
 import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
-import NewEngine from './views/NewRulesPage/NewEngine';
 
 class App extends React.Component {
   state = {
