@@ -5,32 +5,43 @@ import {
   Step,
   Modal,
   Button,
+  Dropdown,
   Header,
   Icon,
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = {headers: {token: `${token}`}} 
 
 class ContactsClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactName: '',
-      contactEmail: '',
+      newContactName: '',
+      newContactEmail: '',
+      contacts: []
     };
   }
 
+  componentDidMount() {
+    axios.get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader).then(res => this.setState({contacts: res.data})).catch(error => console.log(error))
+  }
+
   handleName = e => {
-    this.setState({ contactName: e.target.value });
+    this.setState({ newContactName: e.target.value });
   };
 
   handleEmail = e => {
-    this.setState({ contactEmail: e.target.value });
+    this.setState({ newContactEmail: e.target.value });
   };
 
   handleSubmit = e => {
-    this.props.contactName(this.state.contactName);
-    this.props.contactEmail(this.state.contactEmail);
+    this.props.contactName(this.state.newContactName);
+    this.props.contactEmail(this.state.newContactEmail);
   };
 
   render() {
@@ -111,13 +122,17 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              Choose a contact for the rule you'll create on the following pages. Choose a contact, and on then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
+              Choose a contact for the rule you'll create on the following pages. Choose from existing contacts or add a new contact, and then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
             </Header>
+            <Dropdown  placeholder="Select Contacts"
+    fluid
+    selection
+    options={this.state.contacts.map(contact=> {return {'key': contact.id, 'text': contact.name + " | " + contact.email, 'value': contact.id }})} /> 
             <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
-                  value={this.state.contactName}
+                  value={this.state.newContactName}
                   onChange={this.handleName}
                   type="text"
                   name="name"
@@ -127,7 +142,7 @@ class ContactsClass extends React.Component {
               <Form.Field>
                 <Form.Input
                   label="Email"
-                  value={this.state.contactEmaill}
+                  value={this.state.newContactEmail}
                   onChange={this.handleEmail}
                   type="email"
                   name="email"
