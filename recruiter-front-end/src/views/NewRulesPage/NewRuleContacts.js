@@ -123,11 +123,13 @@ class ContactsClass extends React.Component {
             </Step.Group>
             <Header as="h3" style={center}>
               Choose a contact for the rule you'll create on the following pages. Choose from existing contacts or add a new contact, and then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
-            </Header>
+            </Header> 
+            {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
             <Dropdown  placeholder="Select Contacts"
     fluid
+    multiple
     selection
-    options={this.state.contacts.map(contact=> {return {'key': contact.id, 'text': contact.name + " | " + contact.email, 'value': contact.id }})} /> 
+    options={this.state.contacts.map(contact=> {return {'key': contact.id, 'text': contact.name + " | " + contact.email, 'value': contact.id }})} />  {/**need to actually make it record the ones that the user chose and add them to the rule request */}
             <Form>
               <Form.Field>
                 <Form.Input
