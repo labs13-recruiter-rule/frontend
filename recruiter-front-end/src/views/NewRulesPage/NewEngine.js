@@ -51,16 +51,15 @@ import {
 class NewEngine extends React.Component {
 
     state={
-        engine_name: '',
-        engine_id: null
+        engine_name: ''
     }
 
     handleEngineName = (e) => {
-        this.setState({ engine_name: [e.target.value] });
+        this.setState({ engine_name: e.target.value });
   }
 
     handleSubmit = () => {
-        console.log('engine_name', this.state.engine_name)
+        console.log('engine_name', this.state)
         console.log('token', token)
         axios.post('https://recruiter-back-end.herokuapp.com/engines', this.state, tokenHeader).then(res => console.log('res', res) ).catch(err => console.log(err))
     }
