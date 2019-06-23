@@ -43,6 +43,12 @@ class App extends React.Component {
       maxExp: '',
       contactEmail: '',
     },
+    candidate: {
+      candidateName: '',
+      candidateEmail: '',
+      candidateLinkedIn: '',
+      major: [],
+    },
   };
 
   componentDidMount() {
@@ -71,6 +77,7 @@ class App extends React.Component {
       case '':
         this.setState({
           rule: {
+            ...this.state.rule,
             education: [
               'High School / GED',
               'Some College',
@@ -85,6 +92,7 @@ class App extends React.Component {
       case 'High School / GED':
         this.setState({
           rule: {
+            ...this.state.rule,
             education: [
               'High School / GED',
               'Some College',
@@ -99,6 +107,7 @@ class App extends React.Component {
       case 'Some College':
         this.setState({
           rule: {
+            ...this.state.rule,
             education: [
               'Some College',
               "Associate's",
@@ -112,6 +121,7 @@ class App extends React.Component {
       case "Associate's":
         this.setState({
           rule: {
+            ...this.state.rule,
             education: [
               "Associate's",
               "Bachelor's Degree",
@@ -124,6 +134,7 @@ class App extends React.Component {
       case "Bachelor's Degree":
         this.setState({
           rule: {
+            ...this.state.rule,
             education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
           },
         });
@@ -131,6 +142,8 @@ class App extends React.Component {
       case "Master's Degree":
         this.setState({
           rule: {
+            ...this.state.rule,
+
             education: ["Master's Degree", 'PhD'],
           },
         });
@@ -138,6 +151,7 @@ class App extends React.Component {
       case 'PhD':
         this.setState({
           rule: {
+            ...this.state.rule,
             education: ['PhD'],
           },
         });
@@ -148,6 +162,7 @@ class App extends React.Component {
   majors = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         majors: e,
       },
     });
@@ -156,6 +171,7 @@ class App extends React.Component {
   skills = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         skills: e,
       },
     });
@@ -178,6 +194,7 @@ class App extends React.Component {
   minExp = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         minExp: e,
       },
     });
@@ -186,6 +203,7 @@ class App extends React.Component {
   maxExp = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         maxExp: e,
       },
     });
@@ -194,6 +212,7 @@ class App extends React.Component {
   contactName = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         contactName: e,
       },
     });
@@ -202,9 +221,60 @@ class App extends React.Component {
   contactEmail = e => {
     this.setState({
       rule: {
+        ...this.state.rule,
         contactEmail: e,
       },
     });
+  };
+
+  candidateName = e => {
+    this.setState({
+      candidate: {
+        ...this.state.candidate,
+        candidateName: e,
+      },
+    });
+  };
+
+  candidateEmail = e => {
+    this.setState({
+      candidate: {
+        ...this.state.candidate,
+        candidateEmail: e,
+      },
+    });
+  };
+
+  candidateLinkedIn = e => {
+    this.setState({
+      candidate: {
+        ...this.state.candidate,
+        candidateLinkedIn: e,
+      },
+    });
+  };
+
+  candidateEducation = e => {
+    this.setState({
+      candidate: {
+        ...this.state.candidate,
+        education: e,
+      },
+    });
+  };
+
+  candidateMajor = e => {
+    console.log('App.js candidateMajor', e);
+    this.setState({
+      candidate: {
+        ...this.state.candidate,
+        major: e,
+      },
+    });
+  };
+
+  appState = () => {
+    console.log('App.js this.state.candidate', this.state.candidate);
   };
 
   render() {
@@ -231,17 +301,18 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button as={Link} to="/new-candidate-test">
+                    {/* <Button as={Link} to="/new-candidate-test"> */}
+                    <Button as={Link} to="/new-candidate/contact-info">
                       Send Candidate
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
+                  {/* <button onClick={() => this.appState()}>
+                    App.js this.state
+                  </button> */}
                 </Menu>
-                {/* <button onClick={() => console.log(this.state)}>
-                  App.js this.state
-                </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
                 {/* <Route exact path="/db" component={Dashboard} /> */}
                 <Route
@@ -304,12 +375,24 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-candidate/contact-info"
-                  component={CandidateContactInfo}
+                  // component={CandidateContactInfo}
+                  component={props => (
+                    <CandidateContactInfo
+                      candidateName={this.candidateName}
+                      candidateEmail={this.candidateEmail}
+                      candidateLinkedIn={this.candidateLinkedIn}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path="/new-candidate/education"
-                  component={CandidateEducation}
+                  component={props => (
+                    <CandidateEducation
+                      candidateEducation={this.candidateEducation}
+                      candidateMajor={this.candidateMajor}
+                    />
+                  )}
                 />
                 <Route
                   exact

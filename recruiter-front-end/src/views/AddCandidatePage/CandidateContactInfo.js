@@ -9,19 +9,11 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
-import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
-import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
 
 const flexContainer = {
   display: 'flex',
   flexDirection: 'column',
 };
-
-const center = {
-  textAlign: 'center',
-};
-
 const primaryButton = {
   margin: '50px 0',
   height: '4rem',
@@ -35,66 +27,112 @@ const primaryButton = {
 
 const SkillsTags = () => <Input placeholder="Enter Skill" />;
 
-function App() {
-  return (
-    <Grid columns={12}>
-      <Grid.Row centered>
-        <Grid.Column width={1} />
-        <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={15} />
-          <Step.Group widths={6}>
-            <Step active link href="/new-candidate/contact-info">
-              <Step.Content>
-                <Step.Title>Contact Info</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/education">
-              <Step.Content>
-                <Step.Title>Education</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/skills">
-              <Step.Content>
-                <Step.Title>Experience</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/experience">
-              <Step.Content>
-                <Step.Title>Contacts</Step.Title>
-              </Step.Content>
-            </Step>
-          </Step.Group>
-          <Form className="Contact">
-            <Form.Field>
-              <label>Name</label>
-              <input type="text" placeholder="Name" />
-            </Form.Field>
-            <Form.Field>
-              <label>Email</label>
-              <input type="email" placeholder="Email" />
-            </Form.Field>
-            <Form.Field>
-              <label>LinkedIn</label>
-              <input
-                type="url"
-                placeholder="https://www.linkedin.com/john-lname-exampl3"
-              />
-            </Form.Field>
-          </Form>
-          <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              style={primaryButton}
-              as={Link}
-              to="/new-candidate/education"
-            >
-              Next <Icon name="arrow right" size="small" />
-            </Button>
-          </Grid.Row>
-        </Grid.Column>
-        <Grid.Column width={1} />
-      </Grid.Row>
-    </Grid>
-  );
+class CandidateContactInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      candidateName: '',
+      candidateEmail: '',
+      candidateLinkedIn: '',
+    };
+  }
+
+  handleName = e => {
+    this.setState({ candidateName: e.target.value });
+  };
+
+  handleEmail = e => {
+    this.setState({ candidateEmail: e.target.value });
+  };
+
+  handleLinkedIn = e => {
+    this.setState({ candidateLinkedIn: e.target.value });
+  };
+
+  handleSubmit = e => {
+    this.props.candidateName(this.state.candidateName);
+    this.props.candidateEmail(this.state.candidateEmail);
+    this.props.candidateLinkedIn(this.state.candidateLinkedIn);
+    console.log('CandidateContactInfo this.state', this.state);
+  };
+
+  render() {
+    return (
+      <Grid columns={12} style={{ marginTop: '25px' }}>
+        <Grid.Row centered>
+          <Grid.Column width={1} />
+          <Grid.Column width={10} centered style={flexContainer}>
+            <Progress percent={15} />
+            <Step.Group widths={6}>
+              <Step active link href="/new-candidate/contact-info">
+                <Step.Content>
+                  <Step.Title>Contact Info</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/education">
+                <Step.Content>
+                  <Step.Title>Education</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/skills">
+                <Step.Content>
+                  <Step.Title>Experience</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/experience">
+                <Step.Content>
+                  <Step.Title>Contacts</Step.Title>
+                </Step.Content>
+              </Step>
+            </Step.Group>
+            <Form>
+              <Form.Field>
+                <Form.Input
+                  label="Name"
+                  value={this.state.candidateName}
+                  onChange={this.handleName}
+                  type="text"
+                  name="name"
+                  placeholder="Jane Doe"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Email"
+                  value={this.state.candidateEmaill}
+                  onChange={this.handleEmail}
+                  type="email"
+                  name="email"
+                  placeholder="example@email.com"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="LinkedIn"
+                  value={this.state.candidateLinkedIn}
+                  onChange={this.handleLinkedIn}
+                  type="LinkedIn"
+                  name="LinkedIn"
+                  placeholder="linkedin.com/username"
+                />
+              </Form.Field>
+            </Form>
+            <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button
+                style={primaryButton}
+                as={Link}
+                onClick={this.handleSubmit}
+                to="/new-candidate/education"
+              >
+                Next <Icon name="arrow right" size="small" />
+              </Button>
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column width={1} />
+        </Grid.Row>
+      </Grid>
+    );
+  }
 }
 
-export default App;
+export default CandidateContactInfo;
