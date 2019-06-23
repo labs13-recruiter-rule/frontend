@@ -3,6 +3,7 @@ import {
   Grid,
   Dropdown,
   Input,
+  Header,
   Step,
   Progress,
   Button,
@@ -55,12 +56,12 @@ class CandidateEngine extends React.Component {
         <Grid.Column width={10} centered style={flexContainer}>
           <Progress percent={15} />
           <Step.Group widths={6}> 
-          <Step link href="/new-candidate/engine">
+          <Step active link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Select Engine</Step.Title>
                 </Step.Content>
               </Step>
-            <Step active link href="/new-candidate/contact-info">
+            <Step link href="/new-candidate/contact-info">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>
               </Step.Content>
@@ -81,12 +82,12 @@ class CandidateEngine extends React.Component {
               </Step.Content>
             </Step>
           </Step.Group>
-        {(this.state.engines.length>0) ? <Dropdown
-    placeholder="Select Rules Engine"
+        {(this.state.engines.length>0) ? <> <Header>Which rule engine do you want to run the candidate through?</Header> <Dropdown
+    placeholder="Select Rule Engine"
     fluid
     selection
     options={this.state.engines.map(engine=> {return {'key': engine.id, 'text': engine.engine_name, 'value': engine.id }})}
-  /> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
+  /> </> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
  
           
           <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
