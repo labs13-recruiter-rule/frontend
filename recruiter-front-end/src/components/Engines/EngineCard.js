@@ -13,7 +13,9 @@ class EngineCard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRules(this.props.engine.id);
+    this.props.getRules(this.props.engine.id).then(() => {
+      console.log('from cdm', this.props.rules);
+    });
   }
 
   deleteRule = (engineid, ruleid) => {
@@ -44,19 +46,24 @@ class EngineCard extends React.Component {
         </Card.Content>
 
         {/* </Card.Content> */}
-        {this.props.rules.length < 1 ? (
+        {this.props.rules.length < 0 ? (
           'No Rules'
         ) : (
           <Segment>
-            {this.props.rules.map((rule, i) => (
-              <EngineCardRules
-                rule={rule.rule}
-                key={rule.id}
-                engineRule={rule}
-                count={i + 1}
-                deleteRule={this.deleteRule}
-              />
-            ))}
+            {this.props.rules.map(
+              rule => (
+                console.log(' from rule map', rule),
+                (
+                  <EngineCardRules
+                    rule={rule.rule}
+                    key={rule.id}
+                    engineRule={rule}
+                    count={1 + 1}
+                    deleteRule={this.deleteRule}
+                  />
+                )
+              ),
+            )}
           </Segment>
         )}
       </Card>
