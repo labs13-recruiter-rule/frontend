@@ -14,6 +14,8 @@ import {
   import axios from 'axios';
 
   const token = sessionStorage.getItem('token');
+  const tokenHeader = {headers: {token: `${token}`}}
+
   const flexContainer = {
     display: 'flex',
     flexDirection: 'column',
@@ -58,9 +60,9 @@ class NewEngine extends React.Component {
   }
 
     handleSubmit = () => {
-        axios.post('https://recruiter-back-end.herokuapp.com/engine/', this.state.engine_name, {headers: {
-            token: `${token}`
-        }}).then(res => this.setState({engine_id: res}) ).catch(err => console.log(err))
+        console.log('engine_name', this.state.engine_name)
+        console.log('token', token)
+        axios.post('https://recruiter-back-end.herokuapp.com/engines', this.state, tokenHeader).then(res => console.log('res', res) ).catch(err => console.log(err))
     }
 
     render() {
