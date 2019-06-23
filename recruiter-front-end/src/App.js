@@ -31,6 +31,7 @@ import { parseRule, addRule } from './actions/ruleActions';
 import NewEngine from './components/Engines/NewEngine';
 import NewCandidate from './components/NewCandidate/NewCandidate';
 import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
+import NewEngineRuleView from './views/NewRulesPage/NewEngine';
 
 class App extends React.Component {
   state = {
@@ -283,7 +284,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/engine"
-                  component={props => <NewEngine />} />}
+                  component={props => <NewEngineRuleView />} 
                 />
                 <Route
                   exact

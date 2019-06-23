@@ -48,7 +48,7 @@ import {
     textAlign: 'center',
   };
 
-class NewEngine extends React.Component {
+class NewEngineRuleView extends React.Component {
 
     state={
         engine_name: ''
@@ -175,5 +175,5 @@ class NewEngine extends React.Component {
         }
       }
       
-      export default NewEngine;
+      export default NewEngineRuleView;
       

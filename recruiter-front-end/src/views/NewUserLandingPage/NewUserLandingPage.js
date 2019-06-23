@@ -48,8 +48,8 @@ function App() {
         {/* <Link style={linkStyles} to="/new-rule/education">
           <Button style={primaryButton}>Create Rule</Button>
         </Link> */}
-        <Link style={linkStyles} to="/engines/">
-          <Button style={primaryButton}>Create Engine</Button>
+        <Link style={linkStyles} to="/new-rule/engine">
+          <Button style={primaryButton}>Create New Rule Engine</Button>
         </Link>
       </Grid.Row>
     </Grid>
