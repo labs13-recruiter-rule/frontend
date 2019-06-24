@@ -38,7 +38,7 @@ function App() {
             Send your candidate to the correct contacts every time
           </Header>
           <Header as="h2" style={center}>
-            3 Simple Steps To Create Your First Rule
+            3 Simple Steps To Create Your First Rule Engine
           </Header>
         </Grid.Column>
         <Grid.Column width={1} />
