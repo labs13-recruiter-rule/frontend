@@ -25,7 +25,6 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const SkillsTags = () => <Input placeholder="Enter Skill" />;
 
 class CandidateContactInfo extends React.Component {
   constructor(props) {
@@ -63,7 +62,7 @@ class CandidateContactInfo extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={30} />
             <Step.Group widths={6}>
-              <Step link href="/new-candidate/engine">
+            <Step link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
@@ -80,14 +79,19 @@ class CandidateContactInfo extends React.Component {
               </Step>
               <Step link href="/new-candidate/skills">
                 <Step.Content>
-                  <Step.Title>Experience</Step.Title>
+                  <Step.Title>Skills</Step.Title>
                 </Step.Content>
               </Step>
               <Step link href="/new-candidate/experience">
                 <Step.Content>
-                  <Step.Title>Contacts</Step.Title>
+                  <Step.Title>Experience</Step.Title>
                 </Step.Content>
               </Step>
+            <Step link href="/new-candidate/confirm">
+              <Step.Content>
+                <Step.Title>Confirm</Step.Title>
+              </Step.Content>
+            </Step>
             </Step.Group>
             <Form>
               <Form.Field>

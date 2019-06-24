@@ -117,7 +117,7 @@ class CandidateConfirm extends React.Component {
                       <Step.Title>Select Engine</Step.Title>
                     </Step.Content>
                   </Step>
-                  <Step link href="/new-candidate/contact-info">
+                  <Step link href="/new-candidate/contact">
                     <Step.Content>
                       <Step.Title>Contact Info</Step.Title>
                     </Step.Content>
@@ -137,7 +137,7 @@ class CandidateConfirm extends React.Component {
                       <Step.Title>Experience</Step.Title>
                     </Step.Content>
                   </Step>
-                  <Step active link href="/new-candidate/confirm-candidate">
+                  <Step active link href="/new-candidate/confirm">
                     <Step.Content>
                       <Step.Title>Confirm</Step.Title>
                     </Step.Content>

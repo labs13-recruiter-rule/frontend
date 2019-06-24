@@ -268,7 +268,7 @@ class CandidateSkills extends React.Component {
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-            <Step link href="/new-candidate/contact-info">
+            <Step link href="/new-candidate/contact">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>
               </Step.Content>
@@ -297,7 +297,18 @@ class CandidateSkills extends React.Component {
           <Form className="Skills">
             <Form.Field>
               <label>Skill Tags</label>
-              <SkillsTags />
+              <Dropdown
+                    placeholder="Skills"
+                    search
+                    fluid
+                    multiple
+                    selection
+                    allowAdditions
+                    options={skills}
+                    onAddItem={this.handleAddition}
+                    onChange={this.handleChange}
+                    value={this.state.skills}
+                  />
             </Form.Field>
           </Form>
           <Grid.Row

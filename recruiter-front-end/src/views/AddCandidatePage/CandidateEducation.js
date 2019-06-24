@@ -190,26 +190,6 @@ class CandidateEducation extends React.Component {
                   <Step.Title>Experience</Step.Title>
                 </Step.Content>
               </Step>
-            <Step link href="/new-candidate/contact-info">
-              <Step.Content>
-                <Step.Title>Contact Info</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step active link href="/new-candidate/education">
-              <Step.Content>
-                <Step.Title>Education</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/skills">
-              <Step.Content>
-                <Step.Title>Skills</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/experience">
-              <Step.Content>
-                <Step.Title>Experience</Step.Title>
-              </Step.Content>
-            </Step>
             <Step link href="/new-candidate/confirm-candididate">
               <Step.Content>
                 <Step.Title>Confirm</Step.Title>
@@ -217,18 +197,6 @@ class CandidateEducation extends React.Component {
             </Step>
           </Step.Group>
           <Grid.Column>
-          <Form className="Education">
-            <Form.Field>
-              <label>Degree</label>
-              <DegreeDropdown />
-            </Form.Field>
-            <Form.Field>
-              <label>
-                Major
-              </label>
-              <MajorDropdown />
-            </Form.Field>
-          </Form>
           <Grid.Row
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >

@@ -58,32 +58,32 @@ class CandidateEngine extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={10} />
             <Step.Group widths={6}>
-              <Step active link href="/new-candidate/engine">
+            <Step active link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-            <Step link href="/new-candidate/contact-info">
-              <Step.Content>
-                <Step.Title>Contact Info</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/education">
-              <Step.Content>
-                <Step.Title>Education</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/skills">
-              <Step.Content>
-                <Step.Title>Skills</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/experience">
-              <Step.Content>
-                <Step.Title>Experience</Step.Title>
-              </Step.Content>
-            </Step>
-              <Step link href="/new-candidate/confirm-candidate">
+              <Step link href="/new-candidate/contact">
+                <Step.Content>
+                  <Step.Title>Contact</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/education">
+                <Step.Content>
+                  <Step.Title>Education</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/skills">
+                <Step.Content>
+                  <Step.Title>Skills</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/experience">
+                <Step.Content>
+                  <Step.Title>Experience</Step.Title>
+                </Step.Content>
+              </Step>
+            <Step link href="/new-candidate/confirm">
               <Step.Content>
                 <Step.Title>Confirm</Step.Title>
               </Step.Content>
