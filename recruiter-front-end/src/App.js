@@ -28,20 +28,22 @@ import { Menu, Button, Container } from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
+import NewEngine from './components/Engines/NewEngine';
 import NewCandidate from './components/NewCandidate/NewCandidate';
+import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
+import NewEngineRuleView from './views/NewRulesPage/NewEngine';
 
 class App extends React.Component {
   state = {
     user: {},
     user_id: null,
     rule: {
-      skills: ['React', 'Vue', 'Angular'],
-      education: ['Masters', 'PhD'],
-      majors: ['Computer Science'],
-      minExp: 2,
-      maxExp: 9,
-      contactEmail: 'omaro@me.com',
-      requireHeadshot: true,
+      skills: [],
+      education: [],
+      majors: [],
+      minExp: '',
+      maxExp: '',
+      contactEmail: '',
     },
   };
 
@@ -70,73 +72,95 @@ class App extends React.Component {
     switch (e) {
       case '':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'High School / GED':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'Some College':
         this.setState({
-          education: [
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Associate's":
         this.setState({
-          education: [
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            education: [
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Bachelor's Degree":
         this.setState({
-          education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          rule: {
+            education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          },
         });
         break;
       case "Master's Degree":
         this.setState({
-          education: ["Master's Degree", 'PhD'],
+          rule: {
+            education: ["Master's Degree", 'PhD'],
+          },
         });
         break;
       case 'PhD':
         this.setState({
-          education: ['PhD'],
+          rule: {
+            education: ['PhD'],
+          },
         });
         break;
     }
   };
 
   majors = e => {
-    this.setState({ majors: e });
+    this.setState({
+      rule: {
+        majors: e,
+      },
+    });
   };
 
   skills = e => {
-    this.setState({ skills: e });
+    this.setState({
+      rule: {
+        skills: e,
+      },
+    });
   };
 
   parseMyRule() {
@@ -144,7 +168,6 @@ class App extends React.Component {
       .parseRule(this.state.rule)
       .then(() => {
         console.log('from response of parsing', this.props.parsedRule);
-
         this.props.addRule(
           'https://recruiter-back-end.herokuapp.com/engines/3/rules/',
           this.props.parsedRule,
@@ -155,21 +178,35 @@ class App extends React.Component {
       });
   }
   minExp = e => {
-    this.setState({ minExp: e });
+    this.setState({
+      rule: {
+        minExp: e,
+      },
+    });
   };
 
   maxExp = e => {
-    this.setState({ maxExp: e });
+    this.setState({
+      rule: {
+        maxExp: e,
+      },
+    });
   };
 
   contactName = e => {
-    console.log('App.js contactName');
-    this.setState({ contactName: e });
+    this.setState({
+      rule: {
+        contactName: e,
+      },
+    });
   };
 
   contactEmail = e => {
-    console.log('App.js contactEmail');
-    this.setState({ contactEmail: e });
+    this.setState({
+      rule: {
+        contactEmail: e,
+      },
+    });
   };
 
   render() {
@@ -196,7 +233,7 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    <Button as={Link} to="/new-candidate-test">
+                    <Button as={Link} to="/new-candidate/engine">
                       Send Candidate
                     </Button>
                   </Menu.Item>
@@ -208,7 +245,7 @@ class App extends React.Component {
                   App.js this.state
                 </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
-                <Route exact path="/db" component={Dashboard} />
+                {/* <Route exact path="/db" component={Dashboard} /> */}
                 <Route
                   exact
                   path="/id"
@@ -217,6 +254,7 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
+                <Route exact path="/engines/new" component={NewEngine} />
                 <Route exact path="/engines" component={EngineDash} />
                 <Route
                   exact
@@ -243,7 +281,11 @@ class App extends React.Component {
                   path="/new-rule/skills"
                   component={props => <Skills skills={this.skills} />}
                 />
-
+                <Route
+                  exact
+                  path="/new-rule/engine"
+                  component={props => <NewEngineRuleView />} 
+                />
                 <Route
                   exact
                   path="/new-rule/experience"
@@ -285,6 +327,8 @@ class App extends React.Component {
                   path="/new-candidate/experience"
                   component={CandidateExperience}
                 />
+                <Route 
+                exact path="/new-candidate/engine" component={CandidateEngine} />
                 <Route
                   exact
                   path="/new-candidate-test"

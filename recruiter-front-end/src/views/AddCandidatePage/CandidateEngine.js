@@ -1,8 +1,9 @@
 import React from 'react';
 import {
   Grid,
-  Form,
+  Dropdown,
   Input,
+  Header,
   Step,
   Progress,
   Button,
@@ -12,6 +13,7 @@ import { Link } from 'react-router-dom';
 import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
 import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
 import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
+import Axios from 'axios';
 
 const flexContainer = {
   display: 'flex',
@@ -33,22 +35,33 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const SkillsTags = () => <Input placeholder="Enter Skill" />;
 
-function App() {
+const token = sessionStorage.getItem('token');
+const tokenHeader = {headers: {token: `${token}`}}
+
+class CandidateEngine extends React.Component {
+    state={
+        engines:[],
+        engine: ''
+    }
+
+    componentDidMount() {
+      Axios.get('https://recruiter-back-end.herokuapp.com/engines', tokenHeader).then( res => this.setState({engines: res.data})).catch(error => console.log(error))
+    }
+    render() {
   return (
     <Grid columns={12}>
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
           <Progress percent={15} />
-          <Step.Group widths={6}>
-          <Step link href="/new-candidate/engine">
+          <Step.Group widths={6}> 
+          <Step active link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Select Engine</Step.Title>
                 </Step.Content>
               </Step>
-            <Step active link href="/new-candidate/contact-info">
+            <Step link href="/new-candidate/contact-info">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>
               </Step.Content>
@@ -69,36 +82,19 @@ function App() {
               </Step.Content>
             </Step>
           </Step.Group>
-          <Form className="Contact">
-            <Form.Field>
-              <label>Name</label>
-              <input type="text" placeholder="Name" />
-            </Form.Field>
-            <Form.Field>
-              <label>Email</label>
-              <input type="email" placeholder="Email" />
-            </Form.Field>
-            <Form.Field>
-              <label>LinkedIn</label>
-              <input
-                type="url"
-                placeholder="https://www.linkedin.com/john-lname-exampl3"
-              />
-            </Form.Field>
-          </Form>
-          <Grid.Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button
-              style={primaryButton}
-              as={Link}
-              to="/new-candidate/engine"
-            >
-              <Icon name="arrow left" size="small" />
-              Back
-            </Button>
+        {(this.state.engines.length>0) ? <> <Header>Which rule engine do you want to run the candidate through?</Header> <Dropdown
+    placeholder="Select Rule Engine"
+    fluid
+    selection
+    options={this.state.engines.map(engine=> {return {'key': engine.id, 'text': engine.engine_name, 'value': engine.id }})}
+  /> </> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
+ 
+          
+          <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               style={primaryButton}
               as={Link}
-              to="/new-candidate/education"
+              to="/new-candidate/contact-info"
             >
               Next <Icon name="arrow right" size="small" />
             </Button>
@@ -107,7 +103,7 @@ function App() {
         <Grid.Column width={1} />
       </Grid.Row>
     </Grid>
-  );
+  );}
 }
 
-export default App;
+export default CandidateEngine;

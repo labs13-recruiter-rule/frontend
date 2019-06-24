@@ -5,32 +5,43 @@ import {
   Step,
   Modal,
   Button,
+  Dropdown,
   Header,
   Icon,
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = {headers: {token: `${token}`}} 
 
 class ContactsClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contactName: '',
-      contactEmail: '',
+      newContactName: '',
+      newContactEmail: '',
+      contacts: []
     };
   }
 
+  componentDidMount() {
+    axios.get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader).then(res => this.setState({contacts: res.data})).catch(error => console.log(error))
+  }
+
   handleName = e => {
-    this.setState({ contactName: e.target.value });
+    this.setState({ newContactName: e.target.value });
   };
 
   handleEmail = e => {
-    this.setState({ contactEmail: e.target.value });
+    this.setState({ newContactEmail: e.target.value });
   };
 
   handleSubmit = e => {
-    this.props.contactName(this.state.contactName);
-    this.props.contactEmail(this.state.contactEmail);
+    this.props.contactName(this.state.newContactName);
+    this.props.contactEmail(this.state.newContactEmail);
   };
 
   render() {
@@ -66,6 +77,20 @@ class ContactsClass extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={70} />
             <Step.Group widths={6}>
+            <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/engine">
+                          <Step.Title>Create Rule Engine</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step active>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
@@ -87,13 +112,7 @@ class ContactsClass extends React.Component {
                   </Link>
                 </Step.Content>
               </Step>
-              <Step active>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-contact-group/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
+        
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
@@ -103,13 +122,19 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              When a candidate passes these rules, where should they be sent?
-            </Header>
+              Choose a contact for the rule you'll create on the following pages. Choose from existing contacts or add a new contact, and then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
+            </Header> 
+            {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
+            <Dropdown  placeholder="Select Contacts"
+    fluid
+    multiple
+    selection
+    options={this.state.contacts.map(contact=> {return {'key': contact.id, 'text': contact.name + " | " + contact.email, 'value': contact.id }})} />  {/**need to actually make it record the ones that the user chose and add them to the rule request */}
             <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
-                  value={this.state.contactName}
+                  value={this.state.newContactName}
                   onChange={this.handleName}
                   type="text"
                   name="name"
@@ -119,7 +144,7 @@ class ContactsClass extends React.Component {
               <Form.Field>
                 <Form.Input
                   label="Email"
-                  value={this.state.contactEmaill}
+                  value={this.state.newContactEmail}
                   onChange={this.handleEmail}
                   type="email"
                   name="email"
@@ -130,36 +155,18 @@ class ContactsClass extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button style={primaryButton} as={Link} to="/new-rule/experience">
+              <Button style={primaryButton} as={Link} to="/new-rule/engine">
                 <Icon name="arrow left" size="small" />
                 Back
-              </Button>
-              <Modal
-                trigger={<Button style={primaryButton}>Next</Button>}
-                closeIcon
+              </Button> 
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/new-rule/education"
               >
-                <Header icon="archive" content="Create New Rule" />
-                <Modal.Content>
-                  <p>
-                    Would you like to create a new rule with the same fallback
-                    contact if a candidate does not pass all conditions for the
-                    rule?
-                  </p>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button
-                    color="red"
-                    onClick={this.handleSubmit}
-                    as={Link}
-                    to="/new-rule/confirmation"
-                  >
-                    <Icon name="x" /> No
-                  </Button>
-                  <Button color="green" as={Link} to="/new-rule/education">
-                    <Icon name="check" /> Yes
-                  </Button>
-                </Modal.Actions>
-              </Modal>
+                Next <Icon name="arrow right" size="small" />
+              </Button> 
             </Grid.Column>
           </Grid.Column>
           <Grid.Column width={1} />

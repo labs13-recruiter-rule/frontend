@@ -135,7 +135,22 @@ class NewCandidate extends React.Component {
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={50} />
-            <Step.Group widths={6}>
+            <Step.Group widths={6}> 
+            
+            <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/engine">
+                          <Step.Title>Create Rule Engine</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
@@ -153,13 +168,6 @@ class NewCandidate extends React.Component {
               <Step active>
                 <Step.Content>
                   <Step.Title>Experience</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
-                  </Link>
                 </Step.Content>
               </Step>
               <Step>
@@ -216,14 +224,32 @@ class NewCandidate extends React.Component {
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
-              <Button
-                style={primaryButton}
-                onClick={this.handleSubmit}
-                as={Link}
-                to="/new-rule/contacts"
+              <Modal
+                trigger={<Button style={primaryButton}>Next</Button>}
+                closeIcon
               >
-                Next <Icon name="arrow right" size="small" />
-              </Button>
+                <Header icon="archive" content="Create New Rule" />
+                <Modal.Content>
+                  <p>
+                    Would you like to create a new rule with the same fallback
+                    contact if a candidate does not pass all conditions for the
+                    rule?
+                  </p>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button
+                    color="red"
+                    onClick={this.handleSubmit}
+                    as={Link}
+                    to="/new-rule/confirmation"
+                  >
+                    <Icon name="x" /> No
+                  </Button>
+                  <Button color="green" as={Link} to="/new-rule/contacts">
+                    <Icon name="check" /> Yes
+                  </Button>
+                </Modal.Actions>
+              </Modal>
             </Grid.Column>
             <Modal
               trigger={

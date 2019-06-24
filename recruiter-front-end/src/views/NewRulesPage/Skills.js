@@ -292,6 +292,21 @@ class NewCandidate extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={30} />
             <Step.Group widths={6}>
+              
+            <Step>
+                      <Step.Content>
+                        <Link style={linkStyles} to="/new-rule/engine">
+                          <Step.Title>Create Rule Engine</Step.Title>
+                        </Link>
+                      </Step.Content>
+                    </Step>
+                    <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/contacts">
+                    <Step.Title>Contacts</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/education">
@@ -308,13 +323,6 @@ class NewCandidate extends React.Component {
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/experience">
                     <Step.Title>Experience</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
