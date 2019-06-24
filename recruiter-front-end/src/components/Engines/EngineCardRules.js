@@ -11,6 +11,21 @@ import { connect } from 'react-redux';
 import { getRules, deleteRule } from '../../actions/ruleActions';
 
 class EngineCardRules extends React.Component {
+  state = {
+    rulesToUse: [],
+  };
+  componentDidMount() {
+    this.props
+      .getRules(this.props.engineRule)
+      .then(() => {
+        this.setState({ rulesToUse: this.props.rules });
+        // console.log('CDM LAST', res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <>
@@ -41,8 +56,19 @@ class EngineCardRules extends React.Component {
             {/* </Segment.Group>
           <Segment.Group> */}
 
-            <h3>{this.props.rule.event.type}</h3>
-            <h3>{this.props.rule.event.params.contact}</h3>
+            {this.state.rulesToUse && this.state.rulesToUse.length > 0 ? (
+              this.state.rulesToUse.map(ruleAgain => (
+                <div>
+                  <h1>{ruleAgain.id}</h1>
+                </div>
+              ))
+            ) : (
+              <div>
+                <h1>no rules</h1>
+              </div>
+            )}
+
+            {/* <h3>{this.props.rule.event.params.contact}</h3> */}
           </Card.Content>
         </Segment>
       </>

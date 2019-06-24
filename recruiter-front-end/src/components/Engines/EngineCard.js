@@ -12,11 +12,11 @@ class EngineCard extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getRules(this.props.engine.id).then(() => {
-      console.log('from cdm', this.props.rules);
-    });
-  }
+  // componentDidMount() {
+  //   this.props.getRules(this.props.engine.id).then(() => {
+  //     console.log('from cdm', this.props.rules);
+  //   });
+  // }
 
   deleteRule = (engineid, ruleid) => {
     console.log(engineid, ruleid, 'e, r');
@@ -32,40 +32,16 @@ class EngineCard extends React.Component {
     return (
       <Card centered color="blue">
         {/* <Card.Content> */}
-
         <Card.Content>
           <Header as="h2" content={this.props.engine.engine_name} />
-          <Header.Subheader as="h2">
-            {this.props.rules && this.props.rules.length === 1
-              ? `${this.props.rules.length} Rule`
-              : //   : `${this.props.rules.length} Rules`}
-              this.props.rules && this.props.rules.length > 1
-              ? `${this.props.rules.length} Rules`
-              : `No Rules Added`}
-          </Header.Subheader>
         </Card.Content>
-
         {/* </Card.Content> */}
-        {this.props.rules.length < 0 ? (
-          'No Rules'
-        ) : (
-          <Segment>
-            {this.props.rules.map(
-              rule => (
-                console.log(' from rule map', rule),
-                (
-                  <EngineCardRules
-                    rule={rule.rule}
-                    key={rule.id}
-                    engineRule={rule}
-                    count={1 + 1}
-                    deleteRule={this.deleteRule}
-                  />
-                )
-              ),
-            )}
-          </Segment>
-        )}
+        <Segment>
+          <EngineCardRules
+            engineRule={this.props.engine.id}
+            deleteRule={this.deleteRule}
+          />
+        </Segment>
       </Card>
     );
   }
