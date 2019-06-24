@@ -459,8 +459,8 @@ class App extends React.Component {
                   path="/new-candidate-test"
                   component={NewCandidate}
                 />
-                <Route exact path="/new-candidate/confirm-candidate" component={CandidateConfirm} />
-                <Route exact path="/new-candidate/candidate-sent" component={SendConfirm} />
+                <Route exact path="/new-candidate/confirm" component={CandidateConfirm} />
+                <Route exact path="/new-candidate/sent" component={SendConfirm} />
               </>,
             ]
           ) : (
