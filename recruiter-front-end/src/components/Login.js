@@ -4,7 +4,12 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Button, Form, Container, Header } from 'semantic-ui-react';
 import axios from 'axios';
+import MarketingPage from './MarketingPage';
 // import './'
+
+const center = {
+  textAlign: 'center',
+}; 
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -94,7 +99,8 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Header size="huge">Recruiter Rule</Header>
+        <MarketingPage />
+        <Header as="h1" style={center}>Sign up for Recruiter Rule Engine Today</Header>
         <Form>
           <Form.Field>
             <label htmlFor="email">Email</label>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Button, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import MarketingCards from '../../components/Cards/MarketingCards';
+import MarketingCards from '../components/Cards/MarketingCards';
 
 const flexContainer = {
   display: 'flex',
@@ -25,17 +25,17 @@ const linkStyles = {
   textAlign: 'center',
 };
 
-function App() {
+function MarketingPage() {
   return (
     <Grid columns={12} style={{ marginTop: '25px' }}>
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered="true" style={flexContainer}>
           <Header as="h1" style={center}>
-            Recruiter Rules
+            Recruiter Rule Engine
           </Header>
           <Header as="h3" style={center}>
-            Send your candidate to the correct contacts every time
+            Send your candidates to the correct contacts every time
           </Header>
           <Header as="h2" style={center}>
             3 Simple Steps To Create Your First Rule Engine
@@ -45,15 +45,9 @@ function App() {
       </Grid.Row>
       <Grid.Row centered>
         <MarketingCards />
-        {/* <Link style={linkStyles} to="/new-rule/education">
-          <Button style={primaryButton}>Create Rule</Button>
-        </Link> */}
-        <Link style={linkStyles} to="/new-rule/engine">
-          <Button style={primaryButton}>Create New Rule Engine</Button>
-        </Link>
       </Grid.Row>
     </Grid>
   );
 }
 
-export default App;
+export default MarketingPage;
