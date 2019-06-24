@@ -7,6 +7,10 @@ import axios from 'axios';
 import MarketingPage from './MarketingPage';
 // import './'
 
+const center = {
+  textAlign: 'center',
+}; 
+
 const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
@@ -96,6 +100,7 @@ class Login extends React.Component {
     return (
       <Container>
         <MarketingPage />
+        <Header as="h1" style={center}>Sign up for Recruiter Rule Engine Today</Header>
         <Form>
           <Form.Field>
             <label htmlFor="email">Email</label>

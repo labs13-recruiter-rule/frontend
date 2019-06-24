@@ -32,7 +32,7 @@ function MarketingPage() {
         <Grid.Column width={1} />
         <Grid.Column width={10} centered="true" style={flexContainer}>
           <Header as="h1" style={center}>
-            Recruiter Rules
+            Recruiter Rule Engine
           </Header>
           <Header as="h3" style={center}>
             Send your candidates to the correct contacts every time
