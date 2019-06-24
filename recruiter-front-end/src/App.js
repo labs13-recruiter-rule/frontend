@@ -30,6 +30,8 @@ import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
 import NewEngine from './components/Engines/NewEngine';
 import NewCandidate from './components/NewCandidate/NewCandidate';
+import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
+import NewEngineRuleView from './views/NewRulesPage/NewEngine';
 
 class App extends React.Component {
   state = {
@@ -301,8 +303,8 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    {/* <Button as={Link} to="/new-candidate-test"> */}
-                    <Button as={Link} to="/new-candidate/contact-info">
+                    {/* <Button as={Link} to="/new-candidate/contact-info"> */}
+                    <Button as={Link} to="/new-candidate/engine">
                       Send Candidate
                     </Button>
                   </Menu.Item>
@@ -350,7 +352,11 @@ class App extends React.Component {
                   path="/new-rule/skills"
                   component={props => <Skills skills={this.skills} />}
                 />
-
+                <Route
+                  exact
+                  path="/new-rule/engine"
+                  component={props => <NewEngineRuleView />}
+                />
                 <Route
                   exact
                   path="/new-rule/experience"
@@ -403,6 +409,11 @@ class App extends React.Component {
                   exact
                   path="/new-candidate/experience"
                   component={CandidateExperience}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/engine"
+                  component={CandidateEngine}
                 />
                 <Route
                   exact

@@ -64,6 +64,11 @@ class CandidateContactInfo extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={15} />
             <Step.Group widths={6}>
+              <Step active link href="/new-candidate/engineo">
+                <Step.Content>
+                  <Step.Title>Engine</Step.Title>
+                </Step.Content>
+              </Step>
               <Step active link href="/new-candidate/contact-info">
                 <Step.Content>
                   <Step.Title>Contact Info</Step.Title>

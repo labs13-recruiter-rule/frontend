@@ -1,18 +1,19 @@
 import React from 'react';
 import {
   Grid,
-  Button,
-  Icon,
-  Form,
+  Dropdown,
   Input,
+  Header,
   Step,
   Progress,
+  Button,
+  Icon,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
 import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
 import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
 import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
+import Axios from 'axios';
 
 const flexContainer = {
   display: 'flex',
@@ -34,17 +35,28 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const SkillsTags = () => <Input placeholder="Enter Skill" />;
 
-function App() {
+const token = sessionStorage.getItem('token');
+const tokenHeader = {headers: {token: `${token}`}}
+
+class CandidateEngine extends React.Component {
+    state={
+        engines:[],
+        engine: ''
+    }
+
+    componentDidMount() {
+      Axios.get('https://recruiter-back-end.herokuapp.com/engines', tokenHeader).then( res => this.setState({engines: res.data})).catch(error => console.log(error))
+    }
+    render() {
   return (
     <Grid columns={12}>
       <Grid.Row centered>
         <Grid.Column width={1} />
         <Grid.Column width={10} centered style={flexContainer}>
-          <Progress percent={65} />
-          <Step.Group widths={6}>
-          <Step link href="/new-candidate/engine">
+          <Progress percent={15} />
+          <Step.Group widths={6}> 
+          <Step active link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Select Engine</Step.Title>
                 </Step.Content>
@@ -59,38 +71,30 @@ function App() {
                 <Step.Title>Education</Step.Title>
               </Step.Content>
             </Step>
-            <Step active link href="/new-candidate/skills">
-              <Step.Content>
-                <Step.Title>Skills</Step.Title>
-              </Step.Content>
-            </Step>
-            <Step link href="/new-candidate/experience">
+            <Step link href="/new-candidate/skills">
               <Step.Content>
                 <Step.Title>Experience</Step.Title>
               </Step.Content>
             </Step>
+            <Step link href="/new-candidate/experience">
+              <Step.Content>
+                <Step.Title>Contacts</Step.Title>
+              </Step.Content>
+            </Step>
           </Step.Group>
-          <Form className="Skills">
-            <Form.Field>
-              <label>Skill Tags</label>
-              <SkillsTags />
-            </Form.Field>
-          </Form>
-          <Grid.Row
-            style={{ display: 'flex', justifyContent: 'space-between' }}
-          >
+        {(this.state.engines.length>0) ? <> <Header>Which rule engine do you want to run the candidate through?</Header> <Dropdown
+    placeholder="Select Rule Engine"
+    fluid
+    selection
+    options={this.state.engines.map(engine=> {return {'key': engine.id, 'text': engine.engine_name, 'value': engine.id }})}
+  /> </> : <><p> You don't have any engines created yet. Before you can send a candidate using Recruiter Rule Engine, you need to create an engine and add some rules. </p> <Button style={primaryButton} as={Link} to="">Create Engine</Button> </> }
+ 
+          
+          <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               style={primaryButton}
               as={Link}
-              to="/new-candidate/education"
-            >
-              <Icon name="arrow left" size="small" />
-              Back
-            </Button>
-            <Button
-              style={primaryButton}
-              as={Link}
-              to="/new-candidate/experience"
+              to="/new-candidate/contact-info"
             >
               Next <Icon name="arrow right" size="small" />
             </Button>
@@ -99,7 +103,7 @@ function App() {
         <Grid.Column width={1} />
       </Grid.Row>
     </Grid>
-  );
+  );}
 }
 
-export default App;
+export default CandidateEngine;
