@@ -83,7 +83,6 @@ class App extends React.Component {
     switch (e) {
       case '':
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: [
@@ -95,21 +94,10 @@ class App extends React.Component {
               'PhD',
             ],
           },
-=======
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case 'High School / GED':
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: [
@@ -121,21 +109,10 @@ class App extends React.Component {
               'PhD',
             ],
           },
-=======
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case 'Some College':
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: [
@@ -146,20 +123,10 @@ class App extends React.Component {
               'PhD',
             ],
           },
-=======
-          education: [
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case "Associate's":
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: [
@@ -169,58 +136,37 @@ class App extends React.Component {
               'PhD',
             ],
           },
-=======
-          education: [
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case "Bachelor's Degree":
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
           },
-=======
-          education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case "Master's Degree":
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
 
             education: ["Master's Degree", 'PhD'],
           },
-=======
-          education: ["Master's Degree", 'PhD'],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
       case 'PhD':
         this.setState({
-<<<<<<< HEAD
           rule: {
             ...this.state.rule,
             education: ['PhD'],
           },
-=======
-          education: ['PhD'],
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
         });
         break;
     }
   };
 
   majors = e => {
-<<<<<<< HEAD
     this.setState({
       ...this.state,
       rule: {
@@ -237,13 +183,6 @@ class App extends React.Component {
         skills: e,
       },
     });
-=======
-    this.setState({ majors: e });
-  };
-
-  skills = e => {
-    this.setState({ skills: e });
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
   };
 
   parseMyRule() {
@@ -262,7 +201,6 @@ class App extends React.Component {
       });
   }
   minExp = e => {
-<<<<<<< HEAD
     this.setState({
       rule: {
         ...this.state.rule,
@@ -296,23 +234,6 @@ class App extends React.Component {
         contactEmail: e,
       },
     });
-=======
-    this.setState({ minExp: e });
-  };
-
-  maxExp = e => {
-    this.setState({ maxExp: e });
-  };
-
-  contactName = e => {
-    console.log('App.js contactName');
-    this.setState({ contactName: e });
-  };
-
-  contactEmail = e => {
-    console.log('App.js contactEmail');
-    this.setState({ contactEmail: e });
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
   };
 
   candidateName = e => {
@@ -471,11 +392,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/engine"
-<<<<<<< HEAD
-                  component={props => <NewEngineRuleView />}
-=======
-                  component={props => <NewEngine />} />}
->>>>>>> 800470adf89c304eb0472c9dde62b958519dc913
+                  component={props => <NewEngine />}
                 />
                 <Route
                   exact
