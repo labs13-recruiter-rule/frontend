@@ -22,14 +22,17 @@ class ContactsClass extends React.Component {
     this.state = {
       newContactName: '',
       newContactEmail: '',
-      contacts: [],
+      userContacts: [],
+      selectedContacts: [],
     };
   }
 
   componentDidMount() {
     axios
       .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-      .then(res => this.setState({ contacts: res.data }))
+      .then(res => {
+        this.setState({ userContacts: res.data });
+      })
       .catch(error => console.log(error));
   }
 
@@ -41,9 +44,16 @@ class ContactsClass extends React.Component {
     this.setState({ newContactEmail: e.target.value });
   };
 
+  handleChange = (e, { value }) => {
+    console.log('NewRuleContacts handleChange', value);
+    this.setState({ selectedContacts: value });
+  };
+
   handleSubmit = e => {
+    console.log('NewRuleContacts handleSubmit', this.state);
     this.props.contactName(this.state.newContactName);
     this.props.contactEmail(this.state.newContactEmail);
+    this.props.contactContacts(this.state.selectedContacts);
   };
 
   render() {
@@ -77,7 +87,7 @@ class ContactsClass extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={70} />
+            <Progress percent={25} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
@@ -135,11 +145,13 @@ class ContactsClass extends React.Component {
               fluid
               multiple
               selection
-              options={this.state.contacts.map(contact => {
+              onChange={this.handleChange}
+              value={this.state.contacts}
+              options={this.state.userContacts.map(contact => {
                 return {
                   key: contact.id,
                   text: contact.name + ' | ' + contact.email,
-                  value: contact.id,
+                  value: contact.email,
                 };
               })}
             />{' '}

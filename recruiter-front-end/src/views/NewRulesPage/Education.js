@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Grid,
   Button,
-  Modal,
   Header,
   Icon,
   Progress,
@@ -11,7 +10,6 @@ import {
   Divider,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 
@@ -39,19 +37,6 @@ class NewCandidate extends React.Component {
   handleSubmit = e => {
     this.props.majors(this.state.majors);
     this.props.minEducation(this.state.degree);
-    // Axios.post(
-    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
-    //   this.state,
-    //   {
-    //     headers: {
-    //       token: `${token}`,
-    //     },
-    //   },
-    // )
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -69,13 +54,6 @@ class NewCandidate extends React.Component {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-    };
-
-    const secondaryButton = {
-      margin: '10px auto',
-      height: '3rem',
-      width: '350px',
-      fontSize: '1rem',
     };
 
     const linkStyles = {
@@ -288,25 +266,6 @@ class NewCandidate extends React.Component {
                 Next <Icon name="arrow right" size="small" />
               </Button>
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
-              <Modal.Content>
-                <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
-                </p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>

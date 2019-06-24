@@ -3,15 +3,13 @@ import {
   Grid,
   Progress,
   Step,
-  Modal,
   Button,
   Header,
   Icon,
-  Dropdown,
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -31,43 +29,29 @@ const primaryButton = {
   justifyContent: 'center',
   alignItems: 'center',
 };
-
-const secondaryButton = {
-  margin: '10px auto',
-  height: '3rem',
-  width: '350px',
-  fontSize: '1rem',
-};
-
 const linkStyles = {
   textAlign: 'center',
   color: 'rgba(0,0,0,.87)',
 };
 
-const center = {
-  textAlign: 'center',
-};
-
 class NewEngineRuleView extends React.Component {
   state = {
-    engine_name: '',
+    engines: [],
+    engine: '',
   };
 
+  componentDidMount() {
+    Axios.get('https://recruiter-back-end.herokuapp.com/engines', tokenHeader)
+      .then(res => this.setState({ engines: res.data }))
+      .catch(error => console.log(error));
+  }
+
   handleEngineName = e => {
-    this.setState({ engine_name: e.target.value });
+    this.setState({ engine: e.target.value });
   };
 
   handleSubmit = () => {
-    console.log('engine_name', this.state);
-    console.log('token', token);
-    axios
-      .post(
-        'https://recruiter-back-end.herokuapp.com/engines',
-        this.state,
-        tokenHeader,
-      )
-      .then(res => console.log('res', res))
-      .catch(err => console.log(err));
+    this.props.candidateEngine(this.state.engine);
   };
 
   render() {
@@ -76,7 +60,7 @@ class NewEngineRuleView extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={30} />
+            <Progress percent={10} />
             <Step.Group widths={6}>
               <Step active>
                 <Step.Content>
@@ -159,19 +143,6 @@ class NewEngineRuleView extends React.Component {
                 Next <Icon name="arrow right" size="small" />
               </Button>
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules Engine" />
-              <Modal.Content>
-                <p></p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>
