@@ -69,6 +69,11 @@ function App() {
                 <Step.Title>Experience</Step.Title>
               </Step.Content>
             </Step>
+            <Step link href="/new-candidate/confirm-candididate">
+              <Step.Content>
+                <Step.Title>Confirm</Step.Title>
+              </Step.Content>
+            </Step>
           </Step.Group>
           <Form className="Education">
             <Form.Field>
