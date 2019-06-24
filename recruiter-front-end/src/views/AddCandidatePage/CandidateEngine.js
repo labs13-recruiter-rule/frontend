@@ -75,12 +75,17 @@ class CandidateEngine extends React.Component {
               </Step>
               <Step link href="/new-candidate/skills">
                 <Step.Content>
-                  <Step.Title>Experience</Step.Title>
+                  <Step.Title>Skills</Step.Title>
                 </Step.Content>
               </Step>
               <Step link href="/new-candidate/experience">
                 <Step.Content>
-                  <Step.Title>Contacts</Step.Title>
+                  <Step.Title>Experience</Step.Title>
+                </Step.Content>
+              </Step>
+              <Step link href="/new-candidate/confirm">
+                <Step.Content>
+                  <Step.Title>Confirm</Step.Title>
                 </Step.Content>
               </Step>
             </Step.Group>

@@ -31,7 +31,8 @@ import { parseRule, addRule } from './actions/ruleActions';
 import NewCandidate from './components/NewCandidate/NewCandidate';
 import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
 import NewEngine from './views/NewRulesPage/NewEngine';
-
+import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
+import CandidateSend from './views/AddCandidatePage/CandidateSend';
 class App extends React.Component {
   state = {
     user: {},
@@ -453,11 +454,8 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route
-                  exact
-                  path="/new-candidate-test"
-                  component={NewCandidate}
-                />
+                <Route exact path="new-candidate/confirm" component={CandidateConfirm} />
+                <Route exact path="new-candidate/send" component={CandidateSend} />
               </>,
             ]
           ) : (

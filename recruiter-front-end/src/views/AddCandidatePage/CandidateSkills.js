@@ -289,6 +289,11 @@ class CandidateSkills extends React.Component {
                   <Step.Title>Experience</Step.Title>
                 </Step.Content>
               </Step>
+              <Step link href="/new-candidate/confirm">
+                <Step.Content>
+                  <Step.Title>Confirm</Step.Title>
+                </Step.Content>
+              </Step>
             </Step.Group>
             <Form className="Skills">
               <Grid.Row>
