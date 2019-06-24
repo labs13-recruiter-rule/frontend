@@ -76,7 +76,19 @@ class App extends React.Component {
   }
 
   candidateEngine = e => {
+    console.log('App.js candidateEngine', e);
     this.setState({ ...this.state, engine: e });
+  };
+
+  contactContacts = e => {
+    console.log('App.js contactContacts', e);
+    this.setState({
+      ...this.state,
+      rule: {
+        ...this.state.rule,
+        contactEmail: e,
+      },
+    });
   };
 
   minEducation = e => {
@@ -236,6 +248,14 @@ class App extends React.Component {
     });
   };
 
+  candidateEngine = e => {
+    console.log('App.js candidateEngine', e);
+    this.setState(prevState => ({
+      ...prevState,
+      engine: e,
+    }));
+  };
+
   candidateName = e => {
     this.setState(prevState => ({
       ...prevState,
@@ -366,11 +386,19 @@ class App extends React.Component {
                 />
                 <Route
                   exact
+                  path="/new-rule/engine"
+                  component={props => (
+                    <NewEngine candidateEngine={this.candidateEngine} />
+                  )}
+                />
+                <Route
+                  exact
                   path="/new-rule/contacts"
                   component={props => (
                     <NewRuleContacts
                       contactName={this.contactName}
                       contactEmail={this.contactEmail}
+                      contactContacts={this.contactContacts}
                     />
                   )}
                 />
@@ -388,11 +416,6 @@ class App extends React.Component {
                   exact
                   path="/new-rule/skills"
                   component={props => <Skills skills={this.skills} />}
-                />
-                <Route
-                  exact
-                  path="/new-rule/engine"
-                  component={props => <NewEngine />}
                 />
                 <Route
                   exact
@@ -446,7 +469,6 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-candidate/experience"
-                  //   component={CandidateExperience}
                   component={props => (
                     <CandidateExperience
                       candidateExperience={this.candidateExperience}
