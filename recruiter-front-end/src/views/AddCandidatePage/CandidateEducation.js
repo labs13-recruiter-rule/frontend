@@ -27,39 +27,6 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const DegreeSelection = [
-  {
-    key: '1',
-    text: 'High School Diploma / GED or equivalent',
-    value: 'High School Diploma / GED or equivalent',
-  },
-  {
-    key: '2',
-    text: 'Some College or equivalent',
-    value: 'Some College or equivalent',
-  },
-  {
-    key: '3',
-    text: "Associate's Degree or equivalent",
-    value: "Associate's Degree or equivalent",
-  },
-  {
-    key: '4',
-    text: "Bachelor's Degree or equivalent",
-    value: "Bachelor's Degree or equivalent",
-  },
-  {
-    key: '5',
-    text: "Master's Degree or equivalent",
-    value: "Master's Degree or equivalent",
-  },
-  {
-    key: '6',
-    text: 'PhD or equivalent',
-    value: 'PhD or equivalent',
-  },
-];
-
 const majors = [
   { key: 1, text: 'Accounting', value: 'Accounting' },
   { key: 2, text: 'Advertising', value: 'Advertising' },
@@ -176,10 +143,7 @@ class CandidateEducation extends React.Component {
 
   handleSubmit = e => {
     this.props.candidateMajor(this.state.majors);
-    // this.props.candidateMajor('candidateMajor');
     this.props.candidateEducation(this.state.education);
-    // this.props.candidateEducation('candidateEducation');
-    console.log('CandidateEducation this.state', this.state);
   };
 
   render() {
@@ -197,16 +161,16 @@ class CandidateEducation extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={40} />
+            <Progress percent={50} />
             <Step.Group widths={7}>
               <Step link href="/new-candidate/engine">
                 <Step.Content>
-                  <Step.Title>Select Engine</Step.Title>
+                  <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-              <Step link href="/new-candidate/contact-info">
+              <Step link href="/new-candidate/contact">
                 <Step.Content>
-                  <Step.Title>Contact Info</Step.Title>
+                  <Step.Title>Contact</Step.Title>
                 </Step.Content>
               </Step>
               <Step active link href="/new-candidate/education">
@@ -266,8 +230,8 @@ class CandidateEducation extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
-                // as={Link}
-                // to="/new-candidate/skills"
+                as={Link}
+                to="/new-candidate/skills"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

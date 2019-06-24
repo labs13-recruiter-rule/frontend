@@ -13,9 +13,8 @@ import {
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-
 const token = sessionStorage.getItem('token');
-const tokenHeader = {headers: {token: `${token}`}} 
+const tokenHeader = { headers: { token: `${token}` } };
 
 class ContactsClass extends React.Component {
   constructor(props) {
@@ -23,12 +22,15 @@ class ContactsClass extends React.Component {
     this.state = {
       newContactName: '',
       newContactEmail: '',
-      contacts: []
+      contacts: [],
     };
   }
 
   componentDidMount() {
-    axios.get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader).then(res => this.setState({contacts: res.data})).catch(error => console.log(error))
+    axios
+      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+      .then(res => this.setState({ contacts: res.data }))
+      .catch(error => console.log(error));
   }
 
   handleName = e => {
@@ -77,14 +79,14 @@ class ContactsClass extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={70} />
             <Step.Group widths={6}>
-            <Step>
-                      <Step.Content>
-                        <Link style={linkStyles} to="/new-rule/engine">
-                          <Step.Title>Create Rule Engine</Step.Title>
-                        </Link>
-                      </Step.Content>
-                    </Step>
-                    <Step active>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/engine">
+                    <Step.Title>Engine</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step active>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
@@ -112,7 +114,7 @@ class ContactsClass extends React.Component {
                   </Link>
                 </Step.Content>
               </Step>
-        
+
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
@@ -122,14 +124,26 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              Choose a contact for the rule you'll create on the following pages. Choose from existing contacts or add a new contact, and then you'll decide what qualifications a candidate needs to meet to be sent to that contact.
-            </Header> 
+              Choose a contact for the rule you'll create on the following
+              pages. Choose from existing contacts or add a new contact, and
+              then you'll decide what qualifications a candidate needs to meet
+              to be sent to that contact.
+            </Header>
             {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
-            <Dropdown  placeholder="Select Contacts"
-    fluid
-    multiple
-    selection
-    options={this.state.contacts.map(contact=> {return {'key': contact.id, 'text': contact.name + " | " + contact.email, 'value': contact.id }})} />  {/**need to actually make it record the ones that the user chose and add them to the rule request */}
+            <Dropdown
+              placeholder="Select Contacts"
+              fluid
+              multiple
+              selection
+              options={this.state.contacts.map(contact => {
+                return {
+                  key: contact.id,
+                  text: contact.name + ' | ' + contact.email,
+                  value: contact.id,
+                };
+              })}
+            />{' '}
+            {/**need to actually make it record the ones that the user chose and add them to the rule request */}
             <Form>
               <Form.Field>
                 <Form.Input
@@ -158,7 +172,7 @@ class ContactsClass extends React.Component {
               <Button style={primaryButton} as={Link} to="/new-rule/engine">
                 <Icon name="arrow left" size="small" />
                 Back
-              </Button> 
+              </Button>
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
@@ -166,7 +180,7 @@ class ContactsClass extends React.Component {
                 to="/new-rule/education"
               >
                 Next <Icon name="arrow right" size="small" />
-              </Button> 
+              </Button>
             </Grid.Column>
           </Grid.Column>
           <Grid.Column width={1} />

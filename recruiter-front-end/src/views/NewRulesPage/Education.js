@@ -192,14 +192,14 @@ class NewCandidate extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={10} />
             <Step.Group widths={6}>
-            <Step>
-                      <Step.Content>
-                        <Link style={linkStyles} to="/new-rule/engine">
-                          <Step.Title>Create Rule Engine</Step.Title>
-                        </Link>
-                      </Step.Content>
-                    </Step>
-                    <Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/engine">
+                    <Step.Title>Engine</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
@@ -275,11 +275,7 @@ class NewCandidate extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button
-                style={primaryButton}
-                as={Link}
-                to="/new-rule/contacts"
-              >
+              <Button style={primaryButton} as={Link} to="/new-rule/contacts">
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>

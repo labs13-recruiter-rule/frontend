@@ -88,14 +88,14 @@ class Confirmation extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={92} />
             <Step.Group widths={6}>
-            <Step>
-                      <Step.Content>
-                        <Link style={linkStyles} to="/new-rule/engine">
-                          <Step.Title>Create Rule Engine</Step.Title>
-                        </Link>
-                      </Step.Content>
-                    </Step>
-                    <Step>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/engine">
+                    <Step.Title>Engine</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>
@@ -133,7 +133,8 @@ class Confirmation extends React.Component {
             </Step.Group>
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
-              requirements to be sent to any of the contacts in this rule engine, where should we send them?
+              requirements to be sent to any of the contacts in this rule
+              engine, where should we send them?
             </Header>
             <Form>
               <Form.Field>

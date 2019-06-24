@@ -53,7 +53,6 @@ class CandidateContactInfo extends React.Component {
     this.props.candidateName(this.state.candidateName);
     this.props.candidateEmail(this.state.candidateEmail);
     this.props.candidateLinkedIn(this.state.candidateLinkedIn);
-    console.log('CandidateContactInfo this.state', this.state);
   };
 
   render() {
@@ -62,16 +61,16 @@ class CandidateContactInfo extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={15} />
+            <Progress percent={30} />
             <Step.Group widths={6}>
-              <Step active link href="/new-candidate/engineo">
+              <Step link href="/new-candidate/engine">
                 <Step.Content>
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-              <Step active link href="/new-candidate/contact-info">
+              <Step active link href="/new-candidate/contact">
                 <Step.Content>
-                  <Step.Title>Contact Info</Step.Title>
+                  <Step.Title>Contact</Step.Title>
                 </Step.Content>
               </Step>
               <Step link href="/new-candidate/education">

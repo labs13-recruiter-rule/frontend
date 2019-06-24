@@ -18,7 +18,7 @@ import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
 import Confirmation from './views/NewRulesPage/Confirmation';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
-import CandidateContactInfo from './views/AddCandidatePage/CandidateContactInfo';
+import CandidateContact from './views/AddCandidatePage/CandidateContact';
 import CandidateEducation from './views/AddCandidatePage/CandidateEducation';
 import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
 import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
@@ -51,6 +51,7 @@ class App extends React.Component {
       candidateLinkedIn: '',
       major: [],
     },
+    engine: '',
   };
 
   componentDidMount() {
@@ -73,6 +74,10 @@ class App extends React.Component {
   logout() {
     fire.auth().signOut();
   }
+
+  candidateEngine = e => {
+    this.setState({ ...this.state, engine: e });
+  };
 
   minEducation = e => {
     switch (e) {
@@ -163,6 +168,7 @@ class App extends React.Component {
 
   majors = e => {
     this.setState({
+      ...this.state,
       rule: {
         ...this.state.rule,
         majors: e,
@@ -230,53 +236,77 @@ class App extends React.Component {
   };
 
   candidateName = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       candidate: {
-        ...this.state.candidate,
+        ...prevState.candidate,
         candidateName: e,
       },
-    });
+    }));
   };
 
   candidateEmail = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       candidate: {
-        ...this.state.candidate,
+        ...prevState.candidate,
         candidateEmail: e,
       },
-    });
+    }));
   };
 
   candidateLinkedIn = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       candidate: {
-        ...this.state.candidate,
+        ...prevState.candidate,
         candidateLinkedIn: e,
       },
-    });
+    }));
   };
 
   candidateEducation = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       candidate: {
-        ...this.state.candidate,
+        ...prevState.candidate,
         education: e,
       },
-    });
+    }));
   };
 
   candidateMajor = e => {
-    console.log('App.js candidateMajor', e);
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       candidate: {
-        ...this.state.candidate,
+        ...prevState.candidate,
         major: e,
       },
-    });
+    }));
+  };
+
+  candidateSkills = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        skills: e,
+      },
+    }));
+  };
+
+  candidateExperience = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        experience: e,
+      },
+    }));
   };
 
   appState = () => {
-    console.log('App.js this.state.candidate', this.state.candidate);
+    console.log('App.js this.state', this.state);
   };
 
   render() {
@@ -311,9 +341,9 @@ class App extends React.Component {
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
-                  {/* <button onClick={() => this.appState()}>
+                  <button onClick={() => this.appState()}>
                     App.js this.state
-                  </button> */}
+                  </button>
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 {/* <Route exact path="/db" component={Dashboard} /> */}
@@ -327,6 +357,13 @@ class App extends React.Component {
                 />
                 <Route exact path="/engines/new" component={NewEngine} />
                 <Route exact path="/engines" component={EngineDash} />
+                <Route
+                  exact
+                  path="/new-candidate/engine"
+                  component={props => (
+                    <CandidateEngine candidateEngine={this.candidateEngine} />
+                  )}
+                />
                 <Route
                   exact
                   path="/new-rule/contacts"
@@ -365,14 +402,14 @@ class App extends React.Component {
                     <Experience minExp={this.minExp} maxExp={this.maxExp} />
                   )}
                 />
-                <Route exact path="/contacts/add" component={NewContactForm} />
-                <Route exact path="/contacts" component={Contacts} />
-                <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact
                   path="/new-rule/confirmation"
                   component={Confirmation}
                 />
+                <Route exact path="/contacts/add" component={NewContactForm} />
+                <Route exact path="/contacts" component={Contacts} />
+                <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact
                   path="/new-candidate/"
@@ -380,10 +417,9 @@ class App extends React.Component {
                 />
                 <Route
                   exact
-                  path="/new-candidate/contact-info"
-                  // component={CandidateContactInfo}
+                  path="/new-candidate/contact"
                   component={props => (
-                    <CandidateContactInfo
+                    <CandidateContact
                       candidateName={this.candidateName}
                       candidateEmail={this.candidateEmail}
                       candidateLinkedIn={this.candidateLinkedIn}
@@ -403,17 +439,19 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-candidate/skills"
-                  component={CandidateSkills}
+                  component={props => (
+                    <CandidateSkills candidateSkills={this.candidateSkills} />
+                  )}
                 />
                 <Route
                   exact
                   path="/new-candidate/experience"
-                  component={CandidateExperience}
-                />
-                <Route
-                  exact
-                  path="/new-candidate/engine"
-                  component={CandidateEngine}
+                  //   component={CandidateExperience}
+                  component={props => (
+                    <CandidateExperience
+                      candidateExperience={this.candidateExperience}
+                    />
+                  )}
                 />
                 <Route
                   exact
