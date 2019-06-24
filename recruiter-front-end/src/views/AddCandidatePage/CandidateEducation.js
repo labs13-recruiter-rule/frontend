@@ -10,7 +10,8 @@ import {
   Header,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import DegreeDropdown from './../../components/DegreeDropdown/DegreeDropdown.js';
+import MajorDropdown from './../../components/MajorDropdown/MajorDropdown.js';
 const flexContainer = {
   display: 'flex',
   flexDirection: 'column',

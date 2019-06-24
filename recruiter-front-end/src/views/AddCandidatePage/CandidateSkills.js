@@ -10,7 +10,6 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
 const flexContainer = {
   display: 'flex',
   flexDirection: 'column',
@@ -269,7 +268,6 @@ class CandidateSkills extends React.Component {
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-<<<<<<< HEAD
             <Step link href="/new-candidate/contact-info">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>
@@ -317,58 +315,7 @@ class CandidateSkills extends React.Component {
               style={primaryButton}
               as={Link}
               to="/new-candidate/experience"
-=======
-              <Step link href="/new-candidate/contact">
-                <Step.Content>
-                  <Step.Title>Contact</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step link href="/new-candidate/education">
-                <Step.Content>
-                  <Step.Title>Education</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step active link href="/new-candidate/skills">
-                <Step.Content>
-                  <Step.Title>Skills</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step link href="/new-candidate/experience">
-                <Step.Content>
-                  <Step.Title>Experience</Step.Title>
-                </Step.Content>
-              </Step>
-            </Step.Group>
-            <Form className="Skills">
-              <Grid.Row>
-                <Grid.Column width={2} verticalAlign="middle">
-                  <Header as="h4">Skills</Header>
-                </Grid.Column>
-                <Grid.Column floated="left" width={14} verticalAlign="middle">
-                  <Dropdown
-                    placeholder="Skills"
-                    search
-                    fluid
-                    multiple
-                    selection
-                    allowAdditions
-                    options={skills}
-                    onAddItem={this.handleAddition}
-                    onChange={this.handleChange}
-                    value={this.state.skills}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-            </Form>
-            <Grid.Row
-              style={{ display: 'flex', justifyContent: 'space-between' }}
->>>>>>> 630fe08534696d0e6c6dc11c5b93833c3740a5c8
             >
-              <Button
-                style={primaryButton}
-                as={Link}
-                to="/new-candidate/education"
-              >
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
@@ -385,6 +332,8 @@ class CandidateSkills extends React.Component {
           <Grid.Column width={1} />
         </Grid.Row>
       </Grid>
+    
+    
     );
   }
 }

@@ -4,7 +4,6 @@ import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
 import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
 import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
 import Axios from 'axios';
-
 const flexContainer = {
   display: 'flex',
   flexDirection: 'column',

@@ -63,7 +63,6 @@ class CandidateEngine extends React.Component {
                   <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-<<<<<<< HEAD
             <Step link href="/new-candidate/contact-info">
               <Step.Content>
                 <Step.Title>Contact Info</Step.Title>
@@ -112,77 +111,6 @@ class CandidateEngine extends React.Component {
       </Grid.Row>
     </Grid>
   );}
-=======
-              <Step link href="/new-candidate/contact">
-                <Step.Content>
-                  <Step.Title>Contact</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step link href="/new-candidate/education">
-                <Step.Content>
-                  <Step.Title>Education</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step link href="/new-candidate/skills">
-                <Step.Content>
-                  <Step.Title>Experience</Step.Title>
-                </Step.Content>
-              </Step>
-              <Step link href="/new-candidate/experience">
-                <Step.Content>
-                  <Step.Title>Contacts</Step.Title>
-                </Step.Content>
-              </Step>
-            </Step.Group>
-            {this.state.engines.length > 0 ? (
-              <>
-                {' '}
-                <Header>
-                  Which rule engine do you want to run the candidate through?
-                </Header>{' '}
-                <Dropdown
-                  placeholder="Select Rule Engine"
-                  fluid
-                  selection
-                  options={this.state.engines.map(engine => {
-                    return {
-                      key: engine.id,
-                      text: engine.engine_name,
-                      value: engine.id,
-                    };
-                  })}
-                />{' '}
-              </>
-            ) : (
-              <>
-                <p>
-                  {' '}
-                  You don't have any engines created yet. Before you can send a
-                  candidate using Recruiter Rule Engine, you need to create an
-                  engine and add some rules.{' '}
-                </p>{' '}
-                <Button style={primaryButton} as={Link} to="/new-rule/engine">
-                  Create Engine
-                </Button>{' '}
-              </>
-            )}
-
-            <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button
-                style={primaryButton}
-                as={Link}
-                to="/new-candidate/contact-info"
-              >
-                Next <Icon name="arrow right" size="small" />
-              </Button>
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Column width={1} />
-        </Grid.Row>
-      </Grid>
-    );
-  }
->>>>>>> 630fe08534696d0e6c6dc11c5b93833c3740a5c8
 }
 
 export default CandidateEngine;
