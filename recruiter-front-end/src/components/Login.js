@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Button, Form, Container, Header } from 'semantic-ui-react';
 import axios from 'axios';
+import MarketingPage from './MarketingPage';
 // import './'
 
 const uiConfig = {
@@ -94,7 +95,7 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Header size="huge">Recruiter Rule</Header>
+        <MarketingPage />
         <Form>
           <Form.Field>
             <label htmlFor="email">Email</label>

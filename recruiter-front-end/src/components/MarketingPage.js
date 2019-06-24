@@ -45,9 +45,6 @@ function MarketingPage() {
       </Grid.Row>
       <Grid.Row centered>
         <MarketingCards />
-        <Link style={linkStyles} to="/login">
-          <Button style={primaryButton}>Sign Up Now</Button>
-        </Link>
       </Grid.Row>
     </Grid>
   );
