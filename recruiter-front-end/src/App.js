@@ -18,7 +18,7 @@ import CheckoutContainer from './components/Checkout/CheckoutContainer';
 import NewRuleContacts from './views/NewRulesPage/NewRuleContacts';
 import Confirmation from './views/NewRulesPage/Confirmation';
 import AddCandidatePage from './views/AddCandidatePage/AddCandidatePage';
-import CandidateContactInfo from './views/AddCandidatePage/CandidateContactInfo';
+import CandidateContact from './views/AddCandidatePage/CandidateContact';
 import CandidateEducation from './views/AddCandidatePage/CandidateEducation';
 import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
 import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
@@ -46,6 +46,13 @@ class App extends React.Component {
       contactEmail: 'omaro@me.com',
       requireHeadshot: true,
     },
+    candidate: {
+      candidateName: '',
+      candidateEmail: '',
+      candidateLinkedIn: '',
+      major: [],
+    },
+    engine: '',
   };
 
   componentDidMount() {
@@ -69,77 +76,114 @@ class App extends React.Component {
     fire.auth().signOut();
   }
 
+  candidateEngine = e => {
+    this.setState({ ...this.state, engine: e });
+  };
+
   minEducation = e => {
     switch (e) {
       case '':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            ...this.state.rule,
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'High School / GED':
         this.setState({
-          education: [
-            'High School / GED',
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            ...this.state.rule,
+            education: [
+              'High School / GED',
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case 'Some College':
         this.setState({
-          education: [
-            'Some College',
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            ...this.state.rule,
+            education: [
+              'Some College',
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Associate's":
         this.setState({
-          education: [
-            "Associate's",
-            "Bachelor's Degree",
-            "Master's Degree",
-            'PhD',
-          ],
+          rule: {
+            ...this.state.rule,
+            education: [
+              "Associate's",
+              "Bachelor's Degree",
+              "Master's Degree",
+              'PhD',
+            ],
+          },
         });
         break;
       case "Bachelor's Degree":
         this.setState({
-          education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          rule: {
+            ...this.state.rule,
+            education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
+          },
         });
         break;
       case "Master's Degree":
         this.setState({
-          education: ["Master's Degree", 'PhD'],
+          rule: {
+            ...this.state.rule,
+
+            education: ["Master's Degree", 'PhD'],
+          },
         });
         break;
       case 'PhD':
         this.setState({
-          education: ['PhD'],
+          rule: {
+            ...this.state.rule,
+            education: ['PhD'],
+          },
         });
         break;
     }
   };
 
   majors = e => {
-    this.setState({ majors: e });
+    this.setState({
+      ...this.state,
+      rule: {
+        ...this.state.rule,
+        majors: e,
+      },
+    });
   };
 
   skills = e => {
-    this.setState({ skills: e });
+    this.setState({
+      rule: {
+        ...this.state.rule,
+        skills: e,
+      },
+    });
   };
 
   parseMyRule() {
@@ -158,21 +202,113 @@ class App extends React.Component {
       });
   }
   minExp = e => {
-    this.setState({ minExp: e });
+    this.setState({
+      rule: {
+        ...this.state.rule,
+        minExp: e,
+      },
+    });
   };
 
   maxExp = e => {
-    this.setState({ maxExp: e });
+    this.setState({
+      rule: {
+        ...this.state.rule,
+        maxExp: e,
+      },
+    });
   };
 
   contactName = e => {
-    console.log('App.js contactName');
-    this.setState({ contactName: e });
+    this.setState({
+      rule: {
+        ...this.state.rule,
+        contactName: e,
+      },
+    });
   };
 
   contactEmail = e => {
-    console.log('App.js contactEmail');
-    this.setState({ contactEmail: e });
+    this.setState({
+      rule: {
+        ...this.state.rule,
+        contactEmail: e,
+      },
+    });
+  };
+
+  candidateName = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        candidateName: e,
+      },
+    }));
+  };
+
+  candidateEmail = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        candidateEmail: e,
+      },
+    }));
+  };
+
+  candidateLinkedIn = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        candidateLinkedIn: e,
+      },
+    }));
+  };
+
+  candidateEducation = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        education: e,
+      },
+    }));
+  };
+
+  candidateMajor = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        major: e,
+      },
+    }));
+  };
+
+  candidateSkills = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        skills: e,
+      },
+    }));
+  };
+
+  candidateExperience = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      candidate: {
+        ...prevState.candidate,
+        experience: e,
+      },
+    }));
+  };
+
+  appState = () => {
+    console.log('App.js this.state', this.state);
   };
 
   render() {
@@ -199,6 +335,7 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
+                    {/* <Button as={Link} to="/new-candidate/contact-info"> */}
                     <Button as={Link} to="/new-candidate/engine">
                       Send Candidate
                     </Button>
@@ -206,10 +343,10 @@ class App extends React.Component {
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
+                  <button onClick={() => this.appState()}>
+                    App.js this.state
+                  </button>
                 </Menu>
-                {/* <button onClick={() => console.log(this.state)}>
-                  App.js this.state
-                </button> */}
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -221,6 +358,13 @@ class App extends React.Component {
                   }}
                 />
                 <Route exact path="/engines" component={EngineDash} />
+                <Route
+                  exact
+                  path="/new-candidate/engine"
+                  component={props => (
+                    <CandidateEngine candidateEngine={this.candidateEngine} />
+                  )}
+                />
                 <Route
                   exact
                   path="/new-rule/contacts"
@@ -249,7 +393,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/engine"
-                  component={props => <NewEngine />} />}
+                  component={props => <NewEngine />}
                 />
                 <Route
                   exact
@@ -259,14 +403,14 @@ class App extends React.Component {
                     <Experience minExp={this.minExp} maxExp={this.maxExp} />
                   )}
                 />
-                <Route exact path="/contacts/add" component={NewContactForm} />
-                <Route exact path="/contacts" component={Contacts} />
-                <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact
                   path="/new-rule/confirmation"
                   component={Confirmation}
                 />
+                <Route exact path="/contacts/add" component={NewContactForm} />
+                <Route exact path="/contacts" component={Contacts} />
+                <Route exact path="/checkout" component={CheckoutContainer} />
                 <Route
                   exact
                   path="/new-candidate/"
@@ -274,26 +418,42 @@ class App extends React.Component {
                 />
                 <Route
                   exact
-                  path="/new-candidate/contact-info"
-                  component={CandidateContactInfo}
+                  path="/new-candidate/contact"
+                  component={props => (
+                    <CandidateContact
+                      candidateName={this.candidateName}
+                      candidateEmail={this.candidateEmail}
+                      candidateLinkedIn={this.candidateLinkedIn}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path="/new-candidate/education"
-                  component={CandidateEducation}
+                  component={props => (
+                    <CandidateEducation
+                      candidateEducation={this.candidateEducation}
+                      candidateMajor={this.candidateMajor}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path="/new-candidate/skills"
-                  component={CandidateSkills}
+                  component={props => (
+                    <CandidateSkills candidateSkills={this.candidateSkills} />
+                  )}
                 />
                 <Route
                   exact
                   path="/new-candidate/experience"
-                  component={CandidateExperience}
+                  //   component={CandidateExperience}
+                  component={props => (
+                    <CandidateExperience
+                      candidateExperience={this.candidateExperience}
+                    />
+                  )}
                 />
-                <Route 
-                exact path="/new-candidate/engine" component={CandidateEngine} />
                 <Route
                   exact
                   path="/new-candidate-test"

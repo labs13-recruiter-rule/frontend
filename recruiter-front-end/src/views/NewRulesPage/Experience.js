@@ -51,20 +51,6 @@ class NewCandidate extends React.Component {
   handleSubmit = e => {
     this.props.minExp(this.state.minNumber);
     this.props.maxExp(this.state.maxNumber);
-
-    // Axios.post(
-    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
-    //   this.state,
-    //   {
-    //     headers: {
-    //       token: `${token}`,
-    //     },
-    //   },
-    // )
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -135,16 +121,15 @@ class NewCandidate extends React.Component {
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={50} />
-            <Step.Group widths={6}> 
-            
-            <Step>
-                      <Step.Content>
-                        <Link style={linkStyles} to="/new-rule/engine">
-                          <Step.Title>Create Rule Engine</Step.Title>
-                        </Link>
-                      </Step.Content>
-                    </Step>
-                    <Step>
+            <Step.Group widths={6}>
+              <Step>
+                <Step.Content>
+                  <Link style={linkStyles} to="/new-rule/engine">
+                    <Step.Title>Engine</Step.Title>
+                  </Link>
+                </Step.Content>
+              </Step>
+              <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
                     <Step.Title>Contacts</Step.Title>

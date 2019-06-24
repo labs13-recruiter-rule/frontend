@@ -3,25 +3,18 @@ import {
   Grid,
   Button,
   Icon,
-  Form,
-  Input,
   Step,
   Progress,
+  Header,
+  Dropdown,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import DegreeDropdown from '../../components/DegreeDropdown/DegreeDropdown';
-import MajorDropdown from '../../components/MajorDropdown/MajorDropdown';
-import ExperienceDropdown from '../../components/ExperienceDropdown/ExperienceDropdown';
 import Axios from 'axios';
 const token = sessionStorage.getItem('token');
 
 const flexContainer = {
   display: 'flex',
   flexDirection: 'column',
-};
-
-const center = {
-  textAlign: 'center',
 };
 
 const primaryButton = {
@@ -35,82 +28,56 @@ const primaryButton = {
   alignItems: 'center',
 };
 
-const SkillsTags = () => <Input placeholder="Enter Skill" />;
+const dropdownStyles = {
+  margin: '0',
+};
+
+const options = [
+  { key: 0, text: 'Less than 1', value: '0' },
+  { key: 1, text: '1', value: '1' },
+  { key: 2, text: '2', value: '2' },
+  { key: 3, text: '3', value: '3' },
+  { key: 4, text: '4', value: '4' },
+  { key: 5, text: '5', value: '5' },
+  { key: 6, text: '6', value: '6' },
+  { key: 7, text: '7', value: '7' },
+  { key: 8, text: '8', value: '8' },
+  { key: 9, text: '9', value: '9' },
+  { key: 10, text: '10', value: '10' },
+  { key: 11, text: '11', value: '11' },
+  { key: 12, text: '12', value: '12' },
+  { key: 13, text: '13', value: '13' },
+  { key: 14, text: '14', value: '14' },
+  { key: 15, text: '15', value: '15' },
+  { key: 16, text: '16', value: '16' },
+  { key: 17, text: '17', value: '17' },
+  { key: 18, text: '18', value: '18' },
+  { key: 19, text: '19', value: '19' },
+  { key: 20, text: '20', value: '20' },
+  { key: 21, text: '21', value: '21' },
+  { key: 22, text: '22', value: '22' },
+  { key: 23, text: '23', value: '23' },
+  { key: 24, text: '24', value: '24' },
+  { key: 25, text: '25', value: '25' },
+];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      title: '',
-      skills: '',
-      education: '',
-      industry: '',
-      languages: '',
-      certifications: '',
-      volunteer: '',
-      publications: '',
-      posts: false,
-      linkedinURL: '',
-      picture: false,
-      bio: false,
-      hidden: true,
+      yearsOfExperience: '',
     };
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  toggleBio = () => {
-    this.setState(prevState => ({ bio: !prevState.bio }));
-  };
-
-  togglePicture = () => {
-    this.setState(prevState => ({ picture: !prevState.picture }));
-  };
-
-  togglePosts = () => {
-    this.setState(prevState => ({ posts: !prevState.posts }));
-  };
-
-  toggleHidden = () => {
-    this.setState(prevState => ({ hidden: !prevState.hidden }));
+  handleExperience = (e, { value }) => {
+    this.setState({ yearsOfExperience: value });
   };
 
   submit = e => {
-    const newCandidate = {
-      name: this.state.name,
-      email: this.state.email,
-      title: this.state.title,
-      skills: this.state.skills,
-      education: this.state.education,
-      industry: this.state.industry,
-      languages: this.state.languages,
-      certifications: this.state.certifications,
-      volunteer: this.state.volunteer,
-      publications: this.state.publications,
-      posts: this.state.posts,
-      linkedinURL: this.state.linkedinURL,
-      picture: this.state.picture,
-      bio: this.state.bio,
-      engine_id: this.state.engine_id,
-    };
-    Axios.post(
-      `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine_id}/use`,
-      newCandidate,
-      {
-        headers: {
-          token: `${token}`,
-        },
-      },
-    )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    console.log('CandidateExperience submit', this.state);
+    this.props.candidateExperience(this.state.yearsOfExperience);
   };
+
   render() {
     return (
       <Grid columns={12}>
@@ -119,14 +86,14 @@ class App extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <Progress percent={90} />
             <Step.Group widths={6}>
-            <Step link href="/new-candidate/engine">
+              <Step link href="/new-candidate/engine">
                 <Step.Content>
-                  <Step.Title>Select Engine</Step.Title>
+                  <Step.Title>Engine</Step.Title>
                 </Step.Content>
               </Step>
-              <Step link href="/new-candidate/contact-info">
+              <Step link href="/new-candidate/contact">
                 <Step.Content>
-                  <Step.Title>Contact Info</Step.Title>
+                  <Step.Title>Contact</Step.Title>
                 </Step.Content>
               </Step>
               <Step link href="/new-candidate/education">
@@ -150,12 +117,24 @@ class App extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
-            <Form className="Experience">
-              <Form.Field>
-                <label>Years of Experience</label>
-                <ExperienceDropdown />
-              </Form.Field>
-            </Form>
+            <Grid.Row>
+              <Grid.Column floated="left" width={12}>
+                <Header as="h4">Years of experience</Header>
+              </Grid.Column>
+              <Grid.Column floated="right" width={4} style={dropdownStyles}>
+                <Dropdown
+                  placeholder="Enter a number"
+                  search
+                  fluid
+                  allowAdditions
+                  clearable
+                  selection
+                  options={options}
+                  styles={{ width: '300px' }}
+                  onChange={this.handleExperience}
+                />
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
@@ -167,7 +146,12 @@ class App extends React.Component {
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
-              <Button style={primaryButton} onClick={this.submit}>
+              <Button
+                style={primaryButton}
+                onClick={this.submit}
+                // as={Link}
+                // to="/"
+              >
                 Send
               </Button>
             </Grid.Row>
