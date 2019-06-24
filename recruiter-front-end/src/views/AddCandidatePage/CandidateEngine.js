@@ -92,11 +92,8 @@ class CandidateEngine extends React.Component {
                 </Header>{' '}
                 <Dropdown
                   placeholder="Select Rule Engine"
-                  onChange={this.handleEngine}
                   fluid
-                  clearable
                   selection
-                  //   value={this.state.engine}
                   options={this.state.engines.map(engine => {
                     return {
                       key: engine.id,
@@ -114,7 +111,7 @@ class CandidateEngine extends React.Component {
                   candidate using Recruiter Rule Engine, you need to create an
                   engine and add some rules.{' '}
                 </p>{' '}
-                <Button style={primaryButton} as={Link} to="/engines">
+                <Button style={primaryButton} as={Link} to="/new-rule/engine">
                   Create Engine
                 </Button>{' '}
               </>
@@ -124,8 +121,7 @@ class CandidateEngine extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                onClick={this.handleSubmit}
-                to="/new-candidate/contact"
+                to="/new-candidate/contact-info"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

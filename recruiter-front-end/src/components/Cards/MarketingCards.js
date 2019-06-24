@@ -5,13 +5,13 @@ import contacts from '../../images/contacts.jpg';
 import candidates from '../../images/candidates.jpg';
 
 const MarketingCards = () => (
-  <Grid.Row centered style={{ display: 'flex', alignItems: 'center' }}>
+  <Grid.Row centered style={{ display: 'flex', alignItems: 'top' }}>
     <Card style={{ margin: '1em 15px' }}>
       <Image src={rules} wrapped ui={false} />
       <Card.Content>
-        <Card.Header>1. Create Rules</Card.Header>
+        <Card.Header>1. Create a Rule Engine</Card.Header>
         <Card.Description>
-          Create rules for a canidate's education, skills and experiences
+          Initialize your first rule engine and give it a name. You have the ability to create as many engines as you'd like.
         </Card.Description>
       </Card.Content>
     </Card>
@@ -19,21 +19,19 @@ const MarketingCards = () => (
     <Card style={{ margin: '1em 15px' }}>
       <Image src={contacts} wrapped ui={false} />
       <Card.Content>
-        <Card.Header>2. Add Contacts</Card.Header>
+        <Card.Header>2. Add Rules to your Engine</Card.Header>
         <Card.Description>
-          Specify where you want to send a candidate when they either pass or do
-          not pass the rule
+          Choose a contact or contacts and tell us what experience, skills, or education requirements the candidate should have to be sent to each contact or set of contacts. You can add as many rules as you want to each engine.
         </Card.Description>
       </Card.Content>
-    </Card>
+    </Card> 
     <Icon disabled name="arrow right" size="big" />
     <Card style={{ margin: '1em 15px' }}>
       <Image src={candidates} wrapped ui={false} />
       <Card.Content>
-        <Card.Header>3. Add Candidates</Card.Header>
+        <Card.Header>3. Run Candidates through the Rule Engine</Card.Header>
         <Card.Description>
-          Add information about the candidate's contact information, education,
-          skills and experiences
+          Run a candidate's information through the rule engine, so the right person (according to you!) gets their information. Every time.
         </Card.Description>
       </Card.Content>
     </Card>
