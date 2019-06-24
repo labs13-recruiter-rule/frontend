@@ -4,7 +4,9 @@ import {
     Button,
     Icon,
     Step,
-    Progress
+    Progress,
+    Header,
+    Dropdown,
   } from 'semantic-ui-react';
   import { Link } from 'react-router-dom';
   import Axios from 'axios';
@@ -56,18 +58,23 @@ class CandidateConfirm extends React.Component {
                       <Step.Title>Skills</Step.Title>
                     </Step.Content>
                   </Step>
-                  <Step active link href="/new-candidate/experience">
+                  <Step link href="/new-candidate/experience">
                     <Step.Content>
                       <Step.Title>Experience</Step.Title>
                     </Step.Content>
                   </Step>
-                  <Step link href="/new-candidate/confirm">
+                  <Step active link href="/new-candidate/confirm">
                   <Step.Content>
                     <Step.Title>Confirm</Step.Title>
                   </Step.Content>
                 </Step>
                 </Step.Group>
-              
+                <Grid.Row>
+                  
+                </Grid.Row>
+                <Grid.Row
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
                   <Button
                     style={primaryButton}
                     as={Link}
@@ -84,6 +91,7 @@ class CandidateConfirm extends React.Component {
                   >
                     Send
                   </Button>
+                </Grid.Row>
               </Grid.Column>
               <Grid.Column width={1} />
             </Grid.Row>
