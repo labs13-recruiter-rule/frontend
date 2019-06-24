@@ -227,7 +227,7 @@ class CandidateEducation extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/new-candidate/contact-info"
+                to="/new-candidate/contact"
               >
                 <Icon name="arrow left" size="small" />
                 Back

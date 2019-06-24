@@ -31,18 +31,18 @@ class CandidateContactInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      candidateName: '',
-      candidateEmail: '',
+      name: '',
+      email: '',
       candidateLinkedIn: '',
     };
   }
 
   handleName = e => {
-    this.setState({ candidateName: e.target.value });
+    this.setState({ name: e.target.value });
   };
 
   handleEmail = e => {
-    this.setState({ candidateEmail: e.target.value });
+    this.setState({ email: e.target.value });
   };
 
   handleLinkedIn = e => {
@@ -50,8 +50,8 @@ class CandidateContactInfo extends React.Component {
   };
 
   handleSubmit = e => {
-    this.props.candidateName(this.state.candidateName);
-    this.props.candidateEmail(this.state.candidateEmail);
+    this.props.candidateName(this.state.name);
+    this.props.candidateEmail(this.state.email);
     this.props.candidateLinkedIn(this.state.candidateLinkedIn);
   };
 
@@ -98,7 +98,7 @@ class CandidateContactInfo extends React.Component {
               <Form.Field>
                 <Form.Input
                   label="Name"
-                  value={this.state.candidateName}
+                  value={this.state.name}
                   onChange={this.handleName}
                   type="text"
                   name="name"
@@ -108,7 +108,7 @@ class CandidateContactInfo extends React.Component {
               <Form.Field>
                 <Form.Input
                   label="Email"
-                  value={this.state.candidateEmaill}
+                  value={this.state.email}
                   onChange={this.handleEmail}
                   type="email"
                   name="email"
@@ -126,7 +126,15 @@ class CandidateContactInfo extends React.Component {
                 />
               </Form.Field>
             </Form>
-            <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Grid.Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button
+                style={primaryButton}
+                as={Link}
+                to="/new-candidate/engine"
+              >
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
               <Button
                 style={primaryButton}
                 as={Link}

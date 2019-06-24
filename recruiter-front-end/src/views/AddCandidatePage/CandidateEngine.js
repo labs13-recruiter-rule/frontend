@@ -42,11 +42,13 @@ class CandidateEngine extends React.Component {
       .catch(error => console.log(error));
   }
 
-  handleEngine = (e, { value }) => {
-    this.setState({ engine: value });
+  handleChange = (e, { value }) => {
+    console.log('CandidateEngine handleEngine', e);
+    this.setState(prevState => ({ engine: value }));
   };
 
   handleSubmit = e => {
+    console.log('CandidateEngine handleSubmit', this.state.engine);
     this.props.candidateEngine(this.state.engine);
   };
 
@@ -99,6 +101,8 @@ class CandidateEngine extends React.Component {
                   placeholder="Select Rule Engine"
                   fluid
                   selection
+                  value={this.state.engine}
+                  onChange={this.handleChange}
                   options={this.state.engines.map(engine => {
                     return {
                       key: engine.id,
@@ -125,8 +129,9 @@ class CandidateEngine extends React.Component {
             <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 style={primaryButton}
+                onClick={this.handleSubmit}
                 as={Link}
-                to="/new-candidate/contact-info"
+                to="/new-candidate/contact"
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

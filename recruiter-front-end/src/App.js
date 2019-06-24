@@ -33,6 +33,13 @@ import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
 import NewEngine from './views/NewRulesPage/NewEngine';
 import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
+import Axios from 'axios';
+
+const token = sessionStorage.getItem('token')
+const tokenHeader = {headers: {token: `${token}`}}
+
+
+
 class App extends React.Component {
   state = {
     user: {},
@@ -47,8 +54,8 @@ class App extends React.Component {
       requireHeadshot: true,
     },
     candidate: {
-      candidateName: '',
-      candidateEmail: '',
+      name: '',
+      email: '',
       candidateLinkedIn: '',
       major: [],
       skills: [],
@@ -56,6 +63,7 @@ class App extends React.Component {
       education: []
     },
     engine: '',
+    engine_id: null
   };
 
   componentDidMount() {
@@ -80,6 +88,7 @@ class App extends React.Component {
   }
 
   candidateEngine = e => {
+    console.log('App.js candidateEngine', e);
     this.setState({ ...this.state, engine: e });
   };
 
@@ -245,7 +254,7 @@ class App extends React.Component {
       ...prevState,
       candidate: {
         ...prevState.candidate,
-        candidateName: e,
+        name: e,
       },
     }));
   };
@@ -255,7 +264,7 @@ class App extends React.Component {
       ...prevState,
       candidate: {
         ...prevState.candidate,
-        candidateEmail: e,
+        email: e,
       },
     }));
   };
@@ -364,8 +373,8 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-candidate/engine"
-                  component={props => (
-                    <CandidateEngine candidateEngine={this.candidateEngine} />
+                  render={() => (
+                    <CandidateEngine  candidateEngine={this.candidateEngine} />
                   )}
                 />
                 <Route
@@ -457,7 +466,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route exact path="/new-candidate/confirm" render={() => <CandidateConfirm candidate={this.state.candidate} sendCandidate={this.sendCandidate} parseRules={this.parseMyRule} engine_id={this.engine_id} />} />
+                <Route exact path="/new-candidate/confirm" render={() => <CandidateConfirm candidate={this.state.candidate} sendCandidate={this.sendCandidate} parseRules={this.parseMyRule} engine={this.state.engine} />} />
                 <Route exact path="/new-candidate/send" component={CandidateSend} />
               </>,
             ]

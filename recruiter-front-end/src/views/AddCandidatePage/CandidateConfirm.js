@@ -10,8 +10,9 @@ import {
   } from 'semantic-ui-react';
   import { Link } from 'react-router-dom';
   import Axios from 'axios';
+
   const token = sessionStorage.getItem('token');
-  
+  const tokenHeader = {headers: {token: `${token}`}}
   const flexContainer = {
     display: 'flex',
     flexDirection: 'column',
@@ -38,11 +39,11 @@ class CandidateConfirm extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.candidate, "CDM PROPS CONFIRM");
+        console.log(this.props.candidate, this.props.engine, "CDM PROPS CONFIRM");
     }
 
     submit = e => {
-
+    Axios.post(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine}/use`, this.props.candidate, tokenHeader).then(res => console.log(res)).catch(error=> console.log(error))
     }
     render() {
         return (
@@ -89,8 +90,8 @@ class CandidateConfirm extends React.Component {
                   </Header>
                 </Grid.Row>
                 <Grid.Row>
-                  <p>Name: {this.props.candidate.candidateName}</p>
-                  <p>Email: {this.props.candidate.candidateEmail}</p>
+                  <p>Name: {this.props.candidate.name}</p>
+                  <p>Email: {this.props.candidate.email}</p>
                   <p>LinkedIn: {this.props.candidate.candidateLinkedIn}</p> 
                   <p>Education: {this.props.candidate.education} </p>
                   <p>Major: {this.props.candidate.major}</p>
@@ -111,8 +112,8 @@ class CandidateConfirm extends React.Component {
                   <Button
                     style={primaryButton}
                     onClick={this.submit}
-                    // as={Link}
-                    // to="/"
+                     as={Link}
+                     to="/new-candidate/send"
                   >
                     Send
                   </Button>
