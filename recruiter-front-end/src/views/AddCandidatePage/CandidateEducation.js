@@ -188,6 +188,11 @@ class CandidateEducation extends React.Component {
                   <Step.Title>Experience</Step.Title>
                 </Step.Content>
               </Step>
+              <Step link href="/new-candidate/confirm">
+              <Step.Content>
+                <Step.Title>Confirm</Step.Title>
+              </Step.Content>
+            </Step>
             </Step.Group>
             <Form className="Education">
               <Form.Field>
@@ -222,7 +227,7 @@ class CandidateEducation extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/new-candidate/contact-info"
+                to="/new-candidate/contact"
               >
                 <Icon name="arrow left" size="small" />
                 Back

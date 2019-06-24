@@ -111,6 +111,11 @@ class App extends React.Component {
                   <Step.Title>Experience</Step.Title>
                 </Step.Content>
               </Step>
+              <Step link href="/new-candidate/confirm">
+              <Step.Content>
+                <Step.Title>Confirm</Step.Title>
+              </Step.Content>
+            </Step>
             </Step.Group>
             <Grid.Row>
               <Grid.Column floated="left" width={12}>
@@ -144,10 +149,10 @@ class App extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.submit}
-                // as={Link}
-                // to="/"
+                 as={Link}
+                 to="/new-candidate/confirm"
               >
-                Send
+                Next
               </Button>
             </Grid.Row>
           </Grid.Column>
