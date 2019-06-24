@@ -5,7 +5,7 @@ import contacts from '../../images/contacts.jpg';
 import candidates from '../../images/candidates.jpg';
 
 const MarketingCards = () => (
-  <Grid.Row centered style={{ display: 'flex', alignItems: 'center' }}>
+  <Grid.Row centered style={{ display: 'flex', alignItems: 'top' }}>
     <Card style={{ margin: '1em 15px' }}>
       <Image src={rules} wrapped ui={false} />
       <Card.Content>
