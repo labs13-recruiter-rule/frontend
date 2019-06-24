@@ -38,7 +38,7 @@ class CandidateConfirm extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props, "CDM PROPS CONFIRM");
+        console.log(this.props.candidate, "CDM PROPS CONFIRM");
     }
 
     submit = e => {
@@ -89,12 +89,13 @@ class CandidateConfirm extends React.Component {
                   </Header>
                 </Grid.Row>
                 <Grid.Row>
-                  <p>Name:</p>
-                  <p>Email:</p>
-                  <p>LinkedIn:</p> 
-                  <p>Education:</p>
-                  <p>Skills:</p>
-                  <p>Experience:</p>
+                  <p>Name: {this.props.candidate.candidateName}</p>
+                  <p>Email: {this.props.candidate.candidateEmail}</p>
+                  <p>LinkedIn: {this.props.candidate.candidateLinkedIn}</p> 
+                  <p>Education: {this.props.candidate.education} </p>
+                  <p>Major: {this.props.candidate.major}</p>
+                  <p>Skills: {this.props.candidate.skills.map(skill => `${skill} `)}</p>
+                  <p>Experience: {this.props.candidate.experience} years</p>
                 </Grid.Row>
                 <Grid.Row
                   style={{ display: 'flex', justifyContent: 'space-between' }}
