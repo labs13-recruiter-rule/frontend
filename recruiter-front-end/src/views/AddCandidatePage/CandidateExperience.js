@@ -149,10 +149,10 @@ class App extends React.Component {
               <Button
                 style={primaryButton}
                 onClick={this.submit}
-                // as={Link}
-                // to="/"
+                 as={Link}
+                 to="/new-candidate/confirm"
               >
-                Send
+                Next
               </Button>
             </Grid.Row>
           </Grid.Column>

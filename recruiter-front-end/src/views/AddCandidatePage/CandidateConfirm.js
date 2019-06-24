@@ -30,6 +30,9 @@ import {
   
 
 class CandidateConfirm extends React.Component {
+    submit = e => {
+        
+    }
     render() {
         return (
             <Grid columns={12}>
