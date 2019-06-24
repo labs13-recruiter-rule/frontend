@@ -51,6 +51,9 @@ class App extends React.Component {
       candidateEmail: '',
       candidateLinkedIn: '',
       major: [],
+      skills: [],
+      experience: null,
+      education: []
     },
     engine: '',
   };
@@ -186,14 +189,14 @@ class App extends React.Component {
     });
   };
 
-  parseMyRule() {
+  parseMyRule(engine_id) {
     this.props
       .parseRule(this.state.rule)
       .then(() => {
         console.log('from response of parsing', this.props.parsedRule);
 
         this.props.addRule(
-          'https://recruiter-back-end.herokuapp.com/engines/3/rules/',
+          `https://recruiter-back-end.herokuapp.com/engines/${engine_id}/rules/`,
           this.props.parsedRule,
         );
       })
@@ -454,7 +457,7 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route exact path="/new-candidate/confirm" component={CandidateConfirm} />
+                <Route exact path="/new-candidate/confirm" render={() => <CandidateConfirm candidate={this.state.candidate} sendCandidate={this.sendCandidate} parseRules={this.parseMyRule} engine_id={this.engine_id} />} />
                 <Route exact path="/new-candidate/send" component={CandidateSend} />
               </>,
             ]

@@ -30,8 +30,19 @@ import {
   
 
 class CandidateConfirm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    componentDidMount() {
+        console.log(this.props, "CDM PROPS CONFIRM");
+    }
+
     submit = e => {
-        
+
     }
     render() {
         return (
@@ -73,7 +84,17 @@ class CandidateConfirm extends React.Component {
                 </Step>
                 </Step.Group>
                 <Grid.Row>
-                  
+                  <Header>
+                      Candidate Information
+                  </Header>
+                </Grid.Row>
+                <Grid.Row>
+                  <p>Name:</p>
+                  <p>Email:</p>
+                  <p>LinkedIn:</p> 
+                  <p>Education:</p>
+                  <p>Skills:</p>
+                  <p>Experience:</p>
                 </Grid.Row>
                 <Grid.Row
                   style={{ display: 'flex', justifyContent: 'space-between' }}
