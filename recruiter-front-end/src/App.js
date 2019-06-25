@@ -49,7 +49,6 @@ class App extends React.Component {
       minExp: null,
       maxExp: null,
       contactEmail: '',
-      requireHeadshot: false,
     },
     candidate: {
       name: '',
@@ -286,7 +285,6 @@ class App extends React.Component {
   };
 
   candidateEngine = e => {
-    console.log('App.js candidateEngine', e);
     this.setState(prevState => ({
       ...prevState,
       engine: e,
@@ -391,7 +389,6 @@ class App extends React.Component {
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
-                    {/* <Button as={Link} to="/new-candidate/contact-info"> */}
                     <Button as={Link} to="/new-candidate/engine">
                       Send Candidate
                     </Button>
@@ -469,6 +466,7 @@ class App extends React.Component {
                     <Confirmation
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
+                      rule={this.state.rule}
                       submitRule={() => this.parseMyRule()}
                     />
                   )}

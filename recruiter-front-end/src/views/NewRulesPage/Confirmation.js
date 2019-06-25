@@ -126,11 +126,70 @@ class Confirmation extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
+            {this.props.rule.contactEmail.length === 0 ? (
+              <p
+                style={{
+                  fontSize: '2rem',
+                  color: 'red',
+                  backgroundColor: 'yellow',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                }}
+              >
+                You must specify a contact email
+              </p>
+            ) : (
+              <p style={center}>
+                If a candidate passes these rules then they will be sent to{' '}
+                {this.props.rule.contactEmail[0]}
+              </p>
+            )}
+
+            {this.props.rule.education.length === 0 ? null : (
+              <p style={center}>
+                Minimum level of education required is a{' '}
+                {this.props.rule.education[0]}
+              </p>
+            )}
+
+            {this.props.rule.majors.length === 0 ? null : (
+              <p style={center}>
+                The candidate must have majored in{' '}
+                {this.props.rule.majors
+                  .join(', ')
+                  .replace(/,(?!.*,)/gim, ' and')}
+              </p>
+            )}
+
+            {this.props.rule.minExp === null ? null : (
+              <p style={center}>
+                The experience required for this rule is at least
+                {this.props.rule.minExp} years of experience.
+              </p>
+            )}
+
+            {this.props.rule.maxExp === null ? null : (
+              <p style={center}>
+                The maximum experience allowed for this rule is{' '}
+                {this.props.rule.maxExp} years of experience.
+              </p>
+            )}
+
+            {this.props.rule.skills.length === 0 ? null : (
+              <p style={center}>
+                The skills required for this rule are{' '}
+                {this.props.rule.skills
+                  .join(', ')
+                  .replace(/,(?!.*,)/gim, ' and')}
+                .
+              </p>
+            )}
+
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
-              requirements to be sent to any of the contacts in this rule
-              engine, where should we send them?
+              requirements listed above, where should we send them?
             </Header>
+
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input
@@ -173,7 +232,7 @@ class Confirmation extends React.Component {
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
-                <p>
+                <p style={{ center }}>
                   A valid email is required to create a rule. Please add a
                   fallback name and email. This contact will recieve an email
                   when a candidate does <strong>not</strong> meet the conditions

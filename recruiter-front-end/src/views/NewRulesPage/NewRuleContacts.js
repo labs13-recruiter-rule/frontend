@@ -45,12 +45,10 @@ class ContactsClass extends React.Component {
   };
 
   handleChange = (e, { value }) => {
-    console.log('NewRuleContacts handleChange', value);
     this.setState({ selectedContacts: value });
   };
 
   handleSubmit = e => {
-    console.log('NewRuleContacts handleSubmit', this.state);
     this.props.contactName(this.state.newContactName);
     this.props.contactEmail(this.state.newContactEmail);
     this.props.contactContacts(this.state.selectedContacts);
