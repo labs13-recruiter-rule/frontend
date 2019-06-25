@@ -25,6 +25,7 @@ class Confirmation extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Confirmation', this.props);
     if (this.props.rule.contactEmail.length === 0) {
       this.setState({ hasContactEmail: false });
     }
@@ -179,15 +180,15 @@ class Confirmation extends React.Component {
 
             {this.props.rule.minExp === null ? null : (
               <p style={center}>
-                The experience required for this rule is at least
-                {this.props.rule.minExp} years of experience.
+                The experience required for this rule is at least{' '}
+                {this.props.rule.minExp} years of experience
               </p>
             )}
 
             {this.props.rule.maxExp === null ? null : (
               <p style={center}>
                 The maximum experience allowed for this rule is{' '}
-                {this.props.rule.maxExp} years of experience.
+                {this.props.rule.maxExp} years of experience
               </p>
             )}
 
@@ -197,7 +198,6 @@ class Confirmation extends React.Component {
                 {this.props.rule.skills
                   .join(', ')
                   .replace(/,(?!.*,)/gim, ' and')}
-                .
               </p>
             )}
             <Header as="h3" style={center}>

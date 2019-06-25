@@ -90,7 +90,6 @@ class App extends React.Component {
   };
 
   contactContacts = e => {
-    console.log('App.js contactContacts', e);
     this.setState({
       ...this.state,
       rule: {
@@ -249,21 +248,23 @@ class App extends React.Component {
   }
 
   minExp = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         minExp: e,
       },
-    });
+    }));
   };
 
   maxExp = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         maxExp: e,
       },
-    });
+    }));
   };
 
   contactName = e => {
@@ -396,9 +397,9 @@ class App extends React.Component {
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
-                  {/* <button onClick={() => this.appState()}>
+                  <button onClick={() => this.appState()}>
                     App.js this.state
-                  </button> */}
+                  </button>
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
