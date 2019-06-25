@@ -24,15 +24,21 @@ class Confirmation extends React.Component {
   }
 
   handleSubmit = e => {
-    if (this.state.fallbackEmail === '') {
-      e.preventDefault();
-      this.setState({ invalidEmail: true });
-    } else {
+    // check if an email is valid
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if (validateEmail(this.state.fallbackEmail)) {
       e.preventDefault();
       this.props.fallbackName(this.state.fallbackName);
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
+    } else {
+      e.preventDefault();
+      this.setState({ invalidEmail: true });
     }
   };
 
