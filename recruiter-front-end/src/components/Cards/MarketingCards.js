@@ -15,7 +15,6 @@ const MarketingCards = () => (
         </Card.Description>
       </Card.Content>
     </Card>
-    <Icon disabled name="arrow right" size="big" />
     <Card style={{ margin: '1em 15px' }}>
       <Image src={contacts} wrapped ui={false} />
       <Card.Content>
@@ -25,7 +24,6 @@ const MarketingCards = () => (
         </Card.Description>
       </Card.Content>
     </Card> 
-    <Icon disabled name="arrow right" size="big" />
     <Card style={{ margin: '1em 15px' }}>
       <Image src={candidates} wrapped ui={false} />
       <Card.Content>

@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import NewContactForm from '../../components/Contacts/NewContactForm';
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
@@ -24,17 +24,30 @@ class ContactsClass extends React.Component {
       newContactEmail: '',
       userContacts: [],
       selectedContacts: [],
+      contact: [],
+      modalOpen: false
     };
   }
 
   componentDidMount() {
-    axios
-      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-      .then(res => {
-        this.setState({ userContacts: res.data });
-      })
-      .catch(error => console.log(error));
+   this.getContacts();
   }
+
+  getContacts() {
+    axios
+    .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+    .then(res => {
+      this.setState({ userContacts: res.data });
+    })
+    .catch(error => console.log(error));
+  }
+
+  
+  handleModalOpen = () => this.setState({ modalOpen: true });
+
+  handleModalClose = () =>
+    this.setState({ modalOpen: false }, () => this.getContacts());
+
 
   handleName = e => {
     this.setState({ newContactName: e.target.value });
@@ -135,11 +148,13 @@ class ContactsClass extends React.Component {
             </Step.Group>
             <Header as="h3" style={center}>
               Choose a contact for the rule you'll create on the following
-              pages. Choose from existing contacts or add a new contact, and
-              then you'll decide what qualifications a candidate needs to meet
-              to be sent to that contact.
+              pages. Choose from existing contacts and then you'll decide what qualifications a candidate needs to meet
+              in order for their information to be sent to that contact.
             </Header>
             {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
+            
+            {this.state.userContacts.length> 0 ?
+            <>
             <Dropdown
               placeholder="Select Contacts"
               fluid
@@ -151,12 +166,14 @@ class ContactsClass extends React.Component {
                 return {
                   key: contact.id,
                   text: contact.name + ' | ' + contact.email,
-                  value: contact.email,
+                  value: contact
                 };
               })}
-            />{' '}
+            /> </> : <> <p>You don't have any contacts yet.</p> </>
+
+          }
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
-            <Form>
+            {/* <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -177,7 +194,23 @@ class ContactsClass extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
-            </Form>
+            </Form> */}
+            <Modal
+            trigger={
+              <Button
+                color="green"
+                onClick={this.handleModalOpen}
+              >
+                Add Contact
+              </Button>
+            }
+            open={this.state.modalOpen}
+            onClose={this.handleModalClose}
+          >
+            <Modal.Content>
+              <NewContactForm handleModalClose={this.handleModalClose} />
+            </Modal.Content>
+          </Modal> 
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
