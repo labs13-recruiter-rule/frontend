@@ -20,7 +20,14 @@ class Confirmation extends React.Component {
       fallbackName: '',
       fallbackEmail: '',
       invalidEmail: false,
+      hasContactEmail: true,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.rule.contactEmail.length === 0) {
+      this.setState({ hasContactEmail: false });
+    }
   }
 
   handleSubmit = e => {
@@ -126,19 +133,28 @@ class Confirmation extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
-            {this.props.rule.contactEmail.length === 0 ? (
-              <p
-                style={{
-                  fontSize: '2rem',
-                  color: 'red',
-                  backgroundColor: 'yellow',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                }}
-              >
-                You must specify a contact email
-              </p>
-            ) : (
+            <Modal open={!this.state.hasContactEmail} size="small">
+              <Header icon="warning sign" content="Invalid contact email" />
+              <Modal.Content>
+                <p style={{ center }}>
+                  A valid email is required to create a rule. Please add a
+                  contact name and email. This contact will recieve an email
+                  when a candidate meets the requirements for your rule engine.
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button
+                  color="green"
+                  onClick={() => this.setState({ hasContactEmail: true })}
+                  as={Link}
+                  to={'/new-rule/contacts'}
+                >
+                  <Icon name="checkmark" /> Okay
+                </Button>
+              </Modal.Actions>
+            </Modal>
+
+            {this.props.rule.contactEmail.length === 0 ? null : (
               <p style={center}>
                 If a candidate passes these rules then they will be sent to{' '}
                 {this.props.rule.contactEmail[0]}
@@ -184,12 +200,10 @@ class Confirmation extends React.Component {
                 .
               </p>
             )}
-
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
               requirements listed above, where should we send them?
             </Header>
-
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input
