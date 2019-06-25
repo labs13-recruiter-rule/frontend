@@ -9,17 +9,39 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getRules, deleteRule } from '../../actions/ruleActions';
+import Axios from 'axios';
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 class EngineCardRules extends React.Component {
   state = {
-    rulesToUse: [],
+    rules: [],
   };
+
   componentDidMount() {
-    this.props
-      .getRules(this.props.engineRule)
-      .then(() => {
-        this.setState({ rulesToUse: this.props.rules });
-        // console.log('CDM LAST', res.data);
+    // this.props
+    //   .getRules(this.props.engineRule)
+    //   .then(() => {
+    //     this.setState({ rules: this.props.rules }, () => {
+    //       console.log(this.state.rules);
+    //     });
+    //     // console.log('CDM LAST', res.data);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    Axios.get(
+      `https://recruiter-back-end.herokuapp.com/engines/${this.props.engineRule}/rules`,
+      tokenHeader,
+    )
+      .then(res => {
+        this.setState({ rules: res.data }, () => {
+          console.log(
+            this.state.rules[0],
+            'from this state rules enginecard rules',
+          );
+        });
       })
       .catch(err => {
         console.log(err);
@@ -56,8 +78,8 @@ class EngineCardRules extends React.Component {
             {/* </Segment.Group>
           <Segment.Group> */}
 
-            {this.state.rulesToUse && this.state.rulesToUse.length > 0 ? (
-              this.state.rulesToUse.map(ruleAgain => (
+            {this.state.rules && this.state.rules.length > 0 ? (
+              this.state.rules.map(ruleAgain => (
                 <div>
                   <h1>{ruleAgain.id}</h1>
                 </div>

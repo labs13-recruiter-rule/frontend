@@ -47,9 +47,7 @@ class EngineCard extends React.Component {
   }
 }
 
-const mapStateToProps = ({ rules }) => ({
-  rules,
-});
+const mapStateToProps = ({}) => ({});
 
 export default connect(
   mapStateToProps,
