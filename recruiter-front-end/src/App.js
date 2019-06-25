@@ -61,8 +61,9 @@ class App extends React.Component {
       experience: null,
       education: [],
     },
-    engine: 38,
+    engine: 38, // why is this hardcoded as 38?
     engine_id: null,
+    selectedContacts: []
   };
 
   componentDidMount() {
@@ -93,13 +94,16 @@ class App extends React.Component {
 
   contactContacts = e => {
     console.log('App.js contactContacts', e);
+   let contactNames = e.map(contact => contact.name);
+   let contactEmails = e.map(contact => contact.email);
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
-        contactEmail: e,
+       selectedContacts: e
       },
     });
+    console.log('APP js rule', this.state.rule)
   };
 
   minEducation = e => {
