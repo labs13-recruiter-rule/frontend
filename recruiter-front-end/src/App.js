@@ -49,6 +49,7 @@ class App extends React.Component {
       minExp: null,
       maxExp: null,
       contactEmail: '',
+      contactName: '',
       requireHeadshot: false,
     },
     candidate: {

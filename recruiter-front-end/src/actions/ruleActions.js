@@ -224,6 +224,16 @@ export function actualParser(rule) {
   if (rule.contactEmail) {
     //
     event = { type: 'email', params: { contact: `${rule.contactEmail}` } };
+
+    if (rule.contactName) {
+      event = {
+        type: 'email',
+        params: {
+          contact: `${rule.contactEmail}`,
+          contactName: `${rule.contactName}`,
+        },
+      };
+    }
   }
 
   const conditions = { all: allRules };
