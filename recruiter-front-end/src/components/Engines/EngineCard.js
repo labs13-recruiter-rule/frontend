@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Button, Header, Segment } from 'semantic-ui-react';
+import { Card, Icon, Container, Button, Header, Segment } from 'semantic-ui-react';
 import { getRules, deleteRule } from '../../actions/ruleActions';
 import EngineCardRules from './EngineCardRules';
+import Axios from 'axios';
+
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 class EngineCard extends React.Component {
   constructor(props) {
@@ -28,12 +33,23 @@ class EngineCard extends React.Component {
       });
   };
 
+  deleteEngine = () => {
+    Axios.delete(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`, tokenHeader).then(res => console.log(res)).catch(error => console.log(error))
+  }
+
   render() {
     return (
+      <>
       <Card centered color="blue">
         {/* <Card.Content> */}
         <Card.Content>
-          <Header as="h2" content={this.props.engine.engine_name} />
+          <Header as="h2" content={this.props.engine.engine_name} />   
+          <Icon
+                  name="trash alternate"
+                  color="red"
+                  size="large"
+                  onClick={this.deleteEngine}
+                />
         </Card.Content>
         {/* </Card.Content> */}
         <Segment>
@@ -43,6 +59,7 @@ class EngineCard extends React.Component {
           />
         </Segment>
       </Card>
+      </>
     );
   }
 }
