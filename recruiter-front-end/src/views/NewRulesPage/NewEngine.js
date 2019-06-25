@@ -51,7 +51,18 @@ class NewEngineRuleView extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.candidateEngine(this.state.engine);
+    Axios.post(
+      'https://recruiter-back-end.herokuapp.com/engines',
+      { engine_name: this.state.engine },
+      tokenHeader,
+    )
+      .then(res => {
+        this.props.candidateEngine(res.data.newEngine.id);
+        console.log('posted handlesubmit newengine', res.data.newEngine.id);
+      })
+      .catch(err => {
+        console.log('from error handlesubmit', err);
+      });
   };
 
   render() {
@@ -116,7 +127,7 @@ class NewEngineRuleView extends React.Component {
                     <Form.Field>
                       <Form.Input
                         label="Engine Name"
-                        value={this.state.engine_name}
+                        value={this.state.engine}
                         onChange={this.handleEngineName}
                         type="text"
                         name="engine_name"

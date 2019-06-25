@@ -23,8 +23,9 @@ class EngineDash extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getEngines();
-    //
+    this.props.getEngines().then(() => {
+      console.log(this.props.engines, ' from props engines');
+    });
   }
 
   handleModalOpen = () => this.setState({ newEngineModalOpen: true });

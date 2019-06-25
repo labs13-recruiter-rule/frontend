@@ -206,29 +206,28 @@ export function actualParser(rule) {
       value: rule.minExp,
     };
     allRules.push(minExpRule);
-
-    if (rule.maxExp) {
-      const maxExpRule = {
-        fact: 'experience',
-        operator: 'lessThanInclusive',
-        value: rule.maxExp,
-      };
-      allRules.push(maxExpRule);
-    }
-
-    // !** END OF TRADITIONAL RULES \\
-    // BELOW BEGINS EVENT PARAMS **1 \\
-
-    let event = {};
-
-    if (rule.contactEmail) {
-      //
-      event = { type: 'email', params: { contact: `${rule.contactEmail}` } };
-    }
-
-    const conditions = { all: allRules };
-    const ruleFinal = { rule: { conditions, event } };
-
-    return ruleFinal;
   }
+  if (rule.maxExp) {
+    const maxExpRule = {
+      fact: 'experience',
+      operator: 'lessThanInclusive',
+      value: rule.maxExp,
+    };
+    allRules.push(maxExpRule);
+  }
+
+  // !** END OF TRADITIONAL RULES \\
+  // BELOW BEGINS EVENT PARAMS **1 \\
+
+  let event = {};
+
+  if (rule.contactEmail) {
+    //
+    event = { type: 'email', params: { contact: `${rule.contactEmail}` } };
+  }
+
+  const conditions = { all: allRules };
+  const ruleFinal = { rule: { conditions, event } };
+
+  return ruleFinal;
 }
