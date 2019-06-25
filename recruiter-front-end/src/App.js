@@ -402,9 +402,9 @@ class App extends React.Component {
                   <Menu.Item position="right">
                     <Button as={Link} to="/" onClick={this.logout}>logout</Button>
                   </Menu.Item>
-                  <button onClick={() => this.appState()}>
+                  {/* <button onClick={() => this.appState()}>
                     App.js this.state
-                  </button>
+                  </button> */}
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
