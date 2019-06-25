@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 class Confirmation extends React.Component {
   constructor(props) {
@@ -25,9 +26,10 @@ class Confirmation extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.rule.contactEmail.length === 0) {
-      this.setState({ hasContactEmail: false });
-    }
+    console.log('Confirmation this.props', this.props);
+    // if (this.props.rule.contactEmail.length === 0) {
+    //   this.setState({ hasContactEmail: false });
+    // }
   }
 
   handleSubmit = e => {
@@ -203,6 +205,20 @@ class Confirmation extends React.Component {
               If a candidate does not meet the education, skills and experience
               requirements listed above, where should we send them?
             </Header>
+            {/* <Dropdown
+              placeholder="Select Contact"
+              fluid
+              selection
+              onChange={this.handleChange}
+              value={this.state.contacts}
+              options={this.state.userContacts.map(contact => {
+                return {
+                  key: contact.id,
+                  text: contact.name + ' | ' + contact.email,
+                  value: contact.email
+                };
+              })}
+             /> */}
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input

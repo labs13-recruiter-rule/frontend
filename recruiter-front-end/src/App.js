@@ -59,8 +59,9 @@ class App extends React.Component {
       experience: null,
       education: [],
     },
-    engine: 38,
+    engine: 38, // why is this hardcoded as 38?
     engine_id: null,
+    selectedContacts: [],
   };
 
   componentDidMount() {
@@ -85,7 +86,6 @@ class App extends React.Component {
   }
 
   candidateEngine = e => {
-    console.log('App.js candidateEngine', e);
     this.setState({ ...this.state, engine: e });
   };
 
@@ -94,7 +94,7 @@ class App extends React.Component {
       ...this.state,
       rule: {
         ...this.state.rule,
-        contactEmail: e,
+        selectedContacts: e,
       },
     });
   };
@@ -395,7 +395,9 @@ class App extends React.Component {
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
-                    <Button onClick={this.logout}>logout</Button>
+                    <Button as={Link} to="/" onClick={this.logout}>
+                      logout
+                    </Button>
                   </Menu.Item>
                   {/* <button onClick={() => this.appState()}>
                     App.js this.state
@@ -468,6 +470,7 @@ class App extends React.Component {
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
                       rule={this.state.rule}
+                      contacts={this.state.selectedContacts}
                       submitRule={() => this.parseMyRule()}
                     />
                   )}
