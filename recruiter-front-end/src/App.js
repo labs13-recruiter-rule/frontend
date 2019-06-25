@@ -400,7 +400,7 @@ class App extends React.Component {
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
-                    <Button onClick={this.logout}>logout</Button>
+                    <Button as={Link} to="/" onClick={this.logout}>logout</Button>
                   </Menu.Item>
                   <button onClick={() => this.appState()}>
                     App.js this.state
