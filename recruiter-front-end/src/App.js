@@ -49,6 +49,7 @@ class App extends React.Component {
       minExp: null,
       maxExp: null,
       contactEmail: '',
+      contactName: '',
       requireHeadshot: false,
     },
     candidate: {
@@ -190,7 +191,6 @@ class App extends React.Component {
 
   majors = e => {
     this.setState({
-      ...this.state,
       rule: {
         ...this.state.rule,
         majors: e,

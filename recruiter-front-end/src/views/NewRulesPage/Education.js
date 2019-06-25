@@ -18,7 +18,7 @@ class NewCandidate extends React.Component {
     super(props);
     this.state = {
       degree: '',
-      majors: '',
+      majors: [],
     };
   }
 
