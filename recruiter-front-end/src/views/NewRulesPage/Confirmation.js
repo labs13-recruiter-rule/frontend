@@ -102,7 +102,7 @@ class Confirmation extends React.Component {
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
+                    <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>

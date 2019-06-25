@@ -48,7 +48,8 @@ class App extends React.Component {
       majors: [],
       minExp: null,
       maxExp: null,
-      contactEmail: '',
+      contactEmail: [],
+      contactName: '',
     },
     candidate: {
       name: '',
@@ -90,11 +91,19 @@ class App extends React.Component {
   };
 
   contactContacts = e => {
+<<<<<<< HEAD
+=======
+    console.log('App.js contactContacts', e);
+>>>>>>> 30c94662fb105ab19340e8901b524b4e414274e2
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
+<<<<<<< HEAD
         selectedContacts: e,
+=======
+       contactEmail: e
+>>>>>>> 30c94662fb105ab19340e8901b524b4e414274e2
       },
     });
   };
@@ -386,7 +395,7 @@ class App extends React.Component {
                   </Menu.Item>
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
-                      <Button>Contacts</Button>
+                      <Button>My Contacts</Button>
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
