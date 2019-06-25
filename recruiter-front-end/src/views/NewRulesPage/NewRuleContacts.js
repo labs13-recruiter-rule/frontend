@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import NewContactForm from '../../components/Contacts/NewContactForm';
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
@@ -24,18 +24,30 @@ class ContactsClass extends React.Component {
       newContactEmail: '',
       userContacts: [],
       selectedContacts: [],
-      contact: []
+      contact: [],
+      modalOpen: false
     };
   }
 
   componentDidMount() {
-    axios
-      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-      .then(res => {
-        this.setState({ userContacts: res.data });
-      })
-      .catch(error => console.log(error));
+   this.getContacts();
   }
+
+  getContacts() {
+    axios
+    .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+    .then(res => {
+      this.setState({ userContacts: res.data });
+    })
+    .catch(error => console.log(error));
+  }
+
+  
+  handleModalOpen = () => this.setState({ modalOpen: true });
+
+  handleModalClose = () =>
+    this.setState({ modalOpen: false }, () => this.getContacts());
+
 
   handleName = e => {
     this.setState({ newContactName: e.target.value });
@@ -157,7 +169,7 @@ class ContactsClass extends React.Component {
                   value: contact
                 };
               })}
-            /> </> : <> <p>You don't have any contacts yet.</p> <Button style={primaryButton} as={Link} to="/contacts">Add Contacts</Button> </>
+            /> </> : <> <p>You don't have any contacts yet.</p> </>
 
           }
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
@@ -183,6 +195,22 @@ class ContactsClass extends React.Component {
                 />
               </Form.Field>
             </Form> */}
+            <Modal
+            trigger={
+              <Button
+                color="green"
+                onClick={this.handleModalOpen}
+              >
+                Add Contact
+              </Button>
+            }
+            open={this.state.modalOpen}
+            onClose={this.handleModalClose}
+          >
+            <Modal.Content>
+              <NewContactForm handleModalClose={this.handleModalClose} />
+            </Modal.Content>
+          </Modal> 
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
