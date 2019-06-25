@@ -48,7 +48,7 @@ class App extends React.Component {
       majors: [],
       minExp: null,
       maxExp: null,
-      contactEmail: '',
+      contactEmail: [],
       contactName: '',
       requireHeadshot: false,
     },
@@ -94,13 +94,11 @@ class App extends React.Component {
 
   contactContacts = e => {
     console.log('App.js contactContacts', e);
-   let contactNames = e.map(contact => contact.name);
-   let contactEmails = e.map(contact => contact.email);
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
-       selectedContacts: e
+       contactEmail: e
       },
     });
     console.log('APP js rule', this.state.rule)
@@ -390,7 +388,7 @@ class App extends React.Component {
                   </Menu.Item>
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
-                      <Button>Contacts</Button>
+                      <Button>My Contacts</Button>
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
