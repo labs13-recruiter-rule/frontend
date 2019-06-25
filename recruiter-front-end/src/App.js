@@ -309,7 +309,7 @@ class App extends React.Component {
       ...prevState,
       candidate: {
         ...prevState.candidate,
-        education: e,
+        education: [e],
       },
     }));
   };
