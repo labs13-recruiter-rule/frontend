@@ -19,16 +19,22 @@ class Confirmation extends React.Component {
     this.state = {
       fallbackName: '',
       fallbackEmail: '',
+      invalidEmail: false,
     };
   }
 
   handleSubmit = e => {
-    console.log('confirm handlesubmit clicked');
-    e.preventDefault();
-    this.props.fallbackName(this.state.fallbackName);
-    this.props.fallbackEmail(this.state.fallbackEmail);
-    //  submitRule calls parseMyRule() in App.js
-    this.props.submitRule();
+    if (this.state.fallbackEmail === '') {
+      // alert('Invalid email');
+      e.preventDefault();
+      this.setState({ invalidEmail: true });
+    } else {
+      e.preventDefault();
+      this.props.fallbackName(this.state.fallbackName);
+      this.props.fallbackEmail(this.state.fallbackEmail);
+      //  submitRule calls parseMyRule() in App.js
+      this.props.submitRule();
+    }
   };
 
   handleName = e => {
@@ -54,13 +60,6 @@ class Confirmation extends React.Component {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-    };
-
-    const secondaryButton = {
-      margin: '10px auto',
-      height: '3rem',
-      width: '350px',
-      fontSize: '1rem',
     };
 
     const linkStyles = {
@@ -138,7 +137,7 @@ class Confirmation extends React.Component {
                   placeholder="Jane Doe"
                 />
               </Form.Field>
-              <Form.Field>
+              <Form.Field required>
                 <Form.Input
                   label="Email"
                   value={this.state.fallbackEmail}
@@ -166,24 +165,24 @@ class Confirmation extends React.Component {
                 </Button>
               </Grid.Column>
             </Form>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
+            <Modal open={this.state.invalidEmail} size="small">
+              <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
                 <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
+                  A valid email is required to create a rule. Please add a
+                  fallback name and email. This contact will recieve an email
+                  when a candidate does <strong>not</strong> meet the conditions
+                  for your rule engine.
                 </p>
               </Modal.Content>
+              <Modal.Actions>
+                <Button
+                  color="green"
+                  onClick={() => this.setState({ invalidEmail: false })}
+                >
+                  <Icon name="checkmark" /> Okay
+                </Button>
+              </Modal.Actions>
             </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
