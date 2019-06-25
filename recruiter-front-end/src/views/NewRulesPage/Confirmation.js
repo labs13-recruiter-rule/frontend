@@ -10,7 +10,6 @@ import {
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 
@@ -24,23 +23,12 @@ class Confirmation extends React.Component {
   }
 
   handleSubmit = e => {
-    // console.log('this.state', this.state);
     console.log('confirm handlesubmit clicked');
     e.preventDefault();
+    this.props.fallbackName(this.state.fallbackName);
+    this.props.fallbackEmail(this.state.fallbackEmail);
+    //  submitRule calls parseMyRule() in App.js
     this.props.submitRule();
-    // Axios.post(
-    //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
-    //   this.state,
-    //   {
-    //     headers: {
-    //       token: `${token}`,
-    //     },
-    //   },
-    // )
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   handleName = e => {
