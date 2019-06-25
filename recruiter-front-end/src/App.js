@@ -207,12 +207,30 @@ class App extends React.Component {
     });
   };
 
+  fallbackName = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      rule: {
+        ...prevState.rule,
+        fallbackName: e,
+      },
+    }));
+  };
+
+  fallbackEmail = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      rule: {
+        ...prevState.rule,
+        fallbackEmail: e,
+      },
+    }));
+  };
+
   parseMyRule() {
     this.props
       .parseRule(this.state.rule)
       .then(() => {
-        // console.log('from response of parsing', this.props.parsedRule);
-
         this.props
           .addRule(
             `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine}/rules/`,
@@ -447,7 +465,11 @@ class App extends React.Component {
                   exact
                   path="/new-rule/confirmation"
                   component={props => (
-                    <Confirmation submitRule={() => this.parseMyRule()} />
+                    <Confirmation
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
+                      submitRule={() => this.parseMyRule()}
+                    />
                   )}
                 />
                 <Route exact path="/contacts/add" component={NewContactForm} />
@@ -504,6 +526,8 @@ class App extends React.Component {
                       sendCandidate={this.sendCandidate}
                       parseRules={this.parseMyRule}
                       engine={this.state.engine}
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
                     />
                   )}
                 />

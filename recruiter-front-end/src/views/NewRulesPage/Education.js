@@ -168,7 +168,7 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={10} />
+            <Progress percent={42} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>

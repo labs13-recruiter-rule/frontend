@@ -38,26 +38,10 @@ class EngineDash extends React.Component {
       <Container fluid>
         <Segment className="engineManager">
           <Header>Engine Manager</Header>
-
-          {/* NOTE: Come back and change this to the route for new engine. Make similar icon + route handling for EngineCard Rules later */}
-          <Modal
-            trigger={
-              <Icon
-                name="plus circle"
-                size="big"
-                color="green"
-                link={true}
-                onClick={this.handleModalOpen}
-              ></Icon>
-            }
-            open={this.state.newEngineModalOpen}
-            onClose={this.handleModalClose}
-          >
-            <Modal.Content>
-              <NewEngine handleModalClose={this.handleModalClose} />
-            </Modal.Content>
-          </Modal>
-          {/* </Link> */}
+          <Button icon as={Link} labelPosition="right" to="/new-rule/engine">
+            Add
+            <Icon name="plus circle" />
+          </Button>
         </Segment>
 
         {this.props.engines.length < 1 ? (
