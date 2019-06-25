@@ -38,7 +38,7 @@ class EngineCardRules extends React.Component {
       .then(res => {
         this.setState({ rules: res.data }, () => {
           console.log(
-            this.state.rules[0],
+            this.state.rules,
             'from this state rules enginecard rules',
           );
         });
@@ -81,7 +81,11 @@ class EngineCardRules extends React.Component {
             {this.state.rules && this.state.rules.length > 0 ? (
               this.state.rules.map(ruleAgain => (
                 <div>
-                  <h1>{ruleAgain.id}</h1>
+                  <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2>
+                  <h3>Skills</h3>
+                  <div>{ruleAgain.rule.conditions.all.map(condition => <p>{condition.value}</p>)}</div>
+                  <h3>Degree</h3> 
+                  
                 </div>
               ))
             ) : (
