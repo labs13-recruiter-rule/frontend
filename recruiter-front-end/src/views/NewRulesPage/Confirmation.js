@@ -25,7 +25,6 @@ class Confirmation extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Confirmation', this.props);
     if (this.props.rule.contactEmail.length === 0) {
       this.setState({ hasContactEmail: false });
     }
