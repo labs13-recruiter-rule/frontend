@@ -79,13 +79,25 @@ class EngineCardRules extends React.Component {
           <Segment.Group> */}
 
             {this.state.rules && this.state.rules.length > 0 ? (
-              this.state.rules.map(ruleAgain => (
+              this.state.rules.map(rule => (
                 <div>
-                  <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2>
+                  {/* <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2> */}
+                  <h2>
+                    rule for sending a candidate to:{' '}
+                    {rule.ruleNotParsed.contactEmail}
+                  </h2>
                   <h3>Skills</h3>
-                  <div>{ruleAgain.rule.conditions.all.map(condition => <p>{condition.value}</p>)}</div>
-                  <h3>Degree</h3> 
-                  
+                  <div>
+                    {rule.ruleNotParsed.conditions.all.map(condition => (
+                      <p>{condition.value}</p>
+                    ))}
+                  </div>
+                  {/* <div>
+                    {ruleAgain.rule.conditions.all.map(condition => (
+                      <p>{condition.value}</p>
+                    ))}
+                  </div> */}
+                  <h3>Degree</h3>
                 </div>
               ))
             ) : (

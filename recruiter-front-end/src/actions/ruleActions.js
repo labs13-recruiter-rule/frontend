@@ -138,6 +138,7 @@ export const parseRule = rule => dispatch => {
   //   });
   // }
   // return allRules;
+
   return Promise.resolve(actualParser(rule))
     .then(res => {
       dispatch({ type: PARSE_RULE_SUCCESS, payload: res });
@@ -149,6 +150,7 @@ export const parseRule = rule => dispatch => {
 
 export function actualParser(rule) {
   //
+  const ruleNotParsed = JSON.stringify(rule);
   const allRules = [];
   if (rule.skills) {
     rule.skills.forEach(skill => {
@@ -237,7 +239,10 @@ export function actualParser(rule) {
   }
 
   const conditions = { all: allRules };
-  const ruleFinal = { rule: { conditions, event } };
+  const ruleFinal = {
+    rule: { conditions, event },
+    ruleNotParsed,
+  };
 
   return ruleFinal;
 }
