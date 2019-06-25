@@ -190,7 +190,6 @@ class App extends React.Component {
 
   majors = e => {
     this.setState({
-      ...this.state,
       rule: {
         ...this.state.rule,
         majors: e,
