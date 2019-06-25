@@ -25,7 +25,6 @@ class Confirmation extends React.Component {
 
   handleSubmit = e => {
     if (this.state.fallbackEmail === '') {
-      // alert('Invalid email');
       e.preventDefault();
       this.setState({ invalidEmail: true });
     } else {
