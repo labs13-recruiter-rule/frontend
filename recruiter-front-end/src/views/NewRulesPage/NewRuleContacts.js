@@ -166,7 +166,7 @@ class ContactsClass extends React.Component {
                 return {
                   key: contact.id,
                   text: contact.name + ' | ' + contact.email,
-                  value: contact
+                  value: contact.email
                 };
               })}
             /> </> : <> <p>You don't have any contacts yet.</p> </>

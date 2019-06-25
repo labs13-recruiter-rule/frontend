@@ -325,8 +325,7 @@ class NewCandidate extends React.Component {
                 <Grid.Column />
                 <Grid.Column width={14}>
                   <Header as="h4" textAlign="center">
-                    What are the skill requirements to send a candidate to the
-                    Sales Managers?
+                    What are the skill requirements to send a candidate to your selected contact(s)?
                   </Header>
                 </Grid.Column>
                 <Grid.Column />

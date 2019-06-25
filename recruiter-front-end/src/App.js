@@ -390,7 +390,7 @@ class App extends React.Component {
                   </Menu.Item>
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
-                      <Button>Contacts</Button>
+                      <Button>My Contacts</Button>
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
