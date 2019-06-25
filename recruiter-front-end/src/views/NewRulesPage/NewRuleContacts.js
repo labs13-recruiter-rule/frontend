@@ -24,6 +24,7 @@ class ContactsClass extends React.Component {
       newContactEmail: '',
       userContacts: [],
       selectedContacts: [],
+      contact: []
     };
   }
 
@@ -135,11 +136,13 @@ class ContactsClass extends React.Component {
             </Step.Group>
             <Header as="h3" style={center}>
               Choose a contact for the rule you'll create on the following
-              pages. Choose from existing contacts or add a new contact, and
-              then you'll decide what qualifications a candidate needs to meet
-              to be sent to that contact.
+              pages. Choose from existing contacts and then you'll decide what qualifications a candidate needs to meet
+              in order for their information to be sent to that contact.
             </Header>
             {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
+            
+            {this.state.userContacts.length> 0 ?
+            <>
             <Dropdown
               placeholder="Select Contacts"
               fluid
@@ -151,12 +154,14 @@ class ContactsClass extends React.Component {
                 return {
                   key: contact.id,
                   text: contact.name + ' | ' + contact.email,
-                  value: contact.email,
+                  value: contact
                 };
               })}
-            />{' '}
+            /> </> : <> <p>You don't have any contacts yet.</p> <Button style={primaryButton} as={Link} to="/contacts">Add Contacts</Button> </>
+
+          }
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
-            <Form>
+            {/* <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -177,7 +182,7 @@ class ContactsClass extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
-            </Form>
+            </Form> */}
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
