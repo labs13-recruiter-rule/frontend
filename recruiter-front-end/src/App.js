@@ -48,7 +48,7 @@ class App extends React.Component {
       majors: [],
       minExp: null,
       maxExp: null,
-      contactEmail: '',
+      contactEmail: [],
       contactName: '',
       requireHeadshot: false,
     },
@@ -94,13 +94,11 @@ class App extends React.Component {
 
   contactContacts = e => {
     console.log('App.js contactContacts', e);
-   let contactNames = e.map(contact => contact.name);
-   let contactEmails = e.map(contact => contact.email);
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
-       selectedContacts: e
+       contactEmail: e
       },
     });
     console.log('APP js rule', this.state.rule)

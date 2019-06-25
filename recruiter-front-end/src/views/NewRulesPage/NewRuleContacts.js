@@ -112,7 +112,7 @@ class ContactsClass extends React.Component {
               <Step active>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
+                    <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -147,11 +147,9 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              Choose a contact for the rule you'll create on the following
-              pages. Choose from existing contacts and then you'll decide what qualifications a candidate needs to meet
-              in order for their information to be sent to that contact.
+              Choose contacts for your first rule. On the following pages, you will select the education, experience, and skills requirements a candidate must meet to be sent to be sent to the contacts.
             </Header>
-            {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
+            <p><strong>Note:</strong> if you select more than one contact for a rule, those contacts will be sent an email together as a group. If you don't want the contacts to receive an email together, create a separate rule with the same candidate requirements for each contact and they will be sent separately. You will have the opportunity to add more rules to this engine after creating your first one.</p>
             
             {this.state.userContacts.length> 0 ?
             <>
