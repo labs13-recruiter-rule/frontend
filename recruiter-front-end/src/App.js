@@ -189,22 +189,23 @@ class App extends React.Component {
   };
 
   majors = e => {
-    this.setState({
-      ...this.state,
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         majors: e,
       },
-    });
+    }));
   };
 
   skills = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         skills: e,
       },
-    });
+    }));
   };
 
   fallbackName = e => {
@@ -398,9 +399,9 @@ class App extends React.Component {
                   <Menu.Item position="right">
                     <Button onClick={this.logout}>logout</Button>
                   </Menu.Item>
-                  <button onClick={() => this.appState()}>
+                  {/* <button onClick={() => this.appState()}>
                     App.js this.state
-                  </button>
+                  </button> */}
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
