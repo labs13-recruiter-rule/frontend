@@ -35,23 +35,21 @@ import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
 import Axios from 'axios';
 
-const token = sessionStorage.getItem('token')
-const tokenHeader = {headers: {token: `${token}`}}
-
-
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 class App extends React.Component {
   state = {
     user: {},
     user_id: null,
     rule: {
-      skills: ['React', 'Vue', 'Angular'],
-      education: ['Masters', 'PhD'],
-      majors: ['Computer Science'],
-      minExp: 2,
-      maxExp: 9,
-      contactEmail: 'omaro@me.com',
-      requireHeadshot: true,
+      skills: [],
+      education: [],
+      majors: [],
+      minExp: null,
+      maxExp: null,
+      contactEmail: '',
+      requireHeadshot: false,
     },
     candidate: {
       name: '',
@@ -60,10 +58,10 @@ class App extends React.Component {
       major: [],
       skills: [],
       experience: null,
-      education: []
+      education: [],
     },
-    engine: '',
-    engine_id: null
+    engine: 38,
+    engine_id: null,
   };
 
   componentDidMount() {
@@ -209,21 +207,29 @@ class App extends React.Component {
     });
   };
 
-  parseMyRule(engine_id) {
+  parseMyRule() {
     this.props
       .parseRule(this.state.rule)
       .then(() => {
-        console.log('from response of parsing', this.props.parsedRule);
+        // console.log('from response of parsing', this.props.parsedRule);
 
-        this.props.addRule(
-          `https://recruiter-back-end.herokuapp.com/engines/${engine_id}/rules/`,
-          this.props.parsedRule,
-        );
+        this.props
+          .addRule(
+            `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine}/rules/`,
+            this.props.parsedRule,
+          )
+          .then(() => {
+            console.log('rule submitted good');
+          })
+          .catch(() => {
+            console.log('rule did not submit well');
+          });
       })
       .catch(err => {
         console.log('from error parse', err);
       });
   }
+
   minExp = e => {
     this.setState({
       rule: {
@@ -393,7 +399,7 @@ class App extends React.Component {
                   exact
                   path="/new-candidate/engine"
                   render={() => (
-                    <CandidateEngine  candidateEngine={this.candidateEngine} />
+                    <CandidateEngine candidateEngine={this.candidateEngine} />
                   )}
                 />
                 <Route
@@ -440,7 +446,9 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/confirmation"
-                  component={Confirmation}
+                  component={props => (
+                    <Confirmation submitRule={() => this.parseMyRule()} />
+                  )}
                 />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
@@ -487,8 +495,23 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route exact path="/new-candidate/confirm" render={() => <CandidateConfirm candidate={this.state.candidate} sendCandidate={this.sendCandidate} parseRules={this.parseMyRule} engine={this.state.engine} />} />
-                <Route exact path="/new-candidate/send" component={CandidateSend} />
+                <Route
+                  exact
+                  path="/new-candidate/confirm"
+                  render={() => (
+                    <CandidateConfirm
+                      candidate={this.state.candidate}
+                      sendCandidate={this.sendCandidate}
+                      parseRules={this.parseMyRule}
+                      engine={this.state.engine}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/send"
+                  component={CandidateSend}
+                />
               </>,
             ]
           ) : (

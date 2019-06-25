@@ -24,7 +24,10 @@ class Confirmation extends React.Component {
   }
 
   handleSubmit = e => {
-    console.log('this.state', this.state);
+    // console.log('this.state', this.state);
+    console.log('confirm handlesubmit clicked');
+    e.preventDefault();
+    this.props.submitRule();
     // Axios.post(
     //   'https://recruiter-back-end.herokuapp.com/engine/addRule',
     //   this.state,
@@ -136,7 +139,7 @@ class Confirmation extends React.Component {
               requirements to be sent to any of the contacts in this rule
               engine, where should we send them?
             </Header>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -157,23 +160,24 @@ class Confirmation extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
-            </Form>
-            <Grid.Column
-              style={{ display: 'flex', justifyContent: 'space-between' }}
-            >
-              <Button style={primaryButton} as={Link} to="/new-rule/skills">
-                <Icon name="arrow left" size="small" />
-                Back
-              </Button>
-              <Button
-                style={primaryButton}
-                onClick={this.handleSubmit}
-                as={Link}
-                to="/"
+              <Grid.Column
+                style={{ display: 'flex', justifyContent: 'space-between' }}
               >
-                Submit
-              </Button>
-            </Grid.Column>
+                <Button style={primaryButton} as={Link} to="/new-rule/skills">
+                  <Icon name="arrow left" size="small" />
+                  Back
+                </Button>
+                <Button
+                  style={primaryButton}
+                  onClick={this.handleSubmit}
+                  type="submit"
+                  as={Link}
+                  to="/"
+                >
+                  Submit
+                </Button>
+              </Grid.Column>
+            </Form>
             <Modal
               trigger={
                 <Button style={secondaryButton}>
