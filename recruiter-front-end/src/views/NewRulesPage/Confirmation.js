@@ -4,12 +4,14 @@ import {
   Button,
   Modal,
   Header,
+  Segment,
   Icon,
   Progress,
   Step,
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -22,6 +24,7 @@ class Confirmation extends React.Component {
       fallbackEmail: '',
       invalidEmail: false,
       hasContactEmail: true,
+      message: ''
     };
   }
 
@@ -32,6 +35,29 @@ class Confirmation extends React.Component {
     // }
   }
 
+  state = { log: [] }
+
+  handleClick = () => {
+    this.addFallback();
+    this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)}
+
+  handleKeyPress = (e) => {
+    if (e.charCode === 32 || e.charCode === 13) {
+      // Prevent the default action to stop scrolling when space is pressed
+      e.preventDefault()
+      this.addFallback()
+      this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)
+    }
+  }
+
+  updateMessage = message => this.setState(prevState => ({ message: [message, ...prevState.message] }))
+
+
+  addFallback = e => {
+    Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
+    .then(res => console.log(res)).catch(err=> console.log(err))
+  }
+
   handleSubmit = e => {
     // check if an email is valid
     function validateEmail(email) {
@@ -40,13 +66,11 @@ class Confirmation extends React.Component {
     }
 
     if (validateEmail(this.state.fallbackEmail)) {
-      e.preventDefault();
       this.props.fallbackName(this.state.fallbackName);
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
     } else {
-      e.preventDefault();
       this.setState({ invalidEmail: true });
     }
   };
@@ -219,7 +243,7 @@ class Confirmation extends React.Component {
                 };
               })}
              /> */}
-            <Form onSubmit={this.handleSubmit}>
+            <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -240,30 +264,34 @@ class Confirmation extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
+
+              <Button   onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}>Add Fallback Contact</Button>
+              </Form> 
+              <Segment>{this.state.message}</Segment>
               <Grid.Column
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
-                <Button style={primaryButton} as={Link} to="/new-rule/skills">
+                <Button style={primaryButton} as={Link} to="/new-rule/experience">
                   <Icon name="arrow left" size="small" />
                   Back
                 </Button>
                 <Button
                   style={primaryButton}
                   onClick={this.handleSubmit}
-                  type="submit"
                   as={Link}
-                  to="/"
+                  to="/engines"
                 >
                   Submit
                 </Button>
               </Grid.Column>
-            </Form>
+            
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
                 <p style={{ center }}>
                   A valid email is required to create a rule. Please add a
-                  fallback name and email. This contact will recieve an email
+                  fallback name and email. This contact will receive an email
                   when a candidate does <strong>not</strong> meet the conditions
                   for your rule engine.
                 </p>
