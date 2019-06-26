@@ -4,6 +4,7 @@ import {
   Button,
   Modal,
   Header,
+  Segment,
   Icon,
   Progress,
   Step,
@@ -23,6 +24,7 @@ class Confirmation extends React.Component {
       fallbackEmail: '',
       invalidEmail: false,
       hasContactEmail: true,
+      message: ''
     };
   }
 
@@ -33,8 +35,25 @@ class Confirmation extends React.Component {
     // }
   }
 
+  state = { log: [] }
+
+  handleClick = () => {
+    this.addFallback();
+    this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)}
+
+  handleKeyPress = (e) => {
+    if (e.charCode === 32 || e.charCode === 13) {
+      // Prevent the default action to stop scrolling when space is pressed
+      e.preventDefault()
+      this.addFallback()
+      this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)
+    }
+  }
+
+  updateMessage = message => this.setState(prevState => ({ message: [message, ...prevState.message] }))
+
+
   addFallback = e => {
-    e.preventDefault();
     Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
     .then(res => console.log(res)).catch(err=> console.log(err))
   }
@@ -236,7 +255,6 @@ class Confirmation extends React.Component {
                   name="name"
                   placeholder="Jane Doe"
                 />
-                <p>{this.state.fallbackName}</p>
               </Form.Field>
               <Form.Field required>
                 <Form.Input
@@ -247,11 +265,12 @@ class Confirmation extends React.Component {
                   name="email"
                   placeholder="example@email.com"
                 />
-              <p>{this.state.fallbackEmail}</p>
               </Form.Field>
 
-              <Button onClick={this.addFallback}>Add Fallback Contact</Button>
+              <Button   onClick={this.handleClick}
+            onKeyPress={this.handleKeyPress}>Add Fallback Contact</Button>
               </Form> 
+              <Segment>{this.state.message}</Segment>
               <Grid.Column
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
