@@ -80,6 +80,8 @@ class EngineCard extends React.Component {
             <EngineCardRules
               engineRule={this.props.engine.id}
               deleteRule={this.deleteRule}
+              fallbackName={this.props.engine.fallbackName}
+              fallbackEmail={this.props.engine.fallbackEmail}
             />
           </Segment>
         </Card>
