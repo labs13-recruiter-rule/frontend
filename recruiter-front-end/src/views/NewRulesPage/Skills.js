@@ -289,7 +289,7 @@ class NewCandidate extends React.Component {
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
+                    <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -325,8 +325,7 @@ class NewCandidate extends React.Component {
                 <Grid.Column />
                 <Grid.Column width={14}>
                   <Header as="h4" textAlign="center">
-                    What are the skill requirements to send a candidate to the
-                    Sales Managers?
+                    What are the skill requirements to send a candidate to your selected contact(s)?
                   </Header>
                 </Grid.Column>
                 <Grid.Column />

@@ -8,10 +8,15 @@ import {
   Progress,
   Step,
   Form,
+  Dropdown
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+
 
 const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 class Confirmation extends React.Component {
   constructor(props) {
@@ -20,8 +25,19 @@ class Confirmation extends React.Component {
       fallbackName: '',
       fallbackEmail: '',
       invalidEmail: false,
+      // userContacts: []
     };
   }
+
+  // componentDidMount() {
+  //   axios
+  //     .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+  //     .then(res => {
+  //       this.setState({ userContacts: res.data });
+  //     })
+  //     .catch(error => console.log(error));
+  // }
+
 
   handleSubmit = e => {
     if (this.state.fallbackEmail === '') {
@@ -87,7 +103,7 @@ class Confirmation extends React.Component {
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
+                    <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -125,6 +141,20 @@ class Confirmation extends React.Component {
               requirements to be sent to any of the contacts in this rule
               engine, where should we send them?
             </Header>
+            {/* <Dropdown
+              placeholder="Select Contact"
+              fluid
+              selection
+              onChange={this.handleChange}
+              value={this.state.contacts}
+              options={this.state.userContacts.map(contact => {
+                return {
+                  key: contact.id,
+                  text: contact.name + ' | ' + contact.email,
+                  value: contact.email
+                };
+              })}
+             /> */ }
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input

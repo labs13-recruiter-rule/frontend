@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import NewContactForm from '../../components/Contacts/NewContactForm';
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
@@ -24,17 +24,30 @@ class ContactsClass extends React.Component {
       newContactEmail: '',
       userContacts: [],
       selectedContacts: [],
+      contact: [],
+      modalOpen: false
     };
   }
 
   componentDidMount() {
-    axios
-      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-      .then(res => {
-        this.setState({ userContacts: res.data });
-      })
-      .catch(error => console.log(error));
+   this.getContacts();
   }
+
+  getContacts() {
+    axios
+    .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+    .then(res => {
+      this.setState({ userContacts: res.data });
+    })
+    .catch(error => console.log(error));
+  }
+
+  
+  handleModalOpen = () => this.setState({ modalOpen: true });
+
+  handleModalClose = () =>
+    this.setState({ modalOpen: false }, () => this.getContacts());
+
 
   handleName = e => {
     this.setState({ newContactName: e.target.value });
@@ -99,7 +112,7 @@ class ContactsClass extends React.Component {
               <Step active>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/contacts">
-                    <Step.Title>Contacts</Step.Title>
+                    <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -134,12 +147,12 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              Choose a contact for the rule you'll create on the following
-              pages. Choose from existing contacts or add a new contact, and
-              then you'll decide what qualifications a candidate needs to meet
-              to be sent to that contact.
+              Choose contacts for your first rule. On the following pages, you will select the education, experience, and skills requirements a candidate must meet to be sent to be sent to the contacts.
             </Header>
-            {/**Still need to create a way to add multiple contacts to the actual rule, and to update the dropdown if a candidate is added through this section*/}
+            <p><strong>Note:</strong> if you select more than one contact for a rule, those contacts will be sent an email together as a group. If you don't want the contacts to receive an email together, create a separate rule with the same candidate requirements for each contact and they will be sent separately. You will have the opportunity to add more rules to this engine after creating your first one.</p>
+            
+            {this.state.userContacts.length> 0 ?
+            <>
             <Dropdown
               placeholder="Select Contacts"
               fluid
@@ -151,12 +164,14 @@ class ContactsClass extends React.Component {
                 return {
                   key: contact.id,
                   text: contact.name + ' | ' + contact.email,
-                  value: contact.email,
+                  value: contact.email
                 };
               })}
-            />{' '}
+            /> </> : <> <p>You don't have any contacts yet.</p> </>
+
+          }
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
-            <Form>
+            {/* <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -177,7 +192,23 @@ class ContactsClass extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
-            </Form>
+            </Form> */}
+            <Modal
+            trigger={
+              <Button
+                color="green"
+                onClick={this.handleModalOpen}
+              >
+                Add Contact
+              </Button>
+            }
+            open={this.state.modalOpen}
+            onClose={this.handleModalClose}
+          >
+            <Modal.Content>
+              <NewContactForm handleModalClose={this.handleModalClose} />
+            </Modal.Content>
+          </Modal> 
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >

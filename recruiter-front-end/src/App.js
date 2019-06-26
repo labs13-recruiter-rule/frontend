@@ -48,7 +48,7 @@ class App extends React.Component {
       majors: [],
       minExp: null,
       maxExp: null,
-      contactEmail: '',
+      contactEmail: [],
       contactName: '',
       requireHeadshot: false,
     },
@@ -61,8 +61,9 @@ class App extends React.Component {
       experience: null,
       education: [],
     },
-    engine: 38,
+    engine: 38, // why is this hardcoded as 38?
     engine_id: null,
+    selectedContacts: []
   };
 
   componentDidMount() {
@@ -97,9 +98,10 @@ class App extends React.Component {
       ...this.state,
       rule: {
         ...this.state.rule,
-        contactEmail: e,
+       contactEmail: e
       },
     });
+    console.log('APP js rule', this.state.rule)
   };
 
   minEducation = e => {
@@ -389,7 +391,7 @@ class App extends React.Component {
                   </Menu.Item>
                   <Menu.Item>
                     <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
-                      <Button>Contacts</Button>
+                      <Button>My Contacts</Button>
                     </NavLink>
                   </Menu.Item>
                   <Menu.Item>
@@ -399,11 +401,11 @@ class App extends React.Component {
                     </Button>
                   </Menu.Item>
                   <Menu.Item position="right">
-                    <Button onClick={this.logout}>logout</Button>
+                    <Button as={Link} to="/" onClick={this.logout}>logout</Button>
                   </Menu.Item>
-                  <button onClick={() => this.appState()}>
+                  {/* <button onClick={() => this.appState()}>
                     App.js this.state
-                  </button>
+                  </button> */}
                 </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
