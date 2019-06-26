@@ -33,7 +33,8 @@ class Confirmation extends React.Component {
     // }
   }
 
-  addFallback = () => {
+  addFallback = e => {
+    e.preventDefault();
     Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
     .then(res => console.log(res)).catch(err=> console.log(err))
   }
@@ -51,7 +52,6 @@ class Confirmation extends React.Component {
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
-      this.addFallback();
     } else {
       e.preventDefault();
       this.setState({ invalidEmail: true });
@@ -226,7 +226,7 @@ class Confirmation extends React.Component {
                 };
               })}
              /> */}
-            <Form onSubmit={this.handleSubmit}>
+            <Form>
               <Form.Field>
                 <Form.Input
                   label="Name"
@@ -236,6 +236,7 @@ class Confirmation extends React.Component {
                   name="name"
                   placeholder="Jane Doe"
                 />
+                <p>{this.state.fallbackName}</p>
               </Form.Field>
               <Form.Field required>
                 <Form.Input
@@ -246,7 +247,11 @@ class Confirmation extends React.Component {
                   name="email"
                   placeholder="example@email.com"
                 />
+              <p>{this.state.fallbackEmail}</p>
               </Form.Field>
+
+              <Button onClick={this.addFallback}>Add Fallback Contact</Button>
+              </Form> 
               <Grid.Column
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
@@ -263,7 +268,7 @@ class Confirmation extends React.Component {
                   Submit
                 </Button>
               </Grid.Column>
-            </Form>
+            
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
