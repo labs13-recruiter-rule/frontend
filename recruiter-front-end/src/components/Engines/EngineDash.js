@@ -8,11 +8,8 @@ import {
   Header,
   Segment,
   Icon,
-  Grid,
-  Modal,
 } from 'semantic-ui-react';
 import EngineCard from './EngineCard';
-import NewEngine from './NewEngine';
 import { Link } from 'react-router-dom';
 import './engine.css';
 
@@ -33,12 +30,22 @@ class EngineDash extends React.Component {
   handleModalClose = () =>
     this.setState({ newEngineModalOpen: false }, () => this.props.getEngines());
 
+  createNewRule = () => {
+    this.props.createNewRule();
+  };
+
   render() {
     return (
       <Container fluid>
         <Segment className="engineManager">
           <Header>Engine Manager</Header>
-          <Button icon as={Link} labelPosition="right" to="/new-rule/engine">
+          <Button
+            onClick={this.createNewRule}
+            as={Link}
+            to="/new-rule/engine"
+            icon
+            labelPosition="right"
+          >
             Add
             <Icon name="plus circle" />
           </Button>

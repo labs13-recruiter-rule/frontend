@@ -9,6 +9,7 @@ import {
   Progress,
   Step,
   Form,
+  Card,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
@@ -24,7 +25,7 @@ class Confirmation extends React.Component {
       fallbackEmail: '',
       invalidEmail: false,
       hasContactEmail: true,
-      message: ''
+      message: '',
     };
   }
 
@@ -35,28 +36,41 @@ class Confirmation extends React.Component {
     // }
   }
 
-  state = { log: [] }
+  state = { log: [] };
 
   handleClick = () => {
     this.addFallback();
-    this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)}
+    this.updateMessage(
+      `The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`,
+    );
+  };
 
-  handleKeyPress = (e) => {
+  handleKeyPress = e => {
     if (e.charCode === 32 || e.charCode === 13) {
       // Prevent the default action to stop scrolling when space is pressed
-      e.preventDefault()
-      this.addFallback()
-      this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)
+      e.preventDefault();
+      this.addFallback();
+      this.updateMessage(
+        `The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`,
+      );
     }
-  }
+  };
 
-  updateMessage = message => this.setState(prevState => ({ message: [message, ...prevState.message] }))
-
+  updateMessage = message =>
+    this.setState(prevState => ({ message: [message, ...prevState.message] }));
 
   addFallback = e => {
-    Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
-    .then(res => console.log(res)).catch(err=> console.log(err))
-  }
+    Axios.put(
+      `https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`,
+      {
+        fallbackName: this.state.fallbackName,
+        fallbackEmail: this.state.fallbackEmail,
+      },
+      tokenHeader,
+    )
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   handleSubmit = e => {
     // check if an email is valid
@@ -180,51 +194,173 @@ class Confirmation extends React.Component {
               </Modal.Actions>
             </Modal>
 
-            {this.props.rule.contactEmail.length === 0 ? null : (
-              <p style={center}>
-                If a candidate passes these rules then they will be sent to{' '}
-                {this.props.rule.contactEmail[0]}
-              </p>
-            )}
+            {this.props.rules.length === 1
+              ? this.props.rules.map((rule, index) => {
+                  return (
+                    <Card key={index} fluid>
+                      <Card.Content>
+                        {rule.contactEmail.length === 0 ? null : (
+                          <p>
+                            If a candidate passes these rules then they will be
+                            sent to{' '}
+                            {rule.contactEmail
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+                        {rule.education.length === 0 ? null : (
+                          <p>
+                            Minimum level of education required is a{' '}
+                            {rule.education[0]}
+                          </p>
+                        )}
+                        {rule.majors.length === 0 ? null : (
+                          <p>
+                            The candidate must have majored in{' '}
+                            {rule.majors
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
 
-            {this.props.rule.education.length === 0 ? null : (
-              <p style={center}>
-                Minimum level of education required is a{' '}
-                {this.props.rule.education[0]}
-              </p>
-            )}
+                        {rule.skills.length === 0 ? null : (
+                          <p>
+                            The skills required for this rule are{' '}
+                            {rule.skills
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
 
-            {this.props.rule.majors.length === 0 ? null : (
-              <p style={center}>
-                The candidate must have majored in{' '}
-                {this.props.rule.majors
-                  .join(', ')
-                  .replace(/,(?!.*,)/gim, ' and')}
-              </p>
-            )}
+                        {rule.minExp === '' ? null : (
+                          <p>
+                            The experience required for this rule is at least{' '}
+                            {rule.minExp} years of experience
+                          </p>
+                        )}
+                        {rule.maxExp === '' ? null : (
+                          <p>
+                            The maximum experience allowed for this rule is{' '}
+                            {rule.maxExp} years of experience
+                          </p>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  );
+                })
+              : this.props.rules.map((rule, index) => {
+                  return (
+                    <Card key={index} fluid>
+                      <Card.Content header={`Rule ${index + 1}`} />
+                      <Card.Content>
+                        {rule.contactEmail.length === 0 ? null : (
+                          <p>
+                            If a candidate passes these rules then they will be
+                            sent to{' '}
+                            {rule.contactEmail
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+                        {rule.education.length === 0 ? null : (
+                          <p>
+                            Minimum level of education required is a{' '}
+                            {rule.education[0]}
+                          </p>
+                        )}
+                        {rule.majors.length === 0 ? null : (
+                          <p>
+                            The candidate must have majored in{' '}
+                            {rule.majors
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
 
-            {this.props.rule.minExp === null ? null : (
-              <p style={center}>
-                The experience required for this rule is at least{' '}
-                {this.props.rule.minExp} years of experience
-              </p>
-            )}
+                        {rule.skills.length === 0 ? null : (
+                          <p>
+                            The skills required for this rule are{' '}
+                            {rule.skills
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
 
-            {this.props.rule.maxExp === null ? null : (
-              <p style={center}>
-                The maximum experience allowed for this rule is{' '}
-                {this.props.rule.maxExp} years of experience
-              </p>
-            )}
+                        {rule.minExp === '' ? null : (
+                          <p>
+                            The experience required for this rule is at least{' '}
+                            {rule.minExp} years of experience
+                          </p>
+                        )}
+                        {rule.maxExp === '' ? null : (
+                          <p>
+                            The maximum experience allowed for this rule is{' '}
+                            {rule.maxExp} years of experience
+                          </p>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  );
+                })}
 
-            {this.props.rule.skills.length === 0 ? null : (
+            {/* {this.props.rules.map((rule, index) => {
+              return (
+                <Card key={index} fluid>
+                  <Card.Content>
+                    {rule.contactEmail.length === 0 ? null : (
+                      <p>
+                        If a candidate passes these rules then they will be sent
+                        to{' '}
+                        {rule.contactEmail
+                          .join(', ')
+                          .replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+                    {rule.education.length === 0 ? null : (
+                      <p>
+                        Minimum level of education required is a{' '}
+                        {rule.education[0]}
+                      </p>
+                    )}
+                    {rule.majors.length === 0 ? null : (
+                      <p>
+                        The candidate must have majored in{' '}
+                        {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+
+                    {rule.skills.length === 0 ? null : (
+                      <p>
+                        The skills required for this rule are{' '}
+                        {rule.skills.join(', ').replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+
+                    {rule.minExp === '' ? null : (
+                      <p>
+                        The experience required for this rule is at least{' '}
+                        {rule.minExp} years of experience
+                      </p>
+                    )}
+                    {rule.maxExp === '' ? null : (
+                      <p>
+                        The maximum experience allowed for this rule is{' '}
+                        {rule.maxExp} years of experience
+                      </p>
+                    )}
+                  </Card.Content>
+                </Card>
+              );
+            })} */}
+
+            {/* {this.props.rule.skills.length === 0 ? null : (
               <p style={center}>
                 The skills required for this rule are{' '}
                 {this.props.rule.skills
                   .join(', ')
                   .replace(/,(?!.*,)/gim, ' and')}
               </p>
-            )}
+            )} */}
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
               requirements listed above, where should we send them?
@@ -265,27 +401,34 @@ class Confirmation extends React.Component {
                 />
               </Form.Field>
 
-              <Button   onClick={this.handleClick}
-            onKeyPress={this.handleKeyPress}>Add Fallback Contact</Button>
-              </Form> 
-              <Segment>{this.state.message}</Segment>
-              <Grid.Column
-                style={{ display: 'flex', justifyContent: 'space-between' }}
+              <Button
+                onClick={this.handleClick}
+                onKeyPress={this.handleKeyPress}
               >
-                <Button style={primaryButton} as={Link} to="/new-rule/experience">
-                  <Icon name="arrow left" size="small" />
-                  Back
-                </Button>
-                <Button
-                  style={primaryButton}
-                  onClick={this.handleSubmit}
-                  as={Link}
-                  to="/engines"
-                >
-                  Submit
-                </Button>
-              </Grid.Column>
-            
+                Add Fallback Contact
+              </Button>
+            </Form>
+            {this.state.message === '' ? null : (
+              <Segment>{this.state.message}</Segment>
+            )}
+
+            <Grid.Column
+              style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Button style={primaryButton} as={Link} to="/new-rule/experience">
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/engines"
+              >
+                Submit
+              </Button>
+            </Grid.Column>
+
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
