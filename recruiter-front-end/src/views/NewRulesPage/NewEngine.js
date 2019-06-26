@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token } };
+const tokenHeader = { headers: { token: `${token}` }};
 
 const flexContainer = {
   display: 'flex',
