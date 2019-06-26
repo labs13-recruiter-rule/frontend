@@ -9,6 +9,7 @@ import {
   Progress,
   Step,
   Form,
+  Card,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
@@ -193,57 +194,173 @@ class Confirmation extends React.Component {
               </Modal.Actions>
             </Modal>
 
-            {this.props.rules.map((rule, index) => {
+            {this.props.rules.length === 1
+              ? this.props.rules.map((rule, index) => {
+                  return (
+                    <Card key={index} fluid>
+                      <Card.Content>
+                        {rule.contactEmail.length === 0 ? null : (
+                          <p>
+                            If a candidate passes these rules then they will be
+                            sent to{' '}
+                            {rule.contactEmail
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+                        {rule.education.length === 0 ? null : (
+                          <p>
+                            Minimum level of education required is a{' '}
+                            {rule.education[0]}
+                          </p>
+                        )}
+                        {rule.majors.length === 0 ? null : (
+                          <p>
+                            The candidate must have majored in{' '}
+                            {rule.majors
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+
+                        {rule.skills.length === 0 ? null : (
+                          <p>
+                            The skills required for this rule are{' '}
+                            {rule.skills
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+
+                        {rule.minExp === '' ? null : (
+                          <p>
+                            The experience required for this rule is at least{' '}
+                            {rule.minExp} years of experience
+                          </p>
+                        )}
+                        {rule.maxExp === '' ? null : (
+                          <p>
+                            The maximum experience allowed for this rule is{' '}
+                            {rule.maxExp} years of experience
+                          </p>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  );
+                })
+              : this.props.rules.map((rule, index) => {
+                  return (
+                    <Card key={index} fluid>
+                      <Card.Content header={`Rule ${index + 1}`} />
+                      <Card.Content>
+                        {rule.contactEmail.length === 0 ? null : (
+                          <p>
+                            If a candidate passes these rules then they will be
+                            sent to{' '}
+                            {rule.contactEmail
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+                        {rule.education.length === 0 ? null : (
+                          <p>
+                            Minimum level of education required is a{' '}
+                            {rule.education[0]}
+                          </p>
+                        )}
+                        {rule.majors.length === 0 ? null : (
+                          <p>
+                            The candidate must have majored in{' '}
+                            {rule.majors
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+
+                        {rule.skills.length === 0 ? null : (
+                          <p>
+                            The skills required for this rule are{' '}
+                            {rule.skills
+                              .join(', ')
+                              .replace(/,(?!.*,)/gim, ' and')}
+                          </p>
+                        )}
+
+                        {rule.minExp === '' ? null : (
+                          <p>
+                            The experience required for this rule is at least{' '}
+                            {rule.minExp} years of experience
+                          </p>
+                        )}
+                        {rule.maxExp === '' ? null : (
+                          <p>
+                            The maximum experience allowed for this rule is{' '}
+                            {rule.maxExp} years of experience
+                          </p>
+                        )}
+                      </Card.Content>
+                    </Card>
+                  );
+                })}
+
+            {/* {this.props.rules.map((rule, index) => {
               return (
-                <div key={index}>
-                  <p>
-                    If a candidate passes these rules then they will be sent to{' '}
-                    {rule.contactEmail
-                      .join(', ')
-                      .replace(/,(?!.*,)/gim, ' and')}
-                  </p>
-                  <p>
-                    Minimum level of education required is a {rule.education}
-                  </p>
-                  <p>
-                    The candidate must have majored in{' '}
-                    {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}
-                  </p>
-                </div>
+                <Card key={index} fluid>
+                  <Card.Content>
+                    {rule.contactEmail.length === 0 ? null : (
+                      <p>
+                        If a candidate passes these rules then they will be sent
+                        to{' '}
+                        {rule.contactEmail
+                          .join(', ')
+                          .replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+                    {rule.education.length === 0 ? null : (
+                      <p>
+                        Minimum level of education required is a{' '}
+                        {rule.education[0]}
+                      </p>
+                    )}
+                    {rule.majors.length === 0 ? null : (
+                      <p>
+                        The candidate must have majored in{' '}
+                        {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+
+                    {rule.skills.length === 0 ? null : (
+                      <p>
+                        The skills required for this rule are{' '}
+                        {rule.skills.join(', ').replace(/,(?!.*,)/gim, ' and')}
+                      </p>
+                    )}
+
+                    {rule.minExp === '' ? null : (
+                      <p>
+                        The experience required for this rule is at least{' '}
+                        {rule.minExp} years of experience
+                      </p>
+                    )}
+                    {rule.maxExp === '' ? null : (
+                      <p>
+                        The maximum experience allowed for this rule is{' '}
+                        {rule.maxExp} years of experience
+                      </p>
+                    )}
+                  </Card.Content>
+                </Card>
               );
-            })}
+            })} */}
 
-            {this.props.rule.majors.length === 0 ? null : (
-              <p style={center}>
-                The candidate must have majored in{' '}
-                {this.props.rule.majors
-                  .join(', ')
-                  .replace(/,(?!.*,)/gim, ' and')}
-              </p>
-            )}
-
-            {this.props.rule.minExp === null ? null : (
-              <p style={center}>
-                The experience required for this rule is at least{' '}
-                {this.props.rule.minExp} years of experience
-              </p>
-            )}
-
-            {this.props.rule.maxExp === null ? null : (
-              <p style={center}>
-                The maximum experience allowed for this rule is{' '}
-                {this.props.rule.maxExp} years of experience
-              </p>
-            )}
-
-            {this.props.rule.skills.length === 0 ? null : (
+            {/* {this.props.rule.skills.length === 0 ? null : (
               <p style={center}>
                 The skills required for this rule are{' '}
                 {this.props.rule.skills
                   .join(', ')
                   .replace(/,(?!.*,)/gim, ' and')}
               </p>
-            )}
+            )} */}
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
               requirements listed above, where should we send them?
