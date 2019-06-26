@@ -6,6 +6,7 @@ import {
   Header,
   Grid,
   GridColumn,
+  List,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getRules, deleteRule } from '../../actions/ruleActions';
@@ -56,7 +57,7 @@ class EngineCardRules extends React.Component {
             <Grid className="engineCardRuleGrid">
               <GridColumn width={4}>
                 <Header as="h3" className="ruleHeader">
-                  rule: {this.props.count}
+                  rule: {this.state.rules.length}
                 </Header>
               </GridColumn>
               {/* <GridColumn floated="right"></GridColumn> */}
@@ -81,13 +82,12 @@ class EngineCardRules extends React.Component {
             {this.state.rules && this.state.rules.length > 0 ? (
               this.state.rules.map(rule => (
                 <div>
-                  {console.log(rule, 'from rule map new 85')}
                   {/* <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2> */}
-                  <h2>
-                    rule for sending a candidate to:{' '}
-                    {/* {rule.ruleNotParsed.contactEmail} */}
-                  </h2>
-                  <h3>Skills</h3>
+                  {rule.ruleNotParsed && rule.ruleNotParsed.contactEmail ? (
+                    <div>
+                      <h4>Send to {rule.ruleNotParsed.contactEmail}</h4>
+                    </div>
+                  ) : null}
                   {/* <div>{console.log('rule,ruleNP', rule)}</div> */}
                   {/* <div>
                     {ruleAgain.rule.conditions.all.map(condition => (
@@ -95,7 +95,7 @@ class EngineCardRules extends React.Component {
                     ))}
                   </div> */}
 
-                  {rule.ruleNotParsed &&
+                  {/* {rule.ruleNotParsed &&
                   rule.ruleNotParsed.skills &&
                   rule.ruleNotParsed.skills.length > 0
                     ? (<h3>Skills</h3>,
@@ -104,41 +104,49 @@ class EngineCardRules extends React.Component {
                           <h3>{rule}</h3>
                         </div>
                       )))
-                    : null}
+                    : null} */}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.skills &&
+                  rule.ruleNotParsed.skills.length > 0 ? (
+                    <Segment>
+                      <Header as="h3">Skills</Header>
+                      {rule.ruleNotParsed.skills.map(rule => (
+                        <List.Item>{rule}</List.Item>
+                      ))}
+                    </Segment>
+                  ) : null}
 
                   {rule.ruleNotParsed &&
                   rule.ruleNotParsed.education &&
                   rule.ruleNotParsed.education.length > 0 ? (
-                    <div>
-                      <h2>Education</h2>
-                      <div>
-                        {rule.ruleNotParsed.education.map(rule => (
-                          <p>{rule}</p>
-                        ))}
-                      </div>
-                    </div>
+                    <Segment>
+                      <Header as="h3">Minimum Education</Header>
+
+                      <List.Item>{rule.ruleNotParsed.education[0]}</List.Item>
+                    </Segment>
                   ) : null}
 
                   {rule.ruleNotParsed &&
                   rule.ruleNotParsed.majors &&
                   rule.ruleNotParsed.majors.length > 0 ? (
-                    <div>
-                      <h2>Majors</h2>
-                      <div>
-                        {rule.ruleNotParsed.majors.map(rule => (
-                          <p>{rule}</p>
-                        ))}
-                      </div>
-                    </div>
+                    <Segment>
+                      <Header as="h3">Majors</Header>
+
+                      {rule.ruleNotParsed.majors.map(rule => (
+                        <List.Item>{rule}</List.Item>
+                      ))}
+                    </Segment>
                   ) : null}
 
                   {rule.ruleNotParsed && rule.ruleNotParsed.maxExp ? (
-                    <div>
-                      <h2>Maximum Experience</h2>
-                      <div>
-                        <p>{`${rule.ruleNotParsed.maxExp} years`}</p>
-                      </div>
-                    </div>
+                    <Segment>
+                      <Header as="h3">Maximum Experience</Header>
+
+                      <List.Item>
+                        {`${rule.ruleNotParsed.maxExp} years`}
+                      </List.Item>
+                    </Segment>
                   ) : null}
                 </div>
               ))
