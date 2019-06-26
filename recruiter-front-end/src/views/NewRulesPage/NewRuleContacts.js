@@ -8,7 +8,6 @@ import {
   Dropdown,
   Header,
   Icon,
-  Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -26,6 +25,7 @@ class ContactsClass extends React.Component {
       selectedContacts: [],
       contact: [],
       modalOpen: false,
+      contactSelected: true,
     };
   }
 
@@ -60,9 +60,14 @@ class ContactsClass extends React.Component {
   };
 
   handleSubmit = e => {
-    this.props.contactName(this.state.newContactName);
-    this.props.contactEmail(this.state.newContactEmail);
-    this.props.contactContacts(this.state.selectedContacts);
+    if (this.state.selectedContacts.length === 0) {
+      e.preventDefault();
+      this.setState({ contactSelected: false });
+    } else {
+      this.props.contactName(this.state.newContactName);
+      this.props.contactEmail(this.state.newContactEmail);
+      this.props.contactContacts(this.state.selectedContacts);
+    }
   };
 
   render() {
@@ -93,6 +98,30 @@ class ContactsClass extends React.Component {
 
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
+        <Modal open={!this.state.contactSelected} size="small">
+          <Header icon="warning sign" content="Invalid conctacts" />
+          <Modal.Content>
+            <p style={{ center }}>
+              Please select more or more contacts or add a contact to continue.
+              This contact or these contacts will receive an email when a
+              candidate meets the conditions for your rule engine.
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              color="green"
+              onClick={() => this.setState({ contactSelected: true })}
+            >
+              <Icon name="checkmark" /> Okay
+            </Button>
+          </Modal.Actions>
+        </Modal>
+
+        <button
+          onClick={() => console.log('NewRuleContacts this.state', this.state)}
+        >
+          NewRuleContacts this.state
+        </button>
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
