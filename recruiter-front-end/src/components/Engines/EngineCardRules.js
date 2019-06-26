@@ -84,14 +84,10 @@ class EngineCardRules extends React.Component {
                   {/* <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2> */}
                   <h2>
                     rule for sending a candidate to:{' '}
-                    {rule.ruleNotParsed.contactEmail}
+                    {/* {rule.ruleNotParsed.contactEmail} */}
                   </h2>
                   <h3>Skills</h3>
-                  <div>
-                    {rule.ruleNotParsed.conditions.all.map(condition => (
-                      <p>{condition.value}</p>
-                    ))}
-                  </div>
+                  <div>{console.log('rule,ruleNP', rule)}</div>
                   {/* <div>
                     {ruleAgain.rule.conditions.all.map(condition => (
                       <p>{condition.value}</p>
