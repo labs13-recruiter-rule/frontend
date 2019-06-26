@@ -91,19 +91,11 @@ class App extends React.Component {
   };
 
   contactContacts = e => {
-<<<<<<< HEAD
-=======
-    console.log('App.js contactContacts', e);
->>>>>>> 30c94662fb105ab19340e8901b524b4e414274e2
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
-<<<<<<< HEAD
-        selectedContacts: e,
-=======
-       contactEmail: e
->>>>>>> 30c94662fb105ab19340e8901b524b4e414274e2
+        contactEmail: e,
       },
     });
   };
@@ -418,7 +410,6 @@ class App extends React.Component {
                   exact
                   path="/id"
                   render={props => {
-                    console.log(props);
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
