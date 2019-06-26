@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token: `${token}` } };
+const tokenHeader = { headers: { token } };
 
 const flexContainer = {
   display: 'flex',
@@ -51,6 +51,7 @@ class NewEngineRuleView extends React.Component {
   };
 
   handleSubmit = () => {
+    console.log('token header', tokenHeader)
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/engines',
       { engine_name: this.state.engine },
