@@ -8,12 +8,8 @@ import {
   Progress,
   Step,
   Form,
-  Dropdown
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
-
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -25,30 +21,33 @@ class Confirmation extends React.Component {
       fallbackName: '',
       fallbackEmail: '',
       invalidEmail: false,
-      // userContacts: []
+      hasContactEmail: true,
     };
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-  //     .then(res => {
-  //       this.setState({ userContacts: res.data });
-  //     })
-  //     .catch(error => console.log(error));
-  // }
-
+  componentDidMount() {
+    console.log('Confirmation this.props', this.props);
+    // if (this.props.rule.contactEmail.length === 0) {
+    //   this.setState({ hasContactEmail: false });
+    // }
+  }
 
   handleSubmit = e => {
-    if (this.state.fallbackEmail === '') {
-      e.preventDefault();
-      this.setState({ invalidEmail: true });
-    } else {
+    // check if an email is valid
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if (validateEmail(this.state.fallbackEmail)) {
       e.preventDefault();
       this.props.fallbackName(this.state.fallbackName);
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
+    } else {
+      e.preventDefault();
+      this.setState({ invalidEmail: true });
     }
   };
 
@@ -136,10 +135,75 @@ class Confirmation extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
+            <Modal open={!this.state.hasContactEmail} size="small">
+              <Header icon="warning sign" content="Invalid contact email" />
+              <Modal.Content>
+                <p style={{ center }}>
+                  A valid email is required to create a rule. Please add a
+                  contact name and email. This contact will recieve an email
+                  when a candidate meets the requirements for your rule engine.
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button
+                  color="green"
+                  onClick={() => this.setState({ hasContactEmail: true })}
+                  as={Link}
+                  to={'/new-rule/contacts'}
+                >
+                  <Icon name="checkmark" /> Okay
+                </Button>
+              </Modal.Actions>
+            </Modal>
+
+            {this.props.rule.contactEmail.length === 0 ? null : (
+              <p style={center}>
+                If a candidate passes these rules then they will be sent to{' '}
+                {this.props.rule.contactEmail[0]}
+              </p>
+            )}
+
+            {this.props.rule.education.length === 0 ? null : (
+              <p style={center}>
+                Minimum level of education required is a{' '}
+                {this.props.rule.education[0]}
+              </p>
+            )}
+
+            {this.props.rule.majors.length === 0 ? null : (
+              <p style={center}>
+                The candidate must have majored in{' '}
+                {this.props.rule.majors
+                  .join(', ')
+                  .replace(/,(?!.*,)/gim, ' and')}
+              </p>
+            )}
+
+            {this.props.rule.minExp === null ? null : (
+              <p style={center}>
+                The experience required for this rule is at least{' '}
+                {this.props.rule.minExp} years of experience
+              </p>
+            )}
+
+            {this.props.rule.maxExp === null ? null : (
+              <p style={center}>
+                The maximum experience allowed for this rule is{' '}
+                {this.props.rule.maxExp} years of experience
+              </p>
+            )}
+
+            {this.props.rule.skills.length === 0 ? null : (
+              <p style={center}>
+                The skills required for this rule are{' '}
+                {this.props.rule.skills
+                  .join(', ')
+                  .replace(/,(?!.*,)/gim, ' and')}
+              </p>
+            )}
             <Header as="h3" style={center}>
               If a candidate does not meet the education, skills and experience
-              requirements to be sent to any of the contacts in this rule
-              engine, where should we send them?
+              requirements listed above, where should we send them?
             </Header>
             {/* <Dropdown
               placeholder="Select Contact"
@@ -154,7 +218,7 @@ class Confirmation extends React.Component {
                   value: contact.email
                 };
               })}
-             /> */ }
+             /> */}
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
                 <Form.Input
@@ -197,7 +261,7 @@ class Confirmation extends React.Component {
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>
-                <p>
+                <p style={{ center }}>
                   A valid email is required to create a rule. Please add a
                   fallback name and email. This contact will recieve an email
                   when a candidate does <strong>not</strong> meet the conditions

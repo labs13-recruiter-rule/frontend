@@ -25,29 +25,27 @@ class ContactsClass extends React.Component {
       userContacts: [],
       selectedContacts: [],
       contact: [],
-      modalOpen: false
+      modalOpen: false,
     };
   }
 
   componentDidMount() {
-   this.getContacts();
+    this.getContacts();
   }
 
   getContacts() {
     axios
-    .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
-    .then(res => {
-      this.setState({ userContacts: res.data });
-    })
-    .catch(error => console.log(error));
+      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+      .then(res => {
+        this.setState({ userContacts: res.data });
+      })
+      .catch(error => console.log(error));
   }
 
-  
   handleModalOpen = () => this.setState({ modalOpen: true });
 
   handleModalClose = () =>
     this.setState({ modalOpen: false }, () => this.getContacts());
-
 
   handleName = e => {
     this.setState({ newContactName: e.target.value });
@@ -58,12 +56,10 @@ class ContactsClass extends React.Component {
   };
 
   handleChange = (e, { value }) => {
-    console.log('NewRuleContacts handleChange', value);
     this.setState({ selectedContacts: value });
   };
 
   handleSubmit = e => {
-    console.log('NewRuleContacts handleSubmit', this.state);
     this.props.contactName(this.state.newContactName);
     this.props.contactEmail(this.state.newContactEmail);
     this.props.contactContacts(this.state.selectedContacts);
@@ -147,29 +143,32 @@ class ContactsClass extends React.Component {
               </Step>
             </Step.Group>
             <Header as="h3" style={center}>
-              Choose contacts for your first rule. On the following pages, you will select the education, experience, and skills requirements a candidate must meet to be sent to be sent to the contacts.
+              Choose contacts for your first rule. On the following pages, you
+              will select the education, experience, and skills requirements a
+              candidate must meet to be sent to be sent to the contacts.
             </Header>
-            <p><strong>Note:</strong> if you select more than one contact for a rule, those contacts will be sent an email together as a group. If you don't want the contacts to receive an email together, create a separate rule with the same candidate requirements for each contact and they will be sent separately. You will have the opportunity to add more rules to this engine after creating your first one.</p>
-            
-            {this.state.userContacts.length> 0 ?
-            <>
-            <Dropdown
-              placeholder="Select Contacts"
-              fluid
-              multiple
-              selection
-              onChange={this.handleChange}
-              value={this.state.contacts}
-              options={this.state.userContacts.map(contact => {
-                return {
-                  key: contact.id,
-                  text: contact.name + ' | ' + contact.email,
-                  value: contact.email
-                };
-              })}
-            /> </> : <> <p>You don't have any contacts yet.</p> </>
 
-          }
+            {this.state.userContacts.length > 0 ? (
+              <>
+                <Dropdown
+                  placeholder="Select Contacts"
+                  fluid
+                  multiple
+                  selection
+                  onChange={this.handleChange}
+                  value={this.state.contacts}
+                  options={this.state.userContacts.map(contact => {
+                    return {
+                      key: contact.id,
+                      text: contact.name + ' | ' + contact.email,
+                      value: contact.email,
+                    };
+                  })}
+                />{' '}
+              </>
+            ) : (
+              <></>
+            )}
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
             {/* <Form>
               <Form.Field>
@@ -194,21 +193,39 @@ class ContactsClass extends React.Component {
               </Form.Field>
             </Form> */}
             <Modal
-            trigger={
-              <Button
-                color="green"
-                onClick={this.handleModalOpen}
-              >
-                Add Contact
-              </Button>
-            }
-            open={this.state.modalOpen}
-            onClose={this.handleModalClose}
-          >
-            <Modal.Content>
-              <NewContactForm handleModalClose={this.handleModalClose} />
-            </Modal.Content>
-          </Modal> 
+              size="mini"
+              trigger={
+                <Button
+                  color="green"
+                  onClick={this.handleModalOpen}
+                  style={{ width: '50%', margin: '0 auto' }}
+                >
+                  Add Contact
+                </Button>
+              }
+              open={this.state.modalOpen}
+              onClose={this.handleModalClose}
+            >
+              <Modal.Content>
+                <NewContactForm handleModalClose={this.handleModalClose} />
+              </Modal.Content>
+            </Modal>
+            <p
+              style={{
+                width: '90%',
+                margin: '25px auto 0',
+                textAlign: 'center',
+                fontStyle: 'italic',
+              }}
+            >
+              <strong>Note:</strong> if you select more than one contact for a
+              rule, those contacts will be sent an email together as a group. If
+              you don't want the contacts to receive an email together, create a
+              separate rule with the same candidate requirements for each
+              contact and they will be sent separately. You will have the
+              opportunity to add more rules to this engine after creating your
+              first one.
+            </p>
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
