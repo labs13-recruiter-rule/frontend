@@ -603,6 +603,7 @@ class App extends React.Component {
           ) : (
             <Login />
           )}
+          <footer>&copy; Recruiter Rules 2019</footer>
         </Container>
       </Router>
     );
