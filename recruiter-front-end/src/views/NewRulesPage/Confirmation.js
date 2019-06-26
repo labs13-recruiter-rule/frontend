@@ -10,6 +10,7 @@ import {
   Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -32,6 +33,11 @@ class Confirmation extends React.Component {
     // }
   }
 
+  addFallback = () => {
+    Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
+    .then(res => console.log(res)).catch(err=> console.log(err))
+  }
+
   handleSubmit = e => {
     // check if an email is valid
     function validateEmail(email) {
@@ -45,6 +51,7 @@ class Confirmation extends React.Component {
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
+      this.addFallback();
     } else {
       e.preventDefault();
       this.setState({ invalidEmail: true });
@@ -250,9 +257,8 @@ class Confirmation extends React.Component {
                 <Button
                   style={primaryButton}
                   onClick={this.handleSubmit}
-                  type="submit"
                   as={Link}
-                  to="/"
+                  to="/new-rule/success"
                 >
                   Submit
                 </Button>

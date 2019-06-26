@@ -39,6 +39,7 @@ import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
 import NewEngine from './views/NewRulesPage/NewEngine';
 import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
+import EngineSuccess from './views/NewRulesPage/EngineCreationSuccess';
 import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
@@ -525,11 +526,13 @@ class App extends React.Component {
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
                       rule={this.state.rule}
+                      engine_id={this.state.engine}
                       contacts={this.state.selectedContacts}
                       submitRule={() => this.parseMyRule()}
                     />
                   )}
                 />
+                <Route exact path="/new-rule/success" component={EngineSuccess} />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
