@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Icon, Container, Button, Header, Segment } from 'semantic-ui-react';
+import { Card, Icon, Container, Button, Confirm, Header, Segment } from 'semantic-ui-react';
 import { getRules, deleteRule } from '../../actions/ruleActions';
 import EngineCardRules from './EngineCardRules';
 import Axios from 'axios';
@@ -14,6 +14,7 @@ class EngineCard extends React.Component {
     super(props);
     this.state = {
       engine2: '',
+      open: false
     };
   }
 
@@ -34,7 +35,14 @@ class EngineCard extends React.Component {
   };
 
   deleteEngine = () => {
-    Axios.delete(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`, tokenHeader).then(res => console.log(res)).catch(error => console.log(error))
+    Axios.delete(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`, tokenHeader).then(res => console.log(res) ).catch(error => console.log(error))
+  }
+
+  open = () => this.setState({ open: true })
+  handleCancel = () => this.setState({ open: false}) 
+  handleConfirm = () => {
+    this.deleteEngine();
+    this.handleCancel();
   }
 
   render() {
@@ -44,12 +52,17 @@ class EngineCard extends React.Component {
         {/* <Card.Content> */}
         <Card.Content>
           <Header as="h2" content={this.props.engine.engine_name} />   
-          <Icon
+          {/* <Icon
                   name="trash alternate"
                   color="red"
                   size="large"
-                  onClick={this.deleteEngine}
+                  onClick={this.open}
                 />
+            <Confirm open={this.state.open} 
+          content={`Are you sure you want to delete the ${this.props.engine.engine_name} engine?`}
+          onCancel={this.handleCancel}
+          onConfirm={this.handleConfirm} /> */}
+              
         </Card.Content>
         {/* </Card.Content> */}
         <Segment>

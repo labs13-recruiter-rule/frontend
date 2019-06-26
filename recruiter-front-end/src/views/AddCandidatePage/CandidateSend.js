@@ -27,7 +27,7 @@ class CandidateSend extends React.Component {
             <Header>Congratulations!</Header>
           </Grid.Row>
           <Grid.Row>
-            <p>.</p>
+            <p>Your candidate was successfully sent.</p>
           </Grid.Row>
           <Button style={primaryButton} as={Link} to="/new-candidate/engine">
             Send another Candidate
