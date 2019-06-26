@@ -115,16 +115,6 @@ class CandidateContactInfo extends React.Component {
                   placeholder="example@email.com"
                 />
               </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="LinkedIn"
-                  value={this.state.candidateLinkedIn}
-                  onChange={this.handleLinkedIn}
-                  type="LinkedIn"
-                  name="LinkedIn"
-                  placeholder="linkedin.com/username"
-                />
-              </Form.Field>
             </Form>
             <Grid.Row style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
