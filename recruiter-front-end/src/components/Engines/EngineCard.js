@@ -1,10 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Icon, Container, Button, Confirm, Header, Segment } from 'semantic-ui-react';
+import {
+  Card,
+  Icon,
+  Container,
+  Button,
+  Confirm,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
 import { getRules, deleteRule } from '../../actions/ruleActions';
 import EngineCardRules from './EngineCardRules';
 import Axios from 'axios';
-
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -14,7 +21,7 @@ class EngineCard extends React.Component {
     super(props);
     this.state = {
       engine2: '',
-      open: false
+      open: false,
     };
   }
 
@@ -35,24 +42,29 @@ class EngineCard extends React.Component {
   };
 
   deleteEngine = () => {
-    Axios.delete(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`, tokenHeader).then(res => console.log(res) ).catch(error => console.log(error))
-  }
+    Axios.delete(
+      `https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`,
+      tokenHeader,
+    )
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
+  };
 
-  open = () => this.setState({ open: true })
-  handleCancel = () => this.setState({ open: false}) 
+  open = () => this.setState({ open: true });
+  handleCancel = () => this.setState({ open: false });
   handleConfirm = () => {
     this.deleteEngine();
     this.handleCancel();
-  }
+  };
 
   render() {
     return (
       <>
-      <Card centered color="blue">
-        {/* <Card.Content> */}
-        <Card.Content>
-          <Header as="h2" content={this.props.engine.engine_name} />   
-          {/* <Icon
+        <Card centered color="blue">
+          {/* <Card.Content> */}
+          <Card.Content>
+            <Header as="h2" content={this.props.engine.engine_name} />
+            {/* <Icon
                   name="trash alternate"
                   color="red"
                   size="large"
@@ -62,16 +74,15 @@ class EngineCard extends React.Component {
           content={`Are you sure you want to delete the ${this.props.engine.engine_name} engine?`}
           onCancel={this.handleCancel}
           onConfirm={this.handleConfirm} /> */}
-              
-        </Card.Content>
-        {/* </Card.Content> */}
-        <Segment>
-          <EngineCardRules
-            engineRule={this.props.engine.id}
-            deleteRule={this.deleteRule}
-          />
-        </Segment>
-      </Card>
+          </Card.Content>
+          {/* </Card.Content> */}
+          <Segment attached>
+            <EngineCardRules
+              engineRule={this.props.engine.id}
+              deleteRule={this.deleteRule}
+            />
+          </Segment>
+        </Card>
       </>
     );
   }

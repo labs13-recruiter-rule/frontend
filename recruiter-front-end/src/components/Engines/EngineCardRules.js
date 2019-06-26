@@ -6,6 +6,7 @@ import {
   Header,
   Grid,
   GridColumn,
+  List,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { getRules, deleteRule } from '../../actions/ruleActions';
@@ -51,12 +52,12 @@ class EngineCardRules extends React.Component {
   render() {
     return (
       <>
-        <Segment>
+        <Segment basic>
           <Card.Content>
             <Grid className="engineCardRuleGrid">
               <GridColumn width={4}>
                 <Header as="h3" className="ruleHeader">
-                  rule: {this.props.count}
+                  Total Rules: {this.state.rules.length}
                 </Header>
               </GridColumn>
               {/* <GridColumn floated="right"></GridColumn> */}
@@ -79,14 +80,88 @@ class EngineCardRules extends React.Component {
           <Segment.Group> */}
 
             {this.state.rules && this.state.rules.length > 0 ? (
-              this.state.rules.map(ruleAgain => (
-                <div>
-                  <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2>
-                  <h3>Skills</h3>
-                  <div>{ruleAgain.rule.conditions.all.map(condition => <p>{condition.value}</p>)}</div>
-                  <h3>Degree</h3> 
-                  
-                </div>
+              this.state.rules.map((rule, i = 0) => (
+                <Segment raised>
+                  {/* <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2> */}
+                  {rule.ruleNotParsed && rule.ruleNotParsed.contactEmail ? (
+                    <Segment basic>
+                      <Header
+                        as="h3"
+                        content={`Rule ${i + 1}`}
+                        subheader={`Send to ${rule.ruleNotParsed.contactEmail}`}
+                      />
+                    </Segment>
+                  ) : null}
+                  {/* <div>{console.log('rule,ruleNP', rule)}</div> */}
+                  {/* <div>
+                    {ruleAgain.rule.conditions.all.map(condition => (
+                      <p>{condition.value}</p>
+                    ))}
+                  </div> */}
+
+                  {/* {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.skills &&
+                  rule.ruleNotParsed.skills.length > 0
+                    ? (<h3>Skills</h3>,
+                      rule.ruleNotParsed.skills.map(rule => (
+                        <div>
+                          <h3>{rule}</h3>
+                        </div>
+                      )))
+                    : null} */}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.skills &&
+                  rule.ruleNotParsed.skills.length > 0 ? (
+                    <Segment secondary>
+                      <Header as="h4">Skills</Header>
+                      {rule.ruleNotParsed.skills.map(rule => (
+                        <List.Item>{rule}</List.Item>
+                      ))}
+                    </Segment>
+                  ) : null}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.education &&
+                  rule.ruleNotParsed.education.length > 0 ? (
+                    <Segment secondary>
+                      <Header as="h4">Minimum Education</Header>
+
+                      <List.Item>{rule.ruleNotParsed.education[0]}</List.Item>
+                    </Segment>
+                  ) : null}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.majors &&
+                  rule.ruleNotParsed.majors.length > 0 ? (
+                    <Segment secondary>
+                      <Header as="h4">Majors</Header>
+
+                      {rule.ruleNotParsed.majors.map(rule => (
+                        <List.Item>{rule}</List.Item>
+                      ))}
+                    </Segment>
+                  ) : null}
+
+                  {rule.ruleNotParsed && rule.ruleNotParsed.minExp ? (
+                    <Segment secondary>
+                      <Header as="h4">Minimum Experience</Header>
+
+                      <List.Item>
+                        {`${rule.ruleNotParsed.minExp} years`}
+                      </List.Item>
+                    </Segment>
+                  ) : null}
+                  {rule.ruleNotParsed && rule.ruleNotParsed.maxExp ? (
+                    <Segment secondary>
+                      <Header as="h4">Maximum Experience</Header>
+
+                      <List.Item>
+                        {`${rule.ruleNotParsed.maxExp} years`}
+                      </List.Item>
+                    </Segment>
+                  ) : null}
+                </Segment>
               ))
             ) : (
               <div>
