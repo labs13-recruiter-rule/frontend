@@ -81,19 +81,65 @@ class EngineCardRules extends React.Component {
             {this.state.rules && this.state.rules.length > 0 ? (
               this.state.rules.map(rule => (
                 <div>
+                  {console.log(rule, 'from rule map new 85')}
                   {/* <h2>rule for sending a candidate to: {ruleAgain.rule.event.params.contact}</h2> */}
                   <h2>
                     rule for sending a candidate to:{' '}
                     {/* {rule.ruleNotParsed.contactEmail} */}
                   </h2>
                   <h3>Skills</h3>
-                  <div>{console.log('rule,ruleNP', rule)}</div>
+                  {/* <div>{console.log('rule,ruleNP', rule)}</div> */}
                   {/* <div>
                     {ruleAgain.rule.conditions.all.map(condition => (
                       <p>{condition.value}</p>
                     ))}
                   </div> */}
-                  <h3>Degree</h3>
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.skills &&
+                  rule.ruleNotParsed.skills.length > 0
+                    ? (<h3>Skills</h3>,
+                      rule.ruleNotParsed.skills.map(rule => (
+                        <div>
+                          <h3>{rule}</h3>
+                        </div>
+                      )))
+                    : null}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.education &&
+                  rule.ruleNotParsed.education.length > 0 ? (
+                    <div>
+                      <h2>Education</h2>
+                      <div>
+                        {rule.ruleNotParsed.education.map(rule => (
+                          <p>{rule}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {rule.ruleNotParsed &&
+                  rule.ruleNotParsed.majors &&
+                  rule.ruleNotParsed.majors.length > 0 ? (
+                    <div>
+                      <h2>Majors</h2>
+                      <div>
+                        {rule.ruleNotParsed.majors.map(rule => (
+                          <p>{rule}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {rule.ruleNotParsed && rule.ruleNotParsed.maxExp ? (
+                    <div>
+                      <h2>Maximum Experience</h2>
+                      <div>
+                        <p>{`${rule.ruleNotParsed.maxExp} years`}</p>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               ))
             ) : (
