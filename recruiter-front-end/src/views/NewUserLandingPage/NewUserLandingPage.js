@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Button, Header } from 'semantic-ui-react';
+import { Grid, Button, Header, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import sendArrow from '../../images/send-arrows.jpg'
 import MarketingCards from '../../components/Cards/MarketingCards';
 
 const flexContainer = {
@@ -41,7 +41,7 @@ class NewUserLandingPage extends React.Component {
             </Header>
             <Header as="h3" style={center}>
               Send your candidate to the correct contacts every time
-            </Header>
+            </Header> 
             <Header as="h2" style={center}>
               3 Simple Steps To Create Your First Rule Engine
             </Header>
