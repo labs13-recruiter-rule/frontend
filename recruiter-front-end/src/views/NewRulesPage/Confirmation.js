@@ -193,19 +193,25 @@ class Confirmation extends React.Component {
               </Modal.Actions>
             </Modal>
 
-            {this.props.rule.contactEmail.length === 0 ? null : (
-              <p style={center}>
-                If a candidate passes these rules then they will be sent to{' '}
-                {this.props.rule.contactEmail[0]}
-              </p>
-            )}
-
-            {this.props.rule.education.length === 0 ? null : (
-              <p style={center}>
-                Minimum level of education required is a{' '}
-                {this.props.rule.education[0]}
-              </p>
-            )}
+            {this.props.rules.map((rule, index) => {
+              return (
+                <div key={index}>
+                  <p>
+                    If a candidate passes these rules then they will be sent to{' '}
+                    {rule.contactEmail
+                      .join(', ')
+                      .replace(/,(?!.*,)/gim, ' and')}
+                  </p>
+                  <p>
+                    Minimum level of education required is a {rule.education}
+                  </p>
+                  <p>
+                    The candidate must have majored in{' '}
+                    {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}
+                  </p>
+                </div>
+              );
+            })}
 
             {this.props.rule.majors.length === 0 ? null : (
               <p style={center}>
@@ -285,7 +291,10 @@ class Confirmation extends React.Component {
                 Add Fallback Contact
               </Button>
             </Form>
-            <Segment>{this.state.message}</Segment>
+            {this.state.message === '' ? null : (
+              <Segment>{this.state.message}</Segment>
+            )}
+
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >

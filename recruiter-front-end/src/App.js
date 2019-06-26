@@ -103,88 +103,49 @@ class App extends React.Component {
   };
 
   minEducation = e => {
+    const educationLevel = [
+      'high school / GED',
+      'some college',
+      "Associate's degree",
+      "Bachelor's degree",
+      "Master's degree",
+      'PhD',
+    ];
     switch (e) {
       case '':
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: [
-              'High School / GED',
-              'Some College',
-              "Associate's",
-              "Bachelor's Degree",
-              "Master's Degree",
-              'PhD',
-            ],
-          },
-        });
+        this.setState(prevState => ({
+          rule: { ...prevState, education: educationLevel },
+        }));
         break;
-      case 'High School / GED':
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: [
-              'High School / GED',
-              'Some College',
-              "Associate's",
-              "Bachelor's Degree",
-              "Master's Degree",
-              'PhD',
-            ],
-          },
-        });
+      case 'high school / GED':
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel },
+        }));
         break;
-      case 'Some College':
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: [
-              'Some College',
-              "Associate's",
-              "Bachelor's Degree",
-              "Master's Degree",
-              'PhD',
-            ],
-          },
-        });
+      case 'some college':
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel.slice(1, 6) },
+        }));
         break;
-      case "Associate's":
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: [
-              "Associate's",
-              "Bachelor's Degree",
-              "Master's Degree",
-              'PhD',
-            ],
-          },
-        });
+      case "Associate's degree":
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel.slice(2, 6) },
+        }));
         break;
-      case "Bachelor's Degree":
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: ["Bachelor's Degree", "Master's Degree", 'PhD'],
-          },
-        });
+      case "Bachelor's degree":
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel.slice(3, 6) },
+        }));
         break;
-      case "Master's Degree":
-        this.setState({
-          rule: {
-            ...this.state.rule,
-
-            education: ["Master's Degree", 'PhD'],
-          },
-        });
+      case "Master's degree":
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel.slice(4, 6) },
+        }));
         break;
       case 'PhD':
-        this.setState({
-          rule: {
-            ...this.state.rule,
-            education: ['PhD'],
-          },
-        });
+        this.setState(prevState => ({
+          rule: { ...this.state.rule, education: educationLevel.slice(5, 6) },
+        }));
         break;
     }
   };
@@ -552,6 +513,7 @@ class App extends React.Component {
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
                       rule={this.state.rule}
+                      rules={this.state.rules}
                       engine_id={this.state.engine}
                       contacts={this.state.selectedContacts}
                       submitRule={() => this.parseMyRule()}
