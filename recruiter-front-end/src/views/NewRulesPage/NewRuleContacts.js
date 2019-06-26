@@ -8,7 +8,6 @@ import {
   Dropdown,
   Header,
   Icon,
-  Form,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -26,6 +25,7 @@ class ContactsClass extends React.Component {
       selectedContacts: [],
       contact: [],
       modalOpen: false,
+      contactSelected: true,
     };
   }
 
@@ -60,9 +60,14 @@ class ContactsClass extends React.Component {
   };
 
   handleSubmit = e => {
-    this.props.contactName(this.state.newContactName);
-    this.props.contactEmail(this.state.newContactEmail);
-    this.props.contactContacts(this.state.selectedContacts);
+    if (this.state.selectedContacts.length === 0) {
+      e.preventDefault();
+      this.setState({ contactSelected: false });
+    } else {
+      this.props.contactName(this.state.newContactName);
+      this.props.contactEmail(this.state.newContactEmail);
+      this.props.contactContacts(this.state.selectedContacts);
+    }
   };
 
   render() {
@@ -93,6 +98,24 @@ class ContactsClass extends React.Component {
 
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
+        <Modal open={!this.state.contactSelected} size="small">
+          <Header icon="warning sign" content="Invalid contacts" />
+          <Modal.Content>
+            <p style={{ center }}>
+              Please select more or more contacts or add a contact to continue.
+              This contact or these contacts will receive an email when a
+              candidate meets the conditions for your rule engine.
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              color="green"
+              onClick={() => this.setState({ contactSelected: true })}
+            >
+              <Icon name="checkmark" /> Okay
+            </Button>
+          </Modal.Actions>
+        </Modal>
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
@@ -152,6 +175,7 @@ class ContactsClass extends React.Component {
               <>
                 <Dropdown
                   placeholder="Select Contacts"
+                  style={{ width: '50%', margin: '20px auto' }}
                   fluid
                   multiple
                   selection
@@ -213,12 +237,12 @@ class ContactsClass extends React.Component {
             <p
               style={{
                 width: '90%',
-                margin: '25px auto 0',
+                margin: '35px auto 0',
                 textAlign: 'center',
-                fontStyle: 'italic',
+                lineHeight: '1.75',
               }}
             >
-              <strong>Note:</strong> if you select more than one contact for a
+              <strong>Note:</strong> If you select more than one contact for a
               rule, those contacts will be sent an email together as a group. If
               you don't want the contacts to receive an email together, create a
               separate rule with the same candidate requirements for each
