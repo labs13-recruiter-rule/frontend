@@ -164,7 +164,7 @@ class NewCandidate extends React.Component {
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
-                    <Step.Title>Confirm</Step.Title>
+                    <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
