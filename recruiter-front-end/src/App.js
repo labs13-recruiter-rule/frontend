@@ -536,6 +536,7 @@ class App extends React.Component {
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
+             
                 <Route
                   exact
                   path="/new-candidate/"

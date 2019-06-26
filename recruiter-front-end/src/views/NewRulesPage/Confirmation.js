@@ -66,13 +66,11 @@ class Confirmation extends React.Component {
     }
 
     if (validateEmail(this.state.fallbackEmail)) {
-      e.preventDefault();
       this.props.fallbackName(this.state.fallbackName);
       this.props.fallbackEmail(this.state.fallbackEmail);
       //  submitRule calls parseMyRule() in App.js
       this.props.submitRule();
     } else {
-      e.preventDefault();
       this.setState({ invalidEmail: true });
     }
   };
@@ -274,7 +272,7 @@ class Confirmation extends React.Component {
               <Grid.Column
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
-                <Button style={primaryButton} as={Link} to="/new-rule/skills">
+                <Button style={primaryButton} as={Link} to="/new-rule/experience">
                   <Icon name="arrow left" size="small" />
                   Back
                 </Button>
@@ -282,7 +280,7 @@ class Confirmation extends React.Component {
                   style={primaryButton}
                   onClick={this.handleSubmit}
                   as={Link}
-                  to="/new-rule/success"
+                  to="/engines"
                 >
                   Submit
                 </Button>
@@ -293,7 +291,7 @@ class Confirmation extends React.Component {
               <Modal.Content>
                 <p style={{ center }}>
                   A valid email is required to create a rule. Please add a
-                  fallback name and email. This contact will recieve an email
+                  fallback name and email. This contact will receive an email
                   when a candidate does <strong>not</strong> meet the conditions
                   for your rule engine.
                 </p>
