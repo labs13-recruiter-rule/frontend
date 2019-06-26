@@ -48,7 +48,6 @@ class NewCandidate extends React.Component {
   };
 
   newRule = e => {
-    console.log('/views/NewRulesPage/Experience.js newRule');
     this.props.minExp(this.state.minNumber);
     this.props.maxExp(this.state.maxNumber);
     this.props.newRule(this.state);
@@ -57,6 +56,7 @@ class NewCandidate extends React.Component {
   handleSubmit = e => {
     this.props.minExp(this.state.minNumber);
     this.props.maxExp(this.state.maxNumber);
+    this.props.newRule(this.state);
   };
 
   render() {

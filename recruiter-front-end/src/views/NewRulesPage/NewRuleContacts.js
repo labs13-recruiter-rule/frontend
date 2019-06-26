@@ -99,7 +99,7 @@ class ContactsClass extends React.Component {
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
         <Modal open={!this.state.contactSelected} size="small">
-          <Header icon="warning sign" content="Invalid conctacts" />
+          <Header icon="warning sign" content="Invalid contacts" />
           <Modal.Content>
             <p style={{ center }}>
               Please select more or more contacts or add a contact to continue.
@@ -116,12 +116,6 @@ class ContactsClass extends React.Component {
             </Button>
           </Modal.Actions>
         </Modal>
-
-        <button
-          onClick={() => console.log('NewRuleContacts this.state', this.state)}
-        >
-          NewRuleContacts this.state
-        </button>
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
