@@ -1,12 +1,7 @@
 import React from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Link,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
@@ -24,23 +19,15 @@ import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
 import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
-import {
-  Menu,
-  Button,
-  Container,
-  Segment,
-  Responsive,
-} from 'semantic-ui-react';
+import { Menu, Container, Segment, Responsive } from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
-import NewCandidate from './components/NewCandidate/NewCandidate';
 import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
 import NewEngine from './views/NewRulesPage/NewEngine';
 import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
 import EngineSuccess from './views/NewRulesPage/EngineCreationSuccess';
-import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
@@ -49,6 +36,7 @@ class App extends React.Component {
   state = {
     user: {},
     user_id: null,
+    rules: [],
     rule: {
       skills: [],
       education: [],
@@ -67,7 +55,7 @@ class App extends React.Component {
       experience: null,
       education: [],
     },
-    engine: 38, // why is this hardcoded as 38?
+    engine: null,
     engine_id: null,
     selectedContacts: [],
   };
@@ -210,6 +198,25 @@ class App extends React.Component {
       rule: {
         ...prevState.rule,
         skills: e,
+      },
+    }));
+  };
+
+  newRule = e => {
+    console.log('App.js newRule this.state e', e);
+    console.log('App.js newRule this.state', this.state);
+
+    this.setState(prevState => ({
+      ...prevState,
+      rules: [...prevState.rules, prevState.rule],
+      rule: {
+        skills: [],
+        education: [],
+        majors: [],
+        minExp: null,
+        maxExp: null,
+        contactEmail: [],
+        contactName: '',
       },
     }));
   };
@@ -456,10 +463,9 @@ class App extends React.Component {
                     </Menu>
                   </Responsive>
                 </Segment.Group>
-
-                {/* <button onClick={() => this.appState()}>
-                    App.js this.state
-                  </button> */}
+                <button onClick={() => this.appState()}>
+                  App.js this.state
+                </button>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
@@ -513,9 +519,12 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/new-rule/experience"
-                  //   component={Experience}
                   component={props => (
-                    <Experience minExp={this.minExp} maxExp={this.maxExp} />
+                    <Experience
+                      minExp={this.minExp}
+                      maxExp={this.maxExp}
+                      newRule={this.newRule}
+                    />
                   )}
                 />
                 <Route
@@ -532,11 +541,15 @@ class App extends React.Component {
                     />
                   )}
                 />
-                <Route exact path="/new-rule/success" component={EngineSuccess} />
+                <Route
+                  exact
+                  path="/new-rule/success"
+                  component={EngineSuccess}
+                />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
-             
+
                 <Route
                   exact
                   path="/new-candidate/"

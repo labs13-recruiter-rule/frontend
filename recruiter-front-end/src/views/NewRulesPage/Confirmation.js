@@ -24,7 +24,7 @@ class Confirmation extends React.Component {
       fallbackEmail: '',
       invalidEmail: false,
       hasContactEmail: true,
-      message: ''
+      message: '',
     };
   }
 
@@ -35,28 +35,41 @@ class Confirmation extends React.Component {
     // }
   }
 
-  state = { log: [] }
+  state = { log: [] };
 
   handleClick = () => {
     this.addFallback();
-    this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)}
+    this.updateMessage(
+      `The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`,
+    );
+  };
 
-  handleKeyPress = (e) => {
+  handleKeyPress = e => {
     if (e.charCode === 32 || e.charCode === 13) {
       // Prevent the default action to stop scrolling when space is pressed
-      e.preventDefault()
-      this.addFallback()
-      this.updateMessage(`The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`)
+      e.preventDefault();
+      this.addFallback();
+      this.updateMessage(
+        `The fallback contact was set to ${this.state.fallbackName} at ${this.state.fallbackEmail}.`,
+      );
     }
-  }
+  };
 
-  updateMessage = message => this.setState(prevState => ({ message: [message, ...prevState.message] }))
-
+  updateMessage = message =>
+    this.setState(prevState => ({ message: [message, ...prevState.message] }));
 
   addFallback = e => {
-    Axios.put(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`, {fallbackName: this.state.fallbackName, fallbackEmail: this.state.fallbackEmail } , tokenHeader)
-    .then(res => console.log(res)).catch(err=> console.log(err))
-  }
+    Axios.put(
+      `https://recruiter-back-end.herokuapp.com/engines/${this.props.engine_id}`,
+      {
+        fallbackName: this.state.fallbackName,
+        fallbackEmail: this.state.fallbackEmail,
+      },
+      tokenHeader,
+    )
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   handleSubmit = e => {
     // check if an email is valid
@@ -265,27 +278,31 @@ class Confirmation extends React.Component {
                 />
               </Form.Field>
 
-              <Button   onClick={this.handleClick}
-            onKeyPress={this.handleKeyPress}>Add Fallback Contact</Button>
-              </Form> 
-              <Segment>{this.state.message}</Segment>
-              <Grid.Column
-                style={{ display: 'flex', justifyContent: 'space-between' }}
+              <Button
+                onClick={this.handleClick}
+                onKeyPress={this.handleKeyPress}
               >
-                <Button style={primaryButton} as={Link} to="/new-rule/experience">
-                  <Icon name="arrow left" size="small" />
-                  Back
-                </Button>
-                <Button
-                  style={primaryButton}
-                  onClick={this.handleSubmit}
-                  as={Link}
-                  to="/engines"
-                >
-                  Submit
-                </Button>
-              </Grid.Column>
-            
+                Add Fallback Contact
+              </Button>
+            </Form>
+            <Segment>{this.state.message}</Segment>
+            <Grid.Column
+              style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
+              <Button style={primaryButton} as={Link} to="/new-rule/experience">
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
+              <Button
+                style={primaryButton}
+                onClick={this.handleSubmit}
+                as={Link}
+                to="/engines"
+              >
+                Submit
+              </Button>
+            </Grid.Column>
+
             <Modal open={this.state.invalidEmail} size="small">
               <Header icon="warning sign" content="Invalid email" />
               <Modal.Content>

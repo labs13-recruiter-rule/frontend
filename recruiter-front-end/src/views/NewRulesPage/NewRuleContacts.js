@@ -152,6 +152,7 @@ class ContactsClass extends React.Component {
               <>
                 <Dropdown
                   placeholder="Select Contacts"
+                  style={{ width: '50%', margin: '20px auto' }}
                   fluid
                   multiple
                   selection
@@ -213,12 +214,12 @@ class ContactsClass extends React.Component {
             <p
               style={{
                 width: '90%',
-                margin: '25px auto 0',
+                margin: '35px auto 0',
                 textAlign: 'center',
-                fontStyle: 'italic',
+                lineHeight: '1.75',
               }}
             >
-              <strong>Note:</strong> if you select more than one contact for a
+              <strong>Note:</strong> If you select more than one contact for a
               rule, those contacts will be sent an email together as a group. If
               you don't want the contacts to receive an email together, create a
               separate rule with the same candidate requirements for each

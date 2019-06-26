@@ -11,7 +11,6 @@ import {
   Divider,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 
@@ -46,6 +45,13 @@ class NewCandidate extends React.Component {
     this.setState(prevState => ({
       options: [{ text: value, value }, ...prevState.options],
     }));
+  };
+
+  newRule = e => {
+    console.log('/views/NewRulesPage/Experience.js newRule');
+    this.props.minExp(this.state.minNumber);
+    this.props.maxExp(this.state.maxNumber);
+    this.props.newRule(this.state);
   };
 
   handleSubmit = e => {
@@ -230,7 +236,12 @@ class NewCandidate extends React.Component {
                   >
                     <Icon name="x" /> No
                   </Button>
-                  <Button color="green" as={Link} to="/new-rule/contacts">
+                  <Button
+                    color="green"
+                    as={Link}
+                    to="/new-rule/contacts"
+                    onClick={this.newRule}
+                  >
                     <Icon name="check" /> Yes
                   </Button>
                 </Modal.Actions>

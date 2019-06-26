@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token: `${token}` }};
+const tokenHeader = { headers: { token: `${token}` } };
 
 const flexContainer = {
   display: 'flex',
@@ -39,12 +39,6 @@ class NewEngineRuleView extends React.Component {
     engines: [],
     engine: '',
   };
-
-  // componentDidMount() {
-  //   Axios.get('https://recruiter-back-end.herokuapp.com/engines', tokenHeader)
-  //     .then(res => this.setState({ engines: res.data }))
-  //     .catch(error => console.log(error));
-  // }
 
   handleEngineName = e => {
     this.setState({ engine: e.target.value });
