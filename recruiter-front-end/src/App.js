@@ -24,7 +24,13 @@ import CandidateSkills from './views/AddCandidatePage/CandidateSkills';
 import CandidateExperience from './views/AddCandidatePage/CandidateExperience';
 import NewContactForm from './components/Contacts/NewContactForm';
 import fire from './config/fire';
-import { Menu, Button, Container } from 'semantic-ui-react';
+import {
+  Menu,
+  Button,
+  Container,
+  Segment,
+  Responsive,
+} from 'semantic-ui-react';
 import history from './history';
 import EngineDash from './components/Engines/EngineDash';
 import { parseRule, addRule } from './actions/ruleActions';
@@ -33,6 +39,7 @@ import CandidateEngine from './views/AddCandidatePage/CandidateEngine';
 import NewEngine from './views/NewRulesPage/NewEngine';
 import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
+import EngineSuccess from './views/NewRulesPage/EngineCreationSuccess';
 import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
@@ -50,7 +57,6 @@ class App extends React.Component {
       maxExp: null,
       contactEmail: [],
       contactName: '',
-      requireHeadshot: false,
     },
     candidate: {
       name: '',
@@ -63,7 +69,7 @@ class App extends React.Component {
     },
     engine: 38, // why is this hardcoded as 38?
     engine_id: null,
-    selectedContacts: []
+    selectedContacts: [],
   };
 
   componentDidMount() {
@@ -88,20 +94,17 @@ class App extends React.Component {
   }
 
   candidateEngine = e => {
-    console.log('App.js candidateEngine', e);
     this.setState({ ...this.state, engine: e });
   };
 
   contactContacts = e => {
-    console.log('App.js contactContacts', e);
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
-       contactEmail: e
+        contactEmail: e,
       },
     });
-    console.log('APP js rule', this.state.rule)
   };
 
   minEducation = e => {
@@ -192,21 +195,23 @@ class App extends React.Component {
   };
 
   majors = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         majors: e,
       },
-    });
+    }));
   };
 
   skills = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         skills: e,
       },
-    });
+    }));
   };
 
   fallbackName = e => {
@@ -254,21 +259,23 @@ class App extends React.Component {
   //   {rule: this.props.parsedRule, ruleNotParsed: this.state.rule},
   // )
   minExp = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         minExp: e,
       },
-    });
+    }));
   };
 
   maxExp = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       rule: {
-        ...this.state.rule,
+        ...prevState.rule,
         maxExp: e,
       },
-    });
+    }));
   };
 
   contactName = e => {
@@ -290,7 +297,6 @@ class App extends React.Component {
   };
 
   candidateEngine = e => {
-    console.log('App.js candidateEngine', e);
     this.setState(prevState => ({
       ...prevState,
       engine: e,
@@ -378,42 +384,91 @@ class App extends React.Component {
           {this.state.user ? (
             [
               <>
-                <Menu>
-                  <Menu.Item>
-                    <Button as={Link} to="/">
-                      Home
-                    </Button>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/engines">
-                      <Button>Engines</Button>
-                    </NavLink>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <NavLink style={{ color: 'rgba(0,0,0,.6)' }} to="/contacts">
-                      <Button>My Contacts</Button>
-                    </NavLink>
-                  </Menu.Item>
-                  <Menu.Item>
-                    {/* <Button as={Link} to="/new-candidate/contact-info"> */}
-                    <Button as={Link} to="/new-candidate/engine">
-                      Send Candidate
-                    </Button>
-                  </Menu.Item>
-                  <Menu.Item position="right">
-                    <Button as={Link} to="/" onClick={this.logout}>logout</Button>
-                  </Menu.Item>
-                  {/* <button onClick={() => this.appState()}>
+                <Segment.Group>
+                  <Responsive as={Segment} maxWidth={522}>
+                    <Menu
+                      vertical
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        textAlign: 'center',
+                      }}
+                    >
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/" onClick={this.logout}>
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                  <Responsive as={Segment} minWidth={523} maxWidth={736}>
+                    <Menu
+                      compact
+                      style={{ display: 'flex', justifyContent: 'center' }}
+                    >
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/" onClick={this.logout}>
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                  <Responsive as={Segment} minWidth={737}>
+                    <Menu>
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item
+                        as={Link}
+                        to="/"
+                        onClick={this.logout}
+                        position="right"
+                      >
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                </Segment.Group>
+
+                {/* <button onClick={() => this.appState()}>
                     App.js this.state
                   </button> */}
-                </Menu>
                 <Route exact path="/" component={NewUserLandingPage} />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
                   exact
                   path="/id"
                   render={props => {
-                    console.log(props);
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
@@ -473,13 +528,18 @@ class App extends React.Component {
                     <Confirmation
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
+                      rule={this.state.rule}
+                      engine_id={this.state.engine}
+                      contacts={this.state.selectedContacts}
                       submitRule={() => this.parseMyRule()}
                     />
                   )}
                 />
+                <Route exact path="/new-rule/success" component={EngineSuccess} />
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
+             
                 <Route
                   exact
                   path="/new-candidate/"

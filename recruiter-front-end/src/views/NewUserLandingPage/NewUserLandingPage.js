@@ -45,9 +45,6 @@ function App() {
       </Grid.Row>
       <Grid.Row centered>
         <MarketingCards />
-        {/* <Link style={linkStyles} to="/new-rule/education">
-          <Button style={primaryButton}>Create Rule</Button>
-        </Link> */}
         <Link style={linkStyles} to="/new-rule/engine">
           <Button style={primaryButton}>Create New Rule Engine</Button>
         </Link>

@@ -10,7 +10,6 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 
@@ -277,7 +276,7 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
-            <Progress percent={30} />
+            <Progress percent={60} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
@@ -325,7 +324,8 @@ class NewCandidate extends React.Component {
                 <Grid.Column />
                 <Grid.Column width={14}>
                   <Header as="h4" textAlign="center">
-                    What are the skill requirements to send a candidate to your selected contact(s)?
+                    What are the skill requirements to send a candidate to your
+                    selected contact(s)?
                   </Header>
                 </Grid.Column>
                 <Grid.Column />
