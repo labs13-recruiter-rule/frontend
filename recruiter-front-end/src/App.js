@@ -226,7 +226,10 @@ class App extends React.Component {
         console.log('from error parse', err);
       });
   }
-
+  // .addRule(
+  //   `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine}/rules/`,
+  //   {rule: this.props.parsedRule, ruleNotParsed: this.state.rule},
+  // )
   minExp = e => {
     this.setState(prevState => ({
       ...prevState,
