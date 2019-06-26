@@ -81,6 +81,14 @@ class App extends React.Component {
     fire.auth().signOut();
   }
 
+  createNewRule = e => {
+    console.log('App.js createNewRule');
+    this.setState(prevState => ({
+      ...prevState,
+      rules: [],
+    }));
+  };
+
   candidateEngine = e => {
     this.setState({ ...this.state, engine: e });
   };
@@ -466,7 +474,14 @@ class App extends React.Component {
                 <button onClick={() => this.appState()}>
                   App.js this.state
                 </button>
-                <Route exact path="/" component={NewUserLandingPage} />
+                <Route
+                  exact
+                  path="/"
+                  // component={NewUserLandingPage}
+                  render={() => (
+                    <NewUserLandingPage createNewRule={this.createNewRule} />
+                  )}
+                />
                 <Route exact path="/db" component={Dashboard} />
                 <Route
                   exact
