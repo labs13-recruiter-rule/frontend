@@ -62,11 +62,11 @@ class NewCandidate extends React.Component {
     };
 
     const options = [
-      { key: 1, text: 'High School / GED', value: 'High School / GED' },
-      { key: 2, text: 'Some College', value: 'Some College' },
-      { key: 3, text: "Associate's", value: "Associate's" },
-      { key: 4, text: "Bachelor's Degree", value: "Bachelor's Degree" },
-      { key: 5, text: "Master's Degree", value: "Master's Degree" },
+      { key: 1, text: 'high school / GED', value: 'high school / GED' },
+      { key: 2, text: 'some college', value: 'some college' },
+      { key: 3, text: "Associate's degree", value: "Associate's degree" },
+      { key: 4, text: "Bachelor's degree", value: "Bachelor's degree" },
+      { key: 5, text: "Master's degree", value: "Master's degree" },
       { key: 6, text: 'PhD', value: 'PhD' },
     ];
 

@@ -49,6 +49,7 @@ class Contacts extends React.Component {
           />
 
           <Modal
+            size="tiny"
             trigger={
               <Button
                 color="green"
