@@ -7,10 +7,7 @@ import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 import 'semantic-ui-css/semantic.min.css';
-// import dotenv from 'dotenv';
 import App from './App';
-
-// require('dotenv').config();
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
