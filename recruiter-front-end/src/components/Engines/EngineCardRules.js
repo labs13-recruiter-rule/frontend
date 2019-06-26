@@ -56,9 +56,16 @@ class EngineCardRules extends React.Component {
           <Card.Content>
             <Grid className="engineCardRuleGrid">
               <GridColumn width={4}>
-                <Header as="h3" className="ruleHeader">
-                  Total Rules: {this.state.rules.length}
-                </Header>
+                <Header
+                  as="h3"
+                  className="ruleHeader"
+                  content={`Total Rules: ${this.state.rules.length}`}
+                  subheader={
+                    this.props.fallbackEmail
+                      ? `Fallback: ${this.props.fallbackEmail}`
+                      : null
+                  }
+                />
               </GridColumn>
               {/* <GridColumn floated="right"></GridColumn> */}
               <GridColumn width={4} textAlign="right">
