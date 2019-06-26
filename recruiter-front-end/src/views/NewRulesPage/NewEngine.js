@@ -51,7 +51,6 @@ class NewEngineRuleView extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log('token header', tokenHeader)
     Axios.post(
       'https://recruiter-back-end.herokuapp.com/engines',
       { engine_name: this.state.engine },
