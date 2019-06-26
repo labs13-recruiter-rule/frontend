@@ -82,7 +82,6 @@ class App extends React.Component {
   }
 
   createNewRule = e => {
-    console.log('App.js createNewRule');
     this.setState(prevState => ({
       ...prevState,
       rules: [],
@@ -211,9 +210,6 @@ class App extends React.Component {
   };
 
   newRule = e => {
-    console.log('App.js newRule this.state e', e);
-    console.log('App.js newRule this.state', this.state);
-
     this.setState(prevState => ({
       ...prevState,
       rules: [...prevState.rules, prevState.rule],
@@ -477,7 +473,6 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/"
-                  // component={NewUserLandingPage}
                   render={() => (
                     <NewUserLandingPage createNewRule={this.createNewRule} />
                   )}
@@ -490,7 +485,14 @@ class App extends React.Component {
                     return <div>UserId: {props.match.params.id}</div>;
                   }}
                 />
-                <Route exact path="/engines" component={EngineDash} />
+                <Route
+                  exact
+                  path="/engines"
+                  //   component={EngineDash}
+                  render={() => (
+                    <EngineDash createNewRule={this.createNewRule} />
+                  )}
+                />
                 <Route
                   exact
                   path="/new-candidate/engine"
@@ -564,7 +566,6 @@ class App extends React.Component {
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />
-
                 <Route
                   exact
                   path="/new-candidate/"
