@@ -362,23 +362,8 @@ class Confirmation extends React.Component {
               </p>
             )} */}
             <Header as="h3" style={center}>
-              If a candidate does not meet the education, skills and experience
-              requirements listed above, where should we send them?
+              If a candidate does not meet the rules above, their information will be sent to a fallback contact. Who would you like to specify as your fallback?
             </Header>
-            {/* <Dropdown
-              placeholder="Select Contact"
-              fluid
-              selection
-              onChange={this.handleChange}
-              value={this.state.contacts}
-              options={this.state.userContacts.map(contact => {
-                return {
-                  key: contact.id,
-                  text: contact.name + ' | ' + contact.email,
-                  value: contact.email
-                };
-              })}
-             /> */}
             <Form>
               <Form.Field>
                 <Form.Input

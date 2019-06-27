@@ -298,7 +298,7 @@ class CandidateSkills extends React.Component {
             <Form className="Skills">
               <Grid.Row>
                 <Grid.Column width={2} verticalAlign="middle">
-                  <Header as="h4">Skills</Header>
+                  <Header textAlign="center" as="h4">Skills</Header>
                 </Grid.Column>
                 <Grid.Column floated="left" width={14} verticalAlign="middle">
                   <Dropdown

@@ -94,7 +94,7 @@ class CandidateEngine extends React.Component {
             {this.state.engines.length > 0 ? (
               <>
                 {' '}
-                <Header>
+                <Header textAlign="center">
                   Which rule engine do you want to run the candidate through?
                 </Header>{' '}
                 <Dropdown

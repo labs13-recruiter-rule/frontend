@@ -195,7 +195,7 @@ class CandidateEducation extends React.Component {
             </Step.Group>
             <Form className="Education">
               <Form.Field>
-                <Header as="h4">Highest Level of Education</Header>
+                <Header textAlign="center" as="h4">Highest Degree Obtained</Header>
                 <Dropdown
                   clearable
                   options={degreeType}
@@ -205,7 +205,7 @@ class CandidateEducation extends React.Component {
                 />
               </Form.Field>
               <Form.Field>
-                <Header as="h4">Major(s)</Header>
+                <Header textAlign="center" as="h4">Major(s) / Fields of Study</Header>
                 <Dropdown
                   placeholder="Majors"
                   search

@@ -176,7 +176,7 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
-                    placeholder="Enter a number"
+                    placeholder="Choose a number"
                     search
                     fluid
                     allowAdditions
@@ -195,7 +195,7 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
-                    placeholder="Enter a number"
+                    placeholder="Choose a number"
                     search
                     fluid
                     allowAdditions
@@ -219,10 +219,10 @@ class NewCandidate extends React.Component {
                 trigger={<Button style={primaryButton}>Next</Button>}
                 closeIcon
               >
-                <Header icon="archive" content="Create New Rule" />
+                <Header icon="archive" content="Create Another Rule" />
                 <Modal.Content>
                   <p>
-                    Would you like to create a new rule before specifying the fallback contact if a candidate does not meet any of the requirements for this engine?
+                    Would you like to add an additional rule to this engine before confirming?
                   </p>
                 </Modal.Content>
                 <Modal.Actions>
