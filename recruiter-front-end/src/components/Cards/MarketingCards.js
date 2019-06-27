@@ -24,7 +24,7 @@ const MarketingCards = () => (
           <Card.Description>
             Choose contacts and tell us what experience, skills, or
             education requirements the candidate should have for their information to be sent to them.
-             You can add as many rules as you want to each engine. One engine isn't enough? Create more.
+             You can add as many rules as you want to each engine. One rule on one engine isn't enough for you? Create more.
           </Card.Description>
         </Card.Content>
       </Card>
@@ -33,7 +33,7 @@ const MarketingCards = () => (
         <Card.Content>
           <Card.Header>3. Run Candidates through the Rule Engine</Card.Header>
           <Card.Description>
-            Run a candidate's information through the rule engine, so the right
+            Run a candidate's information through the rule engine and preview the email text before it sends, so the right
             person (according to you!) gets the right candidate's information. Every time.
           </Card.Description>
         </Card.Content>
