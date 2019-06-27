@@ -57,20 +57,20 @@ class AddRuleToEngine extends React.Component {
     )
       .then(res => {
         this.props.candidateEngine(res.data.newEngine.id);
-        console.log('posted handlesubmit newengine', res.data.newEngine.id);
+        // console.log('posted handlesubmit newengine', res.data.newEngine.id);
       })
       .catch(err => {
-        console.log('from error handlesubmit', err);
+        // console.log('from error handlesubmit', err);
       });
   };
 
   setEngineForNewRule = () => {
-    console.log('se hit');
+    // console.log('se hit');
     this.props.setEngineForNewRule(this.props.props.location.state.engineID);
   };
 
   continueEngineSet = () => {
-    console.log('se hit pre pre');
+    // console.log('se hit pre pre');
     this.setEngineForNewRule();
   };
 

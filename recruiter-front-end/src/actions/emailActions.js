@@ -17,7 +17,7 @@ import { CommentAction } from 'semantic-ui-react';
 // TOKEN
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token: token,
   },
@@ -26,7 +26,7 @@ const tokenHeader = {
 // GET EMAIL HISTORY
 export const getEmailHistory = url => dispatch => {
   axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_EMAIL_HISTORY_SUCCESS,
@@ -44,7 +44,7 @@ export const getEmailHistory = url => dispatch => {
 // ADD EMAIL HISTORY
 export const addEmailHistory = (url, newEmail) => dispatch => {
   axios
-    .post(`${url}`, newEmail, tokenHeader)
+    .post(`${url}`, newEmail, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: ADD_EMAIL_HISTORY_SUCCESS,
@@ -61,7 +61,7 @@ export const addEmailHistory = (url, newEmail) => dispatch => {
 // COUNTS
 export const getEmailTotal = url => dispatch => {
   axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_EMAIL_TOTAL_SUCCESS,
@@ -78,7 +78,7 @@ export const getEmailTotal = url => dispatch => {
 
 export const getEmailHistoryAboutCandidate = url => dispatch => {
   axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_EMAILS_BY_CANDIDATE_SUCCESS,
@@ -95,7 +95,7 @@ export const getEmailHistoryAboutCandidate = url => dispatch => {
 
 export const getEmailHistoryToContact = url => dispatch => {
   axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_EMAILS_BY_CONTACT_SUCCESS,

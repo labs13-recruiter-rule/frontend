@@ -33,8 +33,13 @@ class NewRuleContact extends React.Component {
   }
 
   componentDidMount() {
+    
+    if (!token || !tokenHeader) {
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
+this.getContacts();
+    }  
     this.getContacts();
-    console.log('new rule contacts props', this.props)
   }
 
   getContacts() {
@@ -43,7 +48,7 @@ class NewRuleContact extends React.Component {
       .then(res => {
         this.setState({ userContacts: res.data });
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log());
   }
 
   handleModalOpen = () => this.setState({ modalOpen: true });

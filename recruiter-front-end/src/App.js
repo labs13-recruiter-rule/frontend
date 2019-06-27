@@ -38,8 +38,6 @@ import {
   AddRuleToEngine,
   NewRuleSkills,
 } from './components/Engines/AddRuleToEngine/index';
-const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token: `${token}` } };
 
 class App extends React.Component {
   state = {
@@ -87,13 +85,13 @@ class App extends React.Component {
   authListener() {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
+        // console.log(user);
         this.setState({
           user,
           user_displayName: user.displayName,
           user_email: user.email,
-        });
-        sessionStorage.setItem('token', user._lat);
+        }, () => sessionStorage.setItem('token', user._lat))
+        
       } else {
         this.setState({
           user: null,
@@ -103,6 +101,7 @@ class App extends React.Component {
   }
 
   logout() {
+    sessionStorage.clear();
     fire.auth().signOut();
   }
 
@@ -343,14 +342,14 @@ class App extends React.Component {
             this.props.parsedRule,
           )
           .then(() => {
-            console.log('rule submitted good');
+            // console.log('rule submitted good');
           })
           .catch(() => {
-            console.log('rule did not submit well');
+            // console.log('rule did not submit well');
           });
       })
       .catch(err => {
-        console.log('from error parse', err);
+        // console.log('from error parse', err);
       });
   }
 
@@ -364,14 +363,14 @@ class App extends React.Component {
             this.props.parsedRule,
           )
           .then(() => {
-            console.log('rule submitted good');
+            // console.log('rule submitted good');
           })
           .catch(() => {
-            console.log('rule did not submit well');
+            // console.log('rule did not submit well');
           });
       })
       .catch(err => {
-        console.log('from error parse', err);
+        // console.log('from error parse', err);
       });
   }
   // .addRule(
@@ -546,7 +545,7 @@ class App extends React.Component {
   };
 
   appState = () => {
-    console.log('App.js this.state', this.state);
+    // console.log('App.js this.state', this.state);
   };
 
   render() {

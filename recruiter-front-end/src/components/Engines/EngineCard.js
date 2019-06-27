@@ -16,8 +16,10 @@ import { Link, Route, Switch, Router } from 'react-router-dom';
 import { AddRuleToEngine } from './AddRuleToEngine';
 import history from '../../history';
 
+
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
+
 
 class EngineCard extends React.Component {
   constructor(props) {
@@ -28,19 +30,21 @@ class EngineCard extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.props.getRules(this.props.engine.id).then(() => {
-  //     console.log('from cdm', this.props.rules);
-  //   });
-  // }
+  componentDidMount() {
+    if (!token || !tokenHeader) {
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
+    }
+  }
+
 
   deleteRule = (engineid, ruleid) => {
-    console.log(engineid, ruleid, 'e, r');
+    // console.log(engineid, ruleid, 'e, r');
     this.props
       .deleteRule(engineid, ruleid)
       .then(() => this.props.getRules(engineid))
       .catch(err => {
-        console.log(err, 'error from .catch in deleteRule in enginecard.js');
+        // console.log(err, 'error from .catch in deleteRule in enginecard.js');
       });
   };
 
@@ -49,8 +53,8 @@ class EngineCard extends React.Component {
       `https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`,
       tokenHeader,
     )
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+      .then(res => console.log())
+      .catch(error => console.log());
   };
 
   open = () => this.setState({ open: true });

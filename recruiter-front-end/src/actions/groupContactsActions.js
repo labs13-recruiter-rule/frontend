@@ -15,7 +15,7 @@ import {
 // TOKEN
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token: token,
   },
@@ -29,7 +29,7 @@ export const addContactToGroup = newGroupContact => dispatch => {
     .post(
       `https://recruiter-back-end.herokuapp.com/groupcontacts/`,
       newGroupContact,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -51,7 +51,7 @@ export const removeContactfromGroup = groupcontact_id => dispatch => {
   return axios
     .delete(
       `https://recruiter-back-end.herokuapp.com/groupcontacts/${groupcontact_id}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -77,7 +77,7 @@ export const editContactInGroup = (
     .put(
       `https://recruiter-back-end.herokuapp.com/groupcontacts/${groupcontact_id}`,
       editedGroupContact,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -99,7 +99,7 @@ export const getGroupContactsByGroupId = group_id => dispatch => {
   axios
     .get(
       `https://recruiter-back-end.herokuapp.com/groupcontacts/group/${group_id}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res =>
       dispatch({
@@ -117,7 +117,7 @@ export const getGroupContactsByGroupId = group_id => dispatch => {
 
 export const getGroupContacts = () => dispatch => {
   axios
-    .get('https://recruiter-back-end.herokuapp.com/groupcontacts', tokenHeader)
+    .get('https://recruiter-back-end.herokuapp.com/groupcontacts', tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_GROUPCONTACTS_SUCCESS,

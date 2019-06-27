@@ -20,21 +20,18 @@ const uiConfig = {
       const newUser = authResult.additionalUserInfo.isNewUser;
       const token = authResult.user._lat;
 
+      sessionStorage.setItem('token', token);
       if (newUser) {
-        sessionStorage.setItem('token', token);
-        console.log('from register token', token);
         axios
           .post(process.env.REACT_APP_BACKEND_REGISTER, { token })
-          .then(res => console.log('from register', res))
+          .then(res => console.log('loginjs register new user success', res))
           .catch(error => {
             console.log('from register error', error);
           });
       } else {
-        sessionStorage.setItem('token', token);
-        console.log('from login token', token);
         axios
           .post(process.env.REACT_APP_BACKEND_LOGIN, { token })
-          .then(res => console.log('from register res', res))
+          .then(res => console.log('loginjs login non new user success'))
           .catch(error => {
             console.log('from register error', error);
           });
@@ -69,11 +66,11 @@ class Login extends React.Component {
           })
           .then(res => console.log('from register res', res))
           .catch(error => {
-            console.log('from register error', error);
+            console.log('from login backend register signinwithemailandpassword error', error);
           });
       })
       .catch(error => {
-        console.log(error);
+        console.log('login signinwithemailandpassword err', error);
       });
   };
 
