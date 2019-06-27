@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Button, Header } from 'semantic-ui-react';
+import { Grid, Button, Header, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import letters from '../images/letters.jpg';
 import MarketingCards from '../components/Cards/MarketingCards';
 
 const flexContainer = {
@@ -32,10 +32,11 @@ function MarketingPage() {
         <Grid.Column width={1} />
         <Grid.Column width={10} centered="true" style={flexContainer}>
           <Header as="h1" style={center}>
-            Recruiter Rule Engine
+            Recruiter Rules
           </Header>
+          <Image src={letters} alt="letters" />
           <Header as="h3" style={center}>
-            Send your candidates to the correct contacts every time
+            Send prospective candidates to the correct contacts every time
           </Header>
           <Header as="h2" style={center}>
             3 Simple Steps To Create Your First Rule Engine

@@ -2,9 +2,10 @@ import React from 'react';
 import fire from './../config/fire';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Button, Form, Container, Header } from 'semantic-ui-react';
+import { Button, Form, Container, Header, Modal, Image } from 'semantic-ui-react';
 import axios from 'axios';
 import MarketingPage from './MarketingPage';
+import './Login.css';
 // import './'
 
 const center = {
@@ -99,9 +100,14 @@ class Login extends React.Component {
   render() {
     return (
       <Container>
-        <MarketingPage />
-        <Header as="h1" style={center}>Sign up for Recruiter Rule Engine Today</Header>
-        <Form>
+        <MarketingPage /> 
+        <div className="modal-container">
+        <Modal tiny trigger={<Button className='button-center'>Sign up or Login Now!</Button>} centered={false}>
+    <Modal.Header>Welcome to Recruiter Rules!</Modal.Header>
+    <Modal.Content image>
+      
+      <Modal.Description>
+      <Form className='form-style'>
           <Form.Field>
             <label htmlFor="email">Email</label>
             <input
@@ -123,13 +129,19 @@ class Login extends React.Component {
             />
           </Form.Field>
           <Form.Field>
+            <div className="button-container">
             <Button type="submit" onClick={this.login}>
               Login
             </Button>
             <Button onClick={this.signup}>Signup</Button>
+            </div>
           </Form.Field>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={fire.auth()} />
         </Form>
+      </Modal.Description>
+    </Modal.Content>
+  </Modal>
+  </div>
       </Container>
     );
   }

@@ -164,7 +164,7 @@ class NewCandidate extends React.Component {
               <Step>
                 <Step.Content>
                   <Link style={linkStyles} to="/new-rule/confirmation">
-                    <Step.Title>Confirm</Step.Title>
+                    <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
@@ -176,7 +176,7 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
-                    placeholder="Enter a number"
+                    placeholder="Choose a number"
                     search
                     fluid
                     allowAdditions
@@ -195,7 +195,7 @@ class NewCandidate extends React.Component {
                 </Grid.Column>
                 <Grid.Column floated="right" width={4} style={dropdownStyles}>
                   <Dropdown
-                    placeholder="Enter a number"
+                    placeholder="Choose a number"
                     search
                     fluid
                     allowAdditions
@@ -215,57 +215,8 @@ class NewCandidate extends React.Component {
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
-              <Modal
-                trigger={<Button style={primaryButton}>Next</Button>}
-                closeIcon
-              >
-                <Header icon="archive" content="Create New Rule" />
-                <Modal.Content>
-                  <p>
-                    Would you like to create a new rule with the same fallback
-                    contact if a candidate does not pass all conditions for the
-                    rule?
-                  </p>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button
-                    color="red"
-                    onClick={this.handleSubmit}
-                    as={Link}
-                    to="/new-rule/confirmation"
-                  >
-                    <Icon name="x" /> No
-                  </Button>
-                  <Button
-                    color="green"
-                    as={Link}
-                    to="/new-rule/contacts"
-                    onClick={this.newRule}
-                  >
-                    <Icon name="check" /> Yes
-                  </Button>
-                </Modal.Actions>
-              </Modal>
+              <Button style={primaryButton} as={Link} to="/new-rule/confirmation">Next</Button>
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
-              <Modal.Content>
-                <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
-                </p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>

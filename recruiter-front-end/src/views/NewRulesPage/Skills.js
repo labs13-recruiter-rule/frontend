@@ -3,6 +3,7 @@ import {
   Grid,
   Button,
   Modal,
+  Popup,
   Header,
   Icon,
   Progress,
@@ -323,18 +324,17 @@ class NewCandidate extends React.Component {
               <Grid.Row>
                 <Grid.Column />
                 <Grid.Column width={14}>
-                  <Header as="h4" textAlign="center">
-                    What are the skill requirements to send a candidate to your
-                    selected contact(s)?
-                  </Header>
+                  <Popup trigger={ <Header as="h4" textAlign="center">
+                  Required Skills
+                  </Header>}><Popup.Content>
+                    A candidate must have <strong>all</strong> the listed skills to be sent to the contact(s).
+                    </Popup.Content></Popup>
+                 
                 </Grid.Column>
                 <Grid.Column />
               </Grid.Row>
               <Grid.Row>
-                <Grid.Column width={2} verticalAlign="middle">
-                  <Header as="h4">Skills</Header>
-                </Grid.Column>
-                <Grid.Column floated="left" width={14} verticalAlign="middle">
+                <Grid.Column >
                   <Dropdown
                     placeholder="Skills"
                     search
@@ -366,25 +366,6 @@ class NewCandidate extends React.Component {
                 Next <Icon name="arrow right" size="small" />
               </Button>
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
-              <Modal.Content>
-                <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
-                </p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>

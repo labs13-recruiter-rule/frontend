@@ -35,8 +35,9 @@ const tokenHeader = { headers: { token: `${token}` } };
 class App extends React.Component {
   state = {
     user: {},
+    user_displayName: "",
+    user_email: "",
     user_id: null,
-    rules: [],
     rule: {
       skills: [],
       education: [],
@@ -67,7 +68,8 @@ class App extends React.Component {
   authListener() {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user });
+        console.log(user);
+        this.setState({ user, user_displayName: user.displayName, user_email: user.email });
         sessionStorage.setItem('token', user._lat);
       } else {
         this.setState({
@@ -173,7 +175,6 @@ class App extends React.Component {
   newRule = e => {
     this.setState(prevState => ({
       ...prevState,
-      rules: [...prevState.rules, prevState.rule],
       rule: {
         skills: [],
         education: [],
@@ -371,7 +372,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -393,7 +394,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -412,7 +413,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -584,6 +585,8 @@ class App extends React.Component {
                       engine={this.state.engine}
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
+                      user_displayName={this.state.user_displayName}
+                      user_email={this.state.user_email}
                     />
                   )}
                 />
@@ -597,6 +600,7 @@ class App extends React.Component {
           ) : (
             <Login />
           )}
+          <footer>&copy; Recruiter Rules 2019</footer>
         </Container>
       </Router>
     );

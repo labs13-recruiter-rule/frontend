@@ -13,8 +13,17 @@ import Axios from 'axios';
 
 const flexContainer = {
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'column'
 };
+
+const centerIt = {
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '4rem',
+  alignItems: 'center',
+  justifyContent: 'center'
+}
+
 
 const primaryButton = {
   margin: '50px 0',
@@ -94,7 +103,7 @@ class CandidateEngine extends React.Component {
             {this.state.engines.length > 0 ? (
               <>
                 {' '}
-                <Header>
+                <Header textAlign="center">
                   Which rule engine do you want to run the candidate through?
                 </Header>{' '}
                 <Dropdown
@@ -113,19 +122,16 @@ class CandidateEngine extends React.Component {
                 />{' '}
               </>
             ) : (
-              <>
-                <p>
+              <Grid style={flexContainer}>
+                <Header as="h3">
                   {' '}
-                  You don't have any engines created yet. Before you can send a
-                  candidate using Recruiter Rule Engine, you need to create an
-                  engine and add some rules.{' '}
-                </p>{' '}
+                  You don't have any engines created yet. You must create an engine before sending a candidate.{' '}
+                </Header>
                 <Button style={primaryButton} as={Link} to="/new-rule/engine">
                   Create Engine
-                </Button>{' '}
-              </>
+                </Button>
+              </Grid>
             )}
-
             <Grid.Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 style={primaryButton}

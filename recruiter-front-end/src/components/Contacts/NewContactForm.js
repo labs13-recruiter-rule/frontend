@@ -63,7 +63,7 @@ class NewContact extends React.Component {
             Cancel
           </Button>
           <Button color="green" type="submit" floated="right">
-            Submit Contact
+            Add to Contacts
           </Button>
         </Form>
       </Container>
