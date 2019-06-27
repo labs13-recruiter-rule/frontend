@@ -36,7 +36,7 @@ function MarketingPage() {
           </Header>
           <Image src={letters} alt="letters" />
           <Header as="h3" style={center}>
-            Send your prospective candidates to the correct contacts every time
+            Send prospective candidates to the correct contacts every time
           </Header>
           <Header as="h2" style={center}>
             3 Simple Steps To Create Your First Rule Engine

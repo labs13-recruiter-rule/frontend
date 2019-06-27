@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NewContactForm from '../../components/Contacts/NewContactForm';
+import "./NewRuleContacts.css";
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
@@ -170,7 +171,7 @@ class ContactsClass extends React.Component {
               will select the education, experience, and skills requirements a
               candidate must meet to be sent to be sent to the contacts.
             </Header>
-
+              <div className="contact-container">
             {this.state.userContacts.length > 0 ? (
               <>
                 <Dropdown
@@ -188,52 +189,24 @@ class ContactsClass extends React.Component {
                       value: contact.email,
                     };
                   })}
-                />{' '}
+                />  <Modal
+                trigger={
+              <Button onClick={this.handleModalOpen}
+              name="plus circle" icon 
+            labelPosition="right" id="add-button">Add  <Icon name="plus circle" /></Button>
+                }
+                open={this.state.modalOpen}
+                onClose={this.handleModalClose}
+              >
+                <Modal.Content>
+                  <NewContactForm handleModalClose={this.handleModalClose} />
+                </Modal.Content>
+              </Modal>{' '}
               </>
             ) : (
               <></>
             )}
-            {/**need to actually make it record the ones that the user chose and add them to the rule request */}
-            {/* <Form>
-              <Form.Field>
-                <Form.Input
-                  label="Name"
-                  value={this.state.newContactName}
-                  onChange={this.handleName}
-                  type="text"
-                  name="name"
-                  placeholder="Jane Doe"
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="Email"
-                  value={this.state.newContactEmail}
-                  onChange={this.handleEmail}
-                  type="email"
-                  name="email"
-                  placeholder="example@email.com"
-                />
-              </Form.Field>
-            </Form> */}
-            <Modal
-              size="mini"
-              trigger={
-                <Button
-                  color="green"
-                  onClick={this.handleModalOpen}
-                  style={{ width: '50%', margin: '0 auto' }}
-                >
-                  Add Contact
-                </Button>
-              }
-              open={this.state.modalOpen}
-              onClose={this.handleModalClose}
-            >
-              <Modal.Content>
-                <NewContactForm handleModalClose={this.handleModalClose} />
-              </Modal.Content>
-            </Modal>
+            </div>
             <p
               style={{
                 width: '90%',

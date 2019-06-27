@@ -222,9 +222,7 @@ class NewCandidate extends React.Component {
                 <Header icon="archive" content="Create New Rule" />
                 <Modal.Content>
                   <p>
-                    Would you like to create a new rule with the same fallback
-                    contact if a candidate does not pass all conditions for the
-                    rule?
+                    Would you like to create a new rule before specifying the fallback contact if a candidate does not meet any of the requirements for this engine?
                   </p>
                 </Modal.Content>
                 <Modal.Actions>
@@ -247,25 +245,6 @@ class NewCandidate extends React.Component {
                 </Modal.Actions>
               </Modal>
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
-              <Modal.Content>
-                <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
-                </p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>

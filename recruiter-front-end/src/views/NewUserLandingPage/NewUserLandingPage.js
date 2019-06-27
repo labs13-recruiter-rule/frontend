@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Button, Header, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import sendArrow from '../../images/send-arrows.jpg'
+import carryenvelope from '../../images/carryenvelope.jpg';
 import MarketingCards from '../../components/Cards/MarketingCards';
 
 const flexContainer = {
@@ -37,22 +38,20 @@ class NewUserLandingPage extends React.Component {
           <Grid.Column width={1} />
           <Grid.Column width={10} centered="true" style={flexContainer}>
             <Header as="h1" style={center}>
-              Recruiter Rules
+             Welcome to Recruiter Rules!
             </Header>
-            <Header as="h3" style={center}>
-              Send your candidate to the correct contacts every time
-            </Header> 
-            <Header as="h2" style={center}>
+            <Image src={carryenvelope} alt="person carrying envelope" />
+            {/* <Header as="h2" style={center}>
               3 Simple Steps To Create Your First Rule Engine
-            </Header>
+            </Header> */}
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>
         <Grid.Row centered>
-          <MarketingCards />
+          {/* <MarketingCards /> */}
           <Link style={linkStyles} to="/new-rule/engine">
             <Button onClick={this.createNewRule} style={primaryButton}>
-              Create New Rule Engine
+              Create a New Rule Engine
             </Button>
           </Link>
         </Grid.Row>
