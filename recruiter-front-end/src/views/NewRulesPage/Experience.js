@@ -215,35 +215,7 @@ class NewCandidate extends React.Component {
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
-              <Modal
-                trigger={<Button style={primaryButton}>Next</Button>}
-                closeIcon
-              >
-                <Header icon="archive" content="Create Another Rule" />
-                <Modal.Content>
-                  <p>
-                    Would you like to add an additional rule to this engine before confirming?
-                  </p>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button
-                    color="red"
-                    onClick={this.handleSubmit}
-                    as={Link}
-                    to="/new-rule/confirmation"
-                  >
-                    <Icon name="x" /> No
-                  </Button>
-                  <Button
-                    color="green"
-                    as={Link}
-                    to="/new-rule/contacts"
-                    onClick={this.newRule}
-                  >
-                    <Icon name="check" /> Yes
-                  </Button>
-                </Modal.Actions>
-              </Modal>
+              <Button style={primaryButton} as={Link} to="/new-rule/confirmation">Next</Button>
             </Grid.Column>
           </Grid.Column>
           <Grid.Column width={1} />

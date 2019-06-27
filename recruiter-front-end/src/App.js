@@ -36,7 +36,6 @@ class App extends React.Component {
   state = {
     user: {},
     user_id: null,
-    rules: [],
     rule: {
       skills: [],
       education: [],
@@ -173,7 +172,6 @@ class App extends React.Component {
   newRule = e => {
     this.setState(prevState => ({
       ...prevState,
-      rules: [...prevState.rules, prevState.rule],
       rule: {
         skills: [],
         education: [],
