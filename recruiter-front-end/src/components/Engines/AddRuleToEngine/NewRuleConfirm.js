@@ -30,9 +30,7 @@ class NewRuleConfirm extends React.Component {
   state = { log: [] };
 
   handleSubmit = e => {
-    this.props.submitRule().then(() => {
-      console.log('handle submit cb then');
-    });
+    this.props.submitRule();
   };
 
   render() {
