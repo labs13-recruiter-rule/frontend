@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 import 'semantic-ui-css/semantic.min.css';
 // import dotenv from 'dotenv';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
 // require('dotenv').config();
@@ -16,7 +17,9 @@ const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );
