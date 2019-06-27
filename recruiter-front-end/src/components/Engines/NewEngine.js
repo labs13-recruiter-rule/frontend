@@ -20,7 +20,7 @@ class NewEngine extends React.Component {
   };
 
   createEngine = e => {
-    console.log('from ne state', this.state.engine);
+    // console.log('from ne state', this.state.engine);
     this.props
       .addEngine(this.state.engine)
       .then(() => this.props.handleModalClose());

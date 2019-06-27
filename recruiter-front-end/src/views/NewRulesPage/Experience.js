@@ -12,7 +12,6 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const token = sessionStorage.getItem('token');
 
 class NewCandidate extends React.Component {
   constructor(props) {

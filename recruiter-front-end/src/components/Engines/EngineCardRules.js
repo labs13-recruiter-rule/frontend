@@ -12,8 +12,6 @@ import { connect } from 'react-redux';
 import { getRules, deleteRule } from '../../actions/ruleActions';
 import Axios from 'axios';
 
-const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token: `${token}` } };
 
 class EngineCardRules extends React.Component {
   state = {
@@ -32,20 +30,29 @@ class EngineCardRules extends React.Component {
     //   .catch(err => {
     //     console.log(err);
     //   });
+
+
+const token = sessionStorage.getItem('token')
+const tokenHeader = { headers: { token: `${token}` } };
+
+
     Axios.get(
       `https://recruiter-back-end.herokuapp.com/engines/${this.props.engineRule}/rules`,
       tokenHeader,
     )
       .then(res => {
         this.setState({ rules: res.data }, () => {
-          console.log(
-            this.state.rules,
-            'from this state rules enginecard rules',
-          );
+          // console.log(
+          //   this.state.rules,
+          //   'from this state rules enginecard rules',
+          // )
+
+          // console.log()
+          ;
         });
       })
       .catch(err => {
-        console.log(err);
+        // console.log();
       });
   }
 
@@ -172,7 +179,7 @@ class EngineCardRules extends React.Component {
               ))
             ) : (
               <div>
-                <h1>no rules</h1>
+                <h1>No Rules Set</h1>
               </div>
             )}
 
