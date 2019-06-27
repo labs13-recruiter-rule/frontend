@@ -47,12 +47,12 @@ const tokenHeader = { headers: { token: `${token}` } };
           //   'from this state rules enginecard rules',
           // )
 
-          console.log()
+          // console.log()
           ;
         });
       })
       .catch(err => {
-        console.log();
+        // console.log();
       });
   }
 

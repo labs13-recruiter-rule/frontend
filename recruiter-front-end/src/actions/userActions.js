@@ -16,8 +16,8 @@ export const getUsers = url => dispatch => {
         type: GET_USERS_SUCCESS,
         payload: res.data,
       });
-      console.log('from res', res.data);
-      console.log('from env', process.env.REACT_APP);
+      // console.log('from res', res.data);
+      // console.log('from env', process.env.REACT_APP);
     })
     .catch(error => {
       dispatch({

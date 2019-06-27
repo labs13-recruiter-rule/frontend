@@ -545,7 +545,7 @@ class App extends React.Component {
   };
 
   appState = () => {
-    console.log('App.js this.state', this.state);
+    // console.log('App.js this.state', this.state);
   };
 
   render() {

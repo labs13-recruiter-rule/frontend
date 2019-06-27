@@ -77,9 +77,9 @@ class NewCandidate extends React.Component {
       },
     )
       .then(res => {
-        console.log(res);
+        console.log();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log());
   };
 
   render() {

@@ -49,7 +49,7 @@ this.getContacts();
       .then(res => {
         this.setState({ userContacts: res.data });
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log());
   }
 
   handleModalOpen = () => this.setState({ modalOpen: true });

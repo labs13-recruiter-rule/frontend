@@ -68,7 +68,7 @@ export const addContact = contact => dispatch => {
       tokenHeaderRedux,
     )
     .then(res => {
-      console.log('addContact res', res);
+      // console.log('addContact res', res);
       dispatch({
         type: ADD_CONTACT_SUCCESS,
         payload: res.data,
@@ -92,7 +92,7 @@ export const updateContact = (contact_id, updatedContact) => dispatch => {
       tokenHeaderRedux,
     )
     .then(res => {
-      console.log('from res update contact', res);
+      // console.log('from res update contact', res);
       dispatch({
         type: UPDATE_CONTACT_SUCCESS,
         payload: res.data,
@@ -115,7 +115,7 @@ export const deleteContact = contact_id => dispatch => {
       tokenHeaderRedux,
     )
     .then(res => {
-      console.log('del success', res);
+      // console.log('del success', res);
       dispatch({
         type: DELETE_CONTACT_SUCCESS,
         payload: res.data,

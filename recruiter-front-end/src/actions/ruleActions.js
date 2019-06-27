@@ -109,7 +109,7 @@ export const deleteRule = (engineid, ruleid) => dispatch => {
       tokenHeaderRedux,
     )
     .then(res => {
-      console.log('from delete res action', res);
+      // console.log('from delete res action', res);
       dispatch({
         type: DELETE_RULE_SUCCESS,
         payload: res.data,
