@@ -64,6 +64,10 @@ class NewRuleConfirm extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+          <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
             <Progress percent={92} />
             <Step.Group widths={6}>
               <Step>
@@ -103,7 +107,7 @@ class NewRuleConfirm extends React.Component {
               </Step>
             </Step.Group>
 
-            {/* {this.props.rules.length === 1
+            {this.props.rules.length === 1
               ? this.props.rules.map((rule, index) => {
                   return (
                     <Card key={index} fluid>
@@ -260,7 +264,7 @@ class NewRuleConfirm extends React.Component {
                   </Card.Content>
                 </Card>
               );
-            })} */}
+            })}
 
             {/* {this.props.rule.skills.length === 0 ? null : (
               <p style={center}>
@@ -296,7 +300,12 @@ class NewRuleConfirm extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/engine/new-rule/experience"
+                to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 <Icon name="arrow left" size="small" />
                 Back

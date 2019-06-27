@@ -168,6 +168,10 @@ class NewRuleEducation extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+          <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
             <Progress percent={42} />
             <Step.Group widths={6}>
               <Step>
@@ -249,7 +253,12 @@ class NewRuleEducation extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/engine/new-rule/contacts"
+                to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 <Icon name="arrow left" size="small" />
                 Back
@@ -258,7 +267,12 @@ class NewRuleEducation extends React.Component {
                 style={primaryButton}
                 onClick={this.handleSubmit}
                 as={Link}
-                to="/engine/new-rule/skills"
+                to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

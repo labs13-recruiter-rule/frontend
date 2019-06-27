@@ -2,13 +2,16 @@ import React from 'react';
 import {
   Grid,
   Progress,
-  Step,
+  Step, 
+  Container,
+  Popup,
   Modal,
   Button,
   Dropdown,
   Header,
   Icon,
 } from 'semantic-ui-react';
+import "../../../views/NewRulesPage/NewRuleContacts.css"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NewContactForm from '../../../components/Contacts/NewContactForm';
@@ -31,6 +34,7 @@ class NewRuleContact extends React.Component {
 
   componentDidMount() {
     this.getContacts();
+    console.log('new rule contacts props', this.props)
   }
 
   getContacts() {
@@ -102,9 +106,9 @@ class NewRuleContact extends React.Component {
           <Header icon="warning sign" content="Invalid contacts" />
           <Modal.Content>
             <p style={{ center }}>
-              Please select more or more contacts or add a contact to continue.
-              This contact or these contacts will receive an email when a
-              candidate meets the conditions for your rule engine.
+              Please select at least one contact to continue.
+              All contacts you select will receive an email when a
+              candidate meets the conditions for this rule on your rule engine.
             </p>
           </Modal.Content>
           <Modal.Actions>
@@ -121,7 +125,7 @@ class NewRuleContact extends React.Component {
           <Grid.Column width={10} centered style={flexContainer}>
             <h3>
               Adding rule to engine:{' '}
-              {/* {this.props.props.location.state.engineName} */}
+              {this.props.props.location.state.engineName} 
             </h3>
 
             <Progress percent={25} />
@@ -163,14 +167,12 @@ class NewRuleContact extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
-            <Header as="h3" style={center}>
-              Choose contacts for your first rule. On the following pages, you
-              will select the education, experience, and skills requirements a
-              candidate must meet to be sent to be sent to the contacts.
-            </Header>
+            <Popup trigger={<Header as="h3" style={center}>
+             Which contact(s) do you want this rule to apply to? 
+            </Header>}><Popup.Content>The contacts you select will receive the candidate's information if the candidate meets the requirements you select on the following pages.</Popup.Content></Popup>
+            
 
-            {this.state.userContacts.length > 0 ? (
-              <>
+              <div className="contact-container">
                 <Dropdown
                   placeholder="Select Contacts"
                   style={{ width: '50%', margin: '20px auto' }}
@@ -187,10 +189,20 @@ class NewRuleContact extends React.Component {
                     };
                   })}
                 />{' '}
-              </>
-            ) : (
-              <></>
-            )}
+                  <Modal
+                trigger={
+              <Button onClick={this.handleModalOpen}
+              name="plus circle" icon 
+            labelPosition="right" id="add-button">Create<Icon name="plus circle" /></Button>
+                }
+                open={this.state.modalOpen}
+                onClose={this.handleModalClose}
+              >
+                <Modal.Content>
+                  <NewContactForm handleModalClose={this.handleModalClose} />
+                </Modal.Content>
+              </Modal>
+              </div>
             {/**need to actually make it record the ones that the user chose and add them to the rule request */}
             {/* <Form>
               <Form.Field>
@@ -214,25 +226,8 @@ class NewRuleContact extends React.Component {
                 />
               </Form.Field>
             </Form> */}
-            <Modal
-              size="mini"
-              trigger={
-                <Button
-                  color="green"
-                  onClick={this.handleModalOpen}
-                  style={{ width: '50%', margin: '0 auto' }}
-                >
-                  Add Contact
-                </Button>
-              }
-              open={this.state.modalOpen}
-              onClose={this.handleModalClose}
-            >
-              <Modal.Content>
-                <NewContactForm handleModalClose={this.handleModalClose} />
-              </Modal.Content>
-            </Modal>
-            <p
+            
+              <p
               style={{
                 width: '90%',
                 margin: '35px auto 0',
@@ -251,11 +246,25 @@ class NewRuleContact extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
+                <Button style={primaryButton} as={Link}  to={{
+                  pathname: '/engine/new-rule',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
+                <Icon name="arrow left" size="small" />
+                Back
+              </Button>
               <Button
                 style={primaryButton}
                 onClick={this.handleSubmit}
                 as={Link}
-                to="/engine/new-rule/education"
+                to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>

@@ -100,7 +100,7 @@ class ContactsClass extends React.Component {
 
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
-        <Modal open={!this.state.contactSelected} size="small">
+         <Modal open={!this.state.contactSelected} size="small">
           <Header icon="warning sign" content="Invalid contacts" />
           <Modal.Content>
             <p style={{ center }}>

@@ -126,6 +126,10 @@ class NewRuleExperience extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+          <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
             <Progress percent={75} />
             <Step.Group widths={6}>
               <Step>
@@ -207,62 +211,33 @@ class NewRuleExperience extends React.Component {
               <Button
                 style={primaryButton}
                 as={Link}
-                to="/engine/new-rule/skills"
+                to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
-              <Modal
-                trigger={<Button style={primaryButton}>Next</Button>}
-                closeIcon
-              >
-                <Header icon="archive" content="Create New Rule" />
-                <Modal.Content>
-                  <p>
-                    Would you like to create a new rule with the same fallback
-                    contact if a candidate does not pass all conditions for the
-                    rule?
-                  </p>
-                </Modal.Content>
-                <Modal.Actions>
+            
                   <Button
-                    color="red"
-                    onClick={this.handleSubmit}
+                    style={primaryButton}
                     as={Link}
-                    to="/engine/new-rule/confirmation"
-                  >
-                    <Icon name="x" /> No
-                  </Button>
-                  <Button
-                    color="green"
-                    as={Link}
-                    to="/engine/new-rule/contacts"
+                    to={{
+                      pathname: '/engine/new-rule/confirmation',
+                      state: {
+                        engineName: this.props.props.location.state.engineName,
+                      },
+                    }}
                     onClick={this.newRule}
+
                   >
-                    <Icon name="check" /> Yes
+                    Next
                   </Button>
-                </Modal.Actions>
-              </Modal>
+              
             </Grid.Column>
-            <Modal
-              trigger={
-                <Button style={secondaryButton}>
-                  I'm confused. Please explain how this will work.
-                </Button>
-              }
-              closeIcon
-            >
-              <Header content="Rules" />
-              <Modal.Content>
-                <p>
-                  Rules are conditions for sending a candidate to a contacts
-                  group. Let's say that you are recruiting for the marketing
-                  department. The marketing department is always looking for new
-                  candidates with a variety of jobs with various requirements. A
-                  marketing intern might have
-                </p>
-              </Modal.Content>
-            </Modal>
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>

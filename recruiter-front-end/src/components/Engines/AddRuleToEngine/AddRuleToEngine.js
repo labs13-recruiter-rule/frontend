@@ -122,8 +122,8 @@ class AddRuleToEngine extends React.Component {
                 <Grid.Column />
                 <Grid.Column width={14}>
                   <Header as="h4" textAlign="center">
-                    Press next to continue adding a new rule to the engine named{' '}
-                    {this.props.props.location.state.engineName}
+                    Press next to continue adding a new rule to the engine named <strong>{' '}
+                    {this.props.props.location.state.engineName} </strong>
                   </Header>
                 </Grid.Column>
                 <Grid.Column />
@@ -139,7 +139,12 @@ class AddRuleToEngine extends React.Component {
                 style={primaryButton}
                 onClick={this.continueEngineSet}
                 as={Link}
-                to="/engine/new-rule/contacts"
+                to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
