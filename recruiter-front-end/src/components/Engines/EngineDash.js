@@ -38,7 +38,7 @@ class EngineDash extends React.Component {
     return (
       <Container fluid>
         <Segment className="engineManager">
-          <Header>Engine Manager</Header>
+          <Header>My Engines</Header>
           <Button
             onClick={this.createNewEngine}
             as={Link}

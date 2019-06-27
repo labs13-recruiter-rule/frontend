@@ -1,0 +1,11 @@
+.button-center {
+    text-align: center;
+    padding: 2%;
+    margin: 2%;
+}
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}

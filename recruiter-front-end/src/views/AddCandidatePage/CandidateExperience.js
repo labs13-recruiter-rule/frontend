@@ -119,9 +119,9 @@ class App extends React.Component {
             </Step.Group>
             <Grid.Row>
               <Grid.Column floated="left" width={12}>
-                <Header as="h4">Years of experience</Header>
               </Grid.Column>
               <Grid.Column floated="right" width={4} style={dropdownStyles}>
+              <Header textAlign="center" as="h4">Years of experience</Header>
                 <Dropdown
                   placeholder="Enter a number"
                   search

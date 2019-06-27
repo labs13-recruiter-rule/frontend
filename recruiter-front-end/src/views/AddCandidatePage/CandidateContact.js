@@ -3,6 +3,7 @@ import {
   Grid,
   Form,
   Input,
+  Header,
   Step,
   Progress,
   Button,
@@ -96,8 +97,8 @@ class CandidateContactInfo extends React.Component {
             </Step.Group>
             <Form>
               <Form.Field>
+                <Header as="h4" textAlign="center">Name</Header>
                 <Form.Input
-                  label="Name"
                   value={this.state.name}
                   onChange={this.handleName}
                   type="text"
@@ -106,23 +107,13 @@ class CandidateContactInfo extends React.Component {
                 />
               </Form.Field>
               <Form.Field>
-                <Form.Input
-                  label="Email"
+              <Header as="h4" textAlign="center">Email</Header>
+                <Form.Input 
                   value={this.state.email}
                   onChange={this.handleEmail}
                   type="email"
                   name="email"
                   placeholder="example@email.com"
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="LinkedIn"
-                  value={this.state.candidateLinkedIn}
-                  onChange={this.handleLinkedIn}
-                  type="LinkedIn"
-                  name="LinkedIn"
-                  placeholder="linkedin.com/username"
                 />
               </Form.Field>
             </Form>

@@ -5,6 +5,7 @@ import {
   Step,
   Modal,
   Button,
+  Popup,
   Dropdown,
   Header,
   Icon,
@@ -12,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NewContactForm from '../../components/Contacts/NewContactForm';
+import "./NewRuleContacts.css";
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
@@ -102,9 +104,9 @@ class ContactsClass extends React.Component {
           <Header icon="warning sign" content="Invalid contacts" />
           <Modal.Content>
             <p style={{ center }}>
-              Please select more or more contacts or add a contact to continue.
-              This contact or these contacts will receive an email when a
-              candidate meets the conditions for your rule engine.
+              Please select at least one contact to continue.
+              All contacts you select will receive an email when a
+              candidate meets the conditions for this rule on your rule engine.
             </p>
           </Modal.Content>
           <Modal.Actions>
@@ -165,14 +167,11 @@ class ContactsClass extends React.Component {
                 </Step.Content>
               </Step>
             </Step.Group>
-            <Header as="h3" style={center}>
-              Choose contacts for your first rule. On the following pages, you
-              will select the education, experience, and skills requirements a
-              candidate must meet to be sent to be sent to the contacts.
-            </Header>
-
-            {this.state.userContacts.length > 0 ? (
-              <>
+            <Popup trigger={<Header as="h3" style={center}>
+             Which contact(s) do you want this rule to apply to? 
+            </Header>}><Popup.Content>The contacts you select will receive the candidate's information if the candidate meets the requirements you select on the following pages.</Popup.Content></Popup>
+            
+              <div className="contact-container">
                 <Dropdown
                   placeholder="Select Contacts"
                   style={{ width: '50%', margin: '20px auto' }}
@@ -188,52 +187,23 @@ class ContactsClass extends React.Component {
                       value: contact.email,
                     };
                   })}
-                />{' '}
-              </>
-            ) : (
-              <></>
-            )}
-            {/**need to actually make it record the ones that the user chose and add them to the rule request */}
-            {/* <Form>
-              <Form.Field>
-                <Form.Input
-                  label="Name"
-                  value={this.state.newContactName}
-                  onChange={this.handleName}
-                  type="text"
-                  name="name"
-                  placeholder="Jane Doe"
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="Email"
-                  value={this.state.newContactEmail}
-                  onChange={this.handleEmail}
-                  type="email"
-                  name="email"
-                  placeholder="example@email.com"
-                />
-              </Form.Field>
-            </Form> */}
-            <Modal
-              size="mini"
-              trigger={
-                <Button
-                  color="green"
-                  onClick={this.handleModalOpen}
-                  style={{ width: '50%', margin: '0 auto' }}
-                >
-                  Add Contact
-                </Button>
-              }
-              open={this.state.modalOpen}
-              onClose={this.handleModalClose}
-            >
-              <Modal.Content>
-                <NewContactForm handleModalClose={this.handleModalClose} />
-              </Modal.Content>
-            </Modal>
+                /> 
+                <Modal
+                trigger={
+              <Button onClick={this.handleModalOpen}
+              name="plus circle" icon 
+            labelPosition="right" id="add-button">Create<Icon name="plus circle" /></Button>
+                }
+                open={this.state.modalOpen}
+                onClose={this.handleModalClose}
+              >
+                <Modal.Content>
+                  <NewContactForm handleModalClose={this.handleModalClose} />
+                </Modal.Content>
+              </Modal>
+                  
+  
+            </div>
             <p
               style={{
                 width: '90%',

@@ -44,8 +44,9 @@ const tokenHeader = { headers: { token: `${token}` } };
 class App extends React.Component {
   state = {
     user: {},
+    user_displayName: '',
+    user_email: '',
     user_id: null,
-    rules: [],
     rule: {
       skills: [],
       education: [],
@@ -86,7 +87,12 @@ class App extends React.Component {
   authListener() {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user });
+        console.log(user);
+        this.setState({
+          user,
+          user_displayName: user.displayName,
+          user_email: user.email,
+        });
         sessionStorage.setItem('token', user._lat);
       } else {
         this.setState({
@@ -292,21 +298,20 @@ class App extends React.Component {
     }));
   };
 
-  // newRule = e => {
-  //   this.setState(prevState => ({
-  //     ...prevState,
-  //     rules: [...prevState.rules, prevState.rule],
-  //     rule: {
-  //       skills: [],
-  //       education: [],
-  //       majors: [],
-  //       minExp: null,
-  //       maxExp: null,
-  //       contactEmail: [],
-  //       contactName: '',
-  //     },
-  //   }));
-  // };
+  newRule = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      rule: {
+        skills: [],
+        education: [],
+        majors: [],
+        minExp: null,
+        maxExp: null,
+        contactEmail: [],
+        contactName: '',
+      },
+    }));
+  };
 
   fallbackName = e => {
     this.setState(prevState => ({
@@ -546,334 +551,341 @@ class App extends React.Component {
 
   render() {
     return (
-      // <Router history={history}>
-      <Container>
-        {this.state.user ? (
-          [
-            <>
-              <Segment.Group>
-                <Responsive as={Segment} maxWidth={522}>
-                  <Menu
-                    vertical
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      textAlign: 'center',
-                    }}
-                  >
-                    <Menu.Item as={Link} to="/">
-                      Home
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/engines">
-                      Engines
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/contacts">
-                      My Contacts
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/new-candidate/engine">
-                      Send Candidate
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/" onClick={this.logout}>
-                      Logout
-                    </Menu.Item>
-                  </Menu>
-                </Responsive>
-                <Responsive as={Segment} minWidth={523} maxWidth={736}>
-                  <Menu
-                    compact
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <Menu.Item as={Link} to="/">
-                      Home
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/engines">
-                      Engines
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/contacts">
-                      My Contacts
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/new-candidate/engine">
-                      Send Candidate
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/" onClick={this.logout}>
-                      Logout
-                    </Menu.Item>
-                  </Menu>
-                </Responsive>
-                <Responsive as={Segment} minWidth={737}>
-                  <Menu>
-                    <Menu.Item as={Link} to="/">
-                      Home
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/engines">
-                      Engines
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/contacts">
-                      My Contacts
-                    </Menu.Item>
-                    <Menu.Item as={Link} to="/new-candidate/engine">
-                      Send Candidate
-                    </Menu.Item>
-                    <Menu.Item
-                      as={Link}
-                      to="/"
-                      onClick={this.logout}
-                      position="right"
+      <Router history={history}>
+        <Container>
+          {this.state.user ? (
+            [
+              <>
+                <Segment.Group>
+                  <Responsive as={Segment} maxWidth={522}>
+                    <Menu
+                      vertical
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%',
+                        textAlign: 'center',
+                      }}
                     >
-                      Logout
-                    </Menu.Item>
-                  </Menu>
-                </Responsive>
-              </Segment.Group>
-              <button onClick={() => this.appState()}>App.js this.state</button>
-              <Route
-                exact
-                path="/"
-                render={() => (
-                  <NewUserLandingPage createNewRule={this.createNewRule} />
-                )}
-              />
-              <Route exact path="/db" component={Dashboard} />
-              <Route
-                exact
-                path="/id"
-                render={props => {
-                  return <div>UserId: {props.match.params.id}</div>;
-                }}
-              />
-              <Route
-                exact
-                path="/engines"
-                //   component={EngineDash}
-                render={() => <EngineDash createNewRule={this.createNewRule} />}
-              />
-              <Route
-                exact
-                path="/new-candidate/engine"
-                render={() => (
-                  <CandidateEngine candidateEngine={this.candidateEngine} />
-                )}
-              />
-              <Route
-                exact
-                path="/new-rule/engine"
-                component={props => (
-                  <NewEngine candidateEngine={this.candidateEngine} />
-                )}
-              />
-              <Route
-                exact
-                path="/new-rule/contacts"
-                component={props => (
-                  <NewRuleContacts
-                    contactName={this.contactName}
-                    contactEmail={this.contactEmail}
-                    contactContacts={this.contactContacts}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-rule/education"
-                component={props => (
-                  <Education
-                    minEducation={this.minEducation}
-                    majors={this.majors}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-rule/skills"
-                component={props => <Skills skills={this.skills} />}
-              />
-              <Route
-                exact
-                path="/new-rule/experience"
-                component={props => (
-                  <Experience
-                    minExp={this.minExp}
-                    maxExp={this.maxExp}
-                    newRule={this.newRule}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-rule/confirmation"
-                component={props => (
-                  <Confirmation
-                    fallbackName={this.fallbackName}
-                    fallbackEmail={this.fallbackEmail}
-                    rule={this.state.rule}
-                    rules={this.state.rules}
-                    engine_id={this.state.engine}
-                    contacts={this.state.selectedContacts}
-                    submitRule={() => this.parseMyRule()}
-                  />
-                )}
-              />
-              <Route exact path="/new-rule/success" component={EngineSuccess} />
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/" onClick={this.logout}>
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                  <Responsive as={Segment} minWidth={523} maxWidth={736}>
+                    <Menu
+                      compact
+                      style={{ display: 'flex', justifyContent: 'center' }}
+                    >
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/" onClick={this.logout}>
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                  <Responsive as={Segment} minWidth={737}>
+                    <Menu>
+                      <Menu.Item as={Link} to="/">
+                        Home
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/engines">
+                        Engines
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/contacts">
+                        My Contacts
+                      </Menu.Item>
+                      <Menu.Item as={Link} to="/new-candidate/engine">
+                        Send Candidate
+                      </Menu.Item>
+                      <Menu.Item
+                        as={Link}
+                        to="/"
+                        onClick={this.logout}
+                        position="right"
+                      >
+                        Logout
+                      </Menu.Item>
+                    </Menu>
+                  </Responsive>
+                </Segment.Group>
+                {/* <button onClick={() => this.appState()}>App.js this.state</button> */}
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <NewUserLandingPage createNewRule={this.createNewRule} />
+                  )}
+                />
+                <Route exact path="/db" component={Dashboard} />
+                <Route
+                  exact
+                  path="/id"
+                  render={props => {
+                    return <div>UserId: {props.match.params.id}</div>;
+                  }}
+                />
+                <Route
+                  exact
+                  path="/engines"
+                  //   component={EngineDash}
+                  render={() => (
+                    <EngineDash createNewRule={this.createNewRule} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/engine"
+                  render={() => (
+                    <CandidateEngine candidateEngine={this.candidateEngine} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/engine"
+                  component={props => (
+                    <NewEngine candidateEngine={this.candidateEngine} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/contacts"
+                  component={props => (
+                    <NewRuleContacts
+                      contactName={this.contactName}
+                      contactEmail={this.contactEmail}
+                      contactContacts={this.contactContacts}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/education"
+                  component={props => (
+                    <Education
+                      minEducation={this.minEducation}
+                      majors={this.majors}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/skills"
+                  component={props => <Skills skills={this.skills} />}
+                />
+                <Route
+                  exact
+                  path="/new-rule/experience"
+                  component={props => (
+                    <Experience
+                      minExp={this.minExp}
+                      maxExp={this.maxExp}
+                      newRule={this.newRule}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/confirmation"
+                  component={props => (
+                    <Confirmation
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
+                      rule={this.state.rule}
+                      rules={this.state.rules}
+                      engine_id={this.state.engine}
+                      contacts={this.state.selectedContacts}
+                      submitRule={() => this.parseMyRule()}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-rule/success"
+                  component={EngineSuccess}
+                />
 
-              {/* ^^^^ Above is for new ENGINE and adding a rule with it. *NOT* for adding a new rule to an engine. */}
+                {/* ^^^^ Above is for new ENGINE and adding a rule with it. *NOT* for adding a new rule to an engine. */}
 
-              {/* <Switch> */}
+                {/* <Switch> */}
 
-              {/*  */}
-              {/* START below: ADDING RULE TO ENGINE */}
+                {/*  */}
+                {/* START below: ADDING RULE TO ENGINE */}
 
-              {/*
-               */}
+                {/*
+                 */}
 
-              <Route
-                exact
-                path="/engine/new-rule/"
-                component={props => (
-                  <AddRuleToEngine
-                    props={props}
-                    setEngineForNewRule={this.setEngineForNewRule}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/contacts"
-                component={props => (
-                  <NewRuleContact
-                    contactName={this.newContactName}
-                    contactEmail={this.newContactEmail}
-                    contactContacts={this.newContactContacts}
-                    props={props}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/education"
-                component={props => (
-                  <NewRuleEducation
-                    minEducation={this.newRuleMinEducation}
-                    majors={this.newRuleMajors}
-                    props={props}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/skills"
-                component={props => (
-                  <NewRuleSkills skills={this.newRuleSkills} props={props} />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/experience"
-                component={props => (
-                  <NewRuleExperience
-                    minExp={this.newRuleMinExp}
-                    maxExp={this.newRuleMaxExp}
-                    newRule={this.newRule}
-                    props={props}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/confirmation"
-                component={props => (
-                  <NewRuleConfirm
-                    fallbackName={this.fallbackName}
-                    fallbackEmail={this.fallbackEmail}
-                    rule={this.state.newRule}
-                    // rules={this.state.rules}
-                    engine_id={this.state.existingEngineID}
-                    contacts={this.state.selectedContacts}
-                    submitRule={() => this.parseMyRuleForOldEng()}
-                    props={props}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/engine/new-rule/success"
-                component={NewRuleSuccess}
-              />
-              {/* </Switch> */}
+                <Route
+                  exact
+                  path="/engine/new-rule/"
+                  component={props => (
+                    <AddRuleToEngine
+                      props={props}
+                      setEngineForNewRule={this.setEngineForNewRule}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/contacts"
+                  component={props => (
+                    <NewRuleContact
+                      contactName={this.newContactName}
+                      contactEmail={this.newContactEmail}
+                      contactContacts={this.newContactContacts}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/education"
+                  component={props => (
+                    <NewRuleEducation
+                      minEducation={this.newRuleMinEducation}
+                      majors={this.newRuleMajors}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/skills"
+                  component={props => (
+                    <NewRuleSkills skills={this.newRuleSkills} props={props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/experience"
+                  component={props => (
+                    <NewRuleExperience
+                      minExp={this.newRuleMinExp}
+                      maxExp={this.newRuleMaxExp}
+                      newRule={this.newRule}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/confirmation"
+                  component={props => (
+                    <NewRuleConfirm
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
+                      rule={this.state.newRule}
+                      // rules={this.state.rules}
+                      engine_id={this.state.existingEngineID}
+                      contacts={this.state.selectedContacts}
+                      submitRule={() => this.parseMyRuleForOldEng()}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/success"
+                  component={NewRuleSuccess}
+                />
+                {/* </Switch> */}
 
-              {/* END ** ADDING RULE TO ENGINE */}
+                {/* END ** ADDING RULE TO ENGINE */}
 
-              <Route exact path="/contacts/add" component={NewContactForm} />
-              <Route exact path="/contacts" component={Contacts} />
-              <Route exact path="/checkout" component={CheckoutContainer} />
-              <Route
-                exact
-                path="/new-candidate/"
-                component={AddCandidatePage}
-              />
-              <Route
-                exact
-                path="/new-candidate/contact"
-                component={props => (
-                  <CandidateContact
-                    candidateName={this.candidateName}
-                    candidateEmail={this.candidateEmail}
-                    candidateLinkedIn={this.candidateLinkedIn}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-candidate/education"
-                component={props => (
-                  <CandidateEducation
-                    candidateEducation={this.candidateEducation}
-                    candidateMajor={this.candidateMajor}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-candidate/skills"
-                component={props => (
-                  <CandidateSkills candidateSkills={this.candidateSkills} />
-                )}
-              />
-              <Route
-                exact
-                path="/new-candidate/experience"
-                component={props => (
-                  <CandidateExperience
-                    candidateExperience={this.candidateExperience}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-candidate/confirm"
-                render={() => (
-                  <CandidateConfirm
-                    candidate={this.state.candidate}
-                    sendCandidate={this.sendCandidate}
-                    parseRules={this.parseMyRule}
-                    engine={this.state.engine}
-                    fallbackName={this.fallbackName}
-                    fallbackEmail={this.fallbackEmail}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/new-candidate/send"
-                component={CandidateSend}
-              />
-            </>,
-          ]
-        ) : (
-          <Login />
-        )}
-      </Container>
-      // </Router>
+                <Route exact path="/contacts/add" component={NewContactForm} />
+                <Route exact path="/contacts" component={Contacts} />
+                <Route exact path="/checkout" component={CheckoutContainer} />
+                <Route
+                  exact
+                  path="/new-candidate/"
+                  component={AddCandidatePage}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/contact"
+                  component={props => (
+                    <CandidateContact
+                      candidateName={this.candidateName}
+                      candidateEmail={this.candidateEmail}
+                      candidateLinkedIn={this.candidateLinkedIn}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/education"
+                  component={props => (
+                    <CandidateEducation
+                      candidateEducation={this.candidateEducation}
+                      candidateMajor={this.candidateMajor}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/skills"
+                  component={props => (
+                    <CandidateSkills candidateSkills={this.candidateSkills} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/experience"
+                  component={props => (
+                    <CandidateExperience
+                      candidateExperience={this.candidateExperience}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/confirm"
+                  render={() => (
+                    <CandidateConfirm
+                      candidate={this.state.candidate}
+                      sendCandidate={this.sendCandidate}
+                      parseRules={this.parseMyRule}
+                      engine={this.state.engine}
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/new-candidate/send"
+                  component={CandidateSend}
+                />
+              </>,
+            ]
+          ) : (
+            <Login />
+          )}
+          <footer>&copy; Recruiter Rules 2019</footer>
+        </Container>
+      </Router>
     );
   }
 }
