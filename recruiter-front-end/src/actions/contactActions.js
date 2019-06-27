@@ -14,7 +14,7 @@ import {
 
 // TOKEN
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token,
   },
@@ -23,9 +23,9 @@ const tokenHeader = {
 // GET ALL CONTACTS
 export const getContacts = () => dispatch => {
   return axios
-    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
+    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeaderRedux)
     .then(res => {
-      console.log('from resdata', res.data);
+      // console.log('from resdata', res.data);
       dispatch({
         type: GET_CONTACTS_SUCCESS,
         payload: res.data,
@@ -43,7 +43,7 @@ export const getContacts = () => dispatch => {
 
 export const getContact = () => dispatch => {
   return axios
-    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeader)
+    .get('https://recruiter-back-end.herokuapp.com/contacts/', tokenHeaderRedux)
     .then(res =>
       dispatch({
         type: GET_CONTACT_SUCCESS,
@@ -65,7 +65,7 @@ export const addContact = contact => dispatch => {
     .post(
       'https://recruiter-back-end.herokuapp.com/contacts/',
       contact,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       console.log('addContact res', res);
@@ -89,7 +89,7 @@ export const updateContact = (contact_id, updatedContact) => dispatch => {
     .put(
       `https://recruiter-back-end.herokuapp.com/contacts/${contact_id}`,
       updatedContact,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       console.log('from res update contact', res);
@@ -112,7 +112,7 @@ export const deleteContact = contact_id => dispatch => {
   return axios
     .delete(
       `https://recruiter-back-end.herokuapp.com/contacts/${contact_id}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       console.log('del success', res);

@@ -15,7 +15,7 @@ import { CommentAction } from 'semantic-ui-react';
 // TOKEN
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token: token,
   },
@@ -28,7 +28,7 @@ export const createGroup = newGroup => dispatch => {
     .post(
       'https://recruiter-back-end.herokuapp.com/groups',
       newGroup,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -51,7 +51,7 @@ export const editGroup = (group_id, editedGroup) => dispatch => {
     .put(
       `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
       editedGroup,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -73,7 +73,7 @@ export const deleteGroup = group_id => dispatch => {
   return axios
     .delete(
       `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -95,7 +95,7 @@ export const getGroup = group_id => dispatch => {
   return axios
     .get(
       `https://recruiter-back-end.herokuapp.com/groups/${group_id}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       dispatch({
@@ -113,7 +113,7 @@ export const getGroup = group_id => dispatch => {
 
 export const getGroups = () => dispatch => {
   return axios
-    .get(`https://recruiter-back-end.herokuapp.com/groups/`, tokenHeader)
+    .get(`https://recruiter-back-end.herokuapp.com/groups/`, tokenHeaderRedux)
     .then(res =>
       dispatch({
         type: GET_ALL_GROUPS_SUCCESS,

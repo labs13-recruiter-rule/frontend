@@ -17,7 +17,7 @@ import {
 // TOKEN
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token,
   },
@@ -31,7 +31,7 @@ const engineURL = 'https://recruiter-back-end.herokuapp.com/engines/';
 
 export const getRules = id => dispatch => {
   return axios
-    .get(`${engineURL}` + `${id}` + `/rules/`, tokenHeader)
+    .get(`${engineURL}` + `${id}` + `/rules/`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_RULES_SUCCESS,
@@ -49,7 +49,7 @@ export const getRules = id => dispatch => {
 // GET RULE BY ID
 export const getRule = url => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_RULE_SUCCESS,
@@ -67,7 +67,7 @@ export const getRule = url => dispatch => {
 // ADD RULE
 export const addRule = (url, newRule) => dispatch => {
   return axios
-    .post(`${url}`, newRule, tokenHeader)
+    .post(`${url}`, newRule, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: ADD_RULE_SUCCESS,
@@ -86,7 +86,7 @@ export const addRule = (url, newRule) => dispatch => {
 
 export const updateRule = (url, updatedRule) => dispatch => {
   return axios
-    .put(`${url}`, updatedRule, tokenHeader)
+    .put(`${url}`, updatedRule, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: UPDATE_RULE_SUCCESS,
@@ -106,7 +106,7 @@ export const deleteRule = (engineid, ruleid) => dispatch => {
   return axios
     .delete(
       `${engineURL}` + `${engineid}` + `/rules/` + `${ruleid}`,
-      tokenHeader,
+      tokenHeaderRedux,
     )
     .then(res => {
       console.log('from delete res action', res);

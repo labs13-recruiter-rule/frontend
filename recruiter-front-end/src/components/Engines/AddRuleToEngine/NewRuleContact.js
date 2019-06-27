@@ -30,7 +30,17 @@ class NewRuleContact extends React.Component {
   }
 
   componentDidMount() {
+    
+    if (!token || !tokenHeader) {
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
+this.getContacts();
+    }
+
+    
     this.getContacts();
+
+    
   }
 
   getContacts() {

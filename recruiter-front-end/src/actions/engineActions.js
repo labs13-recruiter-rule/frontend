@@ -15,7 +15,7 @@ import {
 // TOKEN
 
 const token = sessionStorage.getItem('token');
-const tokenHeader = {
+const tokenHeaderRedux = {
   headers: {
     token,
   },
@@ -27,7 +27,7 @@ const engineBaseURL = 'https://recruiter-back-end.herokuapp.com/engines/';
 
 export const getEngines = () => dispatch => {
   return axios
-    .get(engineBaseURL, tokenHeader)
+    .get(engineBaseURL, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_ENGINES_SUCCESS,
@@ -45,7 +45,7 @@ export const getEngines = () => dispatch => {
 // GET ENGINE BY ID
 export const getEngine = url => dispatch => {
   return axios
-    .get(`${url}`, tokenHeader)
+    .get(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: GET_ENGINE_SUCCESS,
@@ -63,7 +63,7 @@ export const getEngine = url => dispatch => {
 // ADD ENGINE
 export const addEngine = newEngine => dispatch => {
   return axios
-    .post(engineBaseURL, newEngine, tokenHeader)
+    .post(engineBaseURL, newEngine, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: ADD_ENGINE_SUCCESS,
@@ -81,7 +81,7 @@ export const addEngine = newEngine => dispatch => {
 // EDIT ENGINE
 export const updateEngine = (url, updatedEngine) => dispatch => {
   return axios
-    .put(`${url}`, updatedEngine, tokenHeader)
+    .put(`${url}`, updatedEngine, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: UPDATE_ENGINE_SUCCESS,
@@ -99,7 +99,7 @@ export const updateEngine = (url, updatedEngine) => dispatch => {
 // DELETE ENGINE
 export const deleteEngine = url => dispatch => {
   return axios
-    .delete(`${url}`, tokenHeader)
+    .delete(`${url}`, tokenHeaderRedux)
     .then(res => {
       dispatch({
         type: DELETE_ENGINE_SUCCESS,

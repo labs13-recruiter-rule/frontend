@@ -21,7 +21,7 @@ class EngineDash extends React.Component {
 
   componentDidMount() {
     this.props.getEngines().then(() => {
-      console.log(this.props.engines, ' from props engines');
+      console.log();
     });
   }
 

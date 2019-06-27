@@ -13,8 +13,8 @@ import App from './App';
 
 // require('dotenv').config();
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
-
+const store = createStore(rootReducer, applyMiddleware(thunk));
+// remember to come back and delete logger
 ReactDOM.render(
   <Provider store={store}>
     <Router>
