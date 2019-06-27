@@ -82,6 +82,6 @@ export default function emailPreview(candidate, displayName, email) {
       candidate.email
     }.  ${candidateInfo} Feel free to reach out to me with any questions. Thank you, ${recruiter_name}  ${recruiter_email}` }
     else  {
-        return  "  "
+        return  "You haven't submitted a candidate yet, so we can't show you a preview."
     }
   }

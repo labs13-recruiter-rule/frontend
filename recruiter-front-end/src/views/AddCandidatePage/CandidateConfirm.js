@@ -6,6 +6,7 @@ import {
     Step,
     Card,
     Progress,
+    Divider,
     Header,
     Dropdown,
   } from 'semantic-ui-react';
@@ -26,7 +27,6 @@ import {
   const centerIt = {
     display: 'flex',
     flexDirection: 'column',
-    padding: '1rem',
     alignItems: 'center',
     justifyContent: 'center'
   }
@@ -119,17 +119,17 @@ class CandidateConfirm extends React.Component {
                   <p>Experience: {this.props.candidate.experience} years</p>
                 </Grid.Row> */}
             
-           { this.state.email_preview === "" ?
                   <Card style={previewStyle}>
                   <Header textAlign="center" as="h2">
                       Email Preview
                   </Header>
                   <Card.Content>
-                    {this.state.displayName ? <Header as="h4">Subject Line: ${this.state.displayName} sent you a candidate using Recruiter Rules`</Header> : <></>}
-                    {this.state.email_preview}
+                    {this.state.displayName ? <><Header as="h4">Subject Line: {`${this.state.displayName} sent you a candidate using Recruiter Rules`}</Header> <Divider /> </> : <></>} 
+                    {this.state.email_preview === "You haven't submitted a candidate yet, so we can't show you a preview." ?  <div style={centerIt}><Header>You have not submitted a candidate yet.</Header> <Button style={primaryButton} as={Link} to="/new-candidate/engine">Enter a Candidate</Button></div> :
+                    <p textAlign="center">{this.state.email_preview} </p> }
                     </Card.Content>
-                  </Card> : <div style={centerIt}><Header>You have not submitted a candidate yet.</Header> <Button style={primaryButton} as={Link} to="/new-candidate/engine">Enter a Candidate</Button></div>
-           }
+                  </Card> 
+           
                 <Grid.Row>
                 
                 </Grid.Row>
