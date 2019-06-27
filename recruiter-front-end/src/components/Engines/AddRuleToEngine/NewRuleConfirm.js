@@ -180,14 +180,14 @@ class NewRuleConfirm extends React.Component {
                   color="green"
                   onClick={() => this.setState({ hasContactEmail: true })}
                   as={Link}
-                  to={'/new-rule/contacts'}
+                  to={'/engine/new-rule/contacts'}
                 >
                   <Icon name="checkmark" /> Okay
                 </Button>
               </Modal.Actions>
             </Modal>
 
-            {this.props.rules.length === 1
+            {/* {this.props.rules.length === 1
               ? this.props.rules.map((rule, index) => {
                   return (
                     <Card key={index} fluid>
@@ -294,7 +294,7 @@ class NewRuleConfirm extends React.Component {
                       </Card.Content>
                     </Card>
                   );
-                })}
+                })} */}
 
             {/* {this.props.rules.map((rule, index) => {
               return (
