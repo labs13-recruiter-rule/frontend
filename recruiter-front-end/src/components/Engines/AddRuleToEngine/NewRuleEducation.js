@@ -5,6 +5,7 @@ import {
   Header,
   Icon,
   Progress,
+  Popup,
   Step,
   Dropdown,
   Divider,
@@ -176,7 +177,12 @@ class NewRuleEducation extends React.Component {
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/contacts">
+                  <Link style={linkStyles} to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
@@ -188,50 +194,67 @@ class NewRuleEducation extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/skills">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Skills</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
             <Grid style={{ marginTop: '25px' }}>
-              <Grid.Row>
-                <Grid.Column width={11}>
-                  <Header as="h4">
-                    What is the minimum the education required to send sending a
-                    candidate?
-                  </Header>
-                </Grid.Column>
-                <Grid.Column floated="right" width={5}>
+            <Grid.Row>
+                <Grid.Column>
+                  <Popup trigger={ <Header as="h4" textAlign="center">
+                   Minimum Degree Requirement
+                  </Header>}>
+                    <Popup.Content>
+                      If a candidate has a degree or degrees higher than what you select here, they will still be sent to the contact(s).
+                    </Popup.Content>
+                  </Popup>
+               
                   <Dropdown
                     clearable
                     options={options}
                     selection
-                    styles={{ width: '300px' }}
+                    fluid
+                    placeholder="Degree"
                     onChange={this.handleDegree}
                   />
                 </Grid.Column>
               </Grid.Row>
               <Divider />
               <Grid.Row>
-                <Grid.Column width={2} verticalAlign="middle">
-                  <Header as="h4">Major(s)</Header>
-                </Grid.Column>
-                <Grid.Column floated="left" width={14} verticalAlign="middle">
+                <Grid.Column>
+                  <Popup trigger={<Header as="h4" textAlign="center">Major(s) / Field(s) of Study</Header>}><Popup.Content>A candidate could have <strong>any</strong> of these to be sent to the contact(s).</Popup.Content></Popup>
+                   
                   <Dropdown
                     placeholder="Majors"
                     search

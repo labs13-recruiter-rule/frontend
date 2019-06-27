@@ -134,20 +134,35 @@ class NewRuleExperience extends React.Component {
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/contacts">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/education">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
-                <Link style={linkStyles} to="/engine/new-rule/skills">
+                <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                   <Step.Content>
                     <Step.Title>Skills</Step.Title>
                   </Step.Content>
@@ -160,7 +175,12 @@ class NewRuleExperience extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirm',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirm</Step.Title>
                   </Link>
                 </Step.Content>

@@ -236,7 +236,7 @@ class NewCandidate extends React.Component {
               <Divider />
               <Grid.Row>
                 <Grid.Column>
-                  <Popup trigger={<Header as="h4" textAlign="center">Major(s) / Fields of Study</Header>}><Popup.Content>A candidate could have <strong>any</strong> of these to be sent to the contact(s).</Popup.Content></Popup>
+                  <Popup trigger={<Header as="h4" textAlign="center">Major(s) / Field(s) of Study</Header>}><Popup.Content>A candidate could have <strong>any</strong> of these to be sent to the contact(s).</Popup.Content></Popup>
                    
                   <Dropdown
                     placeholder="Majors"

@@ -280,38 +280,62 @@ class NewRuleSkills extends React.Component {
               Adding rule to engine:{' '}
               {this.props.props.location.state.engineName} 
             </h3>
-
             <Progress percent={60} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/contacts">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/education">
+                  <Link style={linkStyles} to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step active>
-                <Link style={linkStyles} to="/engine/new-rule/skills">
+                <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                   <Step.Title>Skills</Step.Title>
                 </Link>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>

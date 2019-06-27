@@ -29,6 +29,10 @@ class NewRuleConfirm extends React.Component {
 
   state = { log: [] };
 
+  componentDidMount() {
+
+  }
+
   handleSubmit = e => {
     this.props.submitRule();
   };
@@ -59,6 +63,8 @@ class NewRuleConfirm extends React.Component {
       textAlign: 'center',
     };
 
+    const rule = this.props.rule;
+
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
         <Grid.Row centered>
@@ -72,20 +78,35 @@ class NewRuleConfirm extends React.Component {
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/contacts">
+                  <Link style={linkStyles} to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/education">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
-                <Link style={linkStyles} to="/engine/new-rule/skills">
+                <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                   <Step.Content>
                     <Step.Title>Skills</Step.Title>
                   </Step.Content>
@@ -93,26 +114,32 @@ class NewRuleConfirm extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step active>
                 <Step.Content>
-                  <Link style={linkStyles} to="/engine/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
 
-            {this.props.rules.length === 1
-              ? this.props.rules.map((rule, index) => {
-                  return (
-                    <Card key={index} fluid>
+                    <Card fluid>
                       <Card.Content>
-                        {rule.contactEmail.length === 0 ? null : (
                           <p>
                             If a candidate passes these rules then they will be
                             sent to{' '}
@@ -120,176 +147,33 @@ class NewRuleConfirm extends React.Component {
                               .join(', ')
                               .replace(/,(?!.*,)/gim, ' and')}
                           </p>
-                        )}
-                        {rule.education.length === 0 ? null : (
                           <p>
-                            Minimum level of education required is a{' '}
+                            Minimum degree required is a{' '}
                             {rule.education[0]}
                           </p>
-                        )}
-                        {rule.majors.length === 0 ? null : (
                           <p>
                             The candidate must have majored in{' '}
                             {rule.majors
                               .join(', ')
                               .replace(/,(?!.*,)/gim, ' and')}
                           </p>
-                        )}
-
-                        {rule.skills.length === 0 ? null : (
                           <p>
                             The skills required for this rule are{' '}
                             {rule.skills
                               .join(', ')
                               .replace(/,(?!.*,)/gim, ' and')}
                           </p>
-                        )}
-
-                        {rule.minExp === '' ? null : (
                           <p>
                             The experience required for this rule is at least{' '}
                             {rule.minExp} years of experience
                           </p>
-                        )}
-                        {rule.maxExp === '' ? null : (
                           <p>
                             The maximum experience allowed for this rule is{' '}
                             {rule.maxExp} years of experience
                           </p>
-                        )}
                       </Card.Content>
                     </Card>
-                  );
-                })
-              : this.props.rules.map((rule, index) => {
-                  return (
-                    <Card key={index} fluid>
-                      <Card.Content header={`Rule ${index + 1}`} />
-                      <Card.Content>
-                        {rule.contactEmail.length === 0 ? null : (
-                          <p>
-                            If a candidate passes these rules then they will be
-                            sent to{' '}
-                            {rule.contactEmail
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, ' and')}
-                          </p>
-                        )}
-                        {rule.education.length === 0 ? null : (
-                          <p>
-                            Minimum level of education required is a{' '}
-                            {rule.education[0]}
-                          </p>
-                        )}
-                        {rule.majors.length === 0 ? null : (
-                          <p>
-                            The candidate must have majored in{' '}
-                            {rule.majors
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, ' and')}
-                          </p>
-                        )}
-
-                        {rule.skills.length === 0 ? null : (
-                          <p>
-                            The skills required for this rule are{' '}
-                            {rule.skills
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, ' and')}
-                          </p>
-                        )}
-
-                        {rule.minExp === '' ? null : (
-                          <p>
-                            The experience required for this rule is at least{' '}
-                            {rule.minExp} years of experience
-                          </p>
-                        )}
-                        {rule.maxExp === '' ? null : (
-                          <p>
-                            The maximum experience allowed for this rule is{' '}
-                            {rule.maxExp} years of experience
-                          </p>
-                        )}
-                      </Card.Content>
-                    </Card>
-                  );
-                })} */}
-
-            {/* {this.props.rules.map((rule, index) => {
-              return (
-                <Card key={index} fluid>
-                  <Card.Content>
-                    {rule.contactEmail.length === 0 ? null : (
-                      <p>
-                        If a candidate passes these rules then they will be sent
-                        to{' '}
-                        {rule.contactEmail
-                          .join(', ')
-                          .replace(/,(?!.*,)/gim, ' and')}
-                      </p>
-                    )}
-                    {rule.education.length === 0 ? null : (
-                      <p>
-                        Minimum level of education required is a{' '}
-                        {rule.education[0]}
-                      </p>
-                    )}
-                    {rule.majors.length === 0 ? null : (
-                      <p>
-                        The candidate must have majored in{' '}
-                        {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}
-                      </p>
-                    )}
-
-                    {rule.skills.length === 0 ? null : (
-                      <p>
-                        The skills required for this rule are{' '}
-                        {rule.skills.join(', ').replace(/,(?!.*,)/gim, ' and')}
-                      </p>
-                    )}
-
-                    {rule.minExp === '' ? null : (
-                      <p>
-                        The experience required for this rule is at least{' '}
-                        {rule.minExp} years of experience
-                      </p>
-                    )}
-                    {rule.maxExp === '' ? null : (
-                      <p>
-                        The maximum experience allowed for this rule is{' '}
-                        {rule.maxExp} years of experience
-                      </p>
-                    )}
-                  </Card.Content>
-                </Card>
-              );
-            })}
-
-            {/* {this.props.rule.skills.length === 0 ? null : (
-              <p style={center}>
-                The skills required for this rule are{' '}
-                {this.props.rule.skills
-                  .join(', ')
-                  .replace(/,(?!.*,)/gim, ' and')}
-              </p>
-            )} */}
-
-            {/* <Dropdown
-              placeholder="Select Contact"
-              fluid
-              selection
-              onChange={this.handleChange}
-              value={this.state.contacts}
-              options={this.state.userContacts.map(contact => {
-                return {
-                  key: contact.id,
-                  text: contact.name + ' | ' + contact.email,
-                  value: contact.email
-                };
-              })}
-             /> */}
-
+           
             {this.state.message === '' ? null : (
               <Segment>{this.state.message}</Segment>
             )}
