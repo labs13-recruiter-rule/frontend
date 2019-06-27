@@ -870,6 +870,8 @@ class App extends React.Component {
                       engine={this.state.engine}
                       fallbackName={this.fallbackName}
                       fallbackEmail={this.fallbackEmail}
+                      user_displayName={this.state.user_displayName}
+                      user_email={this.state.user_email}
                     />
                   )}
                 />
