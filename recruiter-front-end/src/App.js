@@ -570,7 +570,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -592,7 +592,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -611,7 +611,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts

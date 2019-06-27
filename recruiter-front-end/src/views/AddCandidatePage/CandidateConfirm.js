@@ -119,7 +119,7 @@ class CandidateConfirm extends React.Component {
                   <p>Experience: {this.props.candidate.experience} years</p>
                 </Grid.Row> */}
             
-                  <Card style={previewStyle}>
+                  <Card fluid style={previewStyle}>
                   <Header textAlign="center" as="h2">
                       Email Preview
                   </Header>
