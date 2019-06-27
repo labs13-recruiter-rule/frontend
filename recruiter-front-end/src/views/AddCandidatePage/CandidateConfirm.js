@@ -4,19 +4,32 @@ import {
     Button,
     Icon,
     Step,
+    Card,
     Progress,
+    Divider,
     Header,
     Dropdown,
   } from 'semantic-ui-react';
   import { Link } from 'react-router-dom';
   import Axios from 'axios';
+  import emailPreview from '../../emailPreview'; 
+  import firebase from 'firebase';
 
   const token = sessionStorage.getItem('token');
   const tokenHeader = {headers: {token: `${token}`}}
   const flexContainer = {
+
     display: 'flex',
     flexDirection: 'column',
+  
   };
+
+  const centerIt = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
   
   const primaryButton = {
     margin: '50px 0',
@@ -29,18 +42,29 @@ import {
     alignItems: 'center',
   };
   
+  const previewStyle = {
+    padding: '2rem',
+    margin: '2rem'
+  }
 
 class CandidateConfirm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+          "displayName": this.props.user_displayName,
+          "userEmail": this.props.user_email,
+          "candidate": this.props.candidate,
+          "email_preview": ""
         }
     }
 
     componentDidMount() {
-        console.log(this.props.candidate, this.props.engine, "CDM PROPS CONFIRM");
+      console.log('props confirm', this.props.user_email)
+
+       this.setState({email_preview: emailPreview(this.state.candidate, this.state.displayName, this.state.userEmail)});
+      
     }
+
 
     submit = e => {
     Axios.post(`https://recruiter-back-end.herokuapp.com/engines/${this.props.engine}/use`, this.props.candidate, tokenHeader).then(res => console.log(res)).catch(error=> console.log(error))
@@ -85,22 +109,33 @@ class CandidateConfirm extends React.Component {
                 </Step>
                 </Step.Group>
                 <Grid.Row>
-                  <Header>
-                      Candidate Information
-                  </Header>
                 </Grid.Row>
-                <Grid.Row>
+                {/* <Grid.Row>
                   <p>Name: {this.props.candidate.name}</p>
                   <p>Email: {this.props.candidate.email}</p>
-                  <p>LinkedIn: {this.props.candidate.candidateLinkedIn}</p> 
                   <p>Education: {this.props.candidate.education} </p>
                   <p>Major: {this.props.candidate.major}</p>
                   <p>Skills: {this.props.candidate.skills.map(skill => `${skill} `)}</p>
                   <p>Experience: {this.props.candidate.experience} years</p>
+                </Grid.Row> */}
+            
+                  <Card style={previewStyle}>
+                  <Header textAlign="center" as="h2">
+                      Email Preview
+                  </Header>
+                  <Card.Content>
+                    {this.state.displayName ? <><Header as="h4">Subject Line: {`${this.state.displayName} sent you a candidate using Recruiter Rules`}</Header> <Divider /> </> : <></>} 
+                    {this.state.email_preview === "You haven't submitted a candidate yet, so we can't show you a preview." ?  <div style={centerIt}><Header>You have not submitted a candidate yet.</Header> <Button style={primaryButton} as={Link} to="/new-candidate/engine">Enter a Candidate</Button></div> :
+                    <p textAlign="center">{this.state.email_preview} </p> }
+                    </Card.Content>
+                  </Card> 
+           
+                <Grid.Row>
+                
                 </Grid.Row>
                 <Grid.Row
                   style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
+                > 
                   <Button
                     style={primaryButton}
                     as={Link}
@@ -115,7 +150,7 @@ class CandidateConfirm extends React.Component {
                      as={Link}
                      to="/new-candidate/send"
                   >
-                    Send
+                    Confirm and Send
                   </Button>
                 </Grid.Row>
               </Grid.Column>
