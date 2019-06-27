@@ -3,8 +3,11 @@ import { Header, Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const flexContainer = {
+  padding: '4rem',
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'center', 
+  justifyContent: 'center'
 };
 const primaryButton = {
   margin: '50px 0',
@@ -20,20 +23,16 @@ const primaryButton = {
 class CandidateSend extends React.Component {
   render() {
     return (
-      <Grid>
-        <Grid.Column width={1} />
-        <Grid.Column width={10} centered style={flexContainer}>
-          <Grid.Row>
-            <Header>Congratulations!</Header>
-          </Grid.Row>
-          <Grid.Row>
-            <p>Your candidate was successfully sent.</p>
-          </Grid.Row>
+      <Grid style={flexContainer}>
+         
+            <Header as="h1">Congratulations!</Header>
+        
+            <p>The candidate's information was successfully sent.</p>
+
           <Button style={primaryButton} as={Link} to="/new-candidate/engine">
             Send another Candidate
           </Button>
-        </Grid.Column>
-        <Grid.Column width={1} />
+       
       </Grid>
     );
   }
