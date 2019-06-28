@@ -57,8 +57,6 @@ class CandidateConfirm extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props confirm', this.props.user_email);
-
     this.setState({
       email_preview: emailPreview(
         this.state.candidate,
@@ -76,6 +74,14 @@ class CandidateConfirm extends React.Component {
     )
       .then(res => console.log(res))
       .catch(error => console.log(error));
+
+    // Axios.post(
+    //   `https://recruiter-back-end.herokuapp.com/emailhistory/`,
+    //   this.props.candidate,
+    //   tokenHeader,
+    // )
+    //   .then(res => console.log(res))
+    //   .catch(error => console.log(error));
   };
   render() {
     return (

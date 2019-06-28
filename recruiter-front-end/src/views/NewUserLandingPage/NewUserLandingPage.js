@@ -38,7 +38,11 @@ const linkStyles = {
 class NewUserLandingPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      engines: [],
+      userContacts: null,
+      user_displayName: null,
+    };
   }
 
   createNewRule = () => {
@@ -46,18 +50,23 @@ class NewUserLandingPage extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ engines: [], userContacts: [] });
-    this.getContacts();
+    axios
+      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+      .then(res => {
+        this.setState({ userContacts: res.data.length });
+      })
+      .catch(error => console.log(error));
     this.props.getEngines().then(() => {
       this.setState({ engines: this.props.engines });
     });
+    this.forceUpdate();
   }
 
   getContacts() {
     axios
       .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
       .then(res => {
-        this.setState({ userContacts: res.data });
+        this.setState({ userContacts: res.data.length });
       })
       .catch(error => console.log(error));
   }
@@ -68,12 +77,20 @@ class NewUserLandingPage extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered="true" style={flexContainer}>
-            <Header as="h1" style={center}>
-              Welcome to Recruiter Rules!
-            </Header>
+            {this.props.user_displayName === null ||
+            this.props.user_displayName.length === 0 ? (
+              <Header as="h1" style={center}>
+                Welcome to Recruiter Rules!
+              </Header>
+            ) : (
+              <Header as="h1" style={center}>
+                Welcome to Recruiter Rules, {this.props.user_displayName}!
+              </Header>
+            )}
+
             <Grid.Row centered style={{ display: 'flex', alignItems: 'top' }}>
               <Card.Group style={{ justifyContent: 'center' }}>
-                {this.state.userContacts.length === 0 ? null : (
+                {this.state.userContacts === null ? null : (
                   <Card style={{ margin: '1em 15px' }} as={Link} to="/contacts">
                     <Card.Content>
                       <Card.Header>

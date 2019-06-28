@@ -103,7 +103,6 @@ class App extends React.Component {
   }
 
   logout() {
-    console.log('App.js logout');
     sessionStorage.clear();
     fire.auth().signOut();
   }
@@ -548,7 +547,7 @@ class App extends React.Component {
   };
 
   appState = () => {
-    // console.log('App.js this.state', this.state);
+    console.log('App.js this.state', this.state);
   };
 
   render() {
@@ -633,12 +632,17 @@ class App extends React.Component {
                     </Menu>
                   </Responsive>
                 </Segment.Group>
-                {/* <button onClick={() => this.appState()}>App.js this.state</button> */}
+                <button onClick={() => this.appState()}>
+                  App.js this.state
+                </button>
                 <Route
                   exact
                   path="/"
                   render={() => (
-                    <NewUserLandingPage createNewRule={this.createNewRule} />
+                    <NewUserLandingPage
+                      createNewRule={this.createNewRule}
+                      user_displayName={this.state.user_displayName}
+                    />
                   )}
                 />
                 <Route exact path="/db" component={Dashboard} />
