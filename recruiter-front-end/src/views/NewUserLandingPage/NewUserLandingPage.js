@@ -1,9 +1,18 @@
 import React from 'react';
-import { Grid, Button, Header, Image } from 'semantic-ui-react';
+import { Grid, Button, Header, Image, Card, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import sendArrow from '../../images/send-arrows.jpg'
+import { connect } from 'react-redux';
+import sendArrow from '../../images/send-arrows.jpg';
 import carryenvelope from '../../images/carryenvelope.jpg';
 import MarketingCards from '../../components/Cards/MarketingCards';
+import axios from 'axios';
+
+import { getEngines } from '../../actions/engineActions';
+
+import candidates from '../../images/candidates.jpg';
+
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
 
 const flexContainer = {
   display: 'flex',
@@ -27,9 +36,40 @@ const linkStyles = {
 };
 
 class NewUserLandingPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      engines: [],
+      userContacts: null,
+      user_displayName: null,
+    };
+  }
+
   createNewRule = () => {
     this.props.createNewRule();
   };
+
+  componentDidMount() {
+    axios
+      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+      .then(res => {
+        this.setState({ userContacts: res.data.length });
+      })
+      .catch(error => console.log(error));
+    this.props.getEngines().then(() => {
+      this.setState({ engines: this.props.engines });
+    });
+    this.forceUpdate();
+  }
+
+  getContacts() {
+    axios
+      .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
+      .then(res => {
+        this.setState({ userContacts: res.data.length });
+      })
+      .catch(error => console.log(error));
+  }
 
   render() {
     return (
@@ -37,10 +77,48 @@ class NewUserLandingPage extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered="true" style={flexContainer}>
-            <Header as="h1" style={center}>
-             Welcome to Recruiter Rules!
-            </Header>
-            <Image src={carryenvelope} alt="person carrying envelope" />
+            {this.props.user_displayName === null ||
+            this.props.user_displayName.length === 0 ? (
+              <Header as="h1" style={center}>
+                Welcome to Recruiter Rules!
+              </Header>
+            ) : (
+              <Header as="h1" style={center}>
+                Welcome to Recruiter Rules, {this.props.user_displayName}!
+              </Header>
+            )}
+
+            <Grid.Row centered style={{ display: 'flex', alignItems: 'top' }}>
+              <Card.Group style={{ justifyContent: 'center' }}>
+                {this.state.userContacts === null ? null : (
+                  <Card style={{ margin: '1em 15px' }} as={Link} to="/contacts">
+                    <Card.Content>
+                      <Card.Header>
+                        <Icon name="user" size="small" />{' '}
+                        {this.state.userContacts}
+                      </Card.Header>
+                      <Card.Description>Contacts</Card.Description>
+                    </Card.Content>
+                  </Card>
+                )}
+                {this.props.engines.length === 0 ? null : (
+                  <Card style={{ margin: '1em 15px' }} as={Link} to="/engines">
+                    <Card.Content>
+                      <Card.Header>
+                        <Icon name="car" size="small" />{' '}
+                        {this.props.engines.length}
+                      </Card.Header>
+                      <Card.Description>Engines</Card.Description>
+                    </Card.Content>
+                  </Card>
+                )}
+              </Card.Group>
+            </Grid.Row>
+            <Image
+              src={carryenvelope}
+              alt="person carrying envelope"
+              style={{ width: '50%', margin: '0 auto' }}
+            />
             {/* <Header as="h2" style={center}>
               3 Simple Steps To Create Your First Rule Engine
             </Header> */}
@@ -60,4 +138,11 @@ class NewUserLandingPage extends React.Component {
   }
 }
 
-export default NewUserLandingPage;
+const mapStateToProps = ({ engines }) => ({
+  engines,
+});
+
+export default connect(
+  mapStateToProps,
+  { getEngines },
+)(NewUserLandingPage);

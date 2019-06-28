@@ -86,12 +86,14 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         // console.log(user);
-        this.setState({
-          user,
-          user_displayName: user.displayName,
-          user_email: user.email,
-        }, () => sessionStorage.setItem('token', user._lat))
-        
+        this.setState(
+          {
+            user,
+            user_displayName: user.displayName,
+            user_email: user.email,
+          },
+          () => sessionStorage.setItem('token', user._lat),
+        );
       } else {
         this.setState({
           user: null,
@@ -545,7 +547,7 @@ class App extends React.Component {
   };
 
   appState = () => {
-    // console.log('App.js this.state', this.state);
+    console.log('App.js this.state', this.state);
   };
 
   render() {
@@ -570,7 +572,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -592,7 +594,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -611,7 +613,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -630,12 +632,17 @@ class App extends React.Component {
                     </Menu>
                   </Responsive>
                 </Segment.Group>
-                {/* <button onClick={() => this.appState()}>App.js this.state</button> */}
+                {/* <button onClick={() => this.appState()}>
+                  App.js this.state
+                </button> */}
                 <Route
                   exact
                   path="/"
                   render={() => (
-                    <NewUserLandingPage createNewRule={this.createNewRule} />
+                    <NewUserLandingPage
+                      createNewRule={this.createNewRule}
+                      user_displayName={this.state.user_displayName}
+                    />
                   )}
                 />
                 <Route exact path="/db" component={Dashboard} />
