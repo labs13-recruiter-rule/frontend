@@ -632,9 +632,9 @@ class App extends React.Component {
                     </Menu>
                   </Responsive>
                 </Segment.Group>
-                <button onClick={() => this.appState()}>
+                {/* <button onClick={() => this.appState()}>
                   App.js this.state
-                </button>
+                </button> */}
                 <Route
                   exact
                   path="/"
