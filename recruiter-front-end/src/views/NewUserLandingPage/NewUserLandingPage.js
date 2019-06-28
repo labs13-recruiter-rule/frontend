@@ -114,7 +114,11 @@ class NewUserLandingPage extends React.Component {
                 )}
               </Card.Group>
             </Grid.Row>
-            <Image src={carryenvelope} alt="person carrying envelope" />
+            <Image
+              src={carryenvelope}
+              alt="person carrying envelope"
+              style={{ width: '50%', margin: '0 auto' }}
+            />
             {/* <Header as="h2" style={center}>
               3 Simple Steps To Create Your First Rule Engine
             </Header> */}
