@@ -395,7 +395,7 @@ class App extends React.Component {
   newRuleMinExp = e => {
     this.setState(prevState => ({
       ...prevState,
-      newRule: {
+      rule: {
         ...prevState.newRule,
         minExp: e,
       },
@@ -423,8 +423,6 @@ class App extends React.Component {
     }));
   };
 
-  
-
   contactName = e => {
     this.setState({
       rule: {
@@ -434,6 +432,7 @@ class App extends React.Component {
     });
   };
 
+  // new
   newContactName = e => {
     this.setState({
       newRule: {
@@ -796,8 +795,6 @@ class App extends React.Component {
                     />
                   )}
                 />
-
-
                 <Route
                   exact
                   path="/engine/new-rule/confirmation"
