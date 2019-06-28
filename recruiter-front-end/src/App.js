@@ -86,12 +86,14 @@ class App extends React.Component {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
         // console.log(user);
-        this.setState({
-          user,
-          user_displayName: user.displayName,
-          user_email: user.email,
-        }, () => sessionStorage.setItem('token', user._lat))
-        
+        this.setState(
+          {
+            user,
+            user_displayName: user.displayName,
+            user_email: user.email,
+          },
+          () => sessionStorage.setItem('token', user._lat),
+        );
       } else {
         this.setState({
           user: null,
@@ -101,6 +103,7 @@ class App extends React.Component {
   }
 
   logout() {
+    console.log('App.js logout');
     sessionStorage.clear();
     fire.auth().signOut();
   }
@@ -570,7 +573,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -592,7 +595,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -611,7 +614,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                       My Engines
+                        My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts

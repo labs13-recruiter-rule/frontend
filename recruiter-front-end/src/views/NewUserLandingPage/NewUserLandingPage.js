@@ -38,9 +38,7 @@ const linkStyles = {
 class NewUserLandingPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userContacts: null,
-    };
+    this.state = {};
   }
 
   createNewRule = () => {
@@ -48,6 +46,7 @@ class NewUserLandingPage extends React.Component {
   };
 
   componentDidMount() {
+    this.setState({ engines: [], userContacts: [] });
     this.getContacts();
     this.props.getEngines().then(() => {
       this.setState({ engines: this.props.engines });
@@ -58,7 +57,7 @@ class NewUserLandingPage extends React.Component {
     axios
       .get('https://recruiter-back-end.herokuapp.com/contacts', tokenHeader)
       .then(res => {
-        this.setState({ userContacts: res.data.length });
+        this.setState({ userContacts: res.data });
       })
       .catch(error => console.log(error));
   }
@@ -74,26 +73,28 @@ class NewUserLandingPage extends React.Component {
             </Header>
             <Grid.Row centered style={{ display: 'flex', alignItems: 'top' }}>
               <Card.Group style={{ justifyContent: 'center' }}>
-                <Card style={{ margin: '1em 15px' }} as={Link} to="/contacts">
-                  <Card.Content>
-                    <Card.Header>
-                      <Icon name="user" size="small" />{' '}
-                      {this.state.userContacts === null
-                        ? null
-                        : this.state.userContacts}
-                    </Card.Header>
-                    <Card.Description>Contacts</Card.Description>
-                  </Card.Content>
-                </Card>
-                <Card style={{ margin: '1em 15px' }} as={Link} to="/engines">
-                  <Card.Content>
-                    <Card.Header>
-                      <Icon name="car" size="small" />{' '}
-                      {this.props.engines.length}
-                    </Card.Header>
-                    <Card.Description>Engines</Card.Description>
-                  </Card.Content>
-                </Card>
+                {this.state.userContacts.length === 0 ? null : (
+                  <Card style={{ margin: '1em 15px' }} as={Link} to="/contacts">
+                    <Card.Content>
+                      <Card.Header>
+                        <Icon name="user" size="small" />{' '}
+                        {this.state.userContacts}
+                      </Card.Header>
+                      <Card.Description>Contacts</Card.Description>
+                    </Card.Content>
+                  </Card>
+                )}
+                {this.props.engines.length === 0 ? null : (
+                  <Card style={{ margin: '1em 15px' }} as={Link} to="/engines">
+                    <Card.Content>
+                      <Card.Header>
+                        <Icon name="car" size="small" />{' '}
+                        {this.props.engines.length}
+                      </Card.Header>
+                      <Card.Description>Engines</Card.Description>
+                    </Card.Content>
+                  </Card>
+                )}
               </Card.Group>
             </Grid.Row>
             <Image src={carryenvelope} alt="person carrying envelope" />
