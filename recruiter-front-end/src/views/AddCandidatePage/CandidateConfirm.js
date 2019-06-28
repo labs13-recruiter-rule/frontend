@@ -124,61 +124,43 @@ class CandidateConfirm extends React.Component {
                   <p>Skills: {this.props.candidate.skills.map(skill => `${skill} `)}</p>
                   <p>Experience: {this.props.candidate.experience} years</p>
                 </Grid.Row> */}
-
-            <Card style={previewStyle}>
-              <Header textAlign="center" as="h2">
-                Email Preview
-              </Header>
-              <Card.Content>
-                {this.state.displayName ? (
-                  <>
-                    <Header as="h4">
-                      Subject Line:{' '}
-                      {`${this.state.displayName} sent you a candidate using Recruiter Rules`}
-                    </Header>{' '}
-                    <Divider />{' '}
-                  </>
-                ) : (
-                  <></>
-                )}
-                {this.state.email_preview ===
-                "You haven't submitted a candidate yet, so we can't show you a preview." ? (
-                  <div style={centerIt}>
-                    <Header>You have not submitted a candidate yet.</Header>{' '}
-                    <Button
-                      style={primaryButton}
-                      as={Link}
-                      to="/new-candidate/engine"
-                    >
-                      Enter a Candidate
-                    </Button>
-                  </div>
-                ) : (
-                  <p textAlign="center">{this.state.email_preview} </p>
-                )}
-              </Card.Content>
-            </Card>
-
-            <Grid.Row></Grid.Row>
-            <Grid.Row
-              style={{ display: 'flex', justifyContent: 'space-between' }}
-            >
-              <Button
-                style={primaryButton}
-                as={Link}
-                to="/new-candidate/education"
-              >
-                <Icon name="arrow left" size="small" />
-                Back
-              </Button>
-              <Button
-                style={primaryButton}
-                onClick={this.submit}
-                as={Link}
-                to="/new-candidate/send"
-              >
-                Confirm and Send
-              </Button>
+            
+                  <Card fluid style={previewStyle}>
+                  <Header textAlign="center" as="h2">
+                      Email Preview
+                  </Header>
+                  <Card.Content>
+                    {this.state.displayName ? <><Header as="h4">Subject Line: {`${this.state.displayName} sent you a candidate using Recruiter Rules`}</Header> <Divider /> </> : <></>} 
+                    {this.state.email_preview === "You haven't submitted a candidate yet, so we can't show you a preview." ?  <div style={centerIt}><Header>You have not submitted a candidate yet.</Header> <Button style={primaryButton} as={Link} to="/new-candidate/engine">Enter a Candidate</Button></div> :
+                    <p textAlign="center">{this.state.email_preview} </p> }
+                    </Card.Content>
+                  </Card> 
+           
+                <Grid.Row>
+                
+                </Grid.Row>
+                <Grid.Row
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                > 
+                  <Button
+                    style={primaryButton}
+                    as={Link}
+                    to="/new-candidate/education"
+                  >
+                    <Icon name="arrow left" size="small" />
+                    Back
+                  </Button>
+                  <Button
+                    style={primaryButton}
+                    onClick={this.submit}
+                     as={Link}
+                     to="/new-candidate/send"
+                  >
+                    Confirm and Send
+                  </Button>
+                </Grid.Row>
+              </Grid.Column>
+              <Grid.Column width={1} />
             </Grid.Row>
           </Grid.Column>
           <Grid.Column width={1} />

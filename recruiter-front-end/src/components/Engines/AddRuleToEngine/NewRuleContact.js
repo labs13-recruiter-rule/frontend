@@ -2,22 +2,23 @@ import React from 'react';
 import {
   Grid,
   Progress,
-  Step,
+  Step, 
+  Container,
+  Popup,
   Modal,
   Button,
-  Popup,
   Dropdown,
   Header,
   Icon,
 } from 'semantic-ui-react';
+import "../../../views/NewRulesPage/NewRuleContacts.css"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import NewContactForm from '../../components/Contacts/NewContactForm';
-import "./NewRuleContacts.css";
+import NewContactForm from '../../../components/Contacts/NewContactForm';
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
 
-class ContactsClass extends React.Component {
+class NewRuleContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +33,12 @@ class ContactsClass extends React.Component {
   }
 
   componentDidMount() {
+    
+    if (!token || !tokenHeader) {
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
+this.getContacts();
+    }  
     this.getContacts();
   }
 
@@ -41,7 +48,7 @@ class ContactsClass extends React.Component {
       .then(res => {
         this.setState({ userContacts: res.data });
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log());
   }
 
   handleModalOpen = () => this.setState({ modalOpen: true });
@@ -100,7 +107,7 @@ class ContactsClass extends React.Component {
 
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
-         <Modal open={!this.state.contactSelected} size="small">
+        <Modal open={!this.state.contactSelected} size="small">
           <Header icon="warning sign" content="Invalid contacts" />
           <Modal.Content>
             <p style={{ center }}>
@@ -121,39 +128,57 @@ class ContactsClass extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+            <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
+
             <Progress percent={25} />
             <Step.Group widths={6}>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/engine">
-                    <Step.Title>Engine</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
               <Step active>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/education">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/skills">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Skills</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
@@ -161,7 +186,12 @@ class ContactsClass extends React.Component {
 
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
@@ -171,6 +201,7 @@ class ContactsClass extends React.Component {
              Which contact(s) do you want this rule to apply to? 
             </Header>}><Popup.Content>The contacts you select will receive the candidate's information if the candidate meets the requirements you select on the following pages.</Popup.Content></Popup>
             
+
               <div className="contact-container">
                 <Dropdown
                   placeholder="Select Contacts"
@@ -187,8 +218,8 @@ class ContactsClass extends React.Component {
                       value: contact.email,
                     };
                   })}
-                /> 
-                <Modal
+                />{' '}
+                  <Modal
                 trigger={
               <Button onClick={this.handleModalOpen}
               name="plus circle" icon 
@@ -201,10 +232,32 @@ class ContactsClass extends React.Component {
                   <NewContactForm handleModalClose={this.handleModalClose} />
                 </Modal.Content>
               </Modal>
-                  
-  
-            </div>
-            <p
+              </div>
+            {/**need to actually make it record the ones that the user chose and add them to the rule request */}
+            {/* <Form>
+              <Form.Field>
+                <Form.Input
+                  label="Name"
+                  value={this.state.newContactName}
+                  onChange={this.handleName}
+                  type="text"
+                  name="name"
+                  placeholder="Jane Doe"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Email"
+                  value={this.state.newContactEmail}
+                  onChange={this.handleEmail}
+                  type="email"
+                  name="email"
+                  placeholder="example@email.com"
+                />
+              </Form.Field>
+            </Form> */}
+            
+              <p
               style={{
                 width: '90%',
                 margin: '35px auto 0',
@@ -223,7 +276,12 @@ class ContactsClass extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button style={primaryButton} as={Link} to="/new-rule/engine">
+                <Button style={primaryButton} as={Link}  to={{
+                  pathname: '/engine/new-rule',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
@@ -231,7 +289,12 @@ class ContactsClass extends React.Component {
                 style={primaryButton}
                 onClick={this.handleSubmit}
                 as={Link}
-                to="/new-rule/education"
+                to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
@@ -244,4 +307,4 @@ class ContactsClass extends React.Component {
   }
 }
 
-export default ContactsClass;
+export default NewRuleContact;

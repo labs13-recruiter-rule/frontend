@@ -4,6 +4,7 @@ import Axios from 'axios';
 
 const token = sessionStorage.getItem('token');
 
+
 class NewCandidate extends React.Component {
   constructor(props) {
     super(props);
@@ -22,9 +23,11 @@ class NewCandidate extends React.Component {
       linkedinURL: '',
       picture: false,
       bio: false,
-      hidden: true,
+      hidden: false,
     };
   }
+
+  
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -74,9 +77,9 @@ class NewCandidate extends React.Component {
       },
     )
       .then(res => {
-        console.log(res);
+        console.log();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log());
   };
 
   render() {

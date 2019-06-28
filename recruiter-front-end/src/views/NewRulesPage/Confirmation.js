@@ -124,7 +124,7 @@ class Confirmation extends React.Component {
       textAlign: 'center',
     };
 
-    const rule = this.props.rule; 
+    const rule = this.props.rule;
 
     return (
       <Grid columns={12} style={{ marginTop: '25px' }}>
@@ -197,60 +197,71 @@ class Confirmation extends React.Component {
               </Modal.Actions>
             </Modal>
 
-            { rule.contactEmail.length !== 0 || rule.education.length !== 0 || rule.majors.length !== 0 || rule.skills.length !== 0 || rule.minExp !== null || rule.maxExp  !== null ?
-                   ( <Card>
-                      <Card.Content>
-                        {rule.contactEmail ? null || undefined : (
-                          <p>
-                            If a candidate passes this rule then they will be
-                            sent to{' '}
-                            {rule.contactEmail
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, ' and')}
-                          </p>
-                        )}
-                        {rule.education.length > 0 ?  (
-                          <p>
-                            The minimum degree requirement is a{' '}
-                            {rule.education[0]}
-                          </p>
-                        ) : null }
-                        {rule.majors.length > 0 ? 
-                          (<p>
-                            The candidate must have majored in {' '}
-                            {rule.majors
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, ' and')}.
-                          </p> ) : null
-                        }
-                        {rule.skills.length > 0 ? (
-                          <p>
-                            The skills required for this rule are{' '}
-                            {rule.skills
-                              .join(', ')
-                              .replace(/,(?!.*,)/gim, 'and ')}.
-                          </p>
-                        ) : null }
+            {rule.contactEmail.length !== 0 ||
+            rule.education.length !== 0 ||
+            rule.majors.length !== 0 ||
+            rule.skills.length !== 0 ||
+            rule.minExp !== null ||
+            rule.maxExp !== null ? (
+              <Card>
+                <Card.Content>
+                  {rule.contactEmail ? (
+                    null || undefined
+                  ) : (
+                    <p>
+                      If a candidate passes this rule then they will be sent to{' '}
+                      {rule.contactEmail
+                        .join(', ')
+                        .replace(/,(?!.*,)/gim, ' and')}
+                    </p>
+                  )}
+                  {rule.education.length > 0 ? (
+                    <p>
+                      The minimum degree requirement is a {rule.education[0]}
+                    </p>
+                  ) : null}
+                  {rule.majors.length > 0 ? (
+                    <p>
+                      The candidate must have majored in{' '}
+                      {rule.majors.join(', ').replace(/,(?!.*,)/gim, ' and')}.
+                    </p>
+                  ) : null}
+                  {rule.skills.length > 0 ? (
+                    <p>
+                      The skills required for this rule are{' '}
+                      {rule.skills.join(', ').replace(/,(?!.*,)/gim, 'and ')}.
+                    </p>
+                  ) : null}
 
-                        {rule.minExp !== null ? (
-                          <p>
-                            The candidate must have at least {' '}
-                            {rule.minExp} years of experience.
-                          </p>
-                        ) : null}
-                        {rule.maxExp !== null ?  (
-                          <p>
-                            The candidate cannot have more than{' '}
-                            {rule.maxExp} years of experience.
-                          </p>
-                        ) : null }
-                      </Card.Content>
-                   </Card> ) : null
+                  {rule.minExp !== null ? (
+                    <p>
+                      The candidate must have at least {rule.minExp} years of
+                      experience.
+                    </p>
+                  ) : null}
+                  {rule.maxExp !== null ? (
+                    <p>
+                      The candidate cannot have more than {rule.maxExp} years of
+                      experience.
+                    </p>
+                  ) : null}
+                </Card.Content>
+              </Card>
+            ) : null}
+            <Popup
+              trigger={
+                <Header as="h3" style={center}>
+                  If a candidate does not meet the requirements above, their
+                  information will be sent to a fallback contact. Who would you
+                  like to specify as your fallback?
+                </Header>
               }
-              <Popup trigger={
-            <Header as="h3" style={center}>
-              If a candidate does not meet the requirements above, their information will be sent to a fallback contact. Who would you like to specify as your fallback?
-              </Header> }><Popup.Content>You will have the opportunity to add more rules to an engine from the engine dashboard.</Popup.Content></Popup>
+            >
+              <Popup.Content>
+                You will have the opportunity to add more rules to an engine
+                from the engine dashboard.
+              </Popup.Content>
+            </Popup>
             <Form>
               <Header as="h4">Name</Header>
               <Form.Field>

@@ -3,7 +3,6 @@ import {
   Grid,
   Button,
   Modal,
-  Popup,
   Header,
   Icon,
   Progress,
@@ -12,8 +11,9 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+const token = sessionStorage.getItem('token');
 
-class NewCandidate extends React.Component {
+class NewRuleSkills extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -276,44 +276,66 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+          <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
             <Progress percent={60} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/engine">
-                    <Step.Title>Engine</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/education">
+                  <Link style={linkStyles} to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Education</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step active>
-                <Link style={linkStyles} to="/new-rule/skills">
+                <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                   <Step.Title>Skills</Step.Title>
                 </Link>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
@@ -323,17 +345,18 @@ class NewCandidate extends React.Component {
               <Grid.Row>
                 <Grid.Column />
                 <Grid.Column width={14}>
-                  <Popup trigger={ <Header as="h4" textAlign="center">
-                  Required Skills
-                  </Header>}><Popup.Content>
-                    A candidate must have <strong>all</strong> the listed skills to be sent to the contact(s).
-                    </Popup.Content></Popup>
-                 
+                  <Header as="h4" textAlign="center">
+                    What are the skill requirements to send a candidate to your
+                    selected contact(s)?
+                  </Header>
                 </Grid.Column>
                 <Grid.Column />
               </Grid.Row>
               <Grid.Row>
-                <Grid.Column >
+                <Grid.Column width={2} verticalAlign="middle">
+                  <Header as="h4">Skills</Header>
+                </Grid.Column>
+                <Grid.Column floated="left" width={14} verticalAlign="middle">
                   <Dropdown
                     placeholder="Skills"
                     search
@@ -352,7 +375,16 @@ class NewCandidate extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button style={primaryButton} as={Link} to="/new-rule/education">
+              <Button
+                style={primaryButton}
+                as={Link}
+                to={{
+                  pathname: '/engine/new-rule/education',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
+              >
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
@@ -360,7 +392,12 @@ class NewCandidate extends React.Component {
                 style={primaryButton}
                 onClick={this.handleSubmit}
                 as={Link}
-                to="/new-rule/experience"
+                to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
@@ -373,4 +410,4 @@ class NewCandidate extends React.Component {
   }
 }
 
-export default NewCandidate;
+export default NewRuleSkills;

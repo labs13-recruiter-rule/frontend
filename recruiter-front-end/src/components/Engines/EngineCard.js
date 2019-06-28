@@ -12,9 +12,14 @@ import {
 import { getRules, deleteRule } from '../../actions/ruleActions';
 import EngineCardRules from './EngineCardRules';
 import Axios from 'axios';
+import { Link, Route, Switch, Router } from 'react-router-dom';
+import { AddRuleToEngine } from './AddRuleToEngine';
+import history from '../../history';
+
 
 const token = sessionStorage.getItem('token');
 const tokenHeader = { headers: { token: `${token}` } };
+
 
 class EngineCard extends React.Component {
   constructor(props) {
@@ -25,19 +30,21 @@ class EngineCard extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.props.getRules(this.props.engine.id).then(() => {
-  //     console.log('from cdm', this.props.rules);
-  //   });
-  // }
+  componentDidMount() {
+    if (!token || !tokenHeader) {
+const token = sessionStorage.getItem('token');
+const tokenHeader = { headers: { token: `${token}` } };
+    }
+  }
+
 
   deleteRule = (engineid, ruleid) => {
-    console.log(engineid, ruleid, 'e, r');
+    // console.log(engineid, ruleid, 'e, r');
     this.props
       .deleteRule(engineid, ruleid)
       .then(() => this.props.getRules(engineid))
       .catch(err => {
-        console.log(err, 'error from .catch in deleteRule in enginecard.js');
+        // console.log(err, 'error from .catch in deleteRule in enginecard.js');
       });
   };
 
@@ -46,8 +53,8 @@ class EngineCard extends React.Component {
       `https://recruiter-back-end.herokuapp.com/engines/${this.props.engine.id}`,
       tokenHeader,
     )
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+      .then(res => console.log())
+      .catch(error => console.log());
   };
 
   open = () => this.setState({ open: true });
@@ -57,6 +64,10 @@ class EngineCard extends React.Component {
     this.handleCancel();
   };
 
+  addNewRuleToEngine = () => {
+    //
+  };
+
   render() {
     return (
       <>
@@ -64,6 +75,19 @@ class EngineCard extends React.Component {
           {/* <Card.Content> */}
           <Card.Content>
             <Header as="h2" content={this.props.engine.engine_name} />
+            {/* <Button>Add Rule</Button> */}
+            <Link
+              to={{
+                pathname: '/engine/new-rule/',
+                state: {
+                  engineName: this.props.engine.engine_name,
+                  // engineID: this.props.engine.id,
+                  engineID: this.props.engine.id,
+                },
+              }}
+            >
+              Add New Rule To Engine
+            </Link>
             {/* <Icon
                   name="trash alternate"
                   color="red"
@@ -80,6 +104,8 @@ class EngineCard extends React.Component {
             <EngineCardRules
               engineRule={this.props.engine.id}
               deleteRule={this.deleteRule}
+              fallbackName={this.props.engine.fallbackName}
+              fallbackEmail={this.props.engine.fallbackEmail}
             />
           </Segment>
         </Card>

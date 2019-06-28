@@ -5,15 +5,16 @@ import {
   Header,
   Icon,
   Progress,
-  Step,
   Popup,
+  Step,
   Dropdown,
   Divider,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+const token = sessionStorage.getItem('token');
 
-class NewCandidate extends React.Component {
+class NewRuleEducation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -168,18 +169,20 @@ class NewCandidate extends React.Component {
         <Grid.Row centered>
           <Grid.Column width={1} />
           <Grid.Column width={10} centered style={flexContainer}>
+          <h3>
+              Adding rule to engine:{' '}
+              {this.props.props.location.state.engineName} 
+            </h3>
             <Progress percent={42} />
             <Step.Group widths={6}>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/engine">
-                    <Step.Title>Engine</Step.Title>
-                  </Link>
-                </Step.Content>
-              </Step>
-              <Step>
-                <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/contacts">
+                  <Link style={linkStyles} to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Rule Contacts</Step.Title>
                   </Link>
                 </Step.Content>
@@ -191,28 +194,43 @@ class NewCandidate extends React.Component {
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/skills">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Skills</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/experience">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/experience',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Experience</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
               <Step>
                 <Step.Content>
-                  <Link style={linkStyles} to="/new-rule/confirmation">
+                  <Link style={linkStyles}  to={{
+                  pathname: '/engine/new-rule/confirmation',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}>
                     <Step.Title>Confirmation</Step.Title>
                   </Link>
                 </Step.Content>
               </Step>
             </Step.Group>
             <Grid style={{ marginTop: '25px' }}>
-              <Grid.Row>
+            <Grid.Row>
                 <Grid.Column>
                   <Popup trigger={ <Header as="h4" textAlign="center">
                    Minimum Degree Requirement
@@ -255,7 +273,16 @@ class NewCandidate extends React.Component {
             <Grid.Column
               style={{ display: 'flex', justifyContent: 'space-between' }}
             >
-              <Button style={primaryButton} as={Link} to="/new-rule/contacts">
+              <Button
+                style={primaryButton}
+                as={Link}
+                to={{
+                  pathname: '/engine/new-rule/contacts',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
+              >
                 <Icon name="arrow left" size="small" />
                 Back
               </Button>
@@ -263,7 +290,12 @@ class NewCandidate extends React.Component {
                 style={primaryButton}
                 onClick={this.handleSubmit}
                 as={Link}
-                to="/new-rule/skills"
+                to={{
+                  pathname: '/engine/new-rule/skills',
+                  state: {
+                    engineName: this.props.props.location.state.engineName,
+                  },
+                }}
               >
                 Next <Icon name="arrow right" size="small" />
               </Button>
@@ -276,4 +308,4 @@ class NewCandidate extends React.Component {
   }
 }
 
-export default NewCandidate;
+export default NewRuleEducation;

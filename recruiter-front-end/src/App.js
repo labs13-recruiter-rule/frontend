@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import { connect } from 'react-redux';
 import NewUserLandingPage from './views/NewUserLandingPage/NewUserLandingPage';
@@ -28,15 +28,22 @@ import NewEngine from './views/NewRulesPage/NewEngine';
 import CandidateConfirm from './views/AddCandidatePage/CandidateConfirm';
 import CandidateSend from './views/AddCandidatePage/CandidateSend';
 import EngineSuccess from './views/NewRulesPage/EngineCreationSuccess';
-
-const token = sessionStorage.getItem('token');
-const tokenHeader = { headers: { token: `${token}` } };
+import {
+  RuleCreationSuccess,
+  NewRuleConfirm,
+  NewRuleContact,
+  NewRuleEducation,
+  NewRuleExperience,
+  NewRuleSuccess,
+  AddRuleToEngine,
+  NewRuleSkills,
+} from './components/Engines/AddRuleToEngine/index';
 
 class App extends React.Component {
   state = {
     user: {},
-    user_displayName: "",
-    user_email: "",
+    user_displayName: '',
+    user_email: '',
     user_id: null,
     rule: {
       skills: [],
@@ -59,6 +66,16 @@ class App extends React.Component {
     engine: null,
     engine_id: null,
     selectedContacts: [],
+    newRule: {
+      skills: [],
+      education: [],
+      majors: [],
+      minExp: null,
+      maxExp: null,
+      contactEmail: [],
+      contactName: '',
+    },
+    existingEngineID: null,
   };
 
   componentDidMount() {
@@ -68,9 +85,13 @@ class App extends React.Component {
   authListener() {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
-        this.setState({ user, user_displayName: user.displayName, user_email: user.email });
-        sessionStorage.setItem('token', user._lat);
+        // console.log(user);
+        this.setState({
+          user,
+          user_displayName: user.displayName,
+          user_email: user.email,
+        }, () => sessionStorage.setItem('token', user._lat))
+        
       } else {
         this.setState({
           user: null,
@@ -80,6 +101,7 @@ class App extends React.Component {
   }
 
   logout() {
+    sessionStorage.clear();
     fire.auth().signOut();
   }
 
@@ -94,11 +116,28 @@ class App extends React.Component {
     this.setState({ ...this.state, engine: e });
   };
 
+  // for new rule to exist engine
+  // setEngineForNewRule = e => {
+  //   this.setState({ ...this.state, existingEngineID: e });
+  // };
+
   contactContacts = e => {
     this.setState({
       ...this.state,
       rule: {
         ...this.state.rule,
+        contactEmail: e,
+      },
+    });
+  };
+
+  // new contactsss
+
+  newContactContacts = e => {
+    this.setState({
+      ...this.state,
+      newRule: {
+        ...this.state.newRule,
         contactEmail: e,
       },
     });
@@ -152,6 +191,69 @@ class App extends React.Component {
     }
   };
 
+  newRuleMinEducation = e => {
+    const educationLevel = [
+      'high school / GED',
+      'some college',
+      "Associate's degree",
+      "Bachelor's degree",
+      "Master's degree",
+      'PhD',
+    ];
+    switch (e) {
+      case '':
+        this.setState(prevState => ({
+          newRule: { ...prevState, education: educationLevel },
+        }));
+        break;
+      case 'high school / GED':
+        this.setState(prevState => ({
+          newRule: { ...this.state.newRule, education: educationLevel },
+        }));
+        break;
+      case 'some college':
+        this.setState(prevState => ({
+          newRule: {
+            ...this.state.newRule,
+            education: educationLevel.slice(1, 6),
+          },
+        }));
+        break;
+      case "Associate's degree":
+        this.setState(prevState => ({
+          newRule: {
+            ...this.state.newRule,
+            education: educationLevel.slice(2, 6),
+          },
+        }));
+        break;
+      case "Bachelor's degree":
+        this.setState(prevState => ({
+          newRule: {
+            ...this.state.newRule,
+            education: educationLevel.slice(3, 6),
+          },
+        }));
+        break;
+      case "Master's degree":
+        this.setState(prevState => ({
+          newRule: {
+            ...this.state.newRule,
+            education: educationLevel.slice(4, 6),
+          },
+        }));
+        break;
+      case 'PhD':
+        this.setState(prevState => ({
+          newRule: {
+            ...this.state.newRule,
+            education: educationLevel.slice(5, 6),
+          },
+        }));
+        break;
+    }
+  };
+
   majors = e => {
     this.setState(prevState => ({
       ...prevState,
@@ -162,11 +264,34 @@ class App extends React.Component {
     }));
   };
 
+  // new rule e eng
+  newRuleMajors = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      newRule: {
+        ...prevState.newRule,
+        majors: e,
+      },
+    }));
+  };
+
   skills = e => {
     this.setState(prevState => ({
       ...prevState,
       rule: {
         ...prevState.rule,
+        skills: e,
+      },
+    }));
+  };
+
+  // new rule e eng
+
+  newRuleSkills = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      newRule: {
+        ...prevState.newRule,
         skills: e,
       },
     }));
@@ -217,25 +342,59 @@ class App extends React.Component {
             this.props.parsedRule,
           )
           .then(() => {
-            console.log('rule submitted good');
+            // console.log('rule submitted good');
           })
           .catch(() => {
-            console.log('rule did not submit well');
+            // console.log('rule did not submit well');
           });
       })
       .catch(err => {
-        console.log('from error parse', err);
+        // console.log('from error parse', err);
+      });
+  }
+
+  parseMyRuleForOldEng() {
+    this.props
+      .parseRule(this.state.newRule)
+      .then(() => {
+        this.props
+          .addRule(
+            `https://recruiter-back-end.herokuapp.com/engines/${this.state.existingEngineID}/rules/`,
+            this.props.parsedRule,
+          )
+          .then(() => {
+            // console.log('rule submitted good');
+          })
+          .catch(() => {
+            // console.log('rule did not submit well');
+          });
+      })
+      .catch(err => {
+        // console.log('from error parse', err);
       });
   }
   // .addRule(
   //   `https://recruiter-back-end.herokuapp.com/engines/${this.state.engine}/rules/`,
   //   {rule: this.props.parsedRule, ruleNotParsed: this.state.rule},
   // )
+
   minExp = e => {
     this.setState(prevState => ({
       ...prevState,
       rule: {
         ...prevState.rule,
+        minExp: e,
+      },
+    }));
+  };
+
+  // new rule ex engine
+
+  newRuleMinExp = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      rule: {
+        ...prevState.newRule,
         minExp: e,
       },
     }));
@@ -250,11 +409,32 @@ class App extends React.Component {
       },
     }));
   };
+  // new rule ex engine
+
+  newRuleMaxExp = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      newRule: {
+        ...prevState.newRule,
+        maxExp: e,
+      },
+    }));
+  };
 
   contactName = e => {
     this.setState({
       rule: {
         ...this.state.rule,
+        contactName: e,
+      },
+    });
+  };
+
+  // new
+  newContactName = e => {
+    this.setState({
+      newRule: {
+        ...this.state.newRule,
         contactName: e,
       },
     });
@@ -269,10 +449,28 @@ class App extends React.Component {
     });
   };
 
+  // new
+  newContactEmail = e => {
+    this.setState({
+      newRule: {
+        ...this.state.newRule,
+        contactEmail: e,
+      },
+    });
+  };
+
   candidateEngine = e => {
     this.setState(prevState => ({
       ...prevState,
       engine: e,
+    }));
+  };
+
+  // new rule ex engine
+  setEngineForNewRule = e => {
+    this.setState(prevState => ({
+      ...prevState,
+      existingEngineID: e,
     }));
   };
 
@@ -347,7 +545,7 @@ class App extends React.Component {
   };
 
   appState = () => {
-    console.log('App.js this.state', this.state);
+    // console.log('App.js this.state', this.state);
   };
 
   render() {
@@ -372,7 +570,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        My Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -413,7 +611,7 @@ class App extends React.Component {
                         Home
                       </Menu.Item>
                       <Menu.Item as={Link} to="/engines">
-                        My Engines
+                       My Engines
                       </Menu.Item>
                       <Menu.Item as={Link} to="/contacts">
                         My Contacts
@@ -432,9 +630,7 @@ class App extends React.Component {
                     </Menu>
                   </Responsive>
                 </Segment.Group>
-                {/* <button onClick={() => this.appState()}>
-                  App.js this.state
-                </button> */}
+                {/* <button onClick={() => this.appState()}>App.js this.state</button> */}
                 <Route
                   exact
                   path="/"
@@ -529,6 +725,94 @@ class App extends React.Component {
                   path="/new-rule/success"
                   component={EngineSuccess}
                 />
+
+                {/* ^^^^ Above is for new ENGINE and adding a rule with it. *NOT* for adding a new rule to an engine. */}
+
+                {/* <Switch> */}
+
+                {/*  */}
+                {/* START below: ADDING RULE TO ENGINE */}
+
+                {/*
+                 */}
+
+                <Route
+                  exact
+                  path="/engine/new-rule/"
+                  component={props => (
+                    <AddRuleToEngine
+                      props={props}
+                      setEngineForNewRule={this.setEngineForNewRule}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/contacts"
+                  component={props => (
+                    <NewRuleContact
+                      contactName={this.newContactName}
+                      contactEmail={this.newContactEmail}
+                      contactContacts={this.newContactContacts}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/education"
+                  component={props => (
+                    <NewRuleEducation
+                      minEducation={this.newRuleMinEducation}
+                      majors={this.newRuleMajors}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/skills"
+                  component={props => (
+                    <NewRuleSkills skills={this.newRuleSkills} props={props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/experience"
+                  component={props => (
+                    <NewRuleExperience
+                      minExp={this.newRuleMinExp}
+                      maxExp={this.newRuleMaxExp}
+                      newRule={this.newRule}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/confirmation"
+                  component={props => (
+                    <NewRuleConfirm
+                      fallbackName={this.fallbackName}
+                      fallbackEmail={this.fallbackEmail}
+                      rule={this.state.newRule}
+                      // rules={this.state.rules}
+                      engine_id={this.state.existingEngineID}
+                      contacts={this.state.selectedContacts}
+                      submitRule={() => this.parseMyRuleForOldEng()}
+                      props={props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/engine/new-rule/success"
+                  component={NewRuleSuccess}
+                />
+                {/* </Switch> */}
+
+                {/* END ** ADDING RULE TO ENGINE */}
+
                 <Route exact path="/contacts/add" component={NewContactForm} />
                 <Route exact path="/contacts" component={Contacts} />
                 <Route exact path="/checkout" component={CheckoutContainer} />

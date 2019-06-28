@@ -21,7 +21,7 @@ class EngineDash extends React.Component {
 
   componentDidMount() {
     this.props.getEngines().then(() => {
-      console.log(this.props.engines, ' from props engines');
+      // console.log();
     });
   }
 
@@ -30,7 +30,7 @@ class EngineDash extends React.Component {
   handleModalClose = () =>
     this.setState({ newEngineModalOpen: false }, () => this.props.getEngines());
 
-  createNewRule = () => {
+  createNewEngine = () => {
     this.props.createNewRule();
   };
 
@@ -40,7 +40,7 @@ class EngineDash extends React.Component {
         <Segment className="engineManager">
           <Header>My Engines</Header>
           <Button
-            onClick={this.createNewRule}
+            onClick={this.createNewEngine}
             as={Link}
             to="/new-rule/engine"
             icon
