@@ -38,6 +38,7 @@ class NewRuleConfirm extends React.Component {
   };
 
   render() {
+    console.log('this.props.rule', this.props.rule);
     const flexContainer = {
       display: 'flex',
       flexDirection: 'column',
@@ -185,7 +186,7 @@ class NewRuleConfirm extends React.Component {
                 style={primaryButton}
                 as={Link}
                 to={{
-                  pathname: '/engine/new-rule/skills',
+                  pathname: '/engine/new-rule/experience',
                   state: {
                     engineName: this.props.props.location.state.engineName,
                   },
