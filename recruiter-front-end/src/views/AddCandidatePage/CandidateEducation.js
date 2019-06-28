@@ -124,7 +124,7 @@ class CandidateEducation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      majors: [],
+      major: [],
       education: [],
     };
   }
@@ -133,16 +133,16 @@ class CandidateEducation extends React.Component {
     this.setState({ education: value });
   };
 
-  handleChange = (e, { value }) => this.setState({ majors: value });
+  handleChange = (e, { value }) => this.setState({ major: value });
 
   handleAddition = (e, { value }) => {
     this.setState(prevState => ({
-      options: [{ text: value, value }, ...prevState.options],
+      major: [{ text: value, value }, ...prevState.major],
     }));
   };
 
   handleSubmit = e => {
-    this.props.candidateMajor(this.state.majors);
+    this.props.candidateMajor(this.state.major);
     this.props.candidateEducation(this.state.education);
   };
 
@@ -216,7 +216,7 @@ class CandidateEducation extends React.Component {
                   options={majors}
                   onAddItem={this.handleAddition}
                   onChange={this.handleChange}
-                  value={this.state.majors}
+                  value={this.state.major}
                 />
               </Form.Field>
             </Form>
